@@ -287,6 +287,15 @@ A version of R² that **penalizes adding irrelevant features**. Ordinary R² nev
 
 Classification problems aim to predict **discrete categories** (e.g., spam / not spam, disease / healthy). To evaluate classification model performance, we use the following metrics:
 
+A classification metric compares the actual class labels ($y$) with the labels predicted by a model ($\hat{y}$). These metrics help us understand not only how many predictions are correct, but also the types of errors the model makes.
+
+The positive class is represented by `1` and the negative class by `0`. We use the following quantities throughout this section:
+
+- **True Positive (TP):** The actual class is positive and the model predicts positive.
+- **True Negative (TN):** The actual class is negative and the model predicts negative.
+- **False Positive (FP):** The actual class is negative but the model predicts positive. This is a Type I error.
+- **False Negative (FN):** The actual class is positive but the model predicts negative. This is a Type II error.
+
 ### Classification Metrics Map
 
 ```mermaid
@@ -428,6 +437,25 @@ The four cells:
 - **True Negatives (TN)** — Predicted No, Actual No ✓
 - **False Positives (FP)** — Predicted Yes, Actual No ✗ *(Type I error)*
 - **False Negatives (FN)** — Predicted No, Actual Yes ✗ *(Type II error)*
+
+
+#### Type I and Type II Errors
+
+Classification errors occur when the model's prediction does not match the actual class.
+
+- **Type I Error (False Positive):** The actual class is negative, but the model predicts positive. In the confusion matrix, this is $FP$. For example, a healthy person is incorrectly classified as having heart disease. The model raises a false alarm.
+- **Type II Error (False Negative):** The actual class is positive, but the model predicts negative. In the confusion matrix, this is $FN$. For example, a person with heart disease is incorrectly classified as healthy. The model fails to detect a positive case.
+
+The error rates can be written as:
+
+$$
+\text{Type I Error Rate} = \frac{FP}{FP + TN}
+$$
+
+$$
+\text{Type II Error Rate} = \frac{FN}{FN + TP}
+$$
+
 
 All classification metrics (Accuracy, Precision, Recall, F1) can be derived directly from these four values.
 
