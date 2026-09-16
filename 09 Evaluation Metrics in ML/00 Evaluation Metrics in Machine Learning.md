@@ -28,6 +28,7 @@ Evaluation metrics are used to measure how well a machine learning model perform
   - [5. Logarithmic Loss (Log Loss)](#5-logarithmic-loss-log-loss)
   - [6. Area Under Curve (AUC) and ROC Curve](#6-area-under-curve-auc-and-roc-curve)
   - [7. Confusion Matrix](#7-confusion-matrix)
+    - [Multiclass Confusion Matrix](#multiclass-confusion-matrix)
 - [Clustering Metrics](#clustering-metrics)
   - [1. Silhouette Score](#1-silhouette-score)
   - [2. Davies-Bouldin Index](#2-davies-bouldin-index)
@@ -328,10 +329,37 @@ graph TD
 
 Accuracy is the proportion of correct predictions out of all predictions made.
 
-$$Accuracy = \frac{\text{Number of Correct Predictions}}{\text{Total Number of Predictions}}$$
+$$\boxed{Accuracy = \frac{\text{Number of Correct Predictions}}{\text{Total Number of Predictions}}}$$
 
 While accuracy provides a quick snapshot, it can be **misleading for imbalanced datasets**. For example, in a dataset with 90% class A and 10% class B, a model that always predicts class A achieves 90% accuracy but fails to identify any class B instances.
 
+#### When Is Accuracy Misleading?
+
+Accuracy can be misleading when the classes are **imbalanced**, meaning one class has many more observations than the other. In that situation, a model can achieve a high accuracy score by mostly predicting the majority class while failing to identify the minority class.
+
+**Example:** Suppose a dataset contains 100 patients:
+
+- 90 patients do not have the disease.
+- 10 patients have the disease.
+- The model predicts **"no disease" for every patient**.
+
+The model makes 90 correct predictions, so:
+
+$$
+	ext{Accuracy} = \frac{90}{100} = 90\%
+$$
+
+However, the model detects none of the 10 patients who have the disease:
+
+- $TP = 0$
+- $FN = 10$
+- $TN = 90$
+- $FP = 0$
+- Recall $= \frac{TP}{TP + FN} = \frac{0}{0 + 10} = 0$
+
+Therefore, the model has **90% accuracy but 0% recall** for the positive class. Accuracy alone gives the impression of good performance, while recall reveals that the model is failing at the most important task.
+
+> **Note:** When classes are imbalanced, evaluate the model using the confusion matrix, precision, recall, F1-score, balanced accuracy, or class-specific metrics in addition to accuracy.
 > **Use with caution** when class distributions are unequal — combine with Precision, Recall, or F1 for a complete picture.
 
 ---
@@ -340,7 +368,7 @@ While accuracy provides a quick snapshot, it can be **misleading for imbalanced 
 
 Precision measures how many of the **positive predictions** made by the model are actually correct. It is useful when the **cost of false positives is high** (e.g., medical diagnosis, fraud detection).
 
-$$Precision = \frac{TP}{TP + FP}$$
+$$\boxed{Precision = \frac{TP}{TP + FP}}$$
 
 Where:
 - $TP$ = True Positives
@@ -354,7 +382,7 @@ Where:
 
 Recall measures how many of the **actual positive cases** were correctly identified. It is important when **missing a positive case is costly** (e.g., cancer screening, safety systems).
 
-$$Recall = \frac{TP}{TP + FN}$$
+$$\boxed{Recall = \frac{TP}{TP + FN}}$$
 
 Where:
 - $TP$ = True Positives
@@ -362,15 +390,20 @@ Where:
 
 > High Recall → the model catches most of the actual positive cases.
 
-**Precision vs Recall trade-off:** Increasing one typically decreases the other. Choose based on which error is more costly.
+> **Note — Precision–Recall Trade-off**
+>
+> Increasing precision often decreases recall, and increasing recall often decreases precision. The best balance depends on which error is more costly:
+>
+> - Prefer **higher precision** when false positives are more costly.
+> - Prefer **higher recall** when false negatives are more costly.
 
 ---
 
 ### 4. F1 Score
 
-The F1 Score is the **harmonic mean of Precision and Recall**. It gives a single number that balances both metrics and is especially useful when class distributions are uneven.
+The F1 Score is the **harmonic mean of Precision and Recall**. It gives a ***single number that balances both*** metrics and is especially ***useful when class distributions are uneven.***
 
-$$F1 = 2 \times \frac{Precision \times Recall}{Precision + Recall}$$
+$$\boxed{F1 = 2 \times \frac{Precision \times Recall}{Precision + Recall}}$$
 
 - Range: $[0, 1]$ — higher is better
 - F1 = 1 means perfect Precision and Recall
@@ -384,7 +417,7 @@ $$F1 = 2 \times \frac{Precision \times Recall}{Precision + Recall}$$
 
 Log Loss measures the **uncertainty of the model's predictions** by penalizing confident wrong predictions heavily. It is used for probabilistic classifiers.
 
-$$Log\ Loss = -\frac{1}{N} \sum_{i=1}^{N} \sum_{j=1}^{M} y_{ij} \cdot \log(p_{ij})$$
+$$\boxed{Log\ Loss = -\frac{1}{N} \sum_{i=1}^{N} \sum_{j=1}^{M} y_{ij} \cdot \log(p_{ij})}$$
 
 Where:
 - $N$ = number of samples
@@ -423,12 +456,12 @@ AUC-ROC is used for **binary classification** tasks. The ROC curve plots the **T
 
 ### 7. Confusion Matrix
 
-A confusion matrix is an $N \times N$ table showing the counts of actual vs predicted classes. For binary classification ($N = 2$):
+A confusion matrix is an $N \times N$ table showing the counts of actual vs predicted classes. For binary classification ($N = 2$), we use the explicit class order `[1, 0]`, with the positive class shown first on both axes:
 
-| | **Predicted: No** | **Predicted: Yes** |
+| | **Predicted: 1** | **Predicted: 0** |
 |:---|:---:|:---:|
-| **Actual: No** | TN = 50 | FP = 10 |
-| **Actual: Yes** | FN = 5 | TP = 100 |
+| **Actual: 1** | TP = 100 | FN = 5 |
+| **Actual: 0** | FP = 10 | TN = 50 |
 
 *Example: n = 165 total samples*
 
@@ -449,15 +482,156 @@ Classification errors occur when the model's prediction does not match the actua
 The error rates can be written as:
 
 $$
-\text{Type I Error Rate} = \frac{FP}{FP + TN}
+\boxed{\text{Type I Error Rate} = \frac{FP}{FP + TN}}
 $$
 
 $$
-\text{Type II Error Rate} = \frac{FN}{FN + TP}
+\boxed{\text{Type II Error Rate} = \frac{FN}{FN + TP}}
 $$
 
 
-All classification metrics (Accuracy, Precision, Recall, F1) can be derived directly from these four values.
+> - ***Type I and Type II errors usually involve a trade-off***. Making a model more sensitive may reduce Type II errors but can increase Type I errors. The appropriate balance depends on the application. In medical screening, reducing Type II errors is often important because missing a disease can be more serious than raising a false alarm.
+
+- All classification metrics (Accuracy, Precision, Recall, F1) can be derived directly from these four values.
+
+### Multiclass Confusion Matrix
+
+The binary confusion matrix has two classes, but a **multiclass classification** problem has three or more possible classes. For $K$ classes, the confusion matrix has a size of $K \times K$.
+
+- **Rows** represent the actual classes.
+- **Columns** represent the predicted classes.
+- The ***diagonal cells*** contain ***correct predictions***.
+- The ***off-diagonal*** cells contain ***misclassifications***.
+
+For example, a three-class problem with classes A, B, and C can be represented as:
+
+| Actual / Predicted | Predicted A | Predicted B | Predicted C |
+|:---|---:|---:|---:|
+| **Actual A** | $C_{AA}$ | $C_{AB}$ | $C_{AC}$ |
+| **Actual B** | $C_{BA}$ | $C_{BB}$ | $C_{BC}$ |
+| **Actual C** | $C_{CA}$ | $C_{CB}$ | $C_{CC}$ |
+
+Here, 
+- ***$C_{ij}$*** is the ***number of observations*** whose ****actual class is $i$*** and whose ****predicted class is $j$***. 
+- The ***diagonal values $C_{AA}$, $C_{BB}$, and $C_{CC}$*** are ***correct predictions***.
+
+##### Deriving metrics for one class
+
+Multiclass precision, recall, and F1-score can be calculated for each class by treating that class as **positive** and combining all other classes into a single **negative** group. This is called the **one-vs-rest** approach.
+
+For class $i$:
+
+$$
+TP_i = C_{ii}
+$$
+
+$$
+FN_i = \sum_{j \ne i} C_{ij}
+$$
+
+$$
+FP_i = \sum_{j \ne i} C_{ji}
+$$
+
+$$
+TN_i = \sum_{j \ne i} \sum_{k \ne i} C_{jk}
+$$
+
+Therefore, the per-class metrics are:
+
+$$
+\mathrm{Precision}_i = \frac{TP_i}{TP_i + FP_i}
+$$
+
+$$
+\mathrm{Recall}_i = \frac{TP_i}{TP_i + FN_i}
+$$
+
+$$
+F1_i = \frac{2 \times \text{Precision}_i \times \text{Recall}_i}{\text{Precision}_i + \text{Recall}_i}
+$$
+
+#### Macro and micro averaging for precision and recall
+
+In multiclass classification, precision and recall are first calculated for each class. The per-class scores can then be combined using **macro averaging** or **micro averaging**.
+
+**Macro-averaged precision:** Calculate precision for every class and give every class equal importance.
+
+$$
+\boxed{\mathrm{Precision}_{\mathrm{macro}} = \frac{1}{K} \sum_{i=1}^{K} \mathrm{Precision}_i}
+$$
+
+Substituting the per-class formula:
+
+$$
+\mathrm{Precision}_{\mathrm{macro}} = \frac{1}{K} \sum_{i=1}^{K} \frac{TP_i}{TP_i + FP_i}
+$$
+
+**Macro-averaged recall:** Calculate recall for every class and give every class equal importance.
+
+$$
+\boxed{\mathrm{Recall}_{\mathrm{macro}} = \frac{1}{K} \sum_{i=1}^{K} \mathrm{Recall}_i}
+$$
+
+Substituting the per-class formula:
+
+$$
+\mathrm{Recall}_{\mathrm{macro}} = \frac{1}{K} \sum_{i=1}^{K} \frac{TP_i}{TP_i + FN_i}
+$$
+
+Macro averaging is useful when every class matters equally, especially when minority-class performance should not be hidden by a majority class.
+
+**Micro-averaged precision:** Add the true positives and false positives across all classes before calculating precision.
+
+$$
+\boxed{\mathrm{Precision}_{\mathrm{micro}} = \frac{\sum_{i=1}^{K} TP_i}{\sum_{i=1}^{K} TP_i + \sum_{i=1}^{K} FP_i}}
+$$
+
+**Micro-averaged recall:** Add the true positives and false negatives across all classes before calculating recall.
+
+$$
+\boxed{\mathrm{Recall}_{\mathrm{micro}} = \frac{\sum_{i=1}^{K} TP_i}{\sum_{i=1}^{K} TP_i + \sum_{i=1}^{K} FN_i}}
+$$
+
+Micro averaging gives every individual observation equal importance. For a single-label multiclass classification problem, each prediction belongs to exactly one class, so:
+
+$$
+\mathrm{Precision}_{\mathrm{micro}} = \mathrm{Recall}_{\mathrm{micro}} = \mathrm{Accuracy}
+$$
+
+Use **macro averaging** when class-level fairness is important. Use **micro averaging** when overall prediction performance is the main objective.
+
+##### Averaging metrics across classes
+
+Because a multiclass model has one score for each class, the scores can be combined in different ways:
+
+| Averaging method | Definition | When to use |
+|:---|:---|:---|
+| **Macro average** | Calculate the metric for each class, then take the unweighted mean | Every class should have equal importance, including minority classes |
+| **Weighted average** | Calculate the metric for each class, then weight it by that class's support (number of actual observations) | Class sizes are unequal and larger classes should have proportionally greater influence |
+| **Micro average** | Add all class-level $TP$, $FP$, and $FN$ counts first, then calculate one global metric | Overall performance across all individual predictions is important |
+
+For $K$ classes, the macro average of a metric $M$ is:
+
+$$
+M_{macro} = \frac{1}{K} \sum_{i=1}^{K} M_i
+$$
+
+The weighted average is:
+
+$$
+M_{weighted} = \frac{\sum_{i=1}^{K} n_i M_i}{\sum_{i=1}^{K} n_i}
+$$
+
+where $n_i$ is the number of actual observations in class $i$. In scikit-learn, these choices are available through the `average` parameter, such as `average='macro'`, `average='weighted'`, or `average='micro'`.
+
+Multiclass accuracy is still calculated as the number of correct predictions divided by the total number of predictions:
+
+$$
+	ext{Accuracy} = \frac{\sum_{i=1}^{K} C_{ii}}{\sum_{i=1}^{K}\sum_{j=1}^{K} C_{ij}}
+$$
+
+The binary formulas are therefore not discarded for multiclass classification; they are applied one class at a time and then averaged according to the evaluation objective.
 
 ---
 
