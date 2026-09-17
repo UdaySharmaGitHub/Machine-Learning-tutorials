@@ -142,9 +142,7 @@ Regression metrics are applied in any domain where a model predicts a **numerica
 
 **Formula:**
 
-$$
-\boxed{\mathrm{MAE} = \frac{1}{n} \sum_{i=1}^{n} |y_i - \hat{y}_i|}
-$$
+$$MAE = \frac{1}{n} \sum_{i=1}^{n} |y_i - \hat{y}_i|$$
 
 **What it measures:**
 MAE is the average size of the errors, ignoring direction. Every error — large or small — is treated **equally**.
@@ -169,9 +167,7 @@ An MAE of 0.50 LPA means: *"On average, the model's package prediction is off by
 
 **Formula:**
 
-$$
-\boxed{\mathrm{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2}
-$$
+$$MSE = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2$$
 
 **What it measures:**
 The average of the **squared** errors. Squaring ensures large errors contribute far more than small ones.
@@ -196,9 +192,7 @@ An MSE of 0.12 LPA² means the average squared error is 0.12. The unit is square
 
 **Formula:**
 
-$$
-\boxed{\mathrm{RMSE} = \sqrt{\mathrm{MSE}} = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2}}
-$$
+$$RMSE = \sqrt{MSE} = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2}$$
 
 **What it measures:**
 The square root of MSE — brings the metric back to the **same unit as the target** while still penalizing large errors more than MAE does.
@@ -225,9 +219,7 @@ An RMSE of 0.35 LPA means: *"Typical predictions deviate from the true value by 
 
 **Formula:**
 
-$$
-\boxed{R^2 = 1 - \frac{SS_{res}}{SS_{tot}} = 1 - \frac{\sum(y_i - \hat{y}_i)^2}{\sum(y_i - \bar{y})^2}}
-$$
+$$R^2 = 1 - \frac{SS_{res}}{SS_{tot}} = 1 - \frac{\sum(y_i - \hat{y}_i)^2}{\sum(y_i - \bar{y})^2}$$
 
 Where:
 - $SS_{res}$ = Sum of Squared Residuals (unexplained variance)
@@ -263,9 +255,7 @@ The proportion of variance in the target variable **explained by the model**. R�
 
 **Formula:**
 
-$$
-\boxed{\mathrm{Adjusted\ R^2} = 1 - \frac{(1-R^2)(n-1)}{n-k-1}}
-$$
+$$Adjusted\ R^2 = 1 - \frac{(1-R^2)(n-1)}{n-k-1}$$
 
 Where:
 - $n$ = number of samples
@@ -339,9 +329,7 @@ graph TD
 
 Accuracy is the proportion of correct predictions out of all predictions made.
 
-$$
-\boxed{\mathrm{Accuracy} = \frac{\text{Number of Correct Predictions}}{\text{Total Number of Predictions}}}
-$$
+$$\boxed{Accuracy = \frac{\text{Number of Correct Predictions}}{\text{Total Number of Predictions}}}$$
 
 While accuracy provides a quick snapshot, it can be **misleading for imbalanced datasets**. For example, in a dataset with 90% class A and 10% class B, a model that always predicts class A achieves 90% accuracy but fails to identify any class B instances.
 
@@ -380,9 +368,7 @@ Therefore, the model has **90% accuracy but 0% recall** for the positive class. 
 
 Precision measures how many of the **positive predictions** made by the model are actually correct. It is useful when the **cost of false positives is high** (e.g., medical diagnosis, fraud detection).
 
-$$
-\boxed{\mathrm{Precision} = \frac{TP}{TP + FP}}
-$$
+$$\boxed{Precision = \frac{TP}{TP + FP}}$$
 
 Where:
 - $TP$ = True Positives
@@ -396,9 +382,7 @@ Where:
 
 Recall measures how many of the **actual positive cases** were correctly identified. It is important when **missing a positive case is costly** (e.g., cancer screening, safety systems).
 
-$$
-\boxed{\mathrm{Recall} = \frac{TP}{TP + FN}}
-$$
+$$\boxed{Recall = \frac{TP}{TP + FN}}$$
 
 Where:
 - $TP$ = True Positives
@@ -419,9 +403,7 @@ Where:
 
 The F1 Score is the **harmonic mean of Precision and Recall**. It gives a ***single number that balances both*** metrics and is especially ***useful when class distributions are uneven.***
 
-$$
-\boxed{F1 = 2 \times \frac{Precision \times Recall}{Precision + Recall}}
-$$
+$$\boxed{F1 = 2 \times \frac{Precision \times Recall}{Precision + Recall}}$$
 
 - Range: $[0, 1]$ — higher is better
 - F1 = 1 means perfect Precision and Recall
@@ -435,9 +417,7 @@ $$
 
 Log Loss measures the **uncertainty of the model's predictions** by penalizing confident wrong predictions heavily. It is used for probabilistic classifiers.
 
-$$
-\boxed{\mathrm{Log\ Loss} = -\frac{1}{N} \sum_{i=1}^{N} \sum_{j=1}^{M} y_{ij} \cdot \log(p_{ij})}
-$$
+$$\boxed{Log\ Loss = -\frac{1}{N} \sum_{i=1}^{N} \sum_{j=1}^{M} y_{ij} \cdot \log(p_{ij})}$$
 
 Where:
 - $N$ = number of samples
