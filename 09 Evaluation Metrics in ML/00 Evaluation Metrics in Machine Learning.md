@@ -515,7 +515,7 @@ Here,
 - ***$C_{ij}$*** is the ***number of observations*** whose ****actual class is $i$*** and whose ****predicted class is $j$***. 
 - The ***diagonal values $C_{AA}$, $C_{BB}$, and $C_{CC}$*** are ***correct predictions***.
 
-##### Deriving metrics for one class
+#### Deriving metrics for one class
 
 Multiclass precision, recall, and F1-score can be calculated for each class by treating that class as **positive** and combining all other classes into a single **negative** group. This is called the **one-vs-rest** approach.
 
@@ -551,11 +551,12 @@ $$
 F1_i = \frac{2 \times \text{Precision}_i \times \text{Recall}_i}{\text{Precision}_i + \text{Recall}_i}
 $$
 
-#### Macro and micro averaging for precision and recall
+#### Macro and micro averaging for precision, recall and F1-Score
 
 In multiclass classification, precision and recall are first calculated for each class. The per-class scores can then be combined using **macro averaging** or **micro averaging**.
 
-**Macro-averaged precision:** Calculate precision for every class and give every class equal importance.
+**Macro-averaged precision:** 
+- Calculate precision for every class and give every class equal importance.
 
 $$
 \boxed{\mathrm{Precision}_{\mathrm{macro}} = \frac{1}{K} \sum_{i=1}^{K} \mathrm{Precision}_i}
@@ -567,7 +568,8 @@ $$
 \mathrm{Precision}_{\mathrm{macro}} = \frac{1}{K} \sum_{i=1}^{K} \frac{TP_i}{TP_i + FP_i}
 $$
 
-**Macro-averaged recall:** Calculate recall for every class and give every class equal importance.
+**Macro-averaged recall:** 
+- Calculate recall for every class and give every class equal importance.
 
 $$
 \boxed{\mathrm{Recall}_{\mathrm{macro}} = \frac{1}{K} \sum_{i=1}^{K} \mathrm{Recall}_i}
@@ -581,25 +583,63 @@ $$
 
 Macro averaging is useful when every class matters equally, especially when minority-class performance should not be hidden by a majority class.
 
-**Micro-averaged precision:** Add the true positives and false positives across all classes before calculating precision.
+**Macro-averaged F1-score:** 
+- Calculate the F1-score for each class, then take the unweighted mean so every class has equal importance.
+
+$$
+\mathrm{F1}_{\mathrm{macro}} = \frac{1}{K} \sum_{i=1}^{K} \mathrm{F1}_i
+$$
+
+Substituting the per-class F1 formula:
+
+$$
+\mathrm{F1}_{\mathrm{macro}}
+= \frac{1}{K} \sum_{i=1}^{K} \mathrm{F1}_i
+= \frac{1}{K} \sum_{i=1}^{K}
+\left(\frac{2TP_i}{2TP_i + FP_i + FN_i}\right)
+$$
+
+**Micro-averaged precision:** 
+- Add the true positives and false positives across all classes before calculating precision.
 
 $$
 \boxed{\mathrm{Precision}_{\mathrm{micro}} = \frac{\sum_{i=1}^{K} TP_i}{\sum_{i=1}^{K} TP_i + \sum_{i=1}^{K} FP_i}}
 $$
 
-**Micro-averaged recall:** Add the true positives and false negatives across all classes before calculating recall.
+**Micro-averaged recall:** 
+- Add the true positives and false negatives across all classes before calculating recall.
 
 $$
 \boxed{\mathrm{Recall}_{\mathrm{micro}} = \frac{\sum_{i=1}^{K} TP_i}{\sum_{i=1}^{K} TP_i + \sum_{i=1}^{K} FN_i}}
 $$
 
-Micro averaging gives every individual observation equal importance. For a single-label multiclass classification problem, each prediction belongs to exactly one class, so:
+**Micro-averaged F1-score:** 
+- Calculate the harmonic mean of micro precision and micro recall. Equivalently, pool the class-wise counts and use:
 
 $$
-\mathrm{Precision}_{\mathrm{micro}} = \mathrm{Recall}_{\mathrm{micro}} = \mathrm{Accuracy}
+\mathrm{F1}_{\mathrm{micro}}
+= \frac{2 \times \mathrm{Precision}_{\mathrm{micro}} \times \mathrm{Recall}_{\mathrm{micro}}}
+{\mathrm{Precision}_{\mathrm{micro}} + \mathrm{Recall}_{\mathrm{micro}}}
 $$
 
-Use **macro averaging** when class-level fairness is important. Use **micro averaging** when overall prediction performance is the main objective.
+Using the pooled one-vs-rest counts, the same score is:
+
+$$
+\mathrm{F1}_{\mathrm{micro}}
+= \frac{2\sum_{i=1}^{K} TP_i}
+{2\sum_{i=1}^{K} TP_i + \sum_{i=1}^{K} FP_i + \sum_{i=1}^{K} FN_i}
+$$
+
+Micro averaging gives every individual observation equal importance. For a single-label multiclass classification problem, every observation has exactly one true class and one predicted class. Therefore:
+
+$$
+\mathrm{Precision}_{\mathrm{micro}} = \mathrm{Recall}_{\mathrm{micro}} = \mathrm{F1}_{\mathrm{micro}} = \mathrm{Accuracy}
+$$
+
+| Averaging method | When to use |
+|:---|:---|
+| **_Macro averaging_** | When **_class-level fairness_** is important and **_every class_** should have equal influence. |
+| **_Micro averaging_** | When **_overall prediction performance_** across **_all individual observations_** is the main objective. |
 
 ##### Averaging metrics across classes
 
