@@ -58,7 +58,7 @@ Whether you're a beginner or looking to solidify your fundamentals, this repo wa
 | 00 | [Complete Derivation — Multiple Linear Regression](02%20Complete%20Linear%20Regression/03%20Multi%20Linear%20Regression%20(MLR)/00_Complete_Derivation_Muliple_Linear_Regression.ipynb) | Full mathematical derivation of MLR |
 | 01 | [MLR Using Random Data](02%20Complete%20Linear%20Regression/03%20Multi%20Linear%20Regression%20(MLR)/01_Mulitple_Linear_Regression_using_random_data.ipynb) | MLR on synthetic data |
 | 02 | [MLR on Diabetes Dataset](02%20Complete%20Linear%20Regression/03%20Multi%20Linear%20Regression%20(MLR)/02_MLR_on_multiple_features_of_diabetes_dataset.ipynb) | MLR with multiple features from diabetes dataset |
-| 04 | [MLR — Economic Index Dataset](02%20Complete%20Linear%20Regression/03%20Multi%20Linear%20Regression%20(MLR)/04_MLR_Economic_index_dataset.ipynb) | MLR on economic index data |
+| 03 | [MLR — Economic Index Dataset](02%20Complete%20Linear%20Regression/03%20Multi%20Linear%20Regression%20(MLR)/03_MLR_Economic_index_dataset.ipynb) | MLR on economic index data |
 
 > **Datasets:** [`Student_Performance.csv`](02%20Complete%20Linear%20Regression/03%20Multi%20Linear%20Regression%20(MLR)/Student_Performance.csv) · [`economic_index.csv`](02%20Complete%20Linear%20Regression/03%20Multi%20Linear%20Regression%20(MLR)/economic_index.csv)
 
