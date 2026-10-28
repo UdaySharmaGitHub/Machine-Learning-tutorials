@@ -20,22 +20,6 @@ $$
 
 These are equivalent notations for the same linear model, not different sets of coefficients that must be learned separately. Simple linear regression has one feature coefficient and one intercept; multiple linear regression has a coefficient for each feature.
 
-For training example $i$, the hypothesis evaluated at its input is the predicted value:
-
-$$
-\boxed{h_{\theta}\!\left(x^{(i)}\right)=\hat y_i}.
-$$
-
-Thus, $h_{\theta}(x)$ names the prediction rule, while $\hat y_i$ names its prediction for the $i$-th example. Given $N$ training observations, one common objective is half the mean squared error:
-
-$$
-J(\theta_0,\theta_1)
-=\frac{1}{2N}\sum_{i=1}^{N}
-\left(h_{\theta}(x^{(i)})-y^{(i)}\right)^2.
-$$
-
-The optimization goal is to choose $\theta_0$ and $\theta_1$ that minimize $J$. Gradient descent does this by repeatedly updating the parameters opposite their partial derivatives. Batch, stochastic, and mini-batch gradient descent differ in how many training examples are used to estimate each update. The learning rate controls update size; poor choices can make learning slow or unstable.
-
 ---- 
 ### OLS and Gradient Descent: Two Ways to Estimate Linear-Model Coefficients
 
@@ -89,17 +73,79 @@ The method of steepest descent, the foundation of modern gradient descent, is ge
 
 Imagine standing on a hilly landscape in fog. The model parameters describe your current location, and the loss is the height of the landscape. You use the local slope to choose a downhill step, then check the slope again and repeat. In this analogy, gradient descent aims to reach a low point in the loss landscape.
 
-![Gradient descent illustrated as successive weight updates moving down a cost curve toward its minimum.](../images/01%20Gradient%20Descent.png)
+<p align="center"><img src="../images/01%20Gradient%20Descent.png" alt="Gradient descent illustrated as successive weight updates moving down a cost curve toward its minimum."></p>
 
-![Linear-regression hypothesis, parameters, half-MSE cost function, and minimization goal.](../images/Cost%20Function%20Formula.png)
+<p align="center"><img src="../images/Cost%20Function%20Formula.png" alt="Linear-regression hypothesis, parameters, half-MSE cost function, and minimization goal."></p>
 
 *The update rule is applied to each parameter, such as the intercept $\theta_0$ and slope $\theta_1$.*
 
-![Gradient descent update rule for each model parameter.](../images/Gradient%20Descent%20Algorithm.png)
+<p align="center"><img src="../images/Gradient%20Descent%20Algorithm.png" alt="Gradient descent update rule for each model parameter."></p>
 
-
+> [!NOTE]
+> #### Learning Rate $\alpha>0$
+> The learning rate determines how big a step we take in the direction opposite to the gradient. A small learning rate results in slow convergence, while a large learning rate can cause overshooting or divergence.
+> Here, $\alpha>0$ is the **learning rate** (also written as $\eta$), which controls the size of each parameter update as gradient descent moves toward convergence.
 
 *This reference shows $h_\theta(x)=\theta_0+\theta_1x$ and the half-MSE objective. The $m$ in the denominator of the image denotes the number of examples; this document uses $N$ for that count to distinguish it from the slope notation $m$.*
+
+---
+### Positive and Negative Cost Gradients: How Should the Intercept Change?
+
+**Here, "slope" means the slope of the cost curve with respect to the intercept, $\partial J/\partial b$, not the fitted line's slope $m$.** The sign of $m$ alone does not tell us whether to increase or decrease $b=\theta_0=\beta_0=w_0$.
+
+With learning rate $\eta>0$, the intercept update is
+
+$$
+\boxed{b_{\text{new}}=b_{\text{old}}-\eta\frac{\partial J}{\partial b}}.
+$$
+
+1. **Positive cost slope: decrease the intercept.** If $\partial J/\partial b>0$, subtracting a positive quantity makes $b_{\text{new}}<b_{\text{old}}$. Move left on the cost-versus-intercept curve; in the prediction model, decreasing $b$ shifts the fitted line downward.
+2. **Negative cost slope: increase the intercept.** If $\partial J/\partial b<0$, subtracting a negative quantity makes $b_{\text{new}}>b_{\text{old}}$. Move right on the cost-versus-intercept curve; in the prediction model, increasing $b$ shifts the fitted line upward.
+
+<p align="center"><img src="../images/Positive%20and%20negative%20slope%20image-1.png" alt="A bowl-shaped curve with a negative derivative on the left, zero derivative at the bottom, and positive derivative on the right."></p>
+
+*This is a generic derivative illustration. To interpret it as intercept optimization, read the horizontal coordinate as $b$, the vertical coordinate as $J(b)$, and the derivative as $dJ/db$, with the regression slope $m$ held fixed.*
+
+<p align="center"><img src="../images/Positive%20and%20negative%20slope.png" alt="Cost versus intercept showing negative and positive tangent slopes on opposite sides of the minimum."></p>
+
+*On the left of the minimum, the cost gradient is negative, so increase $b$. On the right, the gradient is positive, so decrease $b$. The values in this image are illustrative, not calculated from this document's dataset.*
+
+For the half-MSE objective defined below, the intercept gradient is the mean prediction error:
+
+$$
+\frac{\partial J}{\partial b}=\frac{1}{N}\sum_{i=1}^{N}(\hat y_i-y_i).
+$$
+
+Thus, predictions that are too high on average give a positive gradient and call for a smaller intercept; predictions that are too low on average give a negative gradient and call for a larger intercept. For example, with $\eta=0.1$ and $b_{\text{old}}=10$, a gradient of $+4$ gives $b_{\text{new}}=9.6$, while a gradient of $-4$ gives $b_{\text{new}}=10.4$.
+
+| Cost gradient with respect to $b$ | Intercept update | Effect on predictions with $m$ fixed |
+|---|---|---|
+| Positive: $\partial J/\partial b>0$ | Decrease $b$ | Shift the line downward |
+| Negative: $\partial J/\partial b<0$ | Increase $b$ | Shift the line upward |
+| Zero: $\partial J/\partial b=0$ | No intercept change from this update | At the minimum along the intercept direction for this convex quadratic |
+
+These are descent directions; a suitable learning rate is still necessary to reduce the actual cost without overshooting. If both $m$ and $b$ are being learned, a zero intercept gradient alone does not establish that both parameters are optimal: the slope gradient must also be zero.
+
+For training example $i$, the hypothesis evaluated at its input is the predicted value:
+
+$$
+\boxed{h_{\theta}\!\left(x^{(i)}\right)=\hat y_i}.
+$$
+
+Thus, $h_{\theta}(x)$ names the prediction rule, while $\hat y_i$ names its prediction for the $i$-th example. Given $N$ training observations, one common objective is half the mean squared error:
+
+$$
+J(\theta_0,\theta_1)
+=\frac{1}{2N}\sum_{i=1}^{N}
+\left(h_{\theta}(x^{(i)})-y^{(i)}\right)^2.
+$$
+
+The optimization goal is to choose $\theta_0$ and $\theta_1$ that minimize $J$. Gradient descent does this by repeatedly updating the parameters opposite their partial derivatives. Batch, stochastic, and mini-batch gradient descent differ in how many training examples are used to estimate each update. The learning rate controls update size; poor choices can make learning slow or unstable.
+
+----
+### Learning Rate $\alpha$ (Step Size)
+
+---
 
 ### Contour Plot of Loss Surface
 <p align="center"><a href="https://commons.wikimedia.org/wiki/File:Gradient_descent.svg"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Gradient_descent.svg/960px-Gradient_descent.svg.png" alt="Contour lines of a loss surface with successive gradient-descent steps moving toward a minimum" width="420"></a></p>
