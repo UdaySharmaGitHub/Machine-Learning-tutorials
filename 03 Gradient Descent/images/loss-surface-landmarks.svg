@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="850" viewBox="0 0 1320 850" role="img" aria-labelledby="title desc">
+<title id="title">Landmarks on a loss surface</title>
+<desc id="desc">Four schematic contour plots show a local minimum, a saddle point, a global minimum, and a plateau. Contour lines represent equal loss across two parameter dimensions.</desc>
+<rect width="1320" height="850" fill="#f8fafc"/>
+<style>
+text{font-family:Arial,Helvetica,sans-serif;fill:#1f2937}
+.panel{fill:#fff;stroke:#cbd5e1;stroke-width:1.5}
+.title{font-size:21px;font-weight:700}
+.subtitle{font-size:14px;fill:#475569}
+.axis{stroke:#475569;stroke-width:1.8}
+.contour{fill:none;stroke-width:3}
+.label{font-size:14px;font-weight:600}
+.small{font-size:12px;fill:#475569}
+.marker{fill:#fff;stroke:#0f172a;stroke-width:2.5}
+.arrow{stroke:#475569;stroke-width:2;fill:none;marker-end:url(#arrow)}
+</style>
+<defs>
+  <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+    <path d="M0,0 L8,4 L0,8 Z" fill="#475569"/>
+  </marker>
+</defs>
+<text x="660" y="38" text-anchor="middle" font-size="27" font-weight="700">Landmarks on a loss surface</text>
+<text x="660" y="65" text-anchor="middle" class="subtitle">Schematic contour plots: each contour line connects parameter values with the same loss</text>
+
+<!-- Local minimum -->
+<g>
+  <rect class="panel" x="30" y="95" width="615" height="340" rx="14"/>
+  <text class="title" x="55" y="130">1. Local minimum</text>
+  <text class="subtitle" x="55" y="153">Lowest loss in its nearby neighborhood</text>
+  <line class="axis" x1="120" y1="385" x2="575" y2="385"/>
+  <line class="axis" x1="345" y1="400" x2="345" y2="180"/>
+  <text class="small" x="570" y="407">Parameter θ₁</text>
+  <text class="small" x="350" y="184">θ₂</text>
+  <ellipse class="contour" cx="335" cy="285" rx="42" ry="28" stroke="#1d4ed8"/>
+  <ellipse class="contour" cx="335" cy="285" rx="72" ry="49" stroke="#2563eb"/>
+  <ellipse class="contour" cx="335" cy="285" rx="105" ry="72" stroke="#3b82f6"/>
+  <ellipse class="contour" cx="335" cy="285" rx="140" ry="96" stroke="#60a5fa"/>
+  <circle class="marker" cx="335" cy="285" r="6"/>
+  <text class="label" x="360" y="280">Local minimum</text>
+  <path class="arrow" d="M 475 250 C 510 235, 530 220, 550 205"/>
+  <text class="small" x="455" y="195">A different region may</text>
+  <text class="small" x="455" y="211">have an even lower loss.</text>
+</g>
+
+<!-- Saddle point -->
+<g>
+  <rect class="panel" x="675" y="95" width="615" height="340" rx="14"/>
+  <text class="title" x="700" y="130">2. Saddle point</text>
+  <text class="subtitle" x="700" y="153">Rises in one direction and falls in another</text>
+  <line class="axis" x1="765" y1="385" x2="1220" y2="385"/>
+  <line class="axis" x1="990" y1="400" x2="990" y2="180"/>
+  <text class="small" x="1215" y="407">Parameter θ₁</text>
+  <text class="small" x="995" y="184">θ₂</text>
+  <polyline class="contour" stroke="#0f766e" points="796.9,195.0 824.5,210.0 851.1,225.0 876.0,240.0 897.8,255.0 913.8,270.0 920.0,285.0 913.8,300.0 897.8,315.0 876.0,330.0 851.1,345.0 824.5,360.0 796.9,375.0"/>
+  <polyline class="contour" stroke="#0f766e" points="1183.1,195.0 1155.5,210.0 1128.9,225.0 1104.0,240.0 1082.2,255.0 1066.2,270.0 1060.0,285.0 1066.2,300.0 1082.2,315.0 1104.0,330.0 1128.9,345.0 1155.5,360.0 1183.1,375.0"/>
+  <polyline class="contour" stroke="#14b8a6" points="773.7,195.0 797.9,210.0 820.3,225.0 840.0,240.0 855.8,255.0 866.3,270.0 870.0,285.0 866.3,300.0 855.8,315.0 840.0,330.0 820.3,345.0 797.9,360.0 773.7,375.0"/>
+  <polyline class="contour" stroke="#14b8a6" points="1206.3,195.0 1182.1,210.0 1159.7,225.0 1140.0,240.0 1124.2,255.0 1113.7,270.0 1110.0,285.0 1113.7,300.0 1124.2,315.0 1140.0,330.0 1159.7,345.0 1182.1,360.0 1206.3,375.0"/>
+  <polyline class="contour" stroke="#0f766e" points="820.0,191.1 837.0,198.7 854.0,206.1 871.0,213.3 888.0,220.2 905.0,226.6 922.0,232.5 939.0,237.6 956.0,241.5 973.0,244.1 990.0,245.0 1007.0,244.1 1024.0,241.5 1041.0,237.6 1058.0,232.5 1075.0,226.6 1092.0,220.2 1109.0,213.3 1126.0,206.1 1143.0,198.7 1160.0,191.1"/>
+  <polyline class="contour" stroke="#0f766e" points="820.0,378.9 837.0,371.3 854.0,363.9 871.0,356.7 888.0,349.8 905.0,343.4 922.0,337.5 939.0,332.4 956.0,328.5 973.0,325.9 990.0,325.0 1007.0,325.9 1024.0,328.5 1041.0,332.4 1058.0,337.5 1075.0,343.4 1092.0,349.8 1109.0,356.7 1126.0,363.9 1143.0,371.3 1160.0,378.9"/>
+  <path stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4" fill="none" d="M 810 195 L 1170 375 M 810 375 L 1170 195"/>
+  <line x1="966" y1="285" x2="1014" y2="285" stroke="#334155" stroke-width="2.5"/>
+  <line x1="990" y1="261" x2="990" y2="309" stroke="#334155" stroke-width="2.5"/>
+  <circle class="marker" cx="990" cy="285" r="6"/>
+  <text class="label" x="1010" y="278">Saddle</text>
+  <text class="small" x="1035" y="420">Locally flat at the center; not a minimum</text>
+</g>
+
+<!-- Global minimum -->
+<g>
+  <rect class="panel" x="30" y="465" width="615" height="340" rx="14"/>
+  <text class="title" x="55" y="500">3. Global minimum</text>
+  <text class="subtitle" x="55" y="523">Lowest loss over the entire surface</text>
+  <line class="axis" x1="120" y1="755" x2="575" y2="755"/>
+  <line class="axis" x1="345" y1="770" x2="345" y2="550"/>
+  <text class="small" x="570" y="777">Parameter θ₁</text>
+  <text class="small" x="350" y="554">θ₂</text>
+  <ellipse class="contour" cx="350" cy="655" rx="32" ry="22" stroke="#7c3aed"/>
+  <ellipse class="contour" cx="350" cy="655" rx="62" ry="43" stroke="#8b5cf6"/>
+  <ellipse class="contour" cx="350" cy="655" rx="94" ry="64" stroke="#a78bfa"/>
+  <ellipse class="contour" cx="350" cy="655" rx="130" ry="88" stroke="#c4b5fd"/>
+  <circle class="marker" cx="350" cy="655" r="6"/>
+  <text class="label" x="372" y="650">Global minimum</text>
+  <text class="small" x="190" y="790">No other point on the surface has lower loss.</text>
+</g>
+
+<!-- Plateau -->
+<g>
+  <rect class="panel" x="675" y="465" width="615" height="340" rx="14"/>
+  <text class="title" x="700" y="500">4. Plateau</text>
+  <text class="subtitle" x="700" y="523">Broad, nearly flat region with small gradients</text>
+  <line class="axis" x1="765" y1="755" x2="1220" y2="755"/>
+  <line class="axis" x1="990" y1="770" x2="990" y2="550"/>
+  <text class="small" x="1215" y="777">Parameter θ₁</text>
+  <text class="small" x="995" y="554">θ₂</text>
+  <ellipse class="contour" cx="990" cy="655" rx="55" ry="37" stroke="#b45309"/>
+  <ellipse class="contour" cx="990" cy="655" rx="112" ry="74" stroke="#d97706"/>
+  <ellipse class="contour" cx="990" cy="655" rx="175" ry="111" stroke="#f59e0b"/>
+  <circle cx="920" cy="650" r="5" fill="#dc2626"/>
+  <path d="M 920 650 L 950 650" stroke="#dc2626" stroke-width="3" marker-end="url(#arrow)"/>
+  <text class="label" x="867" y="625">Small gradient</text>
+  <text class="small" x="820" y="790">Widely spaced contours indicate slow change in loss.</text>
+</g>
+
+<text x="660" y="835" text-anchor="middle" class="subtitle">For equal loss increments and fixed axis scales: closer contours are steeper; wider spacing is flatter.</text>
+</svg>

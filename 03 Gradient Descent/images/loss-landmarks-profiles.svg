@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="880" viewBox="0 0 1240 880" role="img" aria-labelledby="title desc">
+<title id="title">Loss profiles around optimization landmarks</title>
+<desc id="desc">Four schematic loss-versus-parameter graphs. A local minimum is higher than another minimum. Two perpendicular slices through a saddle share the same central loss, with one curving upward and the other downward. A bowl has a global minimum, and a nearly flat sloping curve illustrates a plateau.</desc>
+<rect width="1240" height="880" fill="#f8fafc"/>
+<style>
+text{font-family:Arial,Helvetica,sans-serif;fill:#1f2937}
+.panel{fill:#fff;stroke:#cbd5e1;stroke-width:1.5}
+.title{font-size:21px;font-weight:700}
+.subtitle{font-size:14px;fill:#475569}
+.axis{stroke:#475569;stroke-width:2}
+.label{font-size:15px;font-weight:600}
+.note{font-size:14px}
+.curve{fill:none;stroke-width:4;stroke-linecap:round}
+.marker{fill:#fff;stroke:#0f172a;stroke-width:2.5}
+</style>
+<defs>
+  <g id="axes">
+    <path class="axis" d="M 75 90 V 295 H 535" fill="none"/>
+    <text class="label" x="305" y="325" text-anchor="middle">Parameter direction</text>
+    <text class="label" x="32" y="195" text-anchor="middle" transform="rotate(-90 32 195)">Loss J</text>
+  </g>
+</defs>
+<text x="620" y="40" text-anchor="middle" font-size="27" font-weight="700">Loss profiles around optimization landmarks</text>
+<text x="620" y="68" text-anchor="middle" class="subtitle">Schematic curves; horizontal position is a parameter, and vertical height is loss.</text>
+
+<g transform="translate(30 100)">
+  <rect class="panel" width="575" height="350" rx="14"/>
+  <text class="title" x="24" y="34">Local minimum</text>
+  <text class="subtitle" x="24" y="59">Lower than nearby points, but not the lowest overall</text>
+  <use href="#axes"/>
+  <path class="curve" stroke="#2563eb" d="M 85 105 C 110 175 120 265 165 265 C 210 265 220 170 280 170 C 335 170 345 225 395 225 C 445 225 465 160 525 100"/>
+  <circle class="marker" cx="165" cy="265" r="6"/>
+  <circle class="marker" cx="395" cy="225" r="6"/>
+  <text class="note" x="125" y="286">Global minimum</text>
+  <text class="note" x="385" y="250">Local minimum</text>
+</g>
+
+<g transform="translate(635 100)">
+  <rect class="panel" width="575" height="350" rx="14"/>
+  <text class="title" x="24" y="34">Saddle point: two directional slices</text>
+  <text class="subtitle" x="24" y="59">Both slices pass through the same stationary point.</text>
+  <use href="#axes"/>
+  <line x1="305" y1="110" x2="305" y2="285" stroke="#94a3b8" stroke-dasharray="5 5"/>
+  <path class="curve" stroke="#0f766e" d="M 95 110 Q 305 270 515 110"/>
+  <path class="curve" stroke="#9333ea" d="M 95 270 Q 305 110 515 270"/>
+  <circle class="marker" cx="305" cy="190" r="6"/>
+  <text class="note" x="260" y="145">Same loss at center</text>
+  <text class="note" x="83" y="90">Upward slice</text>
+  <text class="note" x="405" y="285">Downward slice</text>
+  <text class="note" x="300" y="312">0</text>
+</g>
+
+<g transform="translate(30 495)">
+  <rect class="panel" width="575" height="350" rx="14"/>
+  <text class="title" x="24" y="34">Global minimum</text>
+  <text class="subtitle" x="24" y="59">A quadratic bowl has its lowest value at the bottom.</text>
+  <use href="#axes"/>
+  <path class="curve" stroke="#7c3aed" d="M 95 105 Q 305 435 515 105"/>
+  <circle class="marker" cx="305" cy="270" r="6"/>
+  <text class="note" x="325" y="240">Global minimum</text>
+</g>
+
+<g transform="translate(635 495)">
+  <rect class="panel" width="575" height="350" rx="14"/>
+  <text class="title" x="24" y="34">Plateau</text>
+  <text class="subtitle" x="24" y="59">Small gradient does not necessarily mean a minimum.</text>
+  <use href="#axes"/>
+  <path class="curve" stroke="#d97706" d="M 95 250 C 195 225 205 210 305 205 C 405 200 435 185 515 160"/>
+  <circle cx="305" cy="205" r="5" fill="#dc2626"/>
+  <text class="note" x="270" y="180">Nearly flat region</text>
+  <text class="note" x="140" y="280">Small gradients produce small updates.</text>
+</g>
+<text x="620" y="868" text-anchor="middle" class="subtitle">A single cross-section cannot establish the global minimum of a multi-parameter surface.</text>
+</svg>
