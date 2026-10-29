@@ -6,7 +6,7 @@
 - [OLS and gradient descent: estimating linear-model coefficients](#ols-and-gradient-descent-two-ways-to-estimate-linear-model-coefficients)
 - [Gradient descent overview](#gradient-descent-overview)
   - [Intuition](#intuition)
-  - [Batch, stochastic, and mini-batch updates](#batch-stochastic-and-mini-batch-gradient-descent)
+  - [Types of gradient descent: Batch, stochastic, and mini-batch updates](#types-of-gradient-descent)
   - [Practical training and stopping](#practical-training-and-stopping)
   - [Positive and negative cost gradients](#positive-and-negative-cost-gradients-how-should-the-intercept-change)
   - [Learning rate and step size](#learning-rate-alpha-or-eta-step-size)
@@ -113,19 +113,50 @@ The method of steepest descent, the foundation of modern gradient descent, is ge
 
 Imagine standing on a hilly landscape in fog. The model parameters describe your current location, and the loss is the height of the landscape. You use the local slope to choose a downhill step, then check the slope again and repeat. In this analogy, gradient descent aims to reach a low point in the loss landscape.
 
-### Batch, Stochastic, and Mini-Batch Gradient Descent
+### Types of Gradient Descent
 
-For an average objective $J(\boldsymbol{\theta})=\frac{1}{N}\sum_{i=1}^{N}\ell_i(\boldsymbol{\theta})$, let $\ell_i$ be the loss on example $i$. The variants differ in the examples used per update:
+The main variants differ in **how many training examples contribute to each gradient update**. For the average objective
 
-| Variant | Gradient used for one update | Updates per epoch | Main trade-off |
-|---|---|---|---|
-| **Batch** | $\frac{1}{N}\sum_i\nabla\ell_i$ | $1$ | Exact full-training gradient; expensive per update on large datasets. |
-| **Stochastic (SGD)** | $\nabla\ell_i$ for one sampled example | $N$ in one shuffled pass | Frequent, inexpensive updates, but a noisy trajectory. |
-| **Mini-batch** | $\frac{1}{B}\sum_{i\in\mathcal B}\nabla\ell_i$, for batch $\mathcal B$ of size $B$ | $\lceil N/B\rceil$ in one pass | Balances computational efficiency and gradient noise. |
+$$
+J(\boldsymbol{\theta})=\frac{1}{N}\sum_{i=1}^{N}\ell_i(\boldsymbol{\theta}),
+$$
 
-- **Iteration:** one parameter update. **Epoch:** one full pass through the training data.
-- The table assumes each example is processed once per epoch, including a possible smaller final batch. Random sampling with replacement need not form literal passes.
-- Stochastic gradients do not guarantee that the full cost decreases after every update. Even near a minimum, a fixed learning rate can leave noisy fluctuations; a suitable decaying schedule can help.
+where $\ell_i$ is the loss for example $i$, the update gradient is estimated from either the whole dataset, one example, or a mini-batch:
+
+```mermaid
+flowchart TB
+    A["Training dataset<br/>N examples"] --> Q{"How many examples<br/>contribute to one update?"}
+
+    Q -->|"All N"| B["Batch Gradient Descent"]
+    Q -->|"One"| C["Stochastic Gradient Descent<br/>(SGD)"]
+    Q -->|"A subset of B"| D["Mini-Batch Gradient Descent"]
+
+    B --> B1["Full-dataset gradient<br/>1 update per epoch"]
+    C --> C1["Single-example gradient<br/>About N updates per epoch"]
+    D --> D1["Batch gradient estimate<br/>About ceil(N / B) updates per epoch"]
+
+    classDef source fill:#eef2ff,stroke:#4f46e5,color:#1e1b4b,stroke-width:2px;
+    classDef decision fill:#f8fafc,stroke:#475569,color:#0f172a,stroke-width:2px;
+    classDef batch fill:#dbeafe,stroke:#2563eb,color:#172554,stroke-width:2px;
+    classDef stochastic fill:#ffedd5,stroke:#ea580c,color:#431407,stroke-width:2px;
+    classDef minibatch fill:#dcfce7,stroke:#16a34a,color:#052e16,stroke-width:2px;
+
+    class A source;
+    class Q decision;
+    class B,B1 batch;
+    class C,C1 stochastic;
+    class D,D1 minibatch;
+```
+
+| Variant | Gradient for one update | Updates in one pass (epoch) | Typical trade-off |
+|---|---|---:|---|
+| **Batch GD** | $\nabla J=\frac{1}{N}\sum_{i=1}^{N}\nabla\ell_i$ | $1$ | Uses the exact full-data gradient; each update can be costly for large datasets. |
+| **Stochastic GD (SGD)** | $\nabla\ell_i$ for one example | About $N$ | Cheap, frequent updates, but the optimization path is noisy. |
+| **Mini-batch GD** | $\frac{1}{B}\sum_{i\in\mathcal B}\nabla\ell_i$ for a batch $\mathcal B$ of size $B$ | About $\lceil N/B\rceil$ | Balances vectorized computation and gradient noise; widely used in practice. |
+
+- An **iteration** is one parameter update. An **epoch** is one pass through the training examples.
+- Update counts assume each example is processed once per epoch; the final mini-batch may be smaller. Sampling examples with replacement does not necessarily form literal epochs.
+- SGD and mini-batch GD use gradient estimates, so the **full-data loss need not decrease at every update**. Near a minimum, fixed-rate stochastic updates may continue fluctuating; a learning-rate schedule can reduce this noise.
 
 ### Practical Training and Stopping
 
