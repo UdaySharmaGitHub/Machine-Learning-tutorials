@@ -278,17 +278,17 @@ The actual distance moved depends on **both** the learning rate and the gradient
 The thresholds $1/C$ and $2/C$ have a precise interpretation for a **one-dimensional quadratic** with constant curvature $C>0$:
 
 $$
-J(\theta)=J^*+\frac{C}{2}(\theta-\theta^*)^2,
+J(\theta)=J^{*}+\frac{C}{2}\left(\theta-\theta^{*}\right)^2,
 \qquad
-J'(\theta)=C(\theta-\theta^*).
+J'(\theta)=C\left(\theta-\theta^{*}\right).
 $$
 
-Here $\theta^*$ minimizes the cost and $J^*$ is the minimum cost. Substituting this derivative into the GD update gives
+Here $\theta^{*}$ minimizes the cost and $J^{*}$ is the minimum cost. Substituting this derivative into the GD update gives
 
 $$
 \begin{aligned}
-\theta^{(t+1)}&=\theta^{(t)}-\alpha C(\theta^{(t)}-\theta^*),\\
-\theta^{(t+1)}-\theta^*&=(1-\alpha C)(\theta^{(t)}-\theta^*).
+\theta^{(t+1)}&=\theta^{(t)}-\alpha C\left(\theta^{(t)}-\theta^{*}\right),\\
+\theta^{(t+1)}-\theta^{*}&=(1-\alpha C)\left(\theta^{(t)}-\theta^{*}\right).
 \end{aligned}
 $$
 
