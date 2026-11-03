@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 560" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+  <rect width="620" height="560" fill="#fcfcfb"/>
+  <text x="310" y="32" text-anchor="middle" font-size="19" font-weight="700" fill="#0b0b0b">ROC Curve Shapes — reading classifier quality</text>
+
+  <!-- Gridlines -->
+  <g stroke="#e1e0d9" stroke-width="1">
+    <line x1="90" y1="450" x2="490" y2="450"/>
+    <line x1="90" y1="370" x2="490" y2="370"/>
+    <line x1="90" y1="290" x2="490" y2="290"/>
+    <line x1="90" y1="210" x2="490" y2="210"/>
+    <line x1="90" y1="130" x2="490" y2="130"/>
+    <line x1="90" y1="50"  x2="490" y2="50"/>
+    <line x1="90"  y1="50" x2="90"  y2="450"/>
+    <line x1="170" y1="50" x2="170" y2="450"/>
+    <line x1="250" y1="50" x2="250" y2="450"/>
+    <line x1="330" y1="50" x2="330" y2="450"/>
+    <line x1="410" y1="50" x2="410" y2="450"/>
+    <line x1="490" y1="50" x2="490" y2="450"/>
+  </g>
+
+  <!-- Axes -->
+  <line x1="90" y1="450" x2="490" y2="450" stroke="#c3c2b7" stroke-width="1.5"/>
+  <line x1="90" y1="50"  x2="90"  y2="450" stroke="#c3c2b7" stroke-width="1.5"/>
+
+  <!-- Tick labels -->
+  <g font-size="11" fill="#898781" text-anchor="middle">
+    <text x="90" y="468">0.0</text>
+    <text x="170" y="468">0.2</text>
+    <text x="250" y="468">0.4</text>
+    <text x="330" y="468">0.6</text>
+    <text x="410" y="468">0.8</text>
+    <text x="490" y="468">1.0</text>
+  </g>
+  <g font-size="11" fill="#898781" text-anchor="end">
+    <text x="82" y="454">0.0</text>
+    <text x="82" y="374">0.2</text>
+    <text x="82" y="294">0.4</text>
+    <text x="82" y="214">0.6</text>
+    <text x="82" y="134">0.8</text>
+    <text x="82" y="54">1.0</text>
+  </g>
+
+  <!-- Axis titles -->
+  <text x="290" y="494" text-anchor="middle" font-size="14" font-weight="600" fill="#52514e">False Positive Rate (FPR)</text>
+  <text x="34" y="250" text-anchor="middle" font-size="14" font-weight="600" fill="#52514e" transform="rotate(-90 34 250)">True Positive Rate (TPR)</text>
+
+  <!-- Random baseline (diagonal) -->
+  <line x1="90" y1="450" x2="490" y2="50" stroke="#898781" stroke-width="2" stroke-dasharray="7 5"/>
+  <!-- Poor classifier (below diagonal) -->
+  <path d="M 90 450 C 330 430 470 270 490 50" fill="none" stroke="#e34948" stroke-width="2.5"/>
+  <!-- Good classifier -->
+  <path d="M 90 450 C 106 230 250 70 490 50" fill="none" stroke="#1baf7a" stroke-width="2.5"/>
+  <!-- Perfect classifier -->
+  <polyline points="90,450 90,50 490,50" fill="none" stroke="#2a78d6" stroke-width="2.5"/>
+  <circle cx="90" cy="50" r="5" fill="#2a78d6"/>
+
+  <!-- Curve direct labels -->
+  <text x="150" y="80" font-size="12" font-weight="700" fill="#2a78d6">Perfect  (AUC = 1.0)</text>
+  <text x="250" y="150" font-size="12" font-weight="700" fill="#1baf7a">Good  (AUC ≈ 0.85)</text>
+  <text x="300" y="275" font-size="12" font-weight="700" fill="#898781" transform="rotate(-34 300 275)">Random  (AUC = 0.5)</text>
+  <text x="330" y="400" font-size="12" font-weight="700" fill="#e34948">Poor  (AUC &lt; 0.5)</text>
+
+  <!-- "Better" direction arrow -->
+  <text x="118" y="110" font-size="11" fill="#52514e">↖ better</text>
+
+  <!-- Legend / reading guide -->
+  <text x="90" y="524" font-size="12" fill="#52514e">The closer a curve hugs the <tspan font-weight="700">top-left corner</tspan>, the better the model separates the two classes.</text>
+  <text x="90" y="544" font-size="12" fill="#898781">The diagonal is a coin-flip baseline; a curve below it performs worse than random.</text>
+</svg>

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 470" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+  <rect width="640" height="470" fill="#fcfcfb"/>
+  <text x="320" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#0b0b0b">Confusion Matrix — the building blocks of ROC</text>
+
+  <!-- Column header band -->
+  <text x="410" y="70" text-anchor="middle" font-size="13" font-weight="600" fill="#52514e">PREDICTED</text>
+  <text x="300" y="92" text-anchor="middle" font-size="13" fill="#52514e">Positive</text>
+  <text x="500" y="92" text-anchor="middle" font-size="13" fill="#52514e">Negative</text>
+
+  <!-- Row header band -->
+  <text x="40" y="200" text-anchor="middle" font-size="13" font-weight="600" fill="#52514e" transform="rotate(-90 40 200)">ACTUAL</text>
+  <text x="80" y="165" text-anchor="middle" font-size="13" fill="#52514e" transform="rotate(-90 80 165)">Positive</text>
+  <text x="80" y="285" text-anchor="middle" font-size="13" fill="#52514e" transform="rotate(-90 80 285)">Negative</text>
+
+  <!-- Cells -->
+  <!-- TP -->
+  <rect x="200" y="105" width="200" height="120" fill="#0ca30c" fill-opacity="0.14" stroke="#c3c2b7"/>
+  <text x="300" y="150" text-anchor="middle" font-size="22" font-weight="700" fill="#0b0b0b">TP</text>
+  <text x="300" y="175" text-anchor="middle" font-size="12" fill="#52514e">True Positive</text>
+  <text x="300" y="194" text-anchor="middle" font-size="11" fill="#898781">correctly caught</text>
+  <!-- FN -->
+  <rect x="400" y="105" width="200" height="120" fill="#d03b3b" fill-opacity="0.12" stroke="#c3c2b7"/>
+  <text x="500" y="150" text-anchor="middle" font-size="22" font-weight="700" fill="#0b0b0b">FN</text>
+  <text x="500" y="175" text-anchor="middle" font-size="12" fill="#52514e">False Negative</text>
+  <text x="500" y="194" text-anchor="middle" font-size="11" fill="#898781">missed</text>
+  <!-- FP -->
+  <rect x="200" y="225" width="200" height="120" fill="#d03b3b" fill-opacity="0.12" stroke="#c3c2b7"/>
+  <text x="300" y="270" text-anchor="middle" font-size="22" font-weight="700" fill="#0b0b0b">FP</text>
+  <text x="300" y="295" text-anchor="middle" font-size="12" fill="#52514e">False Positive</text>
+  <text x="300" y="314" text-anchor="middle" font-size="11" fill="#898781">false alarm</text>
+  <!-- TN -->
+  <rect x="400" y="225" width="200" height="120" fill="#0ca30c" fill-opacity="0.14" stroke="#c3c2b7"/>
+  <text x="500" y="270" text-anchor="middle" font-size="22" font-weight="700" fill="#0b0b0b">TN</text>
+  <text x="500" y="295" text-anchor="middle" font-size="12" fill="#52514e">True Negative</text>
+  <text x="500" y="314" text-anchor="middle" font-size="11" fill="#898781">correctly ignored</text>
+
+  <!-- Formulas -->
+  <text x="200" y="398" font-size="15" fill="#0b0b0b"><tspan font-weight="700" fill="#2a78d6">TPR</tspan> (Recall / Sensitivity) = TP / (TP + FN)</text>
+  <text x="200" y="398" font-size="15" fill="#0b0b0b" dy="34"><tspan font-weight="700" fill="#eb6834">FPR</tspan> (1 − Specificity) = FP / (FP + TN)</text>
+  <text x="200" y="398" font-size="12" fill="#898781" dy="60">The ROC curve plots TPR (y) against FPR (x) as the threshold changes.</text>
+</svg>

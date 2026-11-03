@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 470" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+  <rect width="640" height="470" fill="#fcfcfb"/>
+  <text x="320" y="30" text-anchor="middle" font-size="19" font-weight="700" fill="#0b0b0b">AUC — the single number under the ROC curve</text>
+
+  <!-- Gridlines -->
+  <g stroke="#e1e0d9" stroke-width="1">
+    <line x1="80" y1="380" x2="400" y2="380"/>
+    <line x1="80" y1="300" x2="400" y2="300"/>
+    <line x1="80" y1="220" x2="400" y2="220"/>
+    <line x1="80" y1="140" x2="400" y2="140"/>
+    <line x1="80" y1="60"  x2="400" y2="60"/>
+    <line x1="160" y1="60" x2="160" y2="380"/>
+    <line x1="240" y1="60" x2="240" y2="380"/>
+    <line x1="320" y1="60" x2="320" y2="380"/>
+    <line x1="400" y1="60" x2="400" y2="380"/>
+  </g>
+
+  <!-- Shaded AUC area -->
+  <path d="M 80 380 C 93 204 208 76 400 60 L 400 380 Z" fill="#2a78d6" fill-opacity="0.18"/>
+
+  <!-- Axes -->
+  <line x1="80" y1="380" x2="400" y2="380" stroke="#c3c2b7" stroke-width="1.5"/>
+  <line x1="80" y1="60"  x2="80"  y2="380" stroke="#c3c2b7" stroke-width="1.5"/>
+
+  <!-- Random diagonal -->
+  <line x1="80" y1="380" x2="400" y2="60" stroke="#898781" stroke-width="2" stroke-dasharray="7 5"/>
+  <!-- ROC curve -->
+  <path d="M 80 380 C 93 204 208 76 400 60" fill="none" stroke="#2a78d6" stroke-width="2.5"/>
+
+  <!-- AUC label inside area -->
+  <text x="215" y="305" text-anchor="middle" font-size="20" font-weight="700" fill="#1c5cab">AUC</text>
+  <text x="215" y="326" text-anchor="middle" font-size="12" fill="#52514e">shaded area = 0 … 1</text>
+
+  <!-- Axis titles -->
+  <text x="240" y="412" text-anchor="middle" font-size="13" font-weight="600" fill="#52514e">False Positive Rate</text>
+  <text x="40" y="220" text-anchor="middle" font-size="13" font-weight="600" fill="#52514e" transform="rotate(-90 40 220)">True Positive Rate</text>
+
+  <!-- Interpretation panel -->
+  <text x="440" y="78" font-size="14" font-weight="700" fill="#0b0b0b">How to read AUC</text>
+  <text x="440" y="100" font-size="12" fill="#52514e">Probability the model ranks a random</text>
+  <text x="440" y="117" font-size="12" fill="#52514e">positive above a random negative.</text>
+
+  <g font-size="12.5">
+    <rect x="440" y="140" width="14" height="14" rx="2" fill="#0ca30c"/>
+    <text x="462" y="152" fill="#0b0b0b"><tspan font-weight="700">0.90 – 1.00</tspan>  Excellent</text>
+    <rect x="440" y="168" width="14" height="14" rx="2" fill="#3987e5"/>
+    <text x="462" y="180" fill="#0b0b0b"><tspan font-weight="700">0.80 – 0.90</tspan>  Good</text>
+    <rect x="440" y="196" width="14" height="14" rx="2" fill="#eda100"/>
+    <text x="462" y="208" fill="#0b0b0b"><tspan font-weight="700">0.70 – 0.80</tspan>  Fair</text>
+    <rect x="440" y="224" width="14" height="14" rx="2" fill="#eb6834"/>
+    <text x="462" y="236" fill="#0b0b0b"><tspan font-weight="700">0.60 – 0.70</tspan>  Poor</text>
+    <rect x="440" y="252" width="14" height="14" rx="2" fill="#898781"/>
+    <text x="462" y="264" fill="#0b0b0b"><tspan font-weight="700">0.50</tspan>  Random (no skill)</text>
+    <rect x="440" y="280" width="14" height="14" rx="2" fill="#e34948"/>
+    <text x="462" y="292" fill="#0b0b0b"><tspan font-weight="700">&lt; 0.50</tspan>  Worse than random</text>
+  </g>
+
+  <!-- Bottom takeaways -->
+  <text x="80" y="446" font-size="12" fill="#898781">AUC is threshold-independent — it summarizes performance across every possible threshold into one value.</text>
+</svg>

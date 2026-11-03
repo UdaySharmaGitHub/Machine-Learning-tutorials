@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 440" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+  <rect width="640" height="440" fill="#fcfcfb"/>
+  <text x="320" y="30" text-anchor="middle" font-size="19" font-weight="700" fill="#0b0b0b">The Threshold Decides TP, FP, TN, FN</text>
+
+  <defs>
+    <clipPath id="rightOfT"><rect x="320" y="0" width="320" height="340"/></clipPath>
+  </defs>
+
+  <!-- Baseline -->
+  <line x1="70" y1="320" x2="590" y2="320" stroke="#c3c2b7" stroke-width="1.5"/>
+
+  <!-- Distribution curves (base, light fill) -->
+  <!-- Negative class: centered left -->
+  <path d="M 95 320 C 175 320 175 170 255 170 C 335 170 335 320 415 320 Z" fill="#eb6834" fill-opacity="0.14" stroke="#eb6834" stroke-width="2"/>
+  <!-- Positive class: centered right -->
+  <path d="M 225 320 C 305 320 305 170 385 170 C 465 170 465 320 545 320 Z" fill="#2a78d6" fill-opacity="0.14" stroke="#2a78d6" stroke-width="2"/>
+
+  <!-- Predicted-positive side (right of threshold) emphasized -->
+  <g clip-path="url(#rightOfT)">
+    <path d="M 95 320 C 175 320 175 170 255 170 C 335 170 335 320 415 320 Z" fill="#eb6834" fill-opacity="0.55"/>
+    <path d="M 225 320 C 305 320 305 170 385 170 C 465 170 465 320 545 320 Z" fill="#2a78d6" fill-opacity="0.50"/>
+  </g>
+
+  <!-- Threshold line -->
+  <line x1="320" y1="135" x2="320" y2="335" stroke="#0b0b0b" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="320" y="128" text-anchor="middle" font-size="13" font-weight="700" fill="#0b0b0b">Threshold</text>
+  <text x="332" y="150" font-size="11" fill="#52514e">predict Positive →</text>
+  <text x="308" y="150" text-anchor="end" font-size="11" fill="#52514e">← predict Negative</text>
+
+  <!-- Region labels -->
+  <text x="180" y="300" text-anchor="middle" font-size="15" font-weight="700" fill="#52514e">TN</text>
+  <text x="290" y="305" text-anchor="middle" font-size="13" font-weight="700" fill="#2a78d6">FN</text>
+  <text x="360" y="305" text-anchor="middle" font-size="13" font-weight="700" fill="#eb6834">FP</text>
+  <text x="450" y="260" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">TP</text>
+
+  <!-- Axis label -->
+  <text x="330" y="358" text-anchor="middle" font-size="13" fill="#898781">Model's predicted probability (score) →</text>
+
+  <!-- Legend -->
+  <rect x="150" y="378" width="14" height="14" rx="2" fill="#eb6834" fill-opacity="0.6"/>
+  <text x="170" y="390" font-size="12" fill="#52514e">Negative class (actual)</text>
+  <rect x="340" y="378" width="14" height="14" rx="2" fill="#2a78d6" fill-opacity="0.6"/>
+  <text x="360" y="390" font-size="12" fill="#52514e">Positive class (actual)</text>
+
+  <!-- Takeaway -->
+  <text x="320" y="420" text-anchor="middle" font-size="12" fill="#0b0b0b">Slide the threshold LEFT → catch more positives (↑TPR) but raise false alarms (↑FPR). Each position = one point on the ROC curve.</text>
+</svg>
