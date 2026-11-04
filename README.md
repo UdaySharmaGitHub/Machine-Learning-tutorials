@@ -1,10 +1,25 @@
-# Machine Learning Tutorials
+<h1 align="center">Machine Learning Tutorials</h1>
 
-[![GitHub](https://img.shields.io/badge/GitHub-UdaySharmaGitHub-181717?logo=github&style=for-the-badge)](https://github.com/UdaySharmaGitHub)
+<p align="center">
+   Learn machine learning through hands-on Jupyter notebooks covering mathematical foundations, from-scratch implementations, visualizations, and scikit-learn examples.
+</p>
 
-A comprehensive, hands-on collection of Machine Learning tutorials built with Jupyter Notebooks. This repository covers core ML algorithms **from scratch** — starting from mathematical derivations and building up to full implementations using Python and scikit-learn.
+---
 
-Whether you're a beginner or looking to solidify your fundamentals, this repo walks you through each concept step by step with code, visualizations, and real-world datasets.
+<div align="center">
+   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+   <a href="https://github.com/UdaySharmaGitHub/Machine-Learning-tutorials/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="Pull requests welcome"></a>
+   <a href="https://github.com/UdaySharmaGitHub/Machine-Learning-tutorials/stargazers"><img src="https://img.shields.io/github/stars/UdaySharmaGitHub/Machine-Learning-tutorials?style=social" alt="GitHub stars"></a>
+</div>
+
+<p align="center">
+   <a href="#topics-covered">Topics</a> ·
+   <a href="#notebooks-by-topic">Notebooks</a> ·
+   <a href="#getting-started">Getting Started</a> ·
+   <a href="#highlights">Highlights</a> ·
+   <a href="#contributing">Contributing</a> ·
+   <a href="https://github.com/UdaySharmaGitHub/Machine-Learning-tutorials/issues">Issues</a>
+</p>
 
 ---
 
@@ -20,10 +35,11 @@ Whether you're a beginner or looking to solidify your fundamentals, this repo wa
 | 06 | **Lasso Regression (L1)** | Lasso regression demo and key concepts |
 | 07 | **Elastic Net Regression** | Combining L1 and L2 regularization |
 | 08 | **Logistic Regression** | Logistic regression, perceptron trick, and sigmoid function with animations |
+| 09 | **Evaluation Metrics** | Regression and classification metrics, confusion matrices, and model evaluation |
 
 ---
 
-## Folder Structure & Notebook Links
+## Notebooks by Topic
 
 ### 📁 01 Intro
 
@@ -70,7 +86,7 @@ Whether you're a beginner or looking to solidify your fundamentals, this repo wa
 
 | # | Notebook | Description |
 |---|----------|-------------|
-| 00 | [Gradient Descent Intro](03%20Gradient%20Descent/01%20Gradient%20Descent%20end-to-end%20From%20Sractch/00_Gradient_descent_intro.ipynb) | Introduction to gradient descent |
+| 00 | [Gradient Descent Intro](03%20Gradient%20Descent/01%20Gradient%20Descent%20end-to-end%20From%20Sractch/00_Gradient_descent_intro.md) | Introduction to gradient descent |
 | 01 | [Gradient Descent Step by Step](03%20Gradient%20Descent/01%20Gradient%20Descent%20end-to-end%20From%20Sractch/01_Gradient_descent_step_by_step.ipynb) | Step-by-step walkthrough |
 | 01.1 | [Gradient Descent Step by Step (Custom)](03%20Gradient%20Descent/01%20Gradient%20Descent%20end-to-end%20From%20Sractch/01.1_gradient_descent_step_by_step_custom.ipynb) | Custom implementation step-by-step |
 | 02 | [Gradient Descent Code from Scratch](03%20Gradient%20Descent/01%20Gradient%20Descent%20end-to-end%20From%20Sractch/02_Gradient_descent_code_from_scratch.ipynb) | Full GD implementation from scratch |
@@ -137,6 +153,18 @@ Whether you're a beginner or looking to solidify your fundamentals, this repo wa
 | 00 | [Logistic Regression](08%20Logistic%20Regression/00_Logistic_Regression.ipynb) | Logistic regression theory & implementation |
 | 01 | [Perceptron Logistic Regression](08%20Logistic%20Regression/01_Preceptron_Logistic_Regresssion.ipynb) | Perceptron approach to logistic regression |
 | 02 | [Perceptron Trick Using Sigmoid](08%20Logistic%20Regression/02_preceptron_trick_using_Sigmoid.ipynb) | Sigmoid-based perceptron trick |
+| 03 | [Gradient Descent Logistic Regression](08%20Logistic%20Regression/03%20Gradient%20Descent%20Logistic%20Regression.ipynb) | Logistic regression trained with gradient descent |
+
+---
+
+### 📁 09 Evaluation Metrics in ML
+
+| # | Resource | Description |
+|---|----------|-------------|
+| 00 | [Evaluation Metrics Guide](09%20Evaluation%20Metrics%20in%20ML/00%20Evaluation%20Metrics%20in%20Machine%20Learning.md) | Regression, classification, and clustering metric reference |
+| 01 | [Binary Classification Metrics](09%20Evaluation%20Metrics%20in%20ML/01%20Classification%20Matrix%20on%20Binary.ipynb) | Confusion matrix and metrics for binary classification |
+| 02 | [Multiclass Classification Metrics](09%20Evaluation%20Metrics%20in%20ML/02%20Classification%20Matrix%20on%20Multi-Class%20Classification.ipynb) | Confusion matrix and metrics for multiclass classification |
+| 03 | [MNIST Classification Metrics](09%20Evaluation%20Metrics%20in%20ML/03%20Classification%20Metrics%20Multi%20mnist1.ipynb) | Compare classifiers on handwritten digits |
 
 ---
 
@@ -146,7 +174,7 @@ Whether you're a beginner or looking to solidify your fundamentals, this repo wa
 - **Mathematical derivations** — Full derivations included (e.g., multiple linear regression closed-form solution, gradient descent update rules).
 - **Visualizations & animations** — Gradient descent convergence animations, 3D cost surfaces, contour plots, and more.
 - **Real-world datasets** — Practice with datasets like placement data, diabetes dataset, economic index, and student performance.
-- **Regression metrics** — Dedicated notebook covering evaluation metrics (MSE, RMSE, MAE, R²).
+- **Evaluation metrics** — Regression and classification metric guides, notebooks, and examples.
 
 ---
 
@@ -157,6 +185,7 @@ Whether you're a beginner or looking to solidify your fundamentals, this repo wa
 - **NumPy** — numerical computation
 - **Pandas** — data manipulation
 - **Matplotlib / Plotly** — visualization & interactive plots
+- **Seaborn** — statistical plots and confusion-matrix visualizations
 - **scikit-learn** — ML model implementations
 
 ---
@@ -165,21 +194,28 @@ Whether you're a beginner or looking to solidify your fundamentals, this repo wa
 
 1. **Clone the repository**
    ```bash
-   git clone <repo-url>
-   cd Machine\ Learning
+   git clone https://github.com/UdaySharmaGitHub/Machine-Learning-tutorials.git
+   cd Machine-Learning-tutorials
    ```
 
-2. **Install dependencies**
+2. **Create and activate a virtual environment**
    ```bash
-   pip install numpy pandas matplotlib plotly scikit-learn jupyter
+   python3 -m venv .venv
+   source .venv/bin/activate
+   ```
+   On Windows, activate it with `.venv\Scripts\activate`.
+
+3. **Install dependencies**
+   ```bash
+   python -m pip install -r requirements.in
    ```
 
-3. **Launch Jupyter**
+4. **Launch Jupyter**
    ```bash
    jupyter notebook
    ```
 
-4. **Navigate to any topic folder** and open the notebooks in order (00, 01, 02, ...).
+5. **Open a notebook** from the topic directory. Some notebooks require additional datasets; follow the dataset setup instructions in the relevant notebook. Do not commit credentials or API tokens.
 
 ---
 
@@ -187,7 +223,7 @@ Whether you're a beginner or looking to solidify your fundamentals, this repo wa
 
 Each topic is organized in a numbered folder. Within each folder, notebooks are numbered sequentially — **start from `00` or `01`** and work your way through. The progression follows a logical learning path:
 
-> Linear Regression → Gradient Descent → Polynomial Regression → Regularization (Ridge → Lasso → Elastic Net) → Logistic Regression
+> Linear Regression → Gradient Descent → Polynomial Regression → Regularization (Ridge → Lasso → Elastic Net) → Logistic Regression → Evaluation Metrics
 
 ---
 
@@ -207,4 +243,4 @@ Feel free to check out my other repositories and follow for more!
 
 ## License
 
-This project is open-source and available for educational purposes.
+This project is licensed under the [MIT License](LICENSE).

@@ -14,9 +14,11 @@ build/
 # Jupyter
 .ipynb_checkpoints/
 
-# Environment and secrets
+# Environment, private files, and secrets
 .env
 .env.*
+.evn
+.private/
 
 # macOS
 .DS_Store
