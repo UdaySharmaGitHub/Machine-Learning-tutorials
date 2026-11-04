@@ -2,9 +2,9 @@
 
 **ROC** → **R**eceiver **O**perating **C**haracteristic.
 
-A **ROC curve** is a graphical plot that shows how well a **binary classification** model separates two classes **across every possible decision threshold**. Instead of judging a model at one fixed cut-off, the ROC curve lets us see its behaviour at *all* cut-offs at once.
+- A **ROC curve** is a graphical plot that shows how well a **binary classification** model separates two classes **across every possible decision threshold**. Instead of judging a model at one fixed cut-off, the ROC curve lets us see its behaviour at *all* cut-offs at once.
 
-It plots the **True Positive Rate (TPR)** against the **False Positive Rate (FPR)** at each threshold setting. The **AUC** (Area Under the Curve) then collapses that whole curve into a single, threshold-independent score.
+- It plots the **True Positive Rate (TPR)** against the **False Positive Rate (FPR)** at each threshold setting. The **AUC** (Area Under the Curve) then collapses that whole curve into a single, threshold-independent score.
 
 ROC analysis is most useful for **binary classification** problems — two possible outcomes:
 
@@ -36,12 +36,22 @@ ROC analysis is most useful for **binary classification** problems — two possi
 
 ## What Is a ROC Curve?
 
-Most classifiers do not output a hard label directly. They output a **score** (a probability between 0 and 1) that an example belongs to the positive class. We turn that score into a label using a **threshold**:
+- Most classifiers do not output a hard label directly. 
+- They output a **score** (a probability between 0 and 1) that an example belongs to the positive class. We turn that score into a label using a **threshold**:
 
-- score **≥ threshold** → predict **Positive**
-- score **< threshold** → predict **Negative**
+    - score **≥ threshold** → predict **Positive**
+    - score **< threshold** → predict **Negative**
 
-The threshold is a *knob*. Turn it one way and the model becomes cautious (few positives); turn it the other way and it becomes aggressive (many positives). Every setting of the knob gives a different TPR and FPR.
+- As you ***change the threshold, the predictions change, producing different TPR and FPR values.***
+- The ***ROC curve collects*** these operating points to ***show the trade-off between detecting real positives and raising false alarms.***
+
+**Example — Disease prediction.** A model assigns a patient a disease score of **0.70**. The predicted class depends on the threshold:
+
+- At a threshold of **0.50**, the patient is classified as **positive**.
+- At a threshold of **0.80**, the patient is classified as **negative**.
+
+
+The threshold is a **_knob_**. Turn it one way and the model becomes cautious (few positives); turn it the other way and it becomes aggressive (many positives). Every setting of the knob gives a different TPR and FPR.
 
 The **ROC curve** is simply the trace of **(FPR, TPR)** points as the threshold sweeps from high to low. It answers one question: *how good is this model at separating the two classes, independent of the exact cut-off we pick?*
 
@@ -53,7 +63,17 @@ The **ROC curve** is simply the trace of **(FPR, TPR)** points as the threshold 
 
 > **Example — Fraud detection.** Out of 10,000 transactions, only 100 are fraud (1%). A lazy model that predicts *"legitimate"* for every transaction scores **99% accuracy** — yet it catches **zero** fraud. Useless.
 
-The ROC curve exposes this, because it is built from TPR and FPR — which are measured **per class** — rather than from overall accuracy. A model that ignores the rare positive class sits on the random diagonal no matter how high its accuracy looks.
+The ROC curve helps reveal why accuracy is misleading here:
+
+- It uses **TPR and FPR**, which measure performance for each class, rather than overall accuracy.
+- The all-legitimate model has a **TPR of 0** and an **FPR of 0**, so it appears at **(0, 0)** on the ROC plot — not on the random diagonal.
+
+For a model that produces a fraud score:
+
+- Choose a threshold above which transactions are flagged as fraud.
+- **Raise the threshold** to reduce legitimate transactions incorrectly flagged as fraud (**false positives**).
+- A higher threshold can also let more fraud through (**false negatives**).
+- The ROC curve shows this trade-off across thresholds. The all-legitimate model is just one operating point, not a threshold-tunable model.
 
 The ROC curve is valuable because it:
 
@@ -81,7 +101,11 @@ Both rates come straight from the **confusion matrix**. Everything about ROC res
 
 TPR measures the share of **actual positive** cases the model correctly identifies. Also called **Recall** or **Sensitivity**.
 
-$$TPR = \frac{TP}{TP + FN}$$
+$$TPR (\text{threshold}) = \frac{TP}{TP + FN}$$
+
+- A higher TPR is desirable because it means fewer positives are missed.
+- Its ***complement*** is the ***False Negative Rate***:
+$$FNR = \frac{FN}{TP + FN} = 1 - TPR$$
 
 **Example.** Suppose there are **100 fraudulent** transactions:
 
@@ -94,9 +118,18 @@ $$TPR = \frac{80}{80 + 20} = 0.80 = 80\%$$
 
 ### B. False Positive Rate (FPR)
 
-FPR measures the share of **actual negative** cases the model **incorrectly** flags as positive. It equals **1 − Specificity**.
+- **FPR** measures the share of **actual negative** cases the model **incorrectly** flags as positive. 
+- It equals **1 − Specificity**.
 
 $$FPR = \frac{FP}{FP + TN}$$
+
+- The denominator, **FP + TN**, is the total number of actual negatives.
+- A lower FPR is desirable because it means fewer false alarms.
+- FPR is related to specificity, which measures how well the model correctly identifies negatives:
+
+$$\text{Specificity} = \frac{TN}{TN + FP}$$
+
+$$\text{FPR} = 1 - \text{Specificity}$$
 
 **Example.** Suppose there are **900 legitimate** transactions:
 
