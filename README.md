@@ -15,6 +15,7 @@
 <p align="center">
    <a href="#topics-covered">Topics</a> ·
    <a href="#notebooks-by-topic">Notebooks</a> ·
+   <a href="#statistics-for-machine-learning">Statistics for ML</a> ·
    <a href="#getting-started">Getting Started</a> ·
    <a href="#highlights">Highlights</a> ·
    <a href="#contributing">Contributing</a> ·
@@ -36,6 +37,7 @@
 | 07 | **Elastic Net Regression** | Combining L1 and L2 regularization |
 | 08 | **Logistic Regression** | Logistic regression, perceptron trick, and sigmoid function with animations |
 | 09 | **Evaluation Metrics** | Regression and classification metrics, confusion matrices, and model evaluation |
+| 10 | **ROC Curve and AUC** | ROC analysis, AUC, and practical threshold selection |
 
 ---
 
@@ -165,6 +167,25 @@
 | 01 | [Binary Classification Metrics](09%20Evaluation%20Metrics%20in%20ML/01%20Classification%20Matrix%20on%20Binary.ipynb) | Confusion matrix and metrics for binary classification |
 | 02 | [Multiclass Classification Metrics](09%20Evaluation%20Metrics%20in%20ML/02%20Classification%20Matrix%20on%20Multi-Class%20Classification.ipynb) | Confusion matrix and metrics for multiclass classification |
 | 03 | [MNIST Classification Metrics](09%20Evaluation%20Metrics%20in%20ML/03%20Classification%20Metrics%20Multi%20mnist1.ipynb) | Compare classifiers on handwritten digits |
+
+---
+
+### 📁 10 ROC and AUC
+
+| # | Resource | Description |
+|---|----------|-------------|
+| 00 | [ROC and AUC Complete Guide](10%20ROC%20and%20AUC/00%20ROC%20and%20AUC%20Complete.md) | ROC fundamentals, confusion-matrix rates, threshold trade-offs, AUC, and model selection |
+| 01 | [Threshold Selection and Optimization](10%20ROC%20and%20AUC/01%20Advanced%20Topic-%20Threshold%20Selection%20and%20Optimization.md) | Minimum sensitivity, maximum FPR, error costs, Youden's J, and threshold selection in Python |
+| 02 | [Advanced ROC and AUC Concepts](10%20ROC%20and%20AUC/02%20Advanced%20ROC%20Curve%20%26%20AUC:%20Important%20Concepts.md) | Calibration, class imbalance, PR curves, multiclass ROC-AUC, and more |
+| 03 | [ROC-AUC Implementation Notebook](10%20ROC%20and%20AUC/ROC-AUC-Implementation.ipynb) | Compute ROC points and AUC, visualize the curve, and select a threshold with Youden's J |
+
+---
+
+## Statistics for Machine Learning
+
+| # | Resource | Description |
+|---|----------|-------------|
+| 00 | [Sensitivity and Specificity](Statistics%20for%20Machine%20Learning/Sensitivity%20and%20specificity/Sensitivity%20and%20specificity.md) | Definitions, formulas, examples, diagrams, and threshold trade-offs |
 
 ---
 
