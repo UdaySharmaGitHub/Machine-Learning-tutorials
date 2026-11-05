@@ -36,7 +36,7 @@ ROC analysis is most useful for **binary classification** problems — two possi
 - [Choosing a Model and a Threshold with ROC / AUC](#choosing-a-model-and-a-threshold-with-roc--auc)
 - [Key Takeaways](#key-takeaways)
 - [Want to explore more Advanced concepts on ROC and AUC?](#want-to-explore-more-advanced-concepts-on-roc-and-auc)
-  - [Advanced Topic: ROC Curve & AUC: Important Concepts](<02 Advanced ROC Curve & AUC: Important Concepts.md>)
+  - [Advanced Topic: ROC Curve & AUC: Important Concepts](<02 Advanced Topic- ROC Curve & AUC Important Concepts.md>)
   - [Advanced Topic — Threshold Selection and Optimization](<01 Advanced Topic- Threshold Selection and Optimization.md>)
 - [Future Advanced Topics (Coming Soon)](#future-advanced-topics-coming-soon)
 
@@ -407,29 +407,29 @@ graph TD
 ## **Want to explore more Advanced concepts on ROC and AUC?**
 
 ### Advanced Topic: ROC Curve & AUC: Important Concepts
-> See [ROC Curve & AUC: Important Concepts](<02 Advanced ROC Curve & AUC: Important Concepts.md>) for additional topics.
+> See [ROC Curve & AUC: Important Concepts](<02 Advanced Topic- ROC Curve & AUC Important Concepts.md>) for additional topics.
 
-- [ROC-AUC Does Not Measure Probability Calibration](<02 Advanced ROC Curve & AUC: Important Concepts.md#1-roc-auc-does-not-measure-probability-calibration>)
-- [ROC-AUC Is Independent of Classification Threshold](<02 Advanced ROC Curve & AUC: Important Concepts.md#2-roc-auc-is-independent-of-classification-threshold>)
-- [ROC-AUC Is Invariant to Monotonic Transformations](<02 Advanced ROC Curve & AUC: Important Concepts.md#3-roc-auc-is-invariant-to-monotonic-transformations>)
-- [ROC-AUC and Class Imbalance](<02 Advanced ROC Curve & AUC: Important Concepts.md#4-roc-auc-and-class-imbalance>)
-- [ROC Curve vs. Precision-Recall Curve](<02 Advanced ROC Curve & AUC: Important Concepts.md#5-roc-curve-vs-precision-recall-curve-pr-curve>)
-- [AUC Can Be Misleading When Comparing Models](<02 Advanced ROC Curve & AUC: Important Concepts.md#6-auc-can-be-misleading-when-comparing-models>)
-  - [What Is a Confidence Interval?](<02 Advanced ROC Curve & AUC: Important Concepts.md#what-is-a-confidence-interval>)
-- [What Happens When AUC Is Below 0.5?](<02 Advanced ROC Curve & AUC: Important Concepts.md#7-what-happens-when-auc-is-below-05>)
-- [ROC-AUC for Multiclass Classification](<02 Advanced ROC Curve & AUC: Important Concepts.md#8-roc-auc-for-multiclass-classification>)
-  - [One-vs-Rest (OvR)](<02 Advanced ROC Curve & AUC: Important Concepts.md#a-one-vs-rest-ovr>)
-  - [One-vs-One (OvO)](<02 Advanced ROC Curve & AUC: Important Concepts.md#b-one-vs-one-ovo>)
-- [Use Prediction Scores, Not Just Predicted Labels, for ROC-AUC](<02 Advanced ROC Curve & AUC: Important Concepts.md#9-use-prediction-scores-not-just-predicted-labels-for-roc-auc>)
-- [Partial AUC (pAUC) and Operating Regions](<02 Advanced ROC Curve & AUC: Important Concepts.md#10-partial-auc-pauc-and-operating-regions>)
-- [ROC-AUC Does Not Guarantee Good Production Performance](<02 Advanced ROC Curve & AUC: Important Concepts.md#11-roc-auc-does-not-guarantee-good-production-performance>)
-- [Complete ROC & AUC Learning Checklist](<02 Advanced ROC Curve & AUC: Important Concepts.md#12-complete-roc--auc-learning-checklist>)
-  - [Fundamentals](<02 Advanced ROC Curve & AUC: Important Concepts.md#fundamentals>)
-  - [AUC Concepts](<02 Advanced ROC Curve & AUC: Important Concepts.md#auc-concepts>)
-  - [Threshold Optimization](<02 Advanced ROC Curve & AUC: Important Concepts.md#threshold-optimization>)
-  - [Advanced Concepts](<02 Advanced ROC Curve & AUC: Important Concepts.md#advanced-concepts>)
-  - [Practical Implementation](<02 Advanced ROC Curve & AUC: Important Concepts.md#practical-implementation>)
-- [What Should You Study Next?](<02 Advanced ROC Curve & AUC: Important Concepts.md#13-what-should-you-study-next>)
+- [ROC-AUC Does Not Measure Probability Calibration](<02 Advanced Topic- ROC Curve & AUC Important Concepts.md#1-roc-auc-does-not-measure-probability-calibration>)
+- [ROC-AUC Is Independent of Classification Threshold](<02 Advanced Topic- ROC Curve & AUC Important Concepts.md#2-roc-auc-is-independent-of-classification-threshold>)
+- [ROC-AUC Is Invariant to Monotonic Transformations](<02 Advanced Topic- ROC Curve & AUC Important Concepts.md#3-roc-auc-is-invariant-to-monotonic-transformations>)
+- [ROC-AUC and Class Imbalance](<02 Advanced Topic- ROC Curve & AUC Important Concepts.md#4-roc-auc-and-class-imbalance>)
+- [ROC Curve vs. Precision-Recall Curve](<02 Advanced Topic- ROC Curve & AUC Important Concepts.md#5-roc-curve-vs-precision-recall-curve-pr-curve>)
+- [AUC Can Be Misleading When Comparing Models](<02 Advanced Topic- ROC Curve & AUC Important Concepts.md#6-auc-can-be-misleading-when-comparing-models>)
+  - [What Is a Confidence Interval?](<02 Advanced Topic- ROC Curve & AUC Important Concepts.md#what-is-a-confidence-interval>)
+- [What Happens When AUC Is Below 0.5?](<02 Advanced Topic- ROC Curve & AUC Important Concepts.md#7-what-happens-when-auc-is-below-05>)
+- [ROC-AUC for Multiclass Classification](<02 Advanced Topic- ROC Curve & AUC Important Concepts.md#8-roc-auc-for-multiclass-classification>)
+  - [One-vs-Rest (OvR)](<02 Advanced Topic- ROC Curve & AUC Important Concepts.md#a-one-vs-rest-ovr>)
+  - [One-vs-One (OvO)](<02 Advanced Topic- ROC Curve & AUC Important Concepts.md#b-one-vs-one-ovo>)
+- [Use Prediction Scores, Not Just Predicted Labels, for ROC-AUC](<02 Advanced Topic- ROC Curve & AUC Important Concepts.md#9-use-prediction-scores-not-just-predicted-labels-for-roc-auc>)
+- [Partial AUC (pAUC) and Operating Regions](<02 Advanced Topic- ROC Curve & AUC Important Concepts.md#10-partial-auc-pauc-and-operating-regions>)
+- [ROC-AUC Does Not Guarantee Good Production Performance](<02 Advanced Topic- ROC Curve & AUC Important Concepts.md#11-roc-auc-does-not-guarantee-good-production-performance>)
+- [Complete ROC & AUC Learning Checklist](<02 Advanced Topic- ROC Curve & AUC Important Concepts.md#12-complete-roc--auc-learning-checklist>)
+  - [Fundamentals](<02 Advanced Topic- ROC Curve & AUC Important Concepts.md#fundamentals>)
+  - [AUC Concepts](<02 Advanced Topic- ROC Curve & AUC Important Concepts.md#auc-concepts>)
+  - [Threshold Optimization](<02 Advanced Topic- ROC Curve & AUC Important Concepts.md#threshold-optimization>)
+  - [Advanced Concepts](<02 Advanced Topic- ROC Curve & AUC Important Concepts.md#advanced-concepts>)
+  - [Practical Implementation](<02 Advanced Topic- ROC Curve & AUC Important Concepts.md#practical-implementation>)
+- [What Should You Study Next?](<02 Advanced Topic- ROC Curve & AUC Important Concepts.md#13-what-should-you-study-next>)
 
 ---
 
