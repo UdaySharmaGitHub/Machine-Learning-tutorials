@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="680" viewBox="0 0 1120 680" role="img" aria-labelledby="title description">
+  <title id="title">Sensitivity and specificity from a confusion matrix</title>
+  <desc id="description">A two-by-two confusion matrix shows true positives and false negatives among actual positive cases, and false positives and true negatives among actual negative cases. Formula cards explain sensitivity as true positives divided by actual positives and specificity as true negatives divided by actual negatives.</desc>
+  <defs>
+    <style>
+      text { font-family: Arial, Helvetica, sans-serif; fill: #172033; }
+      .muted { fill: #586579; }
+      .small { font-size: 16px; }
+      .label { font-size: 17px; font-weight: 700; }
+      .cell-title { font-size: 22px; font-weight: 700; }
+      .cell-sub { font-size: 15px; }
+    </style>
+  </defs>
+  <rect width="1120" height="680" rx="26" fill="#f3f6fb"/>
+  <text x="54" y="58" font-size="30" font-weight="700">Two rates, two different actual groups</text>
+  <text x="54" y="89" class="muted" font-size="17">Read down each actual row to see the denominator for each measure.</text>
+
+  <text x="426" y="145" text-anchor="middle" class="label">Predicted outcome</text>
+  <text x="316" y="178" text-anchor="middle" class="muted small">Positive</text>
+  <text x="536" y="178" text-anchor="middle" class="muted small">Negative</text>
+
+  <text x="54" y="231" class="label">Actual</text>
+  <text x="54" y="256" class="label">positive</text>
+  <text x="54" y="411" class="label">Actual</text>
+  <text x="54" y="436" class="label">negative</text>
+
+  <rect x="206" y="194" width="220" height="132" rx="16" fill="#d9f3e8" stroke="#52a982" stroke-width="2"/>
+  <text x="316" y="244" text-anchor="middle" class="cell-title">True positive (TP)</text>
+  <text x="316" y="274" text-anchor="middle" class="cell-sub">Actual positive, predicted positive</text>
+  <text x="316" y="303" text-anchor="middle" class="cell-sub">Counts toward sensitivity</text>
+
+  <rect x="446" y="194" width="220" height="132" rx="16" fill="#fde4df" stroke="#d87869" stroke-width="2"/>
+  <text x="556" y="244" text-anchor="middle" class="cell-title">False negative (FN)</text>
+  <text x="556" y="274" text-anchor="middle" class="cell-sub">Actual positive, predicted negative</text>
+  <text x="556" y="303" text-anchor="middle" class="cell-sub">Missed positive</text>
+
+  <rect x="206" y="350" width="220" height="132" rx="16" fill="#fde4df" stroke="#d87869" stroke-width="2"/>
+  <text x="316" y="400" text-anchor="middle" class="cell-title">False positive (FP)</text>
+  <text x="316" y="430" text-anchor="middle" class="cell-sub">Actual negative, predicted positive</text>
+  <text x="316" y="459" text-anchor="middle" class="cell-sub">False alarm</text>
+
+  <rect x="446" y="350" width="220" height="132" rx="16" fill="#d9f3e8" stroke="#52a982" stroke-width="2"/>
+  <text x="556" y="400" text-anchor="middle" class="cell-title">True negative (TN)</text>
+  <text x="556" y="430" text-anchor="middle" class="cell-sub">Actual negative, predicted negative</text>
+  <text x="556" y="459" text-anchor="middle" class="cell-sub">Counts toward specificity</text>
+
+  <rect x="716" y="185" width="356" height="140" rx="18" fill="#ffffff" stroke="#cad4e2" stroke-width="2"/>
+  <rect x="716" y="185" width="9" height="140" rx="4" fill="#18865f"/>
+  <text x="750" y="222" font-size="21" font-weight="700" fill="#116747">Sensitivity / TPR</text>
+  <text x="750" y="266" font-size="21">TP / (TP + FN)</text>
+  <text x="750" y="306" class="muted small">Among actual positives</text>
+
+  <rect x="716" y="350" width="356" height="140" rx="18" fill="#ffffff" stroke="#cad4e2" stroke-width="2"/>
+  <rect x="716" y="350" width="9" height="140" rx="4" fill="#365eb8"/>
+  <text x="750" y="387" font-size="21" font-weight="700" fill="#294a98">Specificity / TNR</text>
+  <text x="750" y="432" font-size="21">TN / (TN + FP)</text>
+  <text x="750" y="471" class="muted small">Among actual negatives</text>
+
+  <rect x="54" y="535" width="1018" height="90" rx="18" fill="#e7edf7"/>
+  <text x="80" y="572" font-size="18" font-weight="700">Key distinction</text>
+  <text x="80" y="602" font-size="17" class="muted">Sensitivity asks how many actual positives were found; specificity asks how many actual negatives were correctly rejected.</text>
+</svg>
