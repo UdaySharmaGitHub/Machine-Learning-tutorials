@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title description">
+  <title id="title">Sigmoid and Softmax function graph comparison</title>
+  <desc id="description">The left graph shows the Sigmoid S-curve producing one positive-class probability. The right graph shows Softmax probabilities for three classes as the Cat score changes while the Dog and Horse scores remain fixed. Softmax probabilities always sum to one.</desc>
+
+  <defs>
+    <linearGradient id="header" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#172554"/>
+      <stop offset="1" stop-color="#312e81"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="7" flood-color="#0f172a" flood-opacity="0.12"/>
+    </filter>
+    <style>
+      .font { font-family: Inter, "Segoe UI", Arial, sans-serif; }
+      .title { font-size: 30px; font-weight: 700; }
+      .panel-title { font-size: 24px; font-weight: 700; }
+      .label { font-size: 17px; font-weight: 600; }
+      .body { font-size: 16px; }
+      .small { font-size: 14px; }
+      .axis { stroke: #334155; stroke-width: 2; }
+      .grid { stroke: #cbd5e1; stroke-width: 1; stroke-dasharray: 4 5; }
+      .tick { fill: #64748b; font-size: 13px; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="700" rx="24" fill="#f8fafc"/>
+  <rect width="1200" height="90" rx="24" fill="url(#header)"/>
+  <rect y="66" width="1200" height="24" fill="url(#header)"/>
+  <text x="600" y="43" text-anchor="middle" class="font title" fill="#ffffff">Sigmoid vs. Softmax Functions</text>
+  <text x="600" y="70" text-anchor="middle" class="font body" fill="#c7d2fe">One probability vs. a probability distribution across classes</text>
+
+  <!-- Panel backgrounds -->
+  <g filter="url(#shadow)">
+    <rect x="38" y="116" width="544" height="494" rx="22" fill="#ffffff" stroke="#bfdbfe" stroke-width="2"/>
+    <rect x="618" y="116" width="544" height="494" rx="22" fill="#ffffff" stroke="#fed7aa" stroke-width="2"/>
+  </g>
+
+  <!-- Sigmoid panel heading -->
+  <circle cx="78" cy="158" r="20" fill="#2563eb"/>
+  <text x="78" y="164" text-anchor="middle" class="font label" fill="#ffffff">1</text>
+  <text x="110" y="156" class="font panel-title" fill="#1d4ed8">Sigmoid</text>
+  <text x="110" y="181" class="font small" fill="#475569">Binary classification | sigma(z) = 1 / (1 + e^-z)</text>
+
+  <!-- Sigmoid graph grid -->
+  <line x1="100" y1="210" x2="540" y2="210" class="grid"/>
+  <line x1="100" y1="292.5" x2="540" y2="292.5" class="grid"/>
+  <line x1="100" y1="375" x2="540" y2="375" class="grid"/>
+  <line x1="100" y1="457.5" x2="540" y2="457.5" class="grid"/>
+  <line x1="100" y1="540" x2="540" y2="540" class="grid"/>
+  <line x1="100" y1="210" x2="100" y2="540" class="axis"/>
+  <line x1="100" y1="540" x2="540" y2="540" class="axis"/>
+  <line x1="320" y1="210" x2="320" y2="540" stroke="#94a3b8" stroke-width="1.5"/>
+
+  <!-- Sigmoid ticks and labels -->
+  <text x="88" y="215" text-anchor="end" class="font tick">1.0</text>
+  <text x="88" y="298" text-anchor="end" class="font tick">0.75</text>
+  <text x="88" y="380" text-anchor="end" class="font tick">0.5</text>
+  <text x="88" y="463" text-anchor="end" class="font tick">0.25</text>
+  <text x="88" y="545" text-anchor="end" class="font tick">0.0</text>
+  <text x="100" y="562" text-anchor="middle" class="font tick">-6</text>
+  <text x="210" y="562" text-anchor="middle" class="font tick">-3</text>
+  <text x="320" y="562" text-anchor="middle" class="font tick">0</text>
+  <text x="430" y="562" text-anchor="middle" class="font tick">3</text>
+  <text x="540" y="562" text-anchor="middle" class="font tick">6</text>
+  <text x="320" y="590" text-anchor="middle" class="font label" fill="#334155">Input score (z)</text>
+  <text x="52" y="375" text-anchor="middle" transform="rotate(-90 52 375)" class="font label" fill="#334155">Probability</text>
+
+  <!-- Sigmoid curve -->
+  <path d="M100 539 C142 538 174 534 210 524 C250 512 282 477 320 375 C358 273 390 238 430 226 C466 216 498 212 540 211"
+        fill="none" stroke="#2563eb" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="320" cy="375" r="6" fill="#ffffff" stroke="#2563eb" stroke-width="4"/>
+  <rect x="337" y="349" width="132" height="35" rx="10" fill="#dbeafe"/>
+  <text x="403" y="372" text-anchor="middle" class="font small" fill="#1d4ed8">z = 0, P = 0.5</text>
+
+  <!-- Softmax panel heading -->
+  <circle cx="658" cy="158" r="20" fill="#ea580c"/>
+  <text x="658" y="164" text-anchor="middle" class="font label" fill="#ffffff">K</text>
+  <text x="690" y="156" class="font panel-title" fill="#c2410c">Softmax</text>
+  <text x="690" y="181" class="font small" fill="#475569">Multiclass classification | one probability per class</text>
+
+  <!-- Softmax graph grid -->
+  <line x1="690" y1="210" x2="1110" y2="210" class="grid"/>
+  <line x1="690" y1="292.5" x2="1110" y2="292.5" class="grid"/>
+  <line x1="690" y1="375" x2="1110" y2="375" class="grid"/>
+  <line x1="690" y1="457.5" x2="1110" y2="457.5" class="grid"/>
+  <line x1="690" y1="540" x2="1110" y2="540" class="grid"/>
+  <line x1="690" y1="210" x2="690" y2="540" class="axis"/>
+  <line x1="690" y1="540" x2="1110" y2="540" class="axis"/>
+  <line x1="900" y1="210" x2="900" y2="540" stroke="#94a3b8" stroke-width="1.5"/>
+
+  <!-- Softmax ticks and labels -->
+  <text x="678" y="215" text-anchor="end" class="font tick">1.0</text>
+  <text x="678" y="298" text-anchor="end" class="font tick">0.75</text>
+  <text x="678" y="380" text-anchor="end" class="font tick">0.5</text>
+  <text x="678" y="463" text-anchor="end" class="font tick">0.25</text>
+  <text x="678" y="545" text-anchor="end" class="font tick">0.0</text>
+  <text x="690" y="562" text-anchor="middle" class="font tick">-4</text>
+  <text x="795" y="562" text-anchor="middle" class="font tick">-2</text>
+  <text x="900" y="562" text-anchor="middle" class="font tick">0</text>
+  <text x="1005" y="562" text-anchor="middle" class="font tick">2</text>
+  <text x="1110" y="562" text-anchor="middle" class="font tick">4</text>
+  <text x="900" y="590" text-anchor="middle" class="font label" fill="#334155">Cat score (z_cat)</text>
+  <text x="642" y="375" text-anchor="middle" transform="rotate(-90 642 375)" class="font label" fill="#334155">Probability</text>
+
+  <!-- Softmax class curves: z_dog = 0 and z_horse = -1 -->
+  <path d="M690 536 C742 531 774 519 795 510 C837 492 870 446 900 401 C935 348 966 283 1005 261 C1043 239 1077 222 1110 218"
+        fill="none" stroke="#ea580c" stroke-width="5" stroke-linecap="round"/>
+  <path d="M690 299 C740 303 773 313 795 321 C837 337 870 370 900 401 C935 436 966 480 1005 502 C1043 522 1077 531 1110 534"
+        fill="none" stroke="#2563eb" stroke-width="4" stroke-linecap="round"/>
+  <path d="M690 451 C738 453 772 457 795 459 C840 464 871 478 900 489 C936 503 969 518 1005 526 C1044 534 1079 537 1110 538"
+        fill="none" stroke="#16a34a" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Softmax legend -->
+  <rect x="713" y="226" width="178" height="95" rx="12" fill="#ffffff" stroke="#e2e8f0"/>
+  <line x1="729" y1="249" x2="759" y2="249" stroke="#ea580c" stroke-width="5" stroke-linecap="round"/>
+  <text x="770" y="254" class="font small" fill="#334155">Cat (score varies)</text>
+  <line x1="729" y1="273" x2="759" y2="273" stroke="#2563eb" stroke-width="4" stroke-linecap="round"/>
+  <text x="770" y="278" class="font small" fill="#334155">Dog (score = 0)</text>
+  <line x1="729" y1="297" x2="759" y2="297" stroke="#16a34a" stroke-width="4" stroke-linecap="round"/>
+  <text x="770" y="302" class="font small" fill="#334155">Horse (score = -1)</text>
+
+  <!-- Footer comparison -->
+  <rect x="116" y="632" width="968" height="44" rx="14" fill="#e0e7ff"/>
+  <text x="600" y="659" text-anchor="middle" class="font label" fill="#312e81">Sigmoid outputs one positive-class probability; Softmax probabilities compete and always sum to 1.</text>
+</svg>
