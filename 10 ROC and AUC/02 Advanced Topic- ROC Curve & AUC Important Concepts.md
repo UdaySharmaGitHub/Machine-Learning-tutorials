@@ -26,7 +26,8 @@
 
 ## 1. ROC-AUC Does Not Measure Probability Calibration
 
-> ***Important:*** This is one of the most common misunderstandings.
+> [!WARNING]
+> A **high ROC-AUC** does **not** mean that a model has **well-calibrated probabilities**. This is one of the most common ROC-AUC misunderstandings.
 
 Logistic Regression predicts probabilities. For example:
 
@@ -52,13 +53,13 @@ Logistic Regression predicts probabilities. For example:
 | Compares positive scores with negative scores | Compares predicted probabilities with actual frequencies |
 | Evaluated using the ROC curve | Often evaluated using calibration curves and the Brier score |
 
-> ***Remember:*** A model can have excellent AUC but poorly calibrated probabilities.
-
-This distinction matters when probabilities are used for financial decisions, risk estimation, or business planning.
+> [!IMPORTANT]
+> A model can have **excellent AUC** but **poorly calibrated probabilities**. Check **calibration separately** when probability values drive financial decisions, risk estimates, or business planning.
 
 ## 2. ROC-AUC Is Independent of Classification Threshold
 
-> ***Important:*** ROC-AUC evaluates ranking across thresholds; it does not depend on choosing one classification threshold.
+> [!IMPORTANT]
+> **ROC-AUC evaluates ranking across thresholds**; it does not depend on choosing one **classification threshold**.
 
 Suppose Logistic Regression generates:
 
@@ -78,14 +79,16 @@ You might use:
 
 Changing the threshold changes the final predicted classes, but the underlying probability scores remain the same. ROC-AUC evaluates the ranking of those scores, so changing the classification threshold does not change ROC-AUC.
 
-> ***Important distinction:***
-
-- Threshold determines the operating point.
-- ROC-AUC evaluates overall ranking performance.
+> [!IMPORTANT]
+> **Threshold and AUC answer different questions:**
+>
+> - The **threshold** determines one operating point and its final class predictions.
+> - **ROC-AUC** evaluates overall ranking performance across thresholds.
 
 ## 3. ROC-AUC Is Invariant to Monotonic Transformations
 
-> ***Key property:*** AUC is invariant to strictly increasing transformations.
+> [!NOTE]
+> **Key property:** AUC is **invariant to strictly increasing transformations** because they preserve **score ordering**.
 
 Suppose your model produces these scores:
 
@@ -116,7 +119,8 @@ $$A > B > C > D$$
 
 ## 4. ROC-AUC and Class Imbalance
 
-> ***Important:*** Class imbalance is common in real-world machine learning.
+> [!NOTE]
+> **Class imbalance** is common in real-world machine learning, especially in **fraud detection**, **medical screening**, and **anomaly detection**.
 
 Let's understand this using fraud detection.
 
@@ -135,7 +139,8 @@ $$
 \text{FPR} = \frac{FP}{FP + TN}
 $$
 
-> ***Important caveat:*** Even a small FPR can generate many false positives when the negative class is very large.
+> [!WARNING]
+> Even a **small FPR** can generate **many false positives** when the negative class is very large. Always translate rates into **expected case counts** for the deployment population.
 
 For example:
 
@@ -162,11 +167,13 @@ $$
 - The system detects 900 fraudulent transactions.
 - It also flags 990 legitimate transactions, creating many false alarms.
 
-> ***Takeaway:*** ROC-AUC alone may not tell the complete story for highly imbalanced datasets.
+> [!IMPORTANT]
+> **ROC-AUC alone** may not tell the complete story for **highly imbalanced datasets**. Also examine **precision**, **recall**, **PR-AUC**, and the **absolute number of false positives**.
 
 ## 5. ROC Curve vs. Precision-Recall Curve (PR Curve)
 
-> ***Important:*** The Precision-Recall (PR) curve is a useful companion to ROC-AUC, especially for imbalanced data.
+> [!TIP]
+> Use the **Precision-Recall (PR) curve** alongside **ROC-AUC** when the positive class is rare or when the quality of predicted-positive cases is especially important.
 
 The Precision-Recall curve evaluates:
 
@@ -198,7 +205,8 @@ In contrast to ROC's TPR and FPR, the PR curve shows the relationship between pr
 
 In fraud detection, for example, you might want to know:
 
-> If my system flags 100 transactions as fraudulent, how many of those are actually fraudulent?
+> [!NOTE]
+> **Precision question:** If my system flags 100 transactions as fraudulent, how many of those are actually fraudulent?
 
 - That is a precision question.
 - ***PR-AUC and ROC-AUC are different metrics.***
@@ -214,6 +222,9 @@ Suppose you train two classification models:
 | Random Forest | 0.92 |
 
 We cannot necessarily conclude that the Random Forest is better just because its AUC is 0.01 higher; the difference may be due to random variation in the test dataset.
+
+> [!WARNING]
+> A **small AUC difference** does not by itself prove that one model is better. **Quantify uncertainty** and use an appropriate **paired comparison** when models are evaluated on the same cases.
 
 To understand whether the difference is statistically meaningful, we can use:
 
@@ -255,7 +266,10 @@ $$
 \text{AUC}_{\text{reversed}} = 1 - 0.30 = 0.70
 $$
 
-Reversing the scores reverses the ranking direction. However, ***do not automatically reverse a model just because AUC is below 0.5***. First check:
+> [!CAUTION]
+> Do **not automatically reverse a model** just because its **AUC is below 0.5**. First verify the **positive label**, selected **score or probability column**, and expected **score direction**.
+
+Reversing the scores reverses the ranking direction. Before doing so, check:
 
 - Whether positive and negative labels are correct.
 - Whether the correct probability column was selected.
@@ -313,7 +327,8 @@ This is useful for multiclass classification problems.
 
 ## 9. Use Prediction Scores, Not Just Predicted Labels, for ROC-AUC
 
-> ***Critical implementation detail:*** ROC-AUC requires prediction scores, not only hard class labels.
+> [!WARNING]
+> **Critical implementation detail:** ROC-AUC requires **continuous prediction scores**, not only **hard class labels**. Hard labels provide only one operating point and cannot produce a complete ROC curve.
 
 Consider:
 
@@ -347,6 +362,9 @@ This is useful for:
 - Applications where false alarms are particularly expensive.
 
 ## 11. ROC-AUC Does Not Guarantee Good Production Performance
+
+> [!WARNING]
+> **High ROC-AUC does not guarantee good production performance.** **Prevalence**, **threshold choice**, **calibration**, and **data drift** can all change operational results.
 
 For example, a model may achieve:
 
@@ -424,6 +442,7 @@ I recommend following this sequence:
 4. **Brier score and calibration curve:** Understand probability calibration.
 5. **Confusion matrix and classification metrics:** Connect all the evaluation metrics.
 
-> ***My advice:*** Don't just memorise ROC-AUC formulas. Understand what each metric measures, what it ignores, and which real-world situation makes it useful.
+> [!TIP]
+> Do not just memorise **ROC-AUC formulas**. Understand **what each metric measures**, **what it ignores**, and **which real-world situation** makes it useful.
 
 That is what will help you move from understanding individual ML algorithms to understanding how to evaluate and deploy machine learning models.

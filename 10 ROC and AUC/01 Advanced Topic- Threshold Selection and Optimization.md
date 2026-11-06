@@ -41,9 +41,8 @@ AUC summarizes the model's **ranking performance across all classification thres
 
 An AUC below 0.5 indicates worse-than-random ranking and may mean the score direction or positive-class label needs checking. AUC values in practice often fall between 0.5 and 1.0.
 
-> ***Important:*** AUC describes the ranking of scores across thresholds. It does not tell you which threshold to use; choose that based on the costs or requirements of the application.
-
-There is **no universally best threshold**. The right choice depends on the application's goals, error costs, and operational constraints.
+> [!IMPORTANT]
+> AUC describes the ranking of scores across thresholds; it does not tell you which threshold to deploy. There is **no universally best threshold**—the right choice depends on the application's goals, error costs, and operational constraints.
 
 ### Understand the threshold trade-off
 
@@ -61,7 +60,8 @@ As the threshold decreases, the model catches more actual positive cases, but al
 - At a threshold of **0.5**, it detects 85%.
 - At a threshold of **0.2**, it detects 98%.
 
-> **At a threshold of 0.00, every patient is predicted positive, so TPR = 100% and FPR = 100%.** The example's AUROC of 0.85 summarizes the entire ROC curve across thresholds; it is not the score for this single operating point.
+> [!NOTE]
+> At a threshold of **0.00**, every patient is predicted positive, so **TPR = 100%** and **FPR = 100%**. The example's AUROC of 0.85 summarizes the entire ROC curve across thresholds; it is not the score for this single operating point.
 
 ## Threshold-selection approaches
 
@@ -146,7 +146,8 @@ $$
 
 Here, $u$ denotes the false positive rate (FPR). However, not every part of this range is necessarily useful. For example:
 
-> Our system is usable only when the FPR is below 5%.
+> [!NOTE]
+> **Operational requirement:** Our system is usable only when the FPR is below 5%.
 
 If so, model performance at FPR values of 40% or 80% may have little operational relevance. **Partial AUC (pAUC)** focuses on a selected region:
 
@@ -176,7 +177,10 @@ Model B could have a higher full AUC, while Model A is more useful for a system 
 
 #### Does pAUC select a threshold?
 
-No. pAUC summarizes performance across multiple thresholds; it does not select one specific threshold. A sensible workflow is:
+> [!IMPORTANT]
+> pAUC summarizes performance across multiple thresholds; it does **not** select one specific threshold.
+
+A sensible workflow is:
 
 1. Compare models using pAUC over the relevant FPR range.
 2. For the selected model, choose a specific threshold using an operating rule—for example, maximize sensitivity subject to $\text{FPR} \leq 5\%$.
@@ -198,11 +202,13 @@ $$\frac{\text{pAUC}}{\alpha}$$
 
 This is the average TPR across the selected FPR interval, with equal weighting over FPR. Software may use a different standardization. For example, scikit-learn's ROC AUC calculation with `max_fpr` returns a standardized partial AUC, where a diagonal chance curve maps to 0.5 and perfect performance maps to 1.
 
-Always check the FPR interval and normalization before comparing reported pAUC values.
+> [!WARNING]
+> Always check the FPR interval and normalization method before comparing reported pAUC values. Raw, simply normalized, and software-standardized pAUC values are not automatically comparable.
 
 #### Main limitation
 
-pAUC still summarizes a region. If ROC curves cross, a model with a higher pAUC can have lower sensitivity at the exact FPR limit you intend to use. If one specific operating point matters, compare performance at that point too.
+> [!WARNING]
+> pAUC still summarizes a region. If ROC curves cross, a model with higher pAUC can have lower sensitivity at the exact FPR limit you intend to use. If one operating point matters, compare performance at that point too.
 
 --- 
 ### C. Minimize the costs of errors
@@ -290,7 +296,8 @@ $$
 
 Choose threshold **0.3** because it has the lower expected cost. Although it produces more false positives, missing fraud is much more expensive in this example.
 
-> The best threshold depends on the consequences of the errors, not just ROC-AUC. This example assumes the costs are per error, correct decisions have zero cost, and prevalence and error costs remain constant.
+> [!IMPORTANT]
+> The best threshold depends on the consequences of errors, not just ROC-AUC. This example assumes costs are specified per error, correct decisions have zero cost, and prevalence and error costs remain constant.
 
 ### D. Maximize Youden's J statistic
 
@@ -354,7 +361,8 @@ Youden's J is a useful general criterion when sensitivity and specificity deserv
 
 #### Main limitation
 
-Youden's J does not directly incorporate deployment prevalence or error costs. Equal weighting of sensitivity and specificity does **not** mean equal total numbers or total costs of mistakes, especially in an imbalanced population.
+> [!WARNING]
+> ***Youden's J*** does ***not directly incorporate deployment prevalence or error costs***. ***Equal weighting of sensitivity and specificity*** does **not** mean ***equal numbers or equal total costs of mistakes***, especially in an imbalanced population.
 
 ### E. Choose the point closest to the top-left corner
 
@@ -406,9 +414,10 @@ Ask what matters most for the application:
 | I want to balance sensitivity and specificity. | Maximize Youden's J. |
 | I want a geometrically balanced ROC operating point. | Minimize distance to the top-left corner. |
 
-> ***Key distinction:*** AUC helps evaluate and compare models. Threshold selection helps decide how to use a model in the real world.
-
-A model with excellent AUC can still have a poor operational threshold if the application's requirements are not considered.
+> [!IMPORTANT]
+> **Key distinction:** 
+> - AUC helps evaluate and compare models. Threshold selection determines how a model is used in the real world. 
+> - A model with excellent AUC can still perform poorly in deployment if its threshold does not reflect the application's requirements.
 
 
 ## Threshold Optimization in Practice

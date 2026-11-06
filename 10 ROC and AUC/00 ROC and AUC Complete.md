@@ -74,7 +74,8 @@ ROC Curve is useful when:
 - You want to balance false positives and true positives.
 - You want to evaluate a binary classification model.
 
-> **Example — Fraud detection.** Out of 10,000 transactions, only 100 are fraud (1%). A lazy model that predicts *"legitimate"* for every transaction scores **99% accuracy** — yet it catches **zero** fraud. Useless.
+> [!WARNING]
+> **Fraud detection example:** Out of 10,000 transactions, only 100 are fraud (1%). A model that predicts *"legitimate"* for every transaction scores **99% accuracy**, yet it catches **zero** fraud. High accuracy alone can therefore be dangerously misleading.
 
 The ROC curve helps reveal why accuracy is misleading here:
 
@@ -144,6 +145,7 @@ $$\text{Specificity} = \frac{TN}{TN + FP}$$
 
 $$\text{FPR} = 1 - \text{Specificity}$$
 
+> [!TIP]
 > For a detailed explanation, examples, and diagrams, see [Sensitivity and specificity](<../Statistics for Machine Learning/Sensitivity and specificity/Sensitivity and specificity.md>).
 
 **Example.** Suppose there are **900 legitimate** transactions:
@@ -157,7 +159,8 @@ $$FPR = \frac{90}{90 + 810} = 0.10 = 10\%$$
 
 **Churn example.** If **churn** is the positive class, an FPR of **10%** means the model incorrectly flags **10% of customers who would stay** as likely to churn. If the business offers those customers retention discounts, those false positives can lead to unnecessary costs.
 
-> **Goal:** achieve a high **TPR** (catch more real positives) and a low **FPR** (raise fewer false alarms). The ROC curve visualises the trade-off as the classification threshold changes.
+> [!IMPORTANT]
+> **Goal:** Achieve a high **TPR** (catch more real positives) and a low **FPR** (raise fewer false alarms). The ROC curve visualises the trade-off as the classification threshold changes.
 
 ---
 
@@ -295,6 +298,7 @@ The shaded area summarizes the curve across thresholds: **AUC = 0.84** indicates
 
 **The intuitive meaning of AUC:**
 
+> [!NOTE]
 > AUC is the **probability that the model ranks a randomly chosen positive example higher than a randomly chosen negative example.**
 
 - AUC, in this context, means the area under the ROC curve, also written **ROC-AUC**.
@@ -311,7 +315,8 @@ Here,
 ***$u$ = FPR (false positive rate).***
 
 
-> **Note:** The ROC curve is a *picture*. **AUC** turns that picture into a **single number** — the area beneath the ROC curve, ranging from **0 to 1**.
+> [!NOTE]
+> The ROC curve is a *picture*. **AUC** turns that picture into a **single number**—the area beneath the ROC curve, ranging from **0 to 1**.
 
 ![ROC curve with the area underneath shaded, plus a scale interpreting AUC values from random (0.5) to excellent (1.0)](images/roc-auc-interpretation.svg)
 
@@ -328,7 +333,8 @@ So an AUC of 0.90 means: pick one real positive and one real negative at random,
 | **0.5** | Random — no discriminative power |
 | **< 0.5** | Worse than random (predictions are inverted) |
 
-> **Important:** An **AUC of 0.8 does not mean 80% accuracy**. It means the model has approximately an **80% probability of ranking a randomly selected positive example higher than a randomly selected negative example**.
+> [!IMPORTANT]
+> An **AUC of 0.8 does not mean 80% accuracy**. It means the model has approximately an **80% probability of ranking a randomly selected positive example higher than a randomly selected negative example**.
 
 **Why AUC is so widely used:**
 
@@ -337,7 +343,8 @@ So an AUC of 0.90 means: pick one real positive and one real negative at random,
 - **Ranking-based** — a strictly increasing transformation of the scores leaves their ranking, and therefore AUC, unchanged.
 - **Single number** — easy to report and compare across models.
 
-> ⚠️ **Caveat:** On highly imbalanced data where false positives are a big concern, the **Precision-Recall AUC** can be more informative than ROC-AUC, because FPR stays small when negatives vastly outnumber positives.
+> [!WARNING]
+> On highly imbalanced data where false positives are a major concern, **Precision-Recall AUC** can be more informative than ROC-AUC because FPR can remain small when negatives vastly outnumber positives.
 
 ---
 ### How AUC Is Calculated
@@ -407,6 +414,7 @@ graph TD
 ## **Want to explore more Advanced concepts on ROC and AUC?**
 
 ### Advanced Topic: ROC Curve & AUC: Important Concepts
+> [!TIP]
 > See [ROC Curve & AUC: Important Concepts](<02 Advanced Topic- ROC Curve & AUC Important Concepts.md>) for additional topics.
 
 - [ROC-AUC Does Not Measure Probability Calibration](<02 Advanced Topic- ROC Curve & AUC Important Concepts.md#1-roc-auc-does-not-measure-probability-calibration>)
@@ -435,6 +443,7 @@ graph TD
 
 ### Advanced Topic — Threshold Selection and Optimization
 
+> [!TIP]
 > See [Advanced Topic — Threshold Selection and Optimization](<01 Advanced Topic- Threshold Selection and Optimization.md>) for additional topics.
 
 - [Choosing the Best Classification Threshold](<01 Advanced Topic- Threshold Selection and Optimization.md#choosing-the-best-classification-threshold>)
@@ -457,9 +466,9 @@ graph TD
 - [Threshold Optimization in Practice](<01 Advanced Topic- Threshold Selection and Optimization.md#threshold-optimization-in-practice>)
 
 ---
-*Reference: [Google Machine Learning Crash Course — ROC and AUC](https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc)*
-*Wikipedia reference: [Receiver operating characteristic](https://en.wikipedia.org/wiki/Receiver_operating_characteristic)*
-*Statistics reference: [Sensitivity and specificity](<../Statistics for Machine Learning/Sensitivity and specificity/Sensitivity and specificity.md>)*
+- ***Google Course Reference:*** [Google Machine Learning Crash Course — ROC and AUC](https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc)
+- ***Wikipedia reference:*** [Receiver operating characteristic](https://en.wikipedia.org/wiki/Receiver_operating_characteristic)
+- ***Statistics reference:*** [Sensitivity and specificity](<../Statistics for Machine Learning/Sensitivity and specificity/Sensitivity and specificity.md>)
 
 ---
 
