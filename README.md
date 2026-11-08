@@ -38,6 +38,7 @@
 | 08 | **Logistic Regression** | Logistic regression, perceptron trick, and sigmoid function with animations |
 | 09 | **Evaluation Metrics** | Regression and classification metrics, confusion matrices, and model evaluation |
 | 10 | **ROC Curve and AUC** | ROC analysis, AUC, and practical threshold selection |
+| 11 | **Multiclass Logistic Regression** | Softmax regression, mathematical derivations, cross-entropy loss, multiclass ROC-AUC, and Iris implementation |
 
 ---
 
@@ -66,8 +67,8 @@
 
 | # | Notebook | Description |
 |---|----------|-------------|
-| — | [Linear Regression ML Implementation](02%20Complete%20Linear%20Regression/02%20Linear%20Regression/Linear%20Regression%20ML%20Implementation.ipynb) | Linear regression using scikit-learn |
-| — | [Linear Regression Practicals](02%20Complete%20Linear%20Regression/02%20Linear%20Regression/Linear%20Regression%20Practicals.ipynb) | Hands-on practice problems |
+| 01 | [Linear Regression ML Implementation](02%20Complete%20Linear%20Regression/02%20Linear%20Regression/Linear%20Regression%20ML%20Implementation.ipynb) | Linear regression using scikit-learn |
+| 02 | [Linear Regression Practicals](02%20Complete%20Linear%20Regression/02%20Linear%20Regression/Linear%20Regression%20Practicals.ipynb) | Hands-on practice problems |
 
 #### 📂 03 Multi Linear Regression (MLR)
 
@@ -181,6 +182,19 @@
 
 ---
 
+### 📁 11 Multiclass Logistic Regression
+
+| # | Resource | Description |
+|---|----------|-------------|
+| 01 | [Softmax Function and Its Mathematical Derivation](11%20Multiclass%20Logistic%20Regression/01%20Softmax%20Function%20and%20its%20mathematical%20derivation.md) | Softmax function and its mathematical foundations |
+| 02 | [Multinomial Logistic Regression — Softmax Regression](11%20Multiclass%20Logistic%20Regression/02%20Multinomial%20Logistic%20Regression%20-%20Softmax%20Regression.ipynb) | Theory notebook covering logits, probabilities, matrix representations, loss functions, and derivations |
+| 02 | [Softmax Regression — Markdown Guide](11%20Multiclass%20Logistic%20Regression/02%20Multinomial%20Logistic%20Regression%20-%20Softmax%20Regression.md) | Markdown version of the Softmax regression lesson |
+| 03 | [Softmax Regression Implementation on Iris](11%20Multiclass%20Logistic%20Regression/03%20Multinomial%20Logistic%20Regression%20-%20Softmax%20Regression%20Implementation%20on%20Iris%20Dataset.ipynb) | Label encoding, manual logits and Softmax, scikit-learn training, evaluation, decision regions, and cross-validation |
+| — | [Cross-Entropy Loss and Categorical Cross-Entropy](11%20Multiclass%20Logistic%20Regression/Cross-Entropy%20Loss%20and%20Categorical%20Cross-Entropy.md) | Cross-entropy loss for classification |
+| — | [Multiclass ROC-AUC (OvR and OvO)](11%20Multiclass%20Logistic%20Regression/Multiclass%20ROC-AUC%20%28OvR%20and%20OvO%29.md) | One-vs-rest and one-vs-one approaches to multiclass ROC-AUC |
+
+---
+
 ## Statistics for Machine Learning
 
 | # | Resource | Description |
@@ -244,7 +258,7 @@
 
 Each topic is organized in a numbered folder. Within each folder, notebooks are numbered sequentially — **start from `00` or `01`** and work your way through. The progression follows a logical learning path:
 
-> Linear Regression → Gradient Descent → Polynomial Regression → Regularization (Ridge → Lasso → Elastic Net) → Logistic Regression → Evaluation Metrics
+> Linear Regression → Gradient Descent → Polynomial Regression → Regularization (Ridge → Lasso → Elastic Net) → Logistic Regression → Evaluation Metrics → ROC and AUC → Multiclass Logistic Regression
 
 ---
 
