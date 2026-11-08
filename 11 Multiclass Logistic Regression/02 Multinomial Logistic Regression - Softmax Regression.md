@@ -123,28 +123,7 @@ $$
 ---
 ## Binary Classification vs. Multiclass Classification
 
-```mermaid
-flowchart LR
-    subgraph Binary["Binary Classification"]
-        direction LR
-        B1["Input Features"] --> B2["Logistic Regression"]
-        B2 --> B3["Sigmoid Function"]
-        B3 --> B4["Probability of the<br/>Positive Class"]
-    end
-
-    subgraph Multiclass["Multiclass Classification"]
-        direction LR
-        M1["Input Features"] --> M2["Softmax Regression"]
-        M2 --> M3["Softmax Function"]
-        M3 --> M4["Probability Distribution<br/>Across All Classes"]
-    end
-
-    classDef binary fill:#dbeafe,stroke:#2563eb,color:#1e3a8a,stroke-width:2px;
-    classDef multiclass fill:#ffedd5,stroke:#ea580c,color:#7c2d12,stroke-width:2px;
-
-    class B1,B2,B3,B4 binary;
-    class M1,M2,M3,M4 multiclass;
-```
+![Binary classification (Logistic Regression and Sigmoid) compared with multiclass classification (Softmax Regression and Softmax)](./images/binary-vs-multiclass-classification.svg)
 
 ### Sigmoid vs. Softmax Graph
 

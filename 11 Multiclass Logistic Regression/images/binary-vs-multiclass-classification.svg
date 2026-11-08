@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="440" viewBox="0 0 1200 440" role="img" aria-labelledby="title description">
+  <title id="title">Binary classification vs. multiclass classification</title>
+  <desc id="description">Binary classification: input features go through Logistic Regression and the Sigmoid function to give the probability of the positive class. Multiclass classification: input features go through Softmax Regression and the Softmax function to give a probability distribution across all classes.</desc>
+
+  <defs>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrowOrange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ea580c"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="440" rx="16" fill="#ffffff"/>
+
+  <rect x="20" y="20" width="1160" height="190" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="44" y="52" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#1e3a8a">Binary Classification</text>
+
+  <g stroke="#2563eb" stroke-width="2.5" marker-end="url(#arrowBlue)">
+    <line x1="262" y1="132" x2="296" y2="132"/>
+    <line x1="534" y1="132" x2="568" y2="132"/>
+    <line x1="806" y1="132" x2="840" y2="132"/>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" text-anchor="middle" fill="#1e3a8a">
+    <rect x="40" y="92" width="222" height="80" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+    <text x="151" y="138">Input Features</text>
+    <rect x="302" y="92" width="232" height="80" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+    <text x="418" y="138">Logistic Regression</text>
+    <rect x="574" y="92" width="232" height="80" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+    <text x="690" y="138">Sigmoid Function</text>
+    <rect x="846" y="92" width="314" height="80" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+    <text x="1003" y="126">Probability of the</text>
+    <text x="1003" y="148">Positive Class</text>
+  </g>
+
+  <rect x="20" y="230" width="1160" height="190" rx="14" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+  <text x="44" y="262" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#7c2d12">Multiclass Classification</text>
+
+  <g stroke="#ea580c" stroke-width="2.5" marker-end="url(#arrowOrange)">
+    <line x1="262" y1="342" x2="296" y2="342"/>
+    <line x1="534" y1="342" x2="568" y2="342"/>
+    <line x1="806" y1="342" x2="840" y2="342"/>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" text-anchor="middle" fill="#7c2d12">
+    <rect x="40" y="302" width="222" height="80" rx="12" fill="#ffedd5" stroke="#ea580c" stroke-width="2.5"/>
+    <text x="151" y="348">Input Features</text>
+    <rect x="302" y="302" width="232" height="80" rx="12" fill="#ffedd5" stroke="#ea580c" stroke-width="2.5"/>
+    <text x="418" y="348">Softmax Regression</text>
+    <rect x="574" y="302" width="232" height="80" rx="12" fill="#ffedd5" stroke="#ea580c" stroke-width="2.5"/>
+    <text x="690" y="348">Softmax Function</text>
+    <rect x="846" y="302" width="314" height="80" rx="12" fill="#ffedd5" stroke="#ea580c" stroke-width="2.5"/>
+    <text x="1003" y="336">Probability Distribution</text>
+    <text x="1003" y="358">Across All Classes</text>
+  </g>
+</svg>
