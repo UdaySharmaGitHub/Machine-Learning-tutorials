@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="300" viewBox="0 0 1440 300" role="img" aria-labelledby="title description">
+  <title id="title">Softmax Regression pipeline</title>
+  <desc id="description">Input features are linearly transformed into class logits, passed through the Softmax function to give class probabilities, then the highest probability is selected as the predicted class.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <rect width="1440" height="300" rx="16" fill="#ffffff"/>
+  <text x="720" y="42" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" fill="#0f172a">Softmax Regression Pipeline</text>
+
+  <g stroke="#475569" stroke-width="2.5" marker-end="url(#arrow)">
+    <line x1="190" y1="160" x2="218" y2="160"/>
+    <line x1="390" y1="160" x2="418" y2="160"/>
+    <line x1="590" y1="160" x2="618" y2="160"/>
+    <line x1="790" y1="160" x2="818" y2="160"/>
+    <line x1="990" y1="160" x2="1018" y2="160"/>
+    <line x1="1190" y1="160" x2="1218" y2="160"/>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif" text-anchor="middle">
+    <rect x="30" y="100" width="160" height="120" rx="12" fill="#e0f2fe" stroke="#0284c7" stroke-width="2.5"/>
+    <text x="110" y="132" font-size="16" font-weight="700" fill="#0c4a6e">Input Features</text>
+    <text x="110" y="168" font-size="14" fill="#0c4a6e">X = [x₁, x₂, x₃,</text>
+    <text x="110" y="188" font-size="14" fill="#0c4a6e">..., x_d]</text>
+
+    <rect x="230" y="100" width="160" height="120" rx="12" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+    <text x="310" y="132" font-size="16" font-weight="700" fill="#78350f">Linear</text>
+    <text x="310" y="152" font-size="16" font-weight="700" fill="#78350f">Transformation</text>
+    <text x="310" y="186" font-size="16" fill="#78350f">Z = XW + b</text>
+
+    <rect x="430" y="100" width="160" height="120" rx="12" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+    <text x="510" y="132" font-size="16" font-weight="700" fill="#78350f">Class Logits</text>
+    <text x="510" y="168" font-size="14" fill="#78350f">One score for</text>
+    <text x="510" y="188" font-size="14" fill="#78350f">each class</text>
+
+    <rect x="630" y="100" width="160" height="120" rx="12" fill="#ffedd5" stroke="#ea580c" stroke-width="2.5"/>
+    <text x="710" y="132" font-size="16" font-weight="700" fill="#7c2d12">Softmax</text>
+    <text x="710" y="152" font-size="16" font-weight="700" fill="#7c2d12">Function</text>
+    <text x="710" y="186" font-size="16" fill="#7c2d12">Ŷ = Softmax(Z)</text>
+
+    <rect x="830" y="100" width="160" height="120" rx="12" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+    <text x="910" y="132" font-size="16" font-weight="700" fill="#14532d">Class</text>
+    <text x="910" y="152" font-size="16" font-weight="700" fill="#14532d">Probabilities</text>
+    <text x="910" y="180" font-size="14" fill="#14532d">One probability</text>
+    <text x="910" y="200" font-size="14" fill="#14532d">for each class</text>
+
+    <rect x="1030" y="100" width="160" height="120" rx="12" fill="#ede9fe" stroke="#7c3aed" stroke-width="2.5"/>
+    <text x="1110" y="126" font-size="16" font-weight="700" fill="#4c1d95">Select Highest</text>
+    <text x="1110" y="146" font-size="16" font-weight="700" fill="#4c1d95">Probability</text>
+    <text x="1110" y="182" font-size="14" fill="#4c1d95">ŷ = argmax_k Ŷ_k</text>
+
+    <rect x="1230" y="100" width="160" height="120" rx="12" fill="#ede9fe" stroke="#7c3aed" stroke-width="2.5"/>
+    <text x="1310" y="132" font-size="16" font-weight="700" fill="#4c1d95">Predicted</text>
+    <text x="1310" y="152" font-size="16" font-weight="700" fill="#4c1d95">Class</text>
+  </g>
+</svg>

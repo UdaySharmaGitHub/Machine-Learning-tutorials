@@ -165,6 +165,14 @@ flowchart LR
 | **Prediction rule** | Apply a threshold, commonly $0.5$ | Select the class with the highest probability using $\arg\max$ |
 | **Typical loss function** | Binary Cross-Entropy | Categorical Cross-Entropy |
 
+The **Softmax equation** gives the probability that the input belongs to class $k$:
+
+$$
+\sigma(\mathbf{z})_k
+= P(Y = k \mid X)
+= \frac{e^{z_k}}{\sum_{j=1}^{K} e^{z_j}}.
+$$
+
 > [!IMPORTANT]
 > Use **Sigmoid** when classes are *binary or independent*. Use **Softmax** when
 > exactly **one class** must be selected from several *mutually exclusive
@@ -177,30 +185,7 @@ flowchart LR
 
 ### Softmax Regression Pipeline
 
-```mermaid
-flowchart LR
-    A["Input Features<br/>X = [x₁, x₂, x₃, ..., x_d]"]
-    B["Linear Transformation<br/>Z = XW + b"]
-    C["Class Logits<br/>One score for each class"]
-    D["Softmax Function<br/>Ŷ = Softmax(Z)"]
-    E["Class Probabilities<br/>One probability for each class"]
-    F["Select Highest Probability<br/>ŷ = argmax_k Ŷ_k"]
-    G["Predicted Class"]
-
-    A --> B --> C --> D --> E --> F --> G
-
-    classDef input fill:#e0f2fe,stroke:#0284c7,color:#0c4a6e,stroke-width:2px;
-    classDef logits fill:#fef3c7,stroke:#d97706,color:#78350f,stroke-width:2px;
-    classDef softmax fill:#ffedd5,stroke:#ea580c,color:#7c2d12,stroke-width:2px;
-    classDef output fill:#dcfce7,stroke:#16a34a,color:#14532d,stroke-width:2px;
-    classDef prediction fill:#ede9fe,stroke:#7c3aed,color:#4c1d95,stroke-width:2px;
-
-    class A input;
-    class B,C logits;
-    class D softmax;
-    class E output;
-    class F,G prediction;
-```
+![Softmax Regression pipeline: input features, linear transformation, class logits, Softmax, class probabilities, highest probability, predicted class](./images/softmax-regression-pipeline.svg)
 
 The pipeline follows:
 
