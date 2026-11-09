@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="450" viewBox="0 0 1120 450" role="img" aria-labelledby="title description">
+  <title id="title">Predicted-probability overlap and what it means for per-class AUC</title>
+  <desc id="description">For a One-vs-Rest problem, each class has a histogram of predicted probabilities for the positive class and for the rest. When the two histograms barely overlap the AUC is high; when they overlap heavily the AUC drops, because the model cannot rank positives above negatives.</desc>
+
+  <rect width="1120" height="450" rx="16" fill="#ffffff"/>
+  <text x="40" y="40" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#0f172a">Overlap in Predicted Probabilities Determines Per-Class AUC</text>
+
+  <!-- Panel 1: well separated -->
+  <rect x="20" y="64" width="520" height="340" rx="14" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="280" y="94" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#15803d">Little overlap → AUC ≈ 0.95</text>
+  <line x1="80" y1="360" x2="320" y2="360" stroke="#334155" stroke-width="2"/>
+  <line x1="80" y1="360" x2="80" y2="110" stroke="#334155" stroke-width="2"/>
+  <text x="200" y="390" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#334155">P(class) — predicted probability</text>
+  <!-- Rest (red) -->
+  <g fill="#dc2626" fill-opacity="0.5">
+    <rect x="80" y="210" width="24" height="150"/>
+    <rect x="104" y="240" width="24" height="120"/>
+    <rect x="128" y="280" width="24" height="80"/>
+    <rect x="152" y="315" width="24" height="45"/>
+    <rect x="176" y="340" width="24" height="20"/>
+    <rect x="200" y="350" width="24" height="10"/>
+  </g>
+  <!-- Class (blue) -->
+  <g fill="#2563eb" fill-opacity="0.5">
+    <rect x="152" y="355" width="24" height="5"/>
+    <rect x="176" y="350" width="24" height="10"/>
+    <rect x="200" y="335" width="24" height="25"/>
+    <rect x="224" y="305" width="24" height="55"/>
+    <rect x="248" y="230" width="24" height="130"/>
+    <rect x="272" y="200" width="24" height="160"/>
+  </g>
+
+  <!-- Panel 2: heavy overlap -->
+  <rect x="560" y="64" width="540" height="340" rx="14" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="840" y="94" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#b91c1c">Heavy overlap → AUC ≈ 0.62</text>
+  <line x1="620" y1="360" x2="860" y2="360" stroke="#334155" stroke-width="2"/>
+  <line x1="620" y1="360" x2="620" y2="110" stroke="#334155" stroke-width="2"/>
+  <text x="740" y="390" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#334155">P(class) — predicted probability</text>
+  <g fill="#dc2626" fill-opacity="0.5">
+    <rect x="620" y="320" width="24" height="40"/>
+    <rect x="644" y="290" width="24" height="70"/>
+    <rect x="668" y="250" width="24" height="110"/>
+    <rect x="692" y="230" width="24" height="130"/>
+    <rect x="716" y="250" width="24" height="110"/>
+    <rect x="740" y="280" width="24" height="80"/>
+    <rect x="764" y="310" width="24" height="50"/>
+    <rect x="788" y="335" width="24" height="25"/>
+  </g>
+  <g fill="#2563eb" fill-opacity="0.5">
+    <rect x="668" y="355" width="24" height="5"/>
+    <rect x="692" y="350" width="24" height="10"/>
+    <rect x="716" y="335" width="24" height="25"/>
+    <rect x="740" y="310" width="24" height="50"/>
+    <rect x="764" y="280" width="24" height="80"/>
+    <rect x="788" y="250" width="24" height="110"/>
+    <rect x="812" y="230" width="24" height="130"/>
+    <rect x="836" y="250" width="24" height="110"/>
+  </g>
+
+  <!-- Legend -->
+  <rect x="860" y="118" width="16" height="16" rx="3" fill="#2563eb" fill-opacity="0.5"/>
+  <text x="882" y="131" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">Positive class</text>
+  <rect x="860" y="140" width="16" height="16" rx="3" fill="#dc2626" fill-opacity="0.5"/>
+  <text x="882" y="153" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">Rest</text>
+
+  <text x="40" y="436" font-family="Arial, Helvetica, sans-serif" font-size="12" font-style="italic" fill="#64748b">AUC = probability a random positive is scored higher than a random negative — exactly the fraction of non-overlapping ranking.</text>
+</svg>

@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="470" viewBox="0 0 1120 470" role="img" aria-labelledby="title description">
+  <title id="title">Mapping a confusion matrix to One-vs-Rest TP, FP, FN, and TN for the Cat class</title>
+  <desc id="description">A three by three confusion matrix with actual classes as rows and predicted classes as columns. For the Cat class treated as positive, the diagonal Cat cell is a true positive, the rest of the Cat row are false negatives, the rest of the Cat column are false positives, and the remaining two by two block are true negatives.</desc>
+
+  <rect width="1120" height="470" rx="16" fill="#ffffff"/>
+  <text x="40" y="44" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#0f172a">Confusion Matrix → One-vs-Rest for the "Cat" class</text>
+
+  <!-- Predicted header -->
+  <text x="308" y="112" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" text-anchor="middle" fill="#334155">Predicted class</text>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" text-anchor="middle" fill="#334155">
+    <text x="236" y="132">Cat</text>
+    <text x="308" y="132">Dog</text>
+    <text x="380" y="132">Horse</text>
+  </g>
+  <!-- Actual header -->
+  <text x="150" y="248" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" text-anchor="middle" fill="#334155" transform="rotate(-90 150 248)">Actual class</text>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" text-anchor="end" fill="#334155">
+    <text x="192" y="182">Cat</text>
+    <text x="192" y="254">Dog</text>
+    <text x="192" y="326">Horse</text>
+  </g>
+
+  <!-- Row Cat -->
+  <rect x="200" y="140" width="72" height="72" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+  <rect x="272" y="140" width="72" height="72" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <rect x="344" y="140" width="72" height="72" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <!-- Row Dog -->
+  <rect x="200" y="212" width="72" height="72" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+  <rect x="272" y="212" width="72" height="72" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <rect x="344" y="212" width="72" height="72" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <!-- Row Horse -->
+  <rect x="200" y="284" width="72" height="72" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+  <rect x="272" y="284" width="72" height="72" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <rect x="344" y="284" width="72" height="72" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" text-anchor="middle" fill="#0f172a">
+    <text x="236" y="184">50</text>
+    <text x="308" y="184">3</text>
+    <text x="380" y="184">2</text>
+    <text x="236" y="256">4</text>
+    <text x="308" y="256">45</text>
+    <text x="380" y="256">1</text>
+    <text x="236" y="328">2</text>
+    <text x="308" y="328">1</text>
+    <text x="380" y="328">42</text>
+  </g>
+
+  <!-- Right panel: breakdown -->
+  <g font-family="Arial, Helvetica, sans-serif" font-size="15">
+    <rect x="500" y="140" width="26" height="26" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="536" y="159" font-weight="700" fill="#15803d">TP = 50</text>
+    <text x="650" y="159" fill="#475569">Cat correctly predicted as Cat</text>
+
+    <rect x="500" y="182" width="26" height="26" rx="4" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+    <text x="536" y="201" font-weight="700" fill="#b45309">FN = 3 + 2 = 5</text>
+    <text x="650" y="201" fill="#475569">Cat predicted as something else</text>
+
+    <rect x="500" y="224" width="26" height="26" rx="4" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+    <text x="536" y="243" font-weight="700" fill="#b91c1c">FP = 4 + 2 = 6</text>
+    <text x="650" y="243" fill="#475569">Non-Cat predicted as Cat</text>
+
+    <rect x="500" y="266" width="26" height="26" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="536" y="285" font-weight="700" fill="#1d4ed8">TN = 45 + 1 + 1 + 42 = 89</text>
+    <text x="760" y="285" fill="#475569">neither actual nor predicted Cat</text>
+  </g>
+
+  <!-- Formulas -->
+  <rect x="500" y="320" width="580" height="120" rx="12" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <g font-family="'Courier New', monospace" font-size="17" fill="#0f172a">
+    <text x="524" y="356">TPR_Cat = TP / (TP + FN) = 50 / (50 + 5)  = 0.909</text>
+    <text x="524" y="388">FPR_Cat = FP / (FP + TN) = 6  / (6 + 89)  = 0.063</text>
+  </g>
+  <text x="524" y="422" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#64748b">One (TPR, FPR) point at this threshold — sweep the threshold to trace the Cat ROC curve.</text>
+</svg>

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="440" viewBox="0 0 1120 440" role="img" aria-labelledby="title description">
+  <title id="title">Choosing an operating threshold with Youden's J statistic</title>
+  <desc id="description">An ROC curve with the chance diagonal. The optimal operating point is where the vertical distance between the curve and the diagonal is largest. That distance equals Youden's J, the maximum of true positive rate minus false positive rate.</desc>
+
+  <rect width="1120" height="440" rx="16" fill="#ffffff"/>
+  <text x="40" y="44" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#0f172a">Selecting a Threshold from the ROC Curve</text>
+
+  <!-- axes -->
+  <line x1="90" y1="400" x2="530" y2="400" stroke="#334155" stroke-width="2"/>
+  <line x1="90" y1="400" x2="90" y2="70" stroke="#334155" stroke-width="2"/>
+  <text x="310" y="432" font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="#334155">False Positive Rate (FPR)</text>
+  <text x="54" y="235" font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="#334155" transform="rotate(-90 54 235)">True Positive Rate (TPR)</text>
+
+  <!-- diagonal -->
+  <line x1="90" y1="400" x2="530" y2="70" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="470" y="250" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#94a3b8" transform="rotate(-36.8 470 250)">chance line</text>
+
+  <!-- ROC curve -->
+  <path d="M90,400 L112,252 L143,176 L200,129 L288,103 L398,83 L530,70" fill="none" stroke="#2563eb" stroke-width="3"/>
+
+  <!-- Youden J segment -->
+  <line x1="200" y1="318" x2="200" y2="129" stroke="#16a34a" stroke-width="3" stroke-dasharray="6 3"/>
+  <circle cx="200" cy="129" r="6" fill="#16a34a" stroke="#ffffff" stroke-width="2"/>
+  <circle cx="200" cy="318" r="4" fill="#94a3b8"/>
+  <text x="214" y="228" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#15803d">J = max(TPR − FPR)</text>
+  <text x="214" y="248" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#15803d">= 0.82 − 0.25 = 0.57</text>
+  <text x="214" y="118" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#16a34a">optimal operating point</text>
+
+  <!-- Right panel -->
+  <rect x="600" y="80" width="480" height="320" rx="12" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="624" y="116" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#0f172a">Threshold-selection rules</text>
+
+  <text x="624" y="152" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#15803d">Youden's J</text>
+  <text x="624" y="174" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#475569">Pick the threshold that maximises TPR − FPR.</text>
+  <text x="624" y="192" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#475569">Balances sensitivity and specificity equally.</text>
+
+  <text x="624" y="226" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#1d4ed8">Equal-Error Rate (EER)</text>
+  <text x="624" y="248" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#475569">Threshold where FPR = 1 − TPR</text>
+  <text x="624" y="266" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#475569">(false positives balance false negatives).</text>
+
+  <text x="624" y="300" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#b45309">Cost-sensitive</text>
+  <text x="624" y="322" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#475569">Minimise C_FP·FP + C_FN·FN when the two</text>
+  <text x="624" y="340" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#475569">error types have different real-world costs.</text>
+
+  <text x="624" y="376" font-family="Arial, Helvetica, sans-serif" font-size="13" font-style="italic" fill="#64748b">AUC summarises all thresholds; these rules</text>
+  <text x="624" y="392" font-family="Arial, Helvetica, sans-serif" font-size="13" font-style="italic" fill="#64748b">pick the single one you deploy.</text>
+</svg>

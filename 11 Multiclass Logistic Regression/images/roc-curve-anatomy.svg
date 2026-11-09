@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="420" viewBox="0 0 1120 420" role="img" aria-labelledby="title description">
+  <title id="title">Interpreting the shape of an ROC curve</title>
+  <desc id="description">Three ROC plots. Left: an excellent curve that hugs the top-left corner. Middle: a random model lying on the diagonal with AUC 0.5. Right: two curves that cross, where one model is better at low false positive rates and the other at high false positive rates.</desc>
+
+  <rect width="1120" height="420" rx="16" fill="#ffffff"/>
+
+  <!-- Panel 1: Excellent -->
+  <rect x="20" y="20" width="340" height="380" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="190" y="50" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#1e3a8a">Excellent (AUC ≈ 0.95)</text>
+  <!-- axes -->
+  <line x1="60" y1="340" x2="300" y2="340" stroke="#334155" stroke-width="2"/>
+  <line x1="60" y1="340" x2="60" y2="100" stroke="#334155" stroke-width="2"/>
+  <text x="180" y="372" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#334155">FPR</text>
+  <text x="34" y="224" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#334155" transform="rotate(-90 34 224)">TPR</text>
+  <!-- diagonal -->
+  <line x1="60" y1="340" x2="300" y2="100" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <!-- AUC fill -->
+  <path d="M60,340 L65,196 L79,136 L108,112 L180,102 L300,100 L300,340 Z" fill="#2563eb" fill-opacity="0.12"/>
+  <!-- curve -->
+  <path d="M60,340 L65,196 L79,136 L108,112 L180,102 L300,100" fill="none" stroke="#2563eb" stroke-width="3"/>
+  <circle cx="60" cy="100" r="4" fill="#16a34a"/>
+  <text x="96" y="92" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#16a34a">perfect corner</text>
+
+  <!-- Panel 2: Random -->
+  <rect x="380" y="20" width="340" height="380" rx="14" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="550" y="50" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#334155">Random (AUC = 0.50)</text>
+  <line x1="420" y1="340" x2="660" y2="340" stroke="#334155" stroke-width="2"/>
+  <line x1="420" y1="340" x2="420" y2="100" stroke="#334155" stroke-width="2"/>
+  <text x="540" y="372" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#334155">FPR</text>
+  <text x="394" y="224" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#334155" transform="rotate(-90 394 224)">TPR</text>
+  <path d="M420,340 L480,274 L540,220 L600,148 L660,100 L660,340 Z" fill="#64748b" fill-opacity="0.10"/>
+  <line x1="420" y1="340" x2="660" y2="100" stroke="#64748b" stroke-width="3" stroke-dasharray="6 4"/>
+  <text x="596" y="250" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#64748b">no better</text>
+  <text x="596" y="266" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#64748b">than chance</text>
+
+  <!-- Panel 3: Crossing -->
+  <rect x="740" y="20" width="360" height="380" rx="14" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+  <text x="920" y="50" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#7c2d12">Crossing curves</text>
+  <line x1="820" y1="340" x2="1060" y2="340" stroke="#334155" stroke-width="2"/>
+  <line x1="820" y1="340" x2="820" y2="100" stroke="#334155" stroke-width="2"/>
+  <text x="940" y="372" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#334155">FPR</text>
+  <text x="794" y="224" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#334155" transform="rotate(-90 794 224)">TPR</text>
+  <line x1="820" y1="340" x2="1060" y2="100" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <!-- Curve A -->
+  <path d="M820,340 L844,220 L892,172 L964,148 L1060,100" fill="none" stroke="#2563eb" stroke-width="3"/>
+  <!-- Curve B -->
+  <path d="M820,340 L844,304 L892,220 L964,129 L1060,100" fill="none" stroke="#dc2626" stroke-width="3"/>
+  <rect x="844" y="300" width="14" height="14" rx="3" fill="#2563eb"/>
+  <text x="864" y="312" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#2563eb">Model A (better at low FPR)</text>
+  <rect x="844" y="322" width="14" height="14" rx="3" fill="#dc2626"/>
+  <text x="864" y="334" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#dc2626">Model B (better at high FPR)</text>
+</svg>
