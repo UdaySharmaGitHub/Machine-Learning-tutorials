@@ -30,6 +30,7 @@
   - [Softmax Function Features](#softmax-function-features)
     - [General Formula](#general-formula)
     - [General Formula for Classes 1 to n](#general-formula-for-classes-1-to-n)
+  - [Why Does the Denominator Contain All Classes?](#why-does-the-denominator-contain-all-classes)
   - [Applying the Softmax Formula: Numerical Example](#applying-the-softmax-formula-numerical-example)
     - [Step 1: Apply the Exponential Function](#step-1-apply-the-exponential-function)
     - [Step 2: Calculate the Denominator](#step-2-calculate-the-denominator)
@@ -69,8 +70,60 @@
   - [Expressing Cross-Entropy in Terms of Logits](#expressing-cross-entropy-in-terms-of-logits)
   - [Information-Theoretic Interpretation](#information-theoretic-interpretation)
   - [Derivation Summary](#derivation-summary)
-- **[Multiclass ROC-AUC](#multiclass-roc-auc)**
-  - [Can We Use ROC-AUC with Softmax Regression?](#can-we-use-roc-auc-with-softmax-regression)
+- **[Gradient Derivation: How Does the Model Learn?](#gradient-derivation-how-does-the-model-learn)**
+  - [The Softmax Jacobian](#the-softmax-jacobian)
+  - [Gradient of the Loss with Respect to Logits](#gradient-of-the-loss-with-respect-to-logits)
+    - [Direct Derivation (via Logit Form)](#direct-derivation-via-logit-form)
+    - [Chain Rule Derivation](#chain-rule-derivation)
+    - [What the Gradient Means](#what-the-gradient-means)
+    - [Component-Wise Weight Update (The Loop View)](#component-wise-weight-update-the-loop-view)
+  - [Complete Numerical Example of Gradient Descent](#complete-numerical-example-of-gradient-descent)
+  - [Weight and Bias Gradients](#weight-and-bias-gradients)
+- **[Vectorized Training](#vectorized-training)**
+  - [Forward Pass](#forward-pass-1)
+  - [Backward Pass](#backward-pass)
+  - [Gradient Descent Update Rule](#gradient-descent-update-rule)
+- **[Hessian, Convexity, and Regularization](#hessian-convexity-and-regularization)**
+  - [Hessian with Respect to Logits](#hessian-with-respect-to-logits)
+  - [Parameter Hessian Blocks](#parameter-hessian-blocks)
+  - [Convexity Does Not Guarantee a Unique Finite Estimate](#convexity-does-not-guarantee-a-unique-finite-estimate)
+  - [L2 Regularization (Ridge)](#l2-regularization-ridge)
+  - [L1 Regularization and Parameterization](#l1-regularization-and-parameterization)
+- **[Numerical Stability: The Log-Sum-Exp Trick](#numerical-stability-the-log-sum-exp-trick)**
+- **[Complete End-to-End Numerical Example](#complete-end-to-end-numerical-example)**
+  - [Step 1: Compute Logits](#step-1-compute-logits)
+  - [Step 2: Compute Probabilities](#step-2-compute-probabilities)
+  - [Step 3: Compute Cross-Entropy](#step-3-compute-cross-entropy)
+  - [Step 4: Compute Gradients](#step-4-compute-gradients)
+  - [Step 5: Update with Learning Rate 0.1](#step-5-update-with-learning-rate-01)
+  - [Step 6: Re-evaluate the Same Example](#step-6-re-evaluate-the-same-example)
+- **[Overfitting and Underfitting](#overfitting-and-underfitting)**
+  - [Underfitting](#underfitting)
+  - [Overfitting](#overfitting)
+  - [How Regularization Fixes Overfitting](#how-regularization-fixes-overfitting)
+  - [Bias-Variance Trade-off Summary](#bias-variance-trade-off-summary)
+- **[Hyperparameter Tuning](#hyperparameter-tuning)**
+  - [Learning Rate η](#learning-rate-η)
+  - [Regularization Strength λ](#regularization-strength-λ)
+  - [Number of Epochs](#number-of-epochs)
+  - [Cross-Validation Strategy](#cross-validation-strategy)
+- **[Decision Boundaries](#decision-boundaries)**
+  - [Why Softmax Boundaries Are Linear](#why-softmax-boundaries-are-linear)
+  - [Geometric Interpretation](#geometric-interpretation)
+  - [What Happens in Higher Dimensions](#what-happens-in-higher-dimensions)
+- **[Comparison with Other Multiclass Methods](#comparison-with-other-multiclass-methods)**
+  - [One-vs-Rest (OvR)](#one-vs-rest-ovr)
+  - [One-vs-One (OvO)](#one-vs-one-ovo)
+  - [Native Softmax](#native-softmax)
+  - [When to Use Which](#when-to-use-which)
+- **[Softmax Temperature](#softmax-temperature)**
+  - [What Does Temperature Do?](#what-does-temperature-do)
+  - [Example: The Same Scores at Different Temperatures](#example-the-same-scores-at-different-temperatures)
+  - [Why Does This Happen? A Formula Derivation](#why-does-this-happen-a-formula-derivation)
+  - [Does Temperature Change the Predicted Class?](#does-temperature-change-the-predicted-class)
+  - [What Happens at Extreme Temperatures?](#what-happens-at-extreme-temperatures)
+  - [Why Use Temperature After Training?](#why-use-temperature-after-training)
+- **[Online References](#online-references)**
 
 ---
 ## 1. Logistic Regression vs. Softmax Regression
@@ -514,6 +567,40 @@ $$
 >
 > Therefore, applying Softmax changes the logits into probabilities but does
 > **not** change their order.
+
+### Why Does the Denominator Contain All Classes?
+
+Think about the requirement that probabilities must sum to one.
+
+We first calculate an unnormalised positive score for each class:
+
+$$
+s_k = e^{z_k}
+$$
+
+But these scores do not necessarily sum to one.
+
+For example:
+
+$$
+s = [7.389,\ 2.718,\ 1.105]
+$$
+
+To convert them into probabilities, we divide every score by the total score:
+
+$$
+p_k = \frac{s_k}{\sum_j s_j}
+$$
+
+Substituting $s_k = e^{z_k}$:
+
+$$
+\boxed{
+p_k = \frac{e^{z_k}}{\sum_j e^{z_j}}
+}
+$$
+
+So the denominator is simply the normalisation term that makes all probabilities sum to one.
 
 ### Applying the Softmax Formula: Numerical Example
 
@@ -1846,26 +1933,1187 @@ $$
 $$
 
 ---
-## Multiclass ROC-AUC
 
-**ROC-AUC** can also evaluate the performance of a Softmax Regression model.
+## Gradient Derivation: How Does the Model Learn?
+
+This is the most important mathematical section. We have the three-step forward pass:
+
+1. **Linear transformation:** $Z = XW$
+2. **Softmax:** $\hat{Y} = \operatorname{Softmax}(Z)$
+3. **Cross-Entropy loss:** $J(W)$
+
+We need the gradient:
+
+$$
+\frac{\partial J}{\partial W}
+$$
+
+Because gradient descent uses this gradient to update the model's weights.
+
+### The Softmax Jacobian
+
+Suppress the example index and write:
+
+$$
+p_k = \frac{e^{z_k}}{S}, \qquad S = \sum_r e^{z_r}
+$$
+
+We need $\frac{\partial p_k}{\partial z_j}$. There are two cases.
+
+**Case 1: $k = j$ — differentiating a probability with respect to its own logit**
+
+Using the quotient rule:
+
+$$
+\frac{\partial p_k}{\partial z_k}
+= \frac{e^{z_k} S - e^{z_k} e^{z_k}}{S^2}
+= \frac{e^{z_k}}{S}\left(1 - \frac{e^{z_k}}{S}\right)
+$$
+
+Therefore:
+
+$$
+\frac{\partial p_k}{\partial z_k} = p_k(1 - p_k) > 0
+$$
+
+**Case 2: $k \neq j$ — differentiating one class's probability with respect to another class's logit**
+
+$$
+\frac{\partial p_k}{\partial z_j}
+= -\frac{e^{z_k} e^{z_j}}{S^2} = -p_k p_j < 0
+$$
+
+Both cases combine using the Kronecker delta $\delta_{kj}$:
+
+$$
+\boxed{
+\frac{\partial p_k}{\partial z_j} = p_k(\delta_{kj} - p_j)
+}
+$$
+
+Where $\delta_{kj} = 1$ when $k = j$ and $0$ otherwise.
+
+Increasing a class logit increases its probability and decreases every other class's probability. The full Jacobian matrix is:
+
+$$
+\boxed{
+\frac{\partial \mathbf{p}}{\partial \mathbf{z}} = \operatorname{diag}(\mathbf{p}) - \mathbf{p}\mathbf{p}^\top
+}
+$$
+
+The Jacobian is not diagonal — outputs are coupled. Its rows and columns sum to zero, consistent with the normalisation constraint.
 
 > [!NOTE]
-> **Multiclass ROC-AUC** requires a strategy such as **One-vs-Rest (OvR)** or
-> **One-vs-One (OvO)** because a standard ROC curve compares *two classes*.
+> **Softmax outputs compete.** Increasing one class logit increases that class's probability and simultaneously **decreases every other class's probability**. Classes must share a probability budget that sums to one — this is why the model learns to distinguish between classes.
 
-### Can We Use ROC-AUC with Softmax Regression?
+### Gradient of the Loss with Respect to Logits
 
-**Yes.** For *multiclass classification*, we commonly use:
+#### Direct Derivation (via Logit Form)
 
-- **One-vs-Rest (OvR)**
-- **One-vs-One (OvO)**
+Recall the loss expressed directly in logits for one example:
 
-For example, with Cat, Dog, and Horse, OvR evaluates:
+$$
+L = \log \sum_j e^{z_j} - \sum_k t_k z_k
+$$
 
-1. Cat vs. (Dog + Horse)
-2. Dog vs. (Cat + Horse)
-3. Horse vs. (Cat + Dog)
+Differentiate with respect to $z_\ell$:
 
-- Calculate an individual **ROC-AUC value** for each comparison.
-- Aggregate the results using **macro averaging** or **weighted averaging**.
+$$
+\frac{\partial L}{\partial z_\ell}
+= \frac{e^{z_\ell}}{\sum_j e^{z_j}} - t_\ell
+= p_\ell - t_\ell
+$$
+
+#### Chain Rule Derivation
+
+From $L = -\sum_k y_k \log p_k$:
+
+$$
+\frac{\partial L}{\partial p_k} = -\frac{y_k}{p_k}
+$$
+
+Combining with the Softmax Jacobian via the chain rule:
+
+$$
+\begin{aligned}
+\frac{\partial L}{\partial z_j}
+&= \sum_k \frac{\partial L}{\partial p_k} \frac{\partial p_k}{\partial z_j} \\
+&= \sum_k \left(-\frac{y_k}{p_k}\right) p_k(\delta_{kj} - p_j) \\
+&= -\sum_k y_k(\delta_{kj} - p_j) \\
+&= -y_j + p_j \sum_k y_k
+\end{aligned}
+$$
+
+Since one-hot labels sum to one ($\sum_k y_k = 1$):
+
+$$
+\boxed{
+\frac{\partial L}{\partial z_j} = p_j - y_j
+}
+$$
+
+Both derivations agree.
+
+> [!IMPORTANT]
+> **Key result — Softmax + Cross-Entropy gradient:** The gradient with respect to each logit simplifies to $p_j - y_j$ (predicted probability minus actual target). The complex Softmax and Cross-Entropy derivatives cancel to this clean expression. This is one of the main reasons Softmax + Cross-Entropy is the standard combination for multiclass classification.
+
+#### What the Gradient Means
+
+For the correct class, $y_k = 1$, so $p_k - y_k < 0$ — gradient descent increases that logit. For incorrect classes, $y_k = 0$, so $p_k - y_k > 0$ — gradient descent decreases those logits.
+
+Breaking this down into two cases:
+
+- **Correct class** ($y_k = 1$): error is $p_k - 1 < 0$ → weight **increases** → logit **rises**
+- **Incorrect class** ($y_k = 0$): error is $p_k - 0 > 0$ → weight **decreases** → logit **falls**
+
+For a single-example update, each logit changes by:
+
+$$
+\boxed{
+\Delta z_k = -\eta(p_k - y_k)(\|\mathbf{x}\|^2 + 1)
+}
+$$
+
+Where $\eta$ is the **learning rate** — a small positive value that controls the step size.
+
+The correct-class logit rises; incorrect-class logits fall. In a batch update, contributions from different examples combine.
+
+#### Component-Wise Weight Update (The Loop View)
+
+The matrix formula $W \leftarrow W - \eta \nabla_W J$ is compact, but it is easier to understand by "unrolling" it into individual weight updates.
+
+Suppose the model has $q$ weights per class: $w_1^{(k)}, w_2^{(k)}, \ldots, w_q^{(k)}$ (plus a bias $w_0^{(k)}$). The gradient of the loss with respect to each individual weight is:
+
+$$
+\frac{\partial L}{\partial w_1^{(1)}}, \quad \frac{\partial L}{\partial w_2^{(1)}}, \quad \frac{\partial L}{\partial w_0^{(s)}}, \quad \ldots \quad (q \text{ gradients total})
+$$
+
+**Initialization:** set all weights to some starting value (e.g. 1, 0, or small random numbers).
+
+**Training loop** — repeat for $T$ epochs (e.g. $T = 1000$):
+
+$$
+\boxed{
+\begin{aligned}
+w_1^{(1)} &\leftarrow w_1^{(1)} - \eta \, \frac{\partial L}{\partial w_1^{(1)}} \\[6pt]
+w_2^{(1)} &\leftarrow w_2^{(1)} - \eta \, \frac{\partial L}{\partial w_2^{(1)}} \\[6pt]
+&\vdots \\[6pt]
+w_q^{(k)} &\leftarrow w_q^{(k)} - \eta \, \frac{\partial L}{\partial w_q^{(k)}}
+\end{aligned}
+}
+$$
+
+Each weight moves a small step $\eta$ in the direction that *decreases* the loss. After $T$ loops, all weights have been nudged toward values that minimize the Cross-Entropy.
+
+> [!NOTE]
+> This element-by-element loop is **exactly** what the matrix update $W \leftarrow W - \eta \nabla_W J$ does — just written out explicitly for every single weight. In practice, the matrix form is used because it runs in parallel on hardware (GPU/CPU SIMD), but the logic is identical.
+
+**Key variables at a glance:**
+
+| Symbol | Meaning |
+|---|---|
+| $w_j^{(k)}$ | $j$-th weight for class $k$ |
+| $\eta$ | **Learning rate** — controls step size |
+| $\frac{\partial L}{\partial w_j^{(k)}}$ | Gradient — direction of steepest *increase* |
+| $T$ | Number of epochs (full passes through data) |
+
+### Complete Numerical Example of Gradient Descent
+
+Let us connect the equations with the Cat, Dog, and Horse example used earlier.
+
+**Actual class:** Dog
+
+$$
+Y = [0,\ 1,\ 0]
+$$
+
+**Predicted probabilities (from the Softmax numerical example):**
+
+$$
+\hat{Y} = [0.659,\ 0.242,\ 0.099]
+$$
+
+We derived:
+
+$$
+\frac{\partial L}{\partial Z} = \hat{Y} - Y
+$$
+
+Substituting:
+
+$$
+\frac{\partial L}{\partial Z}
+= [0.659,\ 0.242,\ 0.099] - [0,\ 1,\ 0]
+$$
+
+$$
+\boxed{
+\frac{\partial L}{\partial Z} = [0.659,\ -0.758,\ 0.099]
+}
+$$
+
+**Interpreting the gradients:**
+
+| Class | Gradient | Interpretation |
+|---|---:|---|
+| Cat | +0.659 | Predicted probability is too high — weight decreases |
+| Dog | −0.758 | Predicted probability needs to increase — weight increases |
+| Horse | +0.099 | Predicted probability is too high — weight decreases |
+
+Recall the Gradient Descent update:
+
+$$
+\boxed{
+W_{\text{new}} = W_{\text{old}} - \alpha \nabla W
+}
+$$
+
+A **positive gradient** decreases the corresponding weight; a **negative gradient** increases it. The model therefore adjusts its weights to:
+
+- **Raise** the probability of *Dog* (negative gradient → weight increases)
+- **Lower** the probabilities of *Cat* and *Horse* (positive gradient → weight decreases)
+
+This is how the model learns from its mistakes.
+
+### Weight and Bias Gradients
+
+Since $z_k = \mathbf{w}_k^\top \mathbf{x} + b_k$:
+
+$$
+\frac{\partial z_k}{\partial \mathbf{w}_k} = \mathbf{x}, \qquad \frac{\partial z_k}{\partial b_k} = 1
+$$
+
+For one example:
+
+$$
+\boxed{
+\frac{\partial L}{\partial \mathbf{w}_k} = (p_k - y_k)\mathbf{x}, \qquad \frac{\partial L}{\partial b_k} = p_k - y_k
+}
+$$
+
+For the average dataset loss $J$ over $N$ examples:
+
+$$
+\boxed{
+\frac{\partial J}{\partial \mathbf{w}_k} = \frac{1}{N} \sum_i (p_{ik} - y_{ik})\mathbf{x}_i
+}
+$$
+
+$$
+\boxed{
+\frac{\partial J}{\partial b_k} = \frac{1}{N} \sum_i (p_{ik} - y_{ik})
+}
+$$
+
+In matrix form:
+
+$$
+\boxed{
+\nabla_W J = \frac{1}{N} X^\top (\hat{Y} - Y)
+}
+$$
+
+This is the main gradient formula used to train Softmax Regression.
+
+> [!IMPORTANT]
+> **Core training formula:** The weight gradient is the average outer product of input features and prediction errors across all $N$ training examples — computed in a single matrix multiplication. This one formula is all you need to implement Softmax Regression from scratch with gradient descent.
+
+---
+
+## Vectorized Training
+
+### Forward Pass {#forward-pass-1}
+
+Let $\mathbf{1}_N$ be a column of $N$ ones:
+
+$$
+Z = XW + \mathbf{1}_N \mathbf{b}^\top, \qquad P = \operatorname{Softmax}_{\text{row}}(Z)
+$$
+
+Softmax is applied **row-wise**, normalising across the $K$ classes independently for each example. Normalising across examples would give the wrong probability meaning.
+
+> [!WARNING]
+> Always apply Softmax **row-wise** (across the $K$ classes for each example). Applying it column-wise (across examples) would not produce valid per-example probability distributions and is a common implementation mistake.
+
+### Backward Pass
+
+The matrix gradients are:
+
+$$
+\boxed{
+\nabla_W J = \frac{1}{N} X^\top (P - Y)
+}
+$$
+
+$$
+\boxed{
+\nabla_{\mathbf{b}} J = \frac{1}{N} (P - Y)^\top \mathbf{1}_N
+}
+$$
+
+Shape check: $(d \times N)(N \times K) = d \times K$ for *weights*; $(K \times N)(N \times 1) = K \times 1$ for *biases*.
+
+### Gradient Descent Update Rule
+
+$$
+\boxed{
+W \leftarrow W - \alpha \nabla_W J = W - \frac{\alpha}{N} X^\top(\hat{Y} - Y)
+}
+$$
+
+$$
+\boxed{
+\mathbf{b} \leftarrow \mathbf{b} - \alpha \nabla_{\mathbf{b}} J
+}
+$$
+
+Where:
+
+- $W$: Model weight matrix.
+- $\mathbf{b}$: Bias vector.
+- $\alpha$: Learning rate.
+- $N$: Number of training examples.
+- $X$: Input feature matrix.
+- $\hat{Y}$: Predicted probability matrix.
+- $Y$: Actual one-hot label matrix.
+
+Each training iteration:
+
+1. Compute logits $Z = XW + \mathbf{1}_N \mathbf{b}^\top$
+2. Apply Softmax row-wise to get $P$
+3. Compute Cross-Entropy loss $J$
+4. Compute gradients $\nabla_W J$ and $\nabla_{\mathbf{b}} J$
+5. Update $W$ and $\mathbf{b}$
+6. Repeat until a stopping criterion is met
+
+A fixed learning rate must be **suitably small**; convexity alone does not make arbitrary step sizes safe.
+
+Practical libraries also support alternative optimizers:
+
+- ***L-BFGS*** — quasi-Newton method, efficient for small datasets
+- ***SAG / SAGA*** — stochastic average gradient, efficient for large datasets
+- ***Newton methods*** — second-order updates, faster convergence but expensive per step
+
+---
+
+## Hessian, Convexity, and Regularization
+
+### Hessian with Respect to Logits
+
+Differentiate $\nabla_{\mathbf{z}} L = \mathbf{p} - \mathbf{t}$:
+
+$$
+H_z = \nabla^2_{\mathbf{z}} L = \operatorname{diag}(\mathbf{p}) - \mathbf{p}\mathbf{p}^\top
+$$
+
+For any vector $\mathbf{v}$:
+
+$$
+\begin{aligned}
+\mathbf{v}^\top H_z \mathbf{v}
+&= \sum_k p_k v_k^2 - \left(\sum_k p_k v_k\right)^2 \\
+&= \operatorname{Var}_{k \sim \mathbf{p}}(v_k) \geq 0
+\end{aligned}
+$$
+
+The Hessian is **positive semidefinite**, so the loss is **convex in logits**. Since logits are affine in weights and biases, the loss is also convex in these parameters. Averaging losses preserves convexity.
+
+> [!NOTE]
+> Softmax Regression has a **convex loss function** in its parameters. Gradient descent is therefore guaranteed to find the global minimum — there are no local minima to get stuck in, unlike deep neural networks where the objective is generally non-convex.
+
+### Parameter Hessian Blocks
+
+Include biases in augmented vectors:
+
+$$
+\tilde{\mathbf{x}}_i = \begin{bmatrix} \mathbf{x}_i \\ 1 \end{bmatrix}, \qquad
+\boldsymbol{\theta}_k = \begin{bmatrix} \mathbf{w}_k \\ b_k \end{bmatrix}
+$$
+
+The Hessian block for classes $k, \ell$ is:
+
+$$
+\boxed{
+\frac{\partial^2 J}{\partial \boldsymbol{\theta}_k \partial \boldsymbol{\theta}_\ell^\top}
+= \frac{1}{N} \sum_i p_{ik}(\delta_{k\ell} - p_{i\ell}) \tilde{\mathbf{x}}_i \tilde{\mathbf{x}}_i^\top
+}
+$$
+
+For parameter perturbations $\mathbf{u}_k$, put $v_{ik} = \tilde{\mathbf{x}}_i^\top \mathbf{u}_k$. The full Hessian quadratic form is an average of $\operatorname{Var}_{k \sim \mathbf{p}_i}(v_{ik})$, which is nonnegative.
+
+### Convexity Does Not Guarantee a Unique Finite Estimate
+
+Three separate issues matter:
+
+1. **Redundancy:** Common parameter shifts leave probabilities unchanged, so the unregularized Hessian has flat directions.
+2. **Feature dependence:** Collinear features introduce further non-identifiability.
+3. **Separation:** If parameters give every observed class a strictly larger score than every incorrect class, scaling those parameters upward drives loss toward zero while their norm grows without bound. There is no finite unregularized maximum likelihood estimate.
+
+A finite stationary point of a differentiable convex objective is a global minimum, but this does not assert that such a point exists or is unique. Regularization (e.g., L2 penalty) addresses the flat directions and separation issues.
+
+If a neural network learns input features jointly with the softmax layer, the overall objective is generally **non-convex**. The convexity result applies to affine softmax regression with fixed features.
+
+### L2 Regularization (Ridge)
+
+We add a penalty proportional to the squared weights to the Cross-Entropy loss:
+
+$$
+\boxed{
+J_\lambda(W)
+= -\frac{1}{N}\sum_{i=1}^{N}\sum_{k=1}^{K} y_{ik}\log(p_{ik})
++ \frac{\lambda}{2}\|W\|_F^2
+}
+$$
+
+Where:
+
+- $\lambda$: Regularization strength — larger $\lambda$ means stronger penalty.
+- $\|W\|_F^2 = \sum_{r,k} w_{rk}^2$: Frobenius norm — sum of all squared weight values.
+
+Bias parameters are typically excluded from the penalty. The gradient becomes:
+
+In **matrix form**, the regularized gradient is:
+
+$$
+\boxed{
+\nabla_W J_\lambda = \frac{1}{N} X^\top (\hat{Y} - Y) + \lambda W
+}
+$$
+
+The gradient descent update in **matrix form** is:
+
+$$
+\boxed{
+W \leftarrow W - \eta \nabla_W J_\lambda
+= (1 - \eta\lambda) W - \frac{\eta}{N} X^\top (\hat{Y} - Y)
+}
+$$
+
+The factor $(1 - \eta\lambda)$ shrinks all weights toward zero at each step — this is the ***weight decay*** interpretation of L2.
+
+**What L2 regularization does:**
+
+- ***Penalizes*** large weights and encourages smaller weight values.
+- ***Reduces*** model complexity and helps prevent overfitting.
+- ***Improves*** curvature in weight directions, helping optimization.
+- Corresponds to a **Gaussian-prior MAP estimate** — equivalent to placing a $\mathcal{N}(0,\, 1/\lambda)$ prior on each weight.
+
+**Finite minimizer guarantee:** Weight-only L2 leaves the common bias-shift redundancy unpenalized. If a class is absent from training, its bias can drift to $-\infty$. Applying L2 to **all** parameters makes the objective strongly convex and coercive, giving a **unique finite minimizer**.
+
+> [!IMPORTANT]
+> Without regularization, Softmax parameters can grow without bound when classes are perfectly separable — the *separation problem*. L2 regularization applied to **all** parameters prevents this by making the objective strongly convex, ensuring a unique finite solution exists.
+
+### L1 Regularization and Parameterization
+
+L1 adds the sum of absolute weight values:
+
+$$
+\boxed{
+J_\lambda(W) = J_{\text{CE}}(W) + \lambda \sum_{r,k} |W_{rk}|
+}
+$$
+
+At nonzero weights the derivative is $\lambda \operatorname{sign}(w_{rk})$. At zero the subgradient is $[-\lambda,\, \lambda]$, so optimization requires algorithms that handle non-smoothness (proximal methods, coordinate descent).
+
+**What L1 regularization does:**
+
+- ***Encourages sparsity*** — some weights become **exactly zero**, producing a *sparse model*.
+- ***Feature selection*** — zero weights correspond to features the model ignores entirely.
+- ***Harder to optimize*** than L2 due to non-differentiability at zero.
+
+**Parameterization note:** Applying L2 to $K$ symmetric weight vectors is not equivalent to applying it to $K-1$ reference-class vectors, even though those parameterizations represent the same probability family. In scikit-learn, smaller values of the inverse-regularization parameter **C** correspond to stronger regularization; the exact mapping to $\lambda$ depends on the objective's loss normalization and sample weights.
+
+---
+
+## Numerical Stability: The Log-Sum-Exp Trick
+
+There is an important implementation detail about Softmax.
+
+Recall the Softmax formula:
+
+$$
+p_k = \frac{e^{z_k}}{\sum_j e^{z_j}}
+$$
+
+Imagine the logits are:
+
+$$
+z = [1000,\ 999,\ 998]
+$$
+
+Computing $e^{1000}$, $e^{999}$, $e^{998}$ causes **numerical overflow** — these values exceed the floating-point range of any computer.
+
+To avoid this, we use the **Log-Sum-Exp trick**: subtract the maximum logit from every logit before computing the exponentials.
+
+$$
+z'_k = z_k - \max_j(z_j)
+$$
+
+For our example:
+
+$$
+z' = [0,\ -1,\ -2]
+$$
+
+Now compute Softmax using the shifted logits:
+
+$$
+p_k = \frac{e^{z_k - \max(z)}}{\sum_j e^{z_j - \max(z)}}
+$$
+
+The probabilities are **mathematically identical** to the original because the common factor cancels:
+
+$$
+\frac{e^{z_k - c}}{\sum_j e^{z_j - c}}
+= \frac{e^{-c} \cdot e^{z_k}}{e^{-c} \cdot \sum_j e^{z_j}}
+= \frac{e^{z_k}}{\sum_j e^{z_j}}
+$$
+
+The shifted logits provide two guarantees:
+
+- **No overflow:** the largest exponential is exactly $e^0 = 1$
+- **Identical probabilities:** the common factor $e^{-c}$ cancels in numerator and denominator
+
+The same trick applies to the *Cross-Entropy loss* in logit form:
+
+$$
+\boxed{
+\operatorname{logsumexp}(\mathbf{z}) = \max(\mathbf{z}) + \log \sum_j e^{z_j - \max(\mathbf{z})}
+}
+$$
+
+> [!TIP]
+> Always use the Log-Sum-Exp trick when implementing Softmax. Numerically stable Softmax is built into every production library — `scipy.special.softmax`, `torch.nn.functional.softmax`, and `tf.nn.softmax` all apply this internally.
+
+---
+
+## Complete End-to-End Numerical Example
+
+This example traces all six steps for a single training sample, connecting logits, probabilities, loss, gradients, and the weight update.
+
+**Setup:** Three classes, two features.
+
+$$
+\mathbf{x} = \begin{bmatrix} 1 \\ 2 \end{bmatrix}, \quad
+W = \begin{bmatrix} 1 & 0 & -1 \\ 0 & 0.5 & 0 \end{bmatrix}, \quad
+\mathbf{b} = \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}
+$$
+
+Columns of $W$ represent classes. The observed class is class 2:
+
+$$
+\mathbf{t} = \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}
+$$
+
+### Step 1: Compute Logits
+
+$$
+\mathbf{z} = W^\top \mathbf{x} + \mathbf{b}
+= \begin{bmatrix} 1 \cdot 1 + 0 \cdot 2 + 1 \\ 0 \cdot 1 + 0.5 \cdot 2 + 0 \\ -1 \cdot 1 + 0 \cdot 2 + 1 \end{bmatrix}
+= \begin{bmatrix} 2 \\ 1 \\ 0 \end{bmatrix}
+$$
+
+### Step 2: Compute Probabilities
+
+$$
+e^2 \approx 7.389, \qquad e^1 \approx 2.718, \qquad e^0 = 1
+$$
+
+$$
+S \approx 11.107, \qquad
+\mathbf{p} \approx \begin{bmatrix} 0.665 \\ 0.245 \\ 0.090 \end{bmatrix}
+$$
+
+The model predicts **class 1** (highest probability), so this example is ***misclassified*** — the true class is **class 2**.
+
+### Step 3: Compute Cross-Entropy
+
+$$
+L = -\log p_2 \approx -\log(0.245) \approx 1.408
+= \log(e^2 + e^1 + 1) - 1
+$$
+
+### Step 4: Compute Gradients
+
+$$
+\mathbf{p} - \mathbf{t} \approx
+\begin{bmatrix} 0.665 \\ -0.755 \\ 0.090 \end{bmatrix}
+$$
+
+The weight gradient is the outer product $\nabla_W L = \mathbf{x}(\mathbf{p} - \mathbf{t})^\top$:
+
+$$
+\nabla_W L
+\approx \begin{bmatrix}
+0.665 & -0.755 & 0.090 \\
+1.330 & -1.511 & 0.180
+\end{bmatrix}
+$$
+
+The bias gradient is $\nabla_{\mathbf{b}} L = \mathbf{p} - \mathbf{t}$. Its components sum to zero, consistent with shift invariance.
+
+### Step 5: Update with Learning Rate 0.1
+
+For one unregularized gradient descent step ($\eta = 0.1$):
+
+$$
+W_{\text{new}} \approx \begin{bmatrix}
+0.934 & 0.076 & -1.009 \\
+-0.133 & 0.651 & -0.018
+\end{bmatrix}
+$$
+
+$$
+\mathbf{b}_{\text{new}} \approx \begin{bmatrix} 0.934 \\ 0.076 \\ 0.991 \end{bmatrix}
+$$
+
+### Step 6: Re-evaluate the Same Example
+
+Since $\|\mathbf{x}\|^2 + 1 = 6$, the logit change per class is $-0.6(\mathbf{p} - \mathbf{t})$:
+
+$$
+\mathbf{z}_{\text{new}} = \mathbf{z} - 0.6(\mathbf{p} - \mathbf{t})
+\approx \begin{bmatrix} 1.601 \\ 1.453 \\ -0.054 \end{bmatrix}
+$$
+
+| | Before update | After update |
+|---|---:|---:|
+| $p_{\text{class 2}}$ | 0.245 | 0.420 |
+| Loss | 1.408 | 0.867 |
+
+The observed-class probability rises from 0.245 to 0.420 and the loss falls from 1.408 to 0.867. Class 1 is still slightly more likely after this single step — more iterations would continue improving it.
+
+> **Note:** A gradient step can improve probability estimates before it changes the predicted class label.
+
+---
+
+<a id="overfitting-and-underfitting"></a>
+
+## Overfitting and Underfitting
+
+Every supervised model sits somewhere on a spectrum between **underfitting** (too simple) and **overfitting** (too complex). Softmax Regression is no exception.
+
+![Overfitting vs Good Fit vs Underfitting — three loss curve panels showing high bias, balanced, and high variance scenarios](images/overfitting-underfitting.svg)
+
+<a id="underfitting"></a>
+
+### Underfitting
+
+***Underfitting*** occurs when the model is **too simple** to capture the true pattern in the data.
+
+**Causes in Softmax Regression:**
+
+- Too few training epochs — weights have not converged
+- Learning rate too small — updates are negligible
+- **Over-regularization** ($\lambda$ too large) — weights are forced toward zero regardless of the data
+- Features are genuinely insufficient to separate the classes
+
+**Symptoms:**
+
+- High training loss *and* high validation loss
+- Model predicts near-uniform probabilities ($p_k \approx 1/K$) for all inputs
+- Accuracy barely above random chance
+
+> [!NOTE]
+> Softmax Regression is a **linear model** — it can only underfit when classes are not linearly separable. No amount of training will help if the data requires a curved decision boundary. Use neural networks or kernel methods in that case.
+
+<a id="overfitting"></a>
+
+### Overfitting the training data and fails to generalise to new examples.
+
+**Causes in Softmax Regression:**
+
+- Too many training epochs without early stopping
+- **Under-regularization** ($\lambda$ too small or zero)
+- Very high-dimensional feature space with few training examples
+- **Perfect linear separability** — unregularized weights grow without bound (the separation problem)
+
+**Symptoms:**
+
+- Low training loss but **high validation loss**
+- Predicted probabilities are extremely confident (near 0 or 1) even on borderline examples
+- Large weight magnitudes ($\|W\|_F \gg 0$)
+
+> [!WARNING]
+> When classes are **perfectly linearly separable**, the unregularized Cross-Entropy loss has no finite minimum — the weights grow indefinitely and the model becomes pathologically overconfident. L2 regularization is the standard fix.
+
+<a id="how-regularization-fixes-overfitting"></a>
+
+### How Regularization Fixes Overfitting
+
+| Regularization | Effect on Weights | Effect on Decision Boundary |
+|---|---|---|
+| **None** | Can grow unbounded | Sharp, overconfident |
+| **L2 (Ridge)** | Shrinks all weights smoothly | Softer, more generalised |
+| **L1 (Lasso)** | Drives some weights to exactly zero | Sparse — ignores irrelevant features |
+
+The regularization term $\lambda \|W\|_F^2$ acts as a **penalty on complexity** — it forces the model to explain the data with smaller weights, which smooths the decision boundary and improves generalisation.
+
+<a id="bias-variance-trade-off-summary"></a>
+
+### Bias-Variance Trade-off Summary
+
+$$
+\boxed{
+\text{Total Error} = \underbrace{\text{Bias}^2}_{\text{underfitting}} + \underbrace{\text{Variance}}_{\text{overfitting}} + \text{Irreducible Noise}
+}
+$$
+
+- **High bias** → underfit → increase model capacity or reduce $\lambda$
+- **High variance** → overfit → increase $\lambda$, add more data, or reduce epochs
+
+---
+
+<a id="hyperparameter-tuning"></a>
+
+## Hyperparameter Tuning
+
+Softmax Regression has three main hyperparameters. None of them are learned from data — they must be set before training.
+
+<a id="learning-rate-η"></a>
+
+### Learning Rate $\eta$
+
+The ***learning rate*** $\eta$ controls how large each gradient descent step is.
+
+$$
+W \leftarrow W - \eta \nabla_W J
+$$
+
+| $\eta$ value | Effect |
+|---|---|
+| **Too large** | Loss oscillates or diverges — overshoots the minimum |
+| **Too small** | Convergence is extremely slow — wastes computation |
+| **Just right** | Loss decreases smoothly and converges |
+
+**Practical starting points:**
+
+- Start with $\eta = 0.1$ and monitor the loss curve
+- If loss oscillates → halve $\eta$
+- If loss decreases but very slowly → double $\eta$
+- Common range: $10^{-4}$ to $10^{-1}$
+
+> [!TIP]
+> Use a **learning rate schedule** — start larger and decay over time (e.g. step decay, exponential decay, cosine annealing). Most production libraries support this out of the box.
+
+![Effect of Learning Rate η — three panels showing slow convergence, smooth convergence, and oscillation](images/hyperparameter-learning-rate.svg)
+
+<a id="regularization-strength-λ"></a>
+
+### Regularization Strength $\lambda$
+
+The ***regularization strength*** $\lambda$ controls the trade-off between fitting the data and keeping weights small.
+
+$$
+J_\lambda = J_{\text{CE}} + \frac{\lambda}{2}\|W\|_F^2
+$$
+
+| $\lambda$ value | Effect |
+|---|---|
+| $\lambda = 0$ | No regularization — risk of overfitting / separation problem |
+| **Too large** | Weights collapse to near-zero — underfitting |
+| **Just right** | Balances fit and generalization |
+
+**Practical starting points:**
+
+- Try $\lambda \in \{0.001,\ 0.01,\ 0.1,\ 1.0\}$ on a log scale
+- Use **cross-validation** to select the best value (see below)
+
+<a id="number-of-epochs"></a>
+
+### Number of Epochs
+
+One ***epoch*** is one full pass through the entire training dataset.
+
+**Choosing the right number:**
+
+- Too few → weights haven't converged (underfitting)
+- Too many → model memorises noise (overfitting)
+
+**Best practice — early stopping:**
+
+- Monitor **validation loss** after each epoch
+- Stop training when validation loss stops decreasing (or starts rising)
+- Save the weights from the epoch with the lowest validation loss
+
+| Epoch count | Typical use case |
+|---|---|
+| 100–500 | Small datasets, simple features |
+| 1 000–5 000 | Medium datasets |
+| 10 000+ | Large datasets or slow convergence |
+
+<a id="cross-validation-strategy"></a>
+
+### Cross-Validation Strategy
+
+***Cross-validation*** estimates how well a hyperparameter choice will generalise, without touching the test set.
+
+**Standard approach — $k$-fold cross-validation:**
+
+1. Split training data into $k$ equal folds (typically $k = 5$ or $k = 10$)
+2. For each candidate hyperparameter combination:
+   - Train on $k-1$ folds, validate on the remaining fold
+   - Repeat $k$ times, rotating the validation fold
+   - Average the $k$ validation losses
+3. Select the combination with the lowest average validation loss
+4. Re-train on **all** training data with the chosen hyperparameters
+5. Evaluate once on the held-out **test set**
+
+> [!IMPORTANT]
+> Never use the test set to pick hyperparameters — that leaks information and gives an over-optimistic estimate of generalisation. The test set is used **exactly once**, at the very end.
+
+**In scikit-learn:**
+
+```python
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import GridSearchCV
+
+param_grid = {'C': [0.001, 0.01, 0.1, 1, 10]}  # C = 1/λ
+model = LogisticRegression(multi_class='multinomial', solver='lbfgs')
+gs = GridSearchCV(model, param_grid, cv=5, scoring='neg_log_loss')
+gs.fit(X_train, y_train)
+print(gs.best_params_)
+```
+
+---
+
+<a id="decision-boundaries"></a>
+
+## Decision Boundaries
+
+![Softmax Decision Boundaries — 2D scatter plot of three classes (Cat, Dog, Horse) with linear separating boundaries](images/decision-boundaries.svg)
+
+<a id="why-softmax-boundaries-are-linear"></a>
+
+### Why Softmax Boundaries Are Linear
+
+The predicted class for an input $\mathbf{x}$ is:
+
+$$
+\hat{y} = \arg\max_k \, z_k = \arg\max_k \, (\mathbf{w}_k^\top \mathbf{x} + b_k)
+$$
+
+The **boundary between class $j$ and class $k$** is the set of points where $z_j = z_k$:
+
+$$
+\boxed{
+\mathbf{w}_j^\top \mathbf{x} + b_j = \mathbf{w}_k^\top \mathbf{x} + b_k
+\quad \Longleftrightarrow \quad
+(\mathbf{w}_j - \mathbf{w}_k)^\top \mathbf{x} + (b_j - b_k) = 0
+}
+$$
+
+This is the equation of a **hyperplane** — a linear surface in $d$-dimensional input space. Softmax Regression always produces **piecewise-linear** decision boundaries.
+
+<a id="geometric-interpretation"></a>
+
+### Geometric Interpretation
+
+- In **2D** ($d = 2$): the boundary between any two classes is a **straight line**
+- In **3D** ($d = 3$): the boundary is a **flat plane**
+- In **$d$ dimensions**: the boundary is a **$(d-1)$-dimensional hyperplane**
+
+For $K$ classes, there are $\binom{K}{2}$ pairwise boundaries. The input space is divided into at most $K$ convex regions — one per class.
+
+**What the weight vectors mean geometrically:**
+
+- $\mathbf{w}_k$ points in the direction of **increasing logit for class $k$**
+- The boundary between class $j$ and class $k$ is **perpendicular** to $\mathbf{w}_j - \mathbf{w}_k$
+- Larger $\|\mathbf{w}_j - \mathbf{w}_k\|$ → sharper, more confident boundary
+
+<a id="what-happens-in-higher-dimensions"></a>
+
+### What Happens in Higher Dimensions
+
+- **Linearly separable data:** Softmax finds a perfect boundary; without regularization weights grow unbounded
+- **Non-linearly separable data:** Softmax cannot separate the classes regardless of training time — the linear boundary is a fundamental limitation
+- **Fix:** Apply a nonlinear feature transformation (polynomial features, RBF kernel) or use a neural network
+
+> [!IMPORTANT]
+> If you observe that training accuracy plateaus well below 100% despite long training, the data is likely **not linearly separable**. A richer model is needed — not more epochs or a smaller learning rate.
+
+---
+
+<a id="comparison-with-other-multiclass-methods"></a>
+
+## Comparison with Other Multiclass Methods
+
+When faced with a $K$-class problem, there are three main strategies.
+
+![Multiclass Strategies: OvR vs OvO vs Native Softmax — architecture diagram comparing all three approaches](images/multiclass-methods-comparison.svg)
+
+<a id="one-vs-rest-ovr"></a>
+
+### One-vs-Rest (OvR)
+
+***One-vs-Rest*** (also called *One-vs-All*, OvA) trains $K$ **independent binary classifiers**.
+
+- Classifier $k$ is trained to distinguish *class $k$* from *all other classes combined*
+- At prediction time, all $K$ classifiers score the input; the class with the **highest score** wins
+
+$$
+\hat{y} = \arg\max_k \, f_k(\mathbf{x})
+$$
+
+**Properties:**
+
+- Simple — reuses any binary classifier
+- $K$ separate models → $K$ times the training cost
+- Probabilities from different classifiers are **not calibrated** — they don't sum to one
+- Can produce **ambiguous regions** where multiple classifiers say "yes"
+
+<a id="one-vs-one-ovo"></a>
+
+### One-vs-One (OvO)
+
+***One-vs-One*** trains $\binom{K}{2}$ binary classifiers, one for **each pair of classes**.
+
+- Each classifier sees only examples from its two classes
+- At prediction time, each classifier votes; the class with the **most votes** wins (majority voting)
+
+**Properties:**
+
+- Each classifier trains on a smaller dataset → can be faster per classifier
+- $\binom{K}{2}$ models grow quadratically: $K = 10$ → 45 classifiers
+- More robust to class imbalance (each classifier sees balanced pairs)
+- Still no calibrated joint probabilities
+
+<a id="native-softmax"></a>
+
+### Native Softmax
+
+***Native Softmax*** trains a **single model** directly over all $K$ classes jointly.
+
+- One weight matrix $W \in \mathbb{R}^{d \times K}$
+- All classes share the same training signal — the gradient couples all class weights
+- Output is a **proper probability distribution** ($\sum_k p_k = 1$)
+
+**Properties:**
+
+- Single model, single training run
+- Calibrated probabilities — directly interpretable
+- Gradient flows through all classes simultaneously → classes influence each other's weights
+- Requires more memory for large $K$ but is generally the most efficient
+
+<a id="when-to-use-which"></a>
+
+### When to Use Which
+
+| Method | Best when | Avoid when |
+|---|---|---|
+| **OvR** | Binary classifier already exists; $K$ is small | Probabilities must be calibrated |
+| **OvO** | Class imbalance is severe; $K$ is moderate | $K$ is large (too many classifiers) |
+| **Native Softmax** | Building from scratch; calibrated probabilities needed | Classes are not mutually exclusive |
+
+> [!TIP]
+> **Default choice: Native Softmax.** It is simpler, gives calibrated probabilities, and trains in a single pass. Use OvR only when you already have a strong binary classifier you want to reuse, or when your framework does not natively support multiclass output.
+
+**Scikit-learn defaults:**
+
+```python
+# Native Softmax (multinomial)
+LogisticRegression(multi_class='multinomial', solver='lbfgs')
+
+# One-vs-Rest
+LogisticRegression(multi_class='ovr')
+```
+
+> [!NOTE]
+> OvO is used internally by **SVM** (`SVC`) in scikit-learn for multiclass problems, since SVMs are inherently binary classifiers and OvO scales better than OvR for SVMs.
+
+---
+
+<a id="softmax-temperature"></a>
+
+## Softmax Temperature
+
+**Temperature-scaled softmax** replaces the standard formula by dividing each logit by a positive scalar $\tau$ before the softmax:
+
+$$
+\boxed{
+p_k^{(\tau)} = \frac{e^{z_k / \tau}}{\displaystyle\sum_{j=1}^{K} e^{z_j / \tau}}, \qquad \tau > 0
+}
+$$
+
+- **Ordinary softmax regression** uses $\tau = 1$.
+- **Small $\tau$** → sharper, more confident probabilities (one class dominates).
+- **Large $\tau$** → flatter, less confident probabilities (spread more evenly).
+- Used widely in **LLMs**, **neural networks**, and **knowledge distillation**.
+
+> [!NOTE]
+> Temperature does **not** change which class has the highest logit — it only changes *how confident* the probabilities look.
+
+<a id="what-does-temperature-do"></a>
+
+### What Does Temperature Do?
+
+**Temperature controls how confident the softmax probabilities are.** It divides each class score (logit) before applying softmax:
+
+$$
+p_k^{(\tau)} = \frac{\exp(z_k / \tau)}{\displaystyle\sum_{j=1}^{K} \exp(z_j / \tau)}, \qquad \tau > 0
+$$
+
+Where:
+
+- $z_k = \mathbf{w}_k^\top \mathbf{x} + b_k$ is the **raw score (logit)** for class $k$
+- $K$ is the **number of classes**
+- $\tau$ is the **temperature**
+- $p_k^{(\tau)}$ is the **resulting class probability**
+
+Intuitively, dividing by a small $\tau$ *amplifies* the differences between logits — making the highest-scoring class even more dominant. Dividing by a large $\tau$ *shrinks* those differences — spreading probability more evenly.
+
+<a id="example-the-same-scores-at-different-temperatures"></a>
+
+### Example: The Same Scores at Different Temperatures
+
+Suppose the logits are $\mathbf{z} = (2, 1, 0)$:
+
+| **Temperature** | **Scores after ÷ τ** | **Class probabilities** | **Effect** |
+|:---:|:---:|:---:|:---|
+| $\tau = 0.5$ | $(4,\ 2,\ 0)$ | $(0.867,\ 0.117,\ 0.016)$ | **Sharper** — more confident |
+| $\tau = 1$ | $(2,\ 1,\ 0)$ | $(0.665,\ 0.245,\ 0.090)$ | Ordinary softmax |
+| $\tau = 2$ | $(1,\ 0.5,\ 0)$ | $(0.506,\ 0.307,\ 0.186)$ | **Flatter** — less confident |
+
+> [!TIP]
+> A **small temperature** enlarges the differences between scores, making the highest-scoring class more dominant. A **large temperature** reduces those differences, spreading probability more evenly across classes. Probabilities are rounded.
+
+<a id="why-does-this-happen-a-formula-derivation"></a>
+
+### Why Does This Happen? A Formula Derivation
+
+Consider the **probability ratio** of classes $a$ and $b$. Their common softmax denominator cancels:
+
+$$
+\frac{p_a^{(\tau)}}{p_b^{(\tau)}}
+= \frac{\exp(z_a / \tau)}{\exp(z_b / \tau)}
+= \exp\!\left(\frac{z_a - z_b}{\tau}\right)
+$$
+
+Taking the log gives the **pairwise log-odds**:
+
+$$
+\boxed{
+\log \frac{p_a^{(\tau)}}{p_b^{(\tau)}} = \frac{z_a - z_b}{\tau}
+}
+$$
+
+For classes 1 and 2 in the example, the score difference is $2 - 1 = 1$:
+
+| **Temperature** | **Probability ratio $p_1 / p_2$** |
+|:---:|---:|
+| $\tau = 0.5$ | $e^{2} \approx 7.39$ |
+| $\tau = 1$ | $e^{1} \approx 2.72$ |
+| $\tau = 2$ | $e^{0.5} \approx 1.65$ |
+
+At **low temperature**, the model gives class 1 much more probability than class 2. At **high temperature**, their probabilities become closer.
+
+<a id="does-temperature-change-the-predicted-class"></a>
+
+### Does Temperature Change the Predicted Class?
+
+**No — for fixed logits and any positive temperature, the predicted class stays the same.** Dividing all scores by the same positive number preserves their ordering:
+
+$$
+\operatorname*{argmax}_k \, p_k^{(\tau)} = \operatorname*{argmax}_k \, z_k
+$$
+
+Class 1 remains the most likely in all three examples above. **Confidence changes, but the argmax prediction does not.**
+
+> [!IMPORTANT]
+> Decisions based on **probability thresholds** (e.g. "only predict if confidence > 90%") *can* still change with temperature, even though the argmax class does not. Temperature calibration affects confidence, not rank order.
+
+<a id="what-happens-at-extreme-temperatures"></a>
+
+### What Happens at Extreme Temperatures?
+
+| **Limit** | **Behaviour** |
+|:---|:---|
+| $\tau \to 0^+$ | Probability **concentrates** on the highest-scoring class. Tied maxima share the limiting probability equally. |
+| $\tau \to \infty$ | Each class probability **approaches** $1/K$ — the uniform distribution. |
+
+As $\tau$ grows, the model becomes maximally uncertain. As $\tau$ shrinks toward zero, the model becomes a deterministic argmax.
+
+> [!NOTE]
+> For positive temperatures, **class ordering is always preserved** — temperature cannot swap which class has the highest probability.
+
+<a id="why-use-temperature-after-training"></a>
+
+### Why Use Temperature After Training?
+
+**Temperature scaling** is the simplest method for **probability calibration** — adjusting confidence so it better matches observed accuracy. For example, among predictions assigned ~80% confidence, a well-calibrated model should be correct ~80% of the time.
+
+**How to apply it:**
+
+- Keep the trained **weights and biases fixed**
+- Fit a single positive scalar $\tau$ on **held-out validation data** by minimising cross-entropy:
+
+$$
+\tau^* = \operatorname*{argmin}_{\tau > 0}
+\left[
+-\frac{1}{n_\text{val}} \sum_{i=1}^{n_\text{val}} \log p_{i,\, y_i}^{(\tau)}
+\right]
+$$
+
+| **Scenario** | **Likely fix** |
+|:---|:---|
+| Model is **overconfident** (predicted 95% but wrong often) | Use $\tau > 1$ to flatten probabilities |
+| Model is **underconfident** (predicted 60% but correct often) | Use $\tau < 1$ to sharpen probabilities |
+
+> [!IMPORTANT]
+> Calibration can improve probability quality while **leaving argmax predictions and classification accuracy unchanged**. It does **not** guarantee perfect calibration, and the **test set must not** be used to choose $\tau$.
+
+**During training:** if temperature is applied while the model is still being trained, the learned parameters can shift. With unrestricted parameters, a fixed temperature can be absorbed into the weights and biases by replacing $W \leftarrow W/\tau$ and $\mathbf{b} \leftarrow \mathbf{b}/\tau$. Regularization affects this equivalence during fitting.
+
+> [!TIP]
+> **When to use temperature scaling:**
+> - After training a softmax classifier and its predicted probabilities seem too extreme or too flat
+> - In **LLMs** and text generation — raising $\tau$ produces more varied/creative outputs; lowering it produces more focused/deterministic outputs
+> - In **knowledge distillation** — a high temperature in the teacher's softmax produces "soft labels" that carry richer information about class similarities
+
+---
+
+<a id=”online-references”></a>
+
+## Online References
+
+The following sources were consulted directly online. This guide uses its own notation and expands their core formulas with additional derivations and a worked example.
+
+**Quick links:**
+- [Dive into Deep Learning — Softmax Regression](https://d2l.ai/chapter_linear-classification/softmax-regression.html): softmax, cross-entropy, and temperature intuition.
+- [scikit-learn — Probability Calibration](https://scikit-learn.org/stable/modules/calibration.html): background on calibrated probabilities.
+- [Guo et al. — On Calibration of Modern Neural Networks](https://proceedings.mlr.press/v70/guo17a.html): further reading on post-training temperature scaling.
+
+---
+
+**[1] Aston Zhang, Zachary C. Lipton, Mu Li, and Alexander J. Smola**  
+*Dive into Deep Learning, Section 4.1: Softmax Regression*  
+[Read the textbook chapter →](https://d2l.ai/chapter_linear-classification/softmax-regression.html)
+
+Used for affine class scores, one-hot targets, softmax normalization, vectorization, maximum likelihood, cross-entropy, its logit gradient, exponential-family connections, and information theory. Especially relevant: **subsections 4.1.1.2, 4.1.1.3, 4.1.2, and 4.1.3**.
+
+---
+
+**[2] scikit-learn developers**  
+*User Guide, Logistic Regression*  
+[Read the logistic regression documentation →](https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression)  
+[Jump to the multinomial case →](https://scikit-learn.org/stable/modules/linear_model.html#multinomial-case)
+
+Used for multinomial versus one-vs-rest models, the $K$ versus $K-1$ parameterization, regularization considerations, and solver support. The practical example uses `LogisticRegression` with `lbfgs`.
+
+---
+
+**[3] SciPy developers**  
+*scipy.special.softmax API reference*  
+[Read the softmax documentation →](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.softmax.html)
+
+Used for the definition, normalization axis, relationship to the gradient of log-sum-exp, and shifting to avoid overflow. The page also cites the numerical analysis paper below.
+
+---
+
+**Further reading, cited by [3]:**  
+Pierre Blanchard, Desmond J. Higham, and Nicholas J. Higham — *”Accurately computing the log-sum-exp and softmax functions”*  
+*IMA Journal of Numerical Analysis*, 41(4), 2021.  
+[Paper DOI →](https://doi.org/10.1093/imanum/draa038)
+
+Listed for deeper study of floating-point accuracy; not separately consulted for this guide.
+

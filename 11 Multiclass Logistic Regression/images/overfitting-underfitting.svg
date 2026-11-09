@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="460" viewBox="0 0 1440 460">
+  <rect width="1440" height="460" rx="16" fill="#ffffff"/>
+  <text x="720" y="42" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="24" font-weight="700" fill="#0f172a">Overfitting vs Good Fit vs Underfitting</text>
+  <rect x="20" y="70" width="430" height="310" rx="12" fill="#fef2f2" stroke="#fca5a5" stroke-width="2"/>
+  <text x="235" y="100" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700" fill="#991b1b">Underfitting</text>
+  <text x="235" y="120" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" fill="#991b1b">(High Bias)</text>
+  <line x1="80" y1="130" x2="80" y2="350" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="80" y1="350" x2="430" y2="350" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="75" y="134" text-anchor="end" font-family="Arial,Helvetica,sans-serif" font-size="11" fill="#64748b">1.0</text>
+  <text x="75" y="354" text-anchor="end" font-family="Arial,Helvetica,sans-serif" font-size="11" fill="#64748b">0.0</text>
+  <text x="255" y="372" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#64748b">Epochs</text>
+  <text x="62" y="240" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#64748b" transform="rotate(-90,62,240)">Loss</text>
+  <line x1="80" y1="295.0" x2="430" y2="295.0" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="80" y1="240.0" x2="430" y2="240.0" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="80" y1="185.0" x2="430" y2="185.0" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,3"/>
+  <polyline points="80.0,152.0 90.5,153.0 101.0,153.9 111.5,154.8 122.0,155.7 132.5,156.5 143.0,157.3 153.5,158.1 164.0,158.8 174.5,159.6 185.0,160.3 195.5,160.9 206.0,161.6 216.5,162.2 227.0,162.8 237.5,163.4 248.0,163.9 258.5,164.4 269.0,165.0 279.5,165.5 290.0,165.9 300.5,166.4 311.0,166.8 321.5,167.3 332.0,167.7 342.5,168.1 353.0,168.4 363.5,168.8 374.0,169.2 384.5,169.5 395.0,169.8 405.5,170.1 416.0,170.4 426.5,170.7" fill="none" stroke="#3b82f6" stroke-width="2.5" stroke-linejoin="round"/>
+  <polyline points="80.0,145.4 90.5,146.2 101.0,147.0 111.5,147.7 122.0,148.5 132.5,149.2 143.0,149.8 153.5,150.5 164.0,151.1 174.5,151.7 185.0,152.3 195.5,152.8 206.0,153.4 216.5,153.9 227.0,154.4 237.5,154.9 248.0,155.3 258.5,155.8 269.0,156.2 279.5,156.6 290.0,157.0 300.5,157.4 311.0,157.8 321.5,158.1 332.0,158.5 342.5,158.8 353.0,159.1 363.5,159.4 374.0,159.7 384.5,160.0 395.0,160.3 405.5,160.5 416.0,160.8 426.5,161.0" fill="none" stroke="#f43f5e" stroke-width="2.5" stroke-dasharray="8,4" stroke-linejoin="round"/>
+  <line x1="85" y1="142" x2="110" y2="142" stroke="#3b82f6" stroke-width="2.5"/>
+  <text x="115" y="146" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#1e40af">Train Loss</text>
+  <line x1="85" y1="159" x2="110" y2="159" stroke="#f43f5e" stroke-width="2.5" stroke-dasharray="6,3"/>
+  <text x="115" y="163" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#be123c">Val Loss</text>
+  <rect x="510" y="70" width="430" height="310" rx="12" fill="#f0fdf4" stroke="#86efac" stroke-width="2"/>
+  <text x="725" y="100" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700" fill="#14532d">Good Fit</text>
+  <text x="725" y="120" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" fill="#14532d">(Balanced)</text>
+  <line x1="570" y1="130" x2="570" y2="350" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="570" y1="350" x2="920" y2="350" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="565" y="134" text-anchor="end" font-family="Arial,Helvetica,sans-serif" font-size="11" fill="#64748b">1.0</text>
+  <text x="565" y="354" text-anchor="end" font-family="Arial,Helvetica,sans-serif" font-size="11" fill="#64748b">0.0</text>
+  <text x="745" y="372" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#64748b">Epochs</text>
+  <text x="552" y="240" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#64748b" transform="rotate(-90,552,240)">Loss</text>
+  <line x1="570" y1="295.0" x2="920" y2="295.0" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="570" y1="240.0" x2="920" y2="240.0" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="570" y1="185.0" x2="920" y2="185.0" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,3"/>
+  <polyline points="570.0,152.0 580.5,170.7 591.0,187.2 601.5,201.9 612.0,214.9 622.5,226.4 633.0,236.7 643.5,245.8 654.0,253.8 664.5,261.0 675.0,267.3 685.5,272.9 696.0,277.9 706.5,282.3 717.0,286.2 727.5,289.7 738.0,292.8 748.5,295.5 759.0,298.0 769.5,300.1 780.0,302.0 790.5,303.7 801.0,305.2 811.5,306.6 822.0,307.7 832.5,308.8 843.0,309.7 853.5,310.5 864.0,311.3 874.5,311.9 885.0,312.5 895.5,313.0 906.0,313.5 916.5,313.9" fill="none" stroke="#3b82f6" stroke-width="2.5" stroke-linejoin="round"/>
+  <polyline points="570.0,147.6 580.5,163.8 591.0,178.1 601.5,190.8 612.0,202.1 622.5,212.1 633.0,221.0 643.5,228.9 654.0,235.8 664.5,242.0 675.0,247.5 685.5,252.4 696.0,256.7 706.5,260.6 717.0,263.9 727.5,267.0 738.0,269.6 748.5,272.0 759.0,274.1 769.5,276.0 780.0,277.6 790.5,279.1 801.0,280.4 811.5,281.5 822.0,282.6 832.5,283.5 843.0,284.3 853.5,285.0 864.0,285.6 874.5,286.2 885.0,286.7 895.5,287.1 906.0,287.5 916.5,287.9" fill="none" stroke="#f43f5e" stroke-width="2.5" stroke-dasharray="8,4" stroke-linejoin="round"/>
+  <line x1="575" y1="142" x2="600" y2="142" stroke="#3b82f6" stroke-width="2.5"/>
+  <text x="605" y="146" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#1e40af">Train Loss</text>
+  <line x1="575" y1="159" x2="600" y2="159" stroke="#f43f5e" stroke-width="2.5" stroke-dasharray="6,3"/>
+  <text x="605" y="163" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#be123c">Val Loss</text>
+  <rect x="1000" y="70" width="430" height="310" rx="12" fill="#fff7ed" stroke="#fdba74" stroke-width="2"/>
+  <text x="1215" y="100" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700" fill="#9a3412">Overfitting</text>
+  <text x="1215" y="120" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" fill="#9a3412">(High Variance)</text>
+  <line x1="1060" y1="130" x2="1060" y2="350" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="1060" y1="350" x2="1410" y2="350" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="1055" y="134" text-anchor="end" font-family="Arial,Helvetica,sans-serif" font-size="11" fill="#64748b">1.0</text>
+  <text x="1055" y="354" text-anchor="end" font-family="Arial,Helvetica,sans-serif" font-size="11" fill="#64748b">0.0</text>
+  <text x="1235" y="372" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#64748b">Epochs</text>
+  <text x="1042" y="240" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#64748b" transform="rotate(-90,1042,240)">Loss</text>
+  <line x1="1060" y1="295.0" x2="1410" y2="295.0" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="1060" y1="240.0" x2="1410" y2="240.0" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="1060" y1="185.0" x2="1410" y2="185.0" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,3"/>
+  <polyline points="1060.0,152.0 1070.5,181.0 1081.0,205.6 1091.5,226.4 1102.0,244.1 1112.5,259.0 1123.0,271.6 1133.5,282.3 1144.0,291.3 1154.5,299.0 1165.0,305.5 1175.5,311.0 1186.0,315.6 1196.5,319.5 1207.0,322.9 1217.5,325.7 1228.0,328.1 1238.5,330.1 1249.0,331.8 1259.5,333.2 1270.0,334.5 1280.5,335.5 1291.0,336.4 1301.5,337.1 1312.0,337.7 1322.5,338.3 1333.0,338.7 1343.5,339.1 1354.0,339.4 1364.5,339.7 1375.0,339.9 1385.5,340.1 1396.0,340.3 1406.5,340.4" fill="none" stroke="#3b82f6" stroke-width="2.5" stroke-linejoin="round"/>
+  <polyline points="1060.0,147.6 1070.5,167.9 1081.0,185.0 1091.5,199.5 1102.0,211.8 1112.5,222.2 1123.0,231.0 1133.5,238.5 1144.0,244.8 1154.5,250.1 1165.0,254.7 1175.5,258.5 1186.0,261.6 1196.5,263.3 1207.0,263.8 1217.5,263.5 1228.0,262.4 1238.5,260.7 1249.0,258.4 1259.5,255.5 1270.0,252.1 1280.5,248.3 1291.0,244.1 1301.5,239.5 1312.0,234.6 1322.5,229.3 1333.0,223.7 1343.5,217.7 1354.0,211.5 1364.5,205.1 1375.0,198.3 1385.5,191.3 1396.0,184.1 1406.5,176.6" fill="none" stroke="#f43f5e" stroke-width="2.5" stroke-dasharray="8,4" stroke-linejoin="round"/>
+  <line x1="1065" y1="142" x2="1090" y2="142" stroke="#3b82f6" stroke-width="2.5"/>
+  <text x="1095" y="146" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#1e40af">Train Loss</text>
+  <line x1="1065" y1="159" x2="1090" y2="159" stroke="#f43f5e" stroke-width="2.5" stroke-dasharray="6,3"/>
+  <text x="1095" y="163" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#be123c">Val Loss</text>
+</svg>

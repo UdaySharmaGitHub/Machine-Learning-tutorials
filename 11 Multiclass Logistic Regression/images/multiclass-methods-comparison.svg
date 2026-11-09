@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="520" viewBox="0 0 1440 520">
+  <rect width="1440" height="520" rx="16" fill="#ffffff"/>
+  <text x="720" y="40" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="24" font-weight="700" fill="#0f172a">Multiclass Strategies: OvR vs OvO vs Native Softmax</text>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect x="20" y="60" width="460" height="430" rx="12" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
+  <text x="250" y="90" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700" fill="#1e3a8a">One-vs-Rest (OvR)</text>
+  <text x="250" y="110" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" fill="#3b82f6">K independent binary classifiers</text>
+  <rect x="40" y="140" width="80" height="40" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="80" y="165" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#475569">Input X</text>
+  <line x1="120" y1="160" x2="148" y2="160" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="150" y="140" width="140" height="40" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="220" y="165" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" fill="#3b82f6">Cat vs Rest</text>
+  <line x1="290" y1="160" x2="318" y2="160" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="320" y="140" width="100" height="40" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="370" y="165" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#475569">Score</text>
+  <rect x="40" y="250" width="80" height="40" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="80" y="275" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#475569">Input X</text>
+  <line x1="120" y1="270" x2="148" y2="270" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="150" y="250" width="140" height="40" rx="8" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+  <text x="220" y="275" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" fill="#ec4899">Dog vs Rest</text>
+  <line x1="290" y1="270" x2="318" y2="270" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="320" y="250" width="100" height="40" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="370" y="275" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#475569">Score</text>
+  <rect x="40" y="360" width="80" height="40" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="80" y="385" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#475569">Input X</text>
+  <line x1="120" y1="380" x2="148" y2="380" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="150" y="360" width="140" height="40" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="220" y="385" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" fill="#16a34a">Horse vs Rest</text>
+  <line x1="290" y1="380" x2="318" y2="380" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="320" y="360" width="100" height="40" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="370" y="385" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#475569">Score</text>
+  <line x1="370" y1="440" x2="370" y2="458" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="285" y="460" width="170" height="22" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="370" y="476" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#92400e">argmax(scores) → Predicted Class</text>
+  <rect x="490" y="60" width="460" height="430" rx="12" fill="#fdf4ff" stroke="#d8b4fe" stroke-width="2"/>
+  <text x="720" y="90" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700" fill="#581c87">One-vs-One (OvO)</text>
+  <text x="720" y="110" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" fill="#9333ea">K(K-1)/2 pairwise classifiers</text>
+  <rect x="510" y="140" width="80" height="40" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="550" y="165" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#475569">Input X</text>
+  <line x1="590" y1="160" x2="618" y2="160" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="620" y="140" width="140" height="40" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="690" y="165" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" fill="#3b82f6">Cat vs Dog</text>
+  <line x1="760" y1="160" x2="788" y2="160" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="790" y="140" width="100" height="40" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="840" y="165" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#475569">Vote</text>
+  <rect x="510" y="250" width="80" height="40" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="550" y="275" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#475569">Input X</text>
+  <line x1="590" y1="270" x2="618" y2="270" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="620" y="250" width="140" height="40" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="690" y="275" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" fill="#16a34a">Cat vs Horse</text>
+  <line x1="760" y1="270" x2="788" y2="270" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="790" y="250" width="100" height="40" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="840" y="275" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#475569">Vote</text>
+  <rect x="510" y="360" width="80" height="40" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="550" y="385" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#475569">Input X</text>
+  <line x1="590" y1="380" x2="618" y2="380" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="620" y="360" width="140" height="40" rx="8" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+  <text x="690" y="385" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" fill="#ec4899">Dog vs Horse</text>
+  <line x1="760" y1="380" x2="788" y2="380" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="790" y="360" width="100" height="40" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="840" y="385" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#475569">Vote</text>
+  <line x1="840" y1="440" x2="840" y2="458" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="750" y="460" width="180" height="22" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="840" y="476" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#92400e">majority vote → Predicted Class</text>
+  <rect x="960" y="60" width="460" height="430" rx="12" fill="#f0fdf4" stroke="#86efac" stroke-width="2"/>
+  <text x="1190" y="90" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700" fill="#14532d">Native Softmax</text>
+  <text x="1190" y="110" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" fill="#16a34a">1 model, K outputs — calibrated probabilities</text>
+  <!-- Input box, centered in panel -->
+  <rect x="1145" y="130" width="90" height="44" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+  <text x="1190" y="150" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" fill="#0c4a6e">Input</text>
+  <text x="1190" y="167" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#0c4a6e">X</text>
+  <line x1="1190" y1="174" x2="1190" y2="202" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)"/>
+  <!-- Linear box -->
+  <rect x="1110" y="204" width="160" height="44" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="1190" y="224" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" fill="#78350f">Linear Layer</text>
+  <text x="1190" y="241" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#78350f">Z = WX + b</text>
+  <line x1="1190" y1="248" x2="1190" y2="276" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)"/>
+  <!-- Softmax box -->
+  <rect x="1110" y="278" width="160" height="44" rx="8" fill="#ffedd5" stroke="#ea580c" stroke-width="2"/>
+  <text x="1190" y="298" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" fill="#7c2d12">Softmax</text>
+  <text x="1190" y="315" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#7c2d12">Ŷ = σ(Z)</text>
+  <!-- Branch arrows to three probability output boxes -->
+  <line x1="1110" y1="300" x2="1068" y2="358" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="1190" y1="322" x2="1190" y2="358" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="1270" y1="300" x2="1312" y2="358" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)"/>
+  <!-- Probability output boxes (evenly spaced within panel x=978 to x=1402) -->
+  <rect x="978" y="360" width="100" height="36" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="1028" y="383" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" fill="#3b82f6">p(Cat)</text>
+  <rect x="1140" y="360" width="100" height="36" rx="8" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+  <text x="1190" y="383" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" fill="#ec4899">p(Dog)</text>
+  <rect x="1302" y="360" width="100" height="36" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="1352" y="383" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" fill="#16a34a">p(Horse)</text>
+  <!-- Convergence arrows to argmax -->
+  <line x1="1028" y1="396" x2="1155" y2="454" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="1190" y1="396" x2="1190" y2="454" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="1352" y1="396" x2="1225" y2="454" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="1060" y="456" width="260" height="22" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="1190" y="472" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#92400e">argmax(p) → Predicted Class</text>
+</svg>
