@@ -4,5 +4,6 @@ plotly
 matplotlib
 seaborn
 scikit-learn
+mlxtend
 jupyter
 ipykernel

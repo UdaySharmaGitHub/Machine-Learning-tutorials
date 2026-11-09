@@ -15,6 +15,7 @@
 <p align="center">
    <a href="#topics-covered">Topics</a> ·
    <a href="#notebooks-by-topic">Notebooks</a> ·
+   <a href="#mathematics-of-machine-learning">Mathematics</a> ·
    <a href="#statistics-for-machine-learning">Statistics for ML</a> ·
    <a href="#getting-started">Getting Started</a> ·
    <a href="#highlights">Highlights</a> ·
@@ -38,7 +39,8 @@
 | 08 | **Logistic Regression** | Logistic regression, perceptron trick, and sigmoid function with animations |
 | 09 | **Evaluation Metrics** | Regression and classification metrics, confusion matrices, and model evaluation |
 | 10 | **ROC Curve and AUC** | ROC analysis, AUC, and practical threshold selection |
-| 11 | **Multiclass Logistic Regression** | Softmax regression, mathematical derivations, cross-entropy loss, multiclass ROC-AUC, and Iris implementation |
+| 11 | **Multiclass Logistic Regression** | Softmax regression, mathematical derivations, cross-entropy loss, polynomial logistic regression, hyperparameter tuning, multiclass ROC-AUC, and Iris implementation |
+
 
 ---
 
@@ -190,8 +192,20 @@
 | 02 | [Multinomial Logistic Regression — Softmax Regression](11%20Multiclass%20Logistic%20Regression/02%20Multinomial%20Logistic%20Regression%20-%20Softmax%20Regression.ipynb) | Theory notebook covering logits, probabilities, matrix representations, loss functions, and derivations |
 | 02 | [Softmax Regression — Markdown Guide](11%20Multiclass%20Logistic%20Regression/02%20Multinomial%20Logistic%20Regression%20-%20Softmax%20Regression.md) | Markdown version of the Softmax regression lesson |
 | 03 | [Softmax Regression Implementation on Iris](11%20Multiclass%20Logistic%20Regression/03%20Multinomial%20Logistic%20Regression%20-%20Softmax%20Regression%20Implementation%20on%20Iris%20Dataset.ipynb) | Label encoding, manual logits and Softmax, scikit-learn training, evaluation, decision regions, and cross-validation |
-| — | [Cross-Entropy Loss and Categorical Cross-Entropy](11%20Multiclass%20Logistic%20Regression/Cross-Entropy%20Loss%20and%20Categorical%20Cross-Entropy.md) | Cross-entropy loss for classification |
+| 04 | [Polynomial Logistic Regression](11%20Multiclass%20Logistic%20Regression/04%20polynomial-logistic-regression.ipynb) | Non-linear binary classification on U-shaped data using `PolynomialFeatures` + `LogisticRegression`; degree selection via CV; `make_pipeline` for leakage-free deployment |
+| 05 | [Logistic Regression Hyperparameter Tuning](11%20Multiclass%20Logistic%20Regression/05%20Logistic%20Hyper-parameter.ipynb) | Tuning the regularisation strength `C`, solver, and penalty type; grid search and cross-validated evaluation |
 | — | [Multiclass ROC-AUC (OvR and OvO)](11%20Multiclass%20Logistic%20Regression/Multiclass%20ROC-AUC%20%28OvR%20and%20OvO%29.md) | One-vs-rest and one-vs-one approaches to multiclass ROC-AUC |
+
+> **Datasets:** [`ushape.csv`](11%20Multiclass%20Logistic%20Regression/dataset/ushape.csv) — synthetic U-shaped binary data · [`nonlinear_data_circles.csv`](11%20Multiclass%20Logistic%20Regression/dataset/nonlinear_data_circles.csv) — synthetic circular binary data
+
+---
+
+## Mathematics of Machine Learning
+
+| # | Resource | Description |
+|---|----------|-------------|
+| — | [Sigmoid Function](Mathematics%20of%20Machine%20Learning/Sigmoid%20Function/README.md) | Mathematical definition, properties, derivative, and role in logistic regression and neural networks |
+| — | [Softmax Function](Mathematics%20of%20Machine%20Learning/Softmax%20Function/README.md) | Mathematical definition, properties, relationship to sigmoid, and role in multiclass classification |
 
 ---
 
