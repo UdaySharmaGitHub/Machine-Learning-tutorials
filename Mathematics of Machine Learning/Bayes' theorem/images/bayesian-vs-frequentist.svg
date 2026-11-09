@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="400" viewBox="0 0 1040 400" role="img" aria-labelledby="title description">
+  <title id="title">Two interpretations of Bayes' theorem</title>
+  <desc id="description">A side-by-side comparison. The Bayesian interpretation treats probability as a rational degree of belief that is updated by evidence. The frequentist interpretation treats probability as a long-run proportion of outcomes over many repetitions.</desc>
+
+  <rect width="1040" height="400" rx="16" fill="#ffffff"/>
+  <text x="520" y="44" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" text-anchor="middle" fill="#0f172a">Same equation, two ways to read probability</text>
+
+  <!-- Bayesian panel -->
+  <rect x="30" y="74" width="470" height="300" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="265" y="108" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#1e3a8a">Bayesian (epistemic)</text>
+  <text x="265" y="134" font-family="Arial, Helvetica, sans-serif" font-size="13.5" text-anchor="middle" fill="#334155">Probability = a rational <tspan font-weight="700">degree of belief</tspan></text>
+
+  <!-- belief arc -->
+  <circle cx="130" cy="210" r="34" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="130" y="206" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#1e3a8a">prior</text>
+  <text x="130" y="222" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#1e3a8a">belief</text>
+  <line x1="168" y1="210" x2="238" y2="210" stroke="#2563eb" stroke-width="2.5"/>
+  <polygon points="238,203 254,210 238,217" fill="#2563eb"/>
+  <text x="300" y="196" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#334155">observe</text>
+  <text x="300" y="212" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#334155">evidence</text>
+  <line x1="348" y1="210" x2="418" y2="210" stroke="#2563eb" stroke-width="2.5"/>
+  <polygon points="418,203 434,210 418,217" fill="#2563eb"/>
+  <circle cx="420" cy="210" r="0" />
+  <circle cx="420" cy="210" r="34" fill="#2563eb" stroke="#1e3a8a" stroke-width="2"/>
+  <text x="420" y="206" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#ffffff">posterior</text>
+  <text x="420" y="222" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#ffffff">belief</text>
+
+  <text x="265" y="286" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#334155">A single event can have a probability,</text>
+  <text x="265" y="306" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#334155">even if it never repeats.</text>
+  <text x="265" y="340" font-family="Arial, Helvetica, sans-serif" font-size="12.5" font-style="italic" text-anchor="middle" fill="#2563eb">"How plausible is this hypothesis now?"</text>
+
+  <!-- Frequentist panel -->
+  <rect x="540" y="74" width="470" height="300" rx="14" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+  <text x="775" y="108" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#7c2d12">Frequentist</text>
+  <text x="775" y="134" font-family="Arial, Helvetica, sans-serif" font-size="13.5" text-anchor="middle" fill="#334155">Probability = a long-run <tspan font-weight="700">proportion</tspan></text>
+
+  <!-- dots grid representing outcomes -->
+  <g fill="#ea580c">
+    <circle cx="600" cy="176" r="6"/><circle cx="624" cy="176" r="6"/><circle cx="648" cy="176" r="6"/>
+    <circle cx="672" cy="176" r="6" fill="#fdba74"/><circle cx="696" cy="176" r="6" fill="#fdba74"/>
+    <circle cx="720" cy="176" r="6" fill="#fdba74"/><circle cx="744" cy="176" r="6" fill="#fdba74"/>
+    <circle cx="600" cy="200" r="6"/><circle cx="624" cy="200" r="6" fill="#fdba74"/>
+    <circle cx="648" cy="200" r="6" fill="#fdba74"/><circle cx="672" cy="200" r="6" fill="#fdba74"/>
+    <circle cx="696" cy="200" r="6" fill="#fdba74"/><circle cx="720" cy="200" r="6" fill="#fdba74"/>
+    <circle cx="744" cy="200" r="6" fill="#fdba74"/>
+  </g>
+  <text x="870" y="190" font-family="Arial, Helvetica, sans-serif" font-size="12.5" fill="#334155">filled = property A</text>
+  <text x="870" y="210" font-family="Arial, Helvetica, sans-serif" font-size="12.5" fill="#334155">P(A) = share of</text>
+  <text x="870" y="226" font-family="Arial, Helvetica, sans-serif" font-size="12.5" fill="#334155">outcomes with A</text>
+
+  <text x="775" y="286" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#334155">Probability only means something</text>
+  <text x="775" y="306" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#334155">across many repeated trials.</text>
+  <text x="775" y="340" font-family="Arial, Helvetica, sans-serif" font-size="12.5" font-style="italic" text-anchor="middle" fill="#ea580c">"In what fraction of cases does this happen?"</text>
+</svg>
