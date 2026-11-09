@@ -146,9 +146,9 @@ Suppose you want to predict whether an email is:
 
 **Logistic Regression** uses the **Sigmoid function**:
 
-$$
+```math
 \sigma(z) = \frac{1}{1 + e^{-z}}
-$$
+```
 
 **Example output:**
 
@@ -199,11 +199,11 @@ $$
 
 The **Softmax equation** gives the probability that the input belongs to class $k$:
 
-$$
+```math
 \sigma(\mathbf{z})_k
 = P(Y = k \mid X)
 = \frac{e^{z_k}}{\sum_{j=1}^{K} e^{z_j}}.
-$$
+```
 
 > [!IMPORTANT]
 > Use **Sigmoid** when classes are *binary or independent*. Use **Softmax** when
@@ -221,7 +221,7 @@ $$
 
 The pipeline follows:
 
-$$
+```math
 \text{Input features}
 \rightarrow
 \text{logits}
@@ -229,7 +229,7 @@ $$
 \text{Softmax probabilities}
 \rightarrow
 \text{predicted class}.
-$$
+```
 
 ### Step 1: Compute the Logits
 
@@ -238,17 +238,17 @@ $$
   $k\in\{1,2,\ldots,n\}$.
 - **Class-specific formula:**
 
-$$
+```math
 z_k
 = \mathbf{w}_k^{\top}\mathbf{x}+b_k
 = \sum_{i=1}^{d}w_{ki}x_i+b_k.
-$$
+```
 
 - **Vectorized calculation:** Compute all $n$ logits *simultaneously*:
 
-$$
+```math
 \mathbf{z}=W\mathbf{x}+\mathbf{b}.
-$$
+```
 
 ### Step 2: Apply the Softmax Function
 
@@ -257,39 +257,39 @@ $$
   exponentiated logits.
 - **Result:** Produce one **probability for each class**:
 
-$$
+```math
 \sigma(\mathbf{z})_k
 =P(Y=k\mid X)
 =\frac{e^{z_k}}{\sum_{j=1}^{n}e^{z_j}}.
-$$
+```
 
 - **Probability properties:** Every probability is between $0$ and $1$,
   and all class probabilities sum to $1$:
 
-$$
+```math
 0<\sigma(\mathbf{z})_k<1,
 \qquad
 \sum_{k=1}^{n}\sigma(\mathbf{z})_k=1.
-$$
+```
 
 ### Step 3: Make a Prediction
 
 - **Selection rule:** Choose the class with the **highest Softmax
   probability**:
 
-$$
+```math
 \hat{y}
 =\arg\max_{k\in\{1,2,\ldots,n\}}\sigma(\mathbf{z})_k
 =\arg\max_{k\in\{1,2,\ldots,n\}}P(Y=k\mid X).
-$$
+```
 
 - **Equivalent rule:** Because **Softmax preserves ranking**, the prediction
   can also be selected directly from the logits:
 
-$$
+```math
 \hat{y}
 =\arg\max_{k\in\{1,2,\ldots,n\}}z_k.
-$$
+```
 
 ---
 ## Softmax Function
@@ -302,11 +302,11 @@ $$
 
 The **Softmax formula** is:
 
-$$
+```math
 \boxed{
 \sigma(\mathbf{z})_k = P(Y = k \mid X) = \frac{e^{z_k}}{\sum_{j=1}^{K} e^{z_j}}
 }
-$$
+```
 
 where:
 
@@ -319,10 +319,10 @@ where:
 > denoted by the lowercase Greek letter **sigma** $\sigma$. The
 > **probability for class $k$** may therefore be written as:
 >
-> $$
+> ```math
 > \sigma(\mathbf{z})_k
 > = \frac{e^{z_k}}{\sum_{j=1}^{K} e^{z_j}}.
-> $$
+> ```
 >
 > The symbol $\sigma$ is also commonly used for the **Sigmoid function**, so
 > its meaning *depends on context*. Do not confuse lowercase $\sigma$, used
@@ -338,14 +338,14 @@ where:
 
 For example, suppose the model produces the following logits:
 
-$$
+```math
 \mathbf{z} =
 \begin{bmatrix}
 2.0 \\
 1.0 \\
 0.1
 \end{bmatrix}
-$$
+```
 
 Each logit represents the model's score for one class:
 
@@ -389,13 +389,13 @@ distribution in which:
 
 The **Softmax formula** is:
 
-$$
+```math
 \boxed{
 \sigma(\mathbf{z})_k
 = P(Y = k \mid X)
 = \frac{e^{z_k}}{\sum_{j=1}^{K} e^{z_j}}
 }
-$$
+```
 
 where:
 
@@ -408,9 +408,9 @@ where:
 The number of **input features** determines how each class logit is calculated.
 For class $k$, the general logit formula is:
 
-$$
+```math
 z_k = \sum_{i=1}^{d} w_{ki}x_i + b_k
-$$
+```
 
 where:
 
@@ -439,31 +439,31 @@ features:
 After calculating one logit for each class, Softmax converts the logits into
 probabilities:
 
-$$
+```math
 \sigma(\mathbf{z})_k
 = P(Y = k \mid X)
 = \frac{e^{z_k}}{\sum_{j=1}^{K} e^{z_j}}
-$$
+```
 
 #### General Formula
 
 For $d$ input features and $K$ classes, define:
 
-$$
+```math
 \mathbf{x} \in \mathbb{R}^{d}, \qquad
 W \in \mathbb{R}^{K \times d}, \qquad
 \mathbf{b} \in \mathbb{R}^{K}.
-$$
+```
 
 The model calculates all $K$ logits simultaneously:
 
-$$
+```math
 \boxed{\mathbf{z} = W\mathbf{x} + \mathbf{b}}
-$$
+```
 
 The $k$-th logit and its corresponding Softmax probability are:
 
-$$
+```math
 \boxed{
 z_k = \mathbf{w}_k^{\top}\mathbf{x} + b_k
 \qquad \Longrightarrow \qquad
@@ -471,13 +471,13 @@ z_k = \mathbf{w}_k^{\top}\mathbf{x} + b_k
 = P(Y = k \mid X)
 = \frac{e^{z_k}}{\sum_{j=1}^{K} e^{z_j}}
 }
-$$
+```
 
 Therefore, the complete Softmax output vector is:
 
-$$
+```math
 \boxed{
-\operatorname{Softmax}(\mathbf{z})
+\mathrm{Softmax}(\mathbf{z})
 =
 \begin{bmatrix}
 \dfrac{e^{z_1}}{\sum_{j=1}^{K} e^{z_j}} \\
@@ -486,14 +486,14 @@ $$
 \dfrac{e^{z_K}}{\sum_{j=1}^{K} e^{z_j}}
 \end{bmatrix}
 }
-$$
+```
 
 #### General Formula for Classes 1 to n
 
 For **$n$ classes** and **$d$ input features**, the model calculates **one logit
 for each class**:
 
-$$
+```math
 \begin{aligned}
 z_1 &= \sum_{i=1}^{d} w_{1i}x_i + b_1
      = \mathbf{w}_1^{\top}\mathbf{x} + b_1, \\
@@ -505,20 +505,20 @@ z_3 &= \sum_{i=1}^{d} w_{3i}x_i + b_3
 z_n &= \sum_{i=1}^{d} w_{ni}x_i + b_n
      = \mathbf{w}_n^{\top}\mathbf{x} + b_n.
 \end{aligned}
-$$
+```
 
 The shared Softmax denominator is:
 
-$$
+```math
 D = e^{z_1} + e^{z_2} + \dots + e^{z_n}.
-$$
+```
 
 > [!NOTE]
 > Using the **Softmax function**, we convert the logits
 > $z_1, z_2, \ldots, z_n$ into a **probability distribution** over all $n$
 > classes.
 
-$$
+```math
 \begin{aligned}
 \sigma(\mathbf{z})_1
 &= P(Y = 1 \mid X)
@@ -538,12 +538,12 @@ $$
  = \frac{e^{z_n}}{D}
  = \frac{e^{z_n}}{e^{z_1} + e^{z_2} + \dots + e^{z_n}}.
 \end{aligned}
-$$
+```
 
 The n probabilities form the output vector:
 
-$$
-\sigma(\mathbf{z}) = \operatorname{Softmax}(\mathbf{z})
+```math
+\sigma(\mathbf{z}) = \mathrm{Softmax}(\mathbf{z})
 =
 \begin{bmatrix}
 P(Y = 1 \mid X) \\
@@ -554,16 +554,16 @@ P(Y = n \mid X)
 \end{bmatrix},
 \qquad
 \sum_{k=1}^{n} P(Y = k \mid X) = 1.
-$$
+```
 
 > [!NOTE]
 > **Softmax preserves ranking.** For any two classes $i$ and $j$:
 >
-> $$
+> ```math
 > z_i > z_j
 > \quad \Longleftrightarrow \quad
 > \sigma(\mathbf{z})_i > \sigma(\mathbf{z})_j.
-> $$
+> ```
 >
 > Therefore, applying Softmax changes the logits into probabilities but does
 > **not** change their order.
@@ -574,31 +574,31 @@ Think about the requirement that probabilities must sum to one.
 
 We first calculate an unnormalised positive score for each class:
 
-$$
+```math
 s_k = e^{z_k}
-$$
+```
 
 But these scores do not necessarily sum to one.
 
 For example:
 
-$$
+```math
 s = [7.389,\ 2.718,\ 1.105]
-$$
+```
 
 To convert them into probabilities, we divide every score by the total score:
 
-$$
+```math
 p_k = \frac{s_k}{\sum_j s_j}
-$$
+```
 
 Substituting $s_k = e^{z_k}$:
 
-$$
+```math
 \boxed{
 p_k = \frac{e^{z_k}}{\sum_j e^{z_j}}
 }
-$$
+```
 
 So the denominator is simply the normalisation term that makes all probabilities sum to one.
 
@@ -607,59 +607,61 @@ So the denominator is simply the normalisation term that makes all probabilities
 Using the previous **Cat, Dog, and Horse** example, the logits correspond to
 the classes in that order:
 
-$$
+```math
 z_1 = 2.0, \qquad z_2 = 1.0, \qquad z_3 = 0.1
-$$
+```
 
 #### Step 1: Apply the Exponential Function
 
 - Calculate the exponential of each logit:
 
-$$
+```math
 e^{z_1} = e^{2.0} \approx 7.389
-$$
+```
 
-$$
+```math
 e^{z_2} = e^{1.0} \approx 2.718
-$$
+```
 
-$$
+```math
 e^{z_3} = e^{0.1} \approx 1.105
-$$
+```
 
 #### Step 2: Calculate the Denominator
 - Add all the exponential values:
 
-$$
+```math
 \begin{aligned}
 D &= e^{z_1} + e^{z_2} + e^{z_3} \\
   &= 7.389 + 2.718 + 1.105 \\
   &= 11.212
 \end{aligned}
-$$
+```
 
 #### Step 3: Calculate Each Class Probability
 **Cat:**
 
-$$
+```math
 \sigma(\mathbf{z})_{\text{Cat}} = P(\text{Cat} \mid X)
 = \frac{7.389}{11.212}
 \approx 0.659
-$$
+```
 
 **Dog:**
-$$
+
+```math
 \sigma(\mathbf{z})_{\text{Dog}} = P(\text{Dog} \mid X)
 = \frac{2.718}{11.212}
 \approx 0.242
-$$
+```
 
 **Horse:**
-$$
+
+```math
 \sigma(\mathbf{z})_{\text{Horse}} = P(\text{Horse} \mid X)
 = \frac{1.105}{11.212}
 \approx 0.099
-$$
+```
 
 #### Final Result
 | Class | Logit | Softmax Probability |
@@ -678,19 +680,19 @@ $$
 - **Ranking property:** Softmax preserves the **ranking of the logits**.
 - **Example:** If the logits are ordered as follows:
 
-$$
+```math
 z_1 > z_2 > z_3,
-$$
+```
 
 - **Result:** The corresponding Softmax probabilities have the **same order**:
 
-$$
+```math
 \sigma(\mathbf{z})_1
 >
 \sigma(\mathbf{z})_2
 >
 \sigma(\mathbf{z})_3,
-$$
+```
 
 - **Notation:** $\sigma(\mathbf{z})_k = P(Y = k \mid X)$ is the Softmax
   probability for class $k$.
@@ -699,7 +701,7 @@ $$
   - The **exponential function is strictly increasing**.
   - Every class probability uses the **same positive denominator**.
 
-$$
+```math
 z_i > z_j
 \quad \Longrightarrow \quad
 e^{z_i} > e^{z_j}
@@ -709,7 +711,7 @@ e^{z_i} > e^{z_j}
 >
 \frac{e^{z_j}}{\sum_{k=1}^{n} e^{z_k}}
 = \sigma(\mathbf{z})_j.
-$$
+```
 
 > [!IMPORTANT]
 > Softmax changes the logits into probabilities, but it does **not** change
@@ -720,11 +722,11 @@ $$
 
 Mathematically, the predicted class is:
 
-$$
+```math
 \hat{y}
 = \arg\max_k P(Y = k \mid X)
 = \arg\max_k \sigma(\mathbf{z})_k
-$$
+```
 
 where:
 
@@ -760,23 +762,23 @@ For example, suppose we want to classify an image as a **cat**, **dog**, or **ho
 For $n$ classes, the model predicts the class with the highest Softmax
 probability:
 
-$$
+```math
 \boxed{
 \hat{y}
 = \arg\max_{k \in \{1,2,\ldots,n\}} P(Y = k \mid X)
 = \arg\max_{k \in \{1,2,\ldots,n\}} \sigma(\mathbf{z})_k
 }
-$$
+```
 
 Because Softmax preserves the ordering of the logits, the same class can be
 selected directly from the logits:
 
-$$
+```math
 \boxed{
 \hat{y}
 = \arg\max_{k \in \{1,2,\ldots,n\}} z_k
 }
-$$
+```
 
 where:
 
@@ -801,7 +803,7 @@ where:
 Suppose the input is $X = [x_1, x_2, x_3]$, and the possible classes are
 **Cat**, **Dog**, and **Horse**. The model calculates:
 
-$$
+```math
 \begin{aligned}
 z_{\text{Cat}} &= w_{\text{Cat},1}x_1 + w_{\text{Cat},2}x_2
                   + w_{\text{Cat},3}x_3 + b_{\text{Cat}} \\
@@ -810,28 +812,28 @@ z_{\text{Dog}} &= w_{\text{Dog},1}x_1 + w_{\text{Dog},2}x_2
 z_{\text{Horse}} &= w_{\text{Horse},1}x_1 + w_{\text{Horse},2}x_2
                     + w_{\text{Horse},3}x_3 + b_{\text{Horse}}
 \end{aligned}
-$$
+```
 
 Let
 
-$$
+```math
 D = e^{z_{\text{Cat}}} + e^{z_{\text{Dog}}} + e^{z_{\text{Horse}}}.
-$$
+```
 
 The corresponding Softmax probabilities are:
 
-$$
+```math
 \sigma(\mathbf{z})_{\text{Cat}} = P(\text{Cat} \mid X)
 = \frac{e^{z_{\text{Cat}}}}{D}, \qquad
 \sigma(\mathbf{z})_{\text{Dog}} = P(\text{Dog} \mid X)
 = \frac{e^{z_{\text{Dog}}}}{D}, \qquad
 \sigma(\mathbf{z})_{\text{Horse}} = P(\text{Horse} \mid X)
 = \frac{e^{z_{\text{Horse}}}}{D}.
-$$
+```
 
 Replacing $D$ with its full value:
 
-$$
+```math
 \begin{aligned}
 \sigma(\mathbf{z})_{\text{Cat}}
 &= P(\text{Cat} \mid X)
@@ -846,7 +848,7 @@ $$
  = \frac{e^{z_{\text{Horse}}}}
 {e^{z_{\text{Cat}}} + e^{z_{\text{Dog}}} + e^{z_{\text{Horse}}}}.
 \end{aligned}
-$$
+```
 
 > [!IMPORTANT]
 > The number of **features** and the number of **classes** are different:
@@ -875,9 +877,9 @@ Suppose:
 
 The logits for all samples and classes are calculated simultaneously:
 
-$$
+```math
 \boxed{Z=X_bW}
-$$
+```
 
 The first column of $X_b$ contains ones, so the first row of $W$ supplies
 the bias term for every class.
@@ -886,16 +888,16 @@ the bias term for every class.
 
 For one sample with three input features, the bias-augmented feature vector is:
 
-$$
+```math
 X_b=
 \begin{bmatrix}
 1 & x_1 & x_2 & x_3
 \end{bmatrix}.
-$$
+```
 
 For three classes, the weight matrix is:
 
-$$
+```math
 W=
 \begin{bmatrix}
 w_{10} & w_{20} & w_{30} \\
@@ -903,7 +905,7 @@ w_{11} & w_{21} & w_{31} \\
 w_{12} & w_{22} & w_{32} \\
 w_{13} & w_{23} & w_{33}
 \end{bmatrix},
-$$
+```
 
 where:
 
@@ -914,42 +916,42 @@ where:
 
 The resulting logits are:
 
-$$
+```math
 Z=X_bW=
 \begin{bmatrix}
 z_1 & z_2 & z_3
 \end{bmatrix}.
-$$
+```
 
 ### Probability Matrix
 
 Softmax is applied **row-wise** to $Z$, so each sample receives its own
 probability distribution across the $n$ classes:
 
-$$
+```math
 \boxed{
 \widehat{Y}
-=\operatorname{Softmax}_{\text{row}}(Z)
-=\operatorname{Softmax}_{\text{row}}(X_bW)
+=\mathrm{Softmax}_{\text{row}}(Z)
+=\mathrm{Softmax}_{\text{row}}(X_bW)
 }
-$$
+```
 
 For sample $i$ and class $k$:
 
-$$
+```math
 \widehat{Y}_{ik}
 =\sigma(\mathbf{z}_i)_k
 =\frac{e^{Z_{ik}}}{\sum_{j=1}^{n}e^{Z_{ij}}}.
-$$
+```
 
 The predicted probability matrix has dimensions:
 
-$$
+```math
 \widehat{Y}\in\mathbb{R}^{m\times n},
 \qquad
 \sum_{k=1}^{n}\widehat{Y}_{ik}=1
 \quad\text{for every sample }i.
-$$
+```
 
 > [!IMPORTANT]
 > Softmax normalization is performed **across the class columns of each row**,
@@ -978,29 +980,29 @@ For binary classification, let:
 
 The **Binary Cross-Entropy**, also called **binary log loss**, for one sample is:
 
-$$
+```math
 \boxed{
 \mathcal{L}_{\text{binary}}
 =-\left[y\log(\hat{y})+(1-y)\log(1-\hat{y})\right]
 }
-$$
+```
 
 This ***formula selects the negative logarithm of the probability assigned to the correct class***:
 
-$$
+```math
 \mathcal{L}_{\text{binary}}
 =
 \begin{cases}
 -\log(\hat{y}), & y=1,\\
 -\log(1-\hat{y}), & y=0.
 \end{cases}
-$$
+```
 
 For $m$ samples,
 - The ***average Binary Cross-Entropy loss***, also called the
   ***average binary log loss***, is:
 
-$$
+```math
 \boxed{
 J_{\text{binary}}
 =-\frac{1}{m}
@@ -1010,7 +1012,7 @@ y^{(i)}\log\left(\hat{y}^{(i)}\right)
 +\left(1-y^{(i)}\right)\log\left(1-\hat{y}^{(i)}\right)
 \right]
 }
-$$
+```
 
 ### Softmax log-Loss / Categorical Cross-Entropy / Multiclass Log Loss
 
@@ -1021,12 +1023,12 @@ For $n$ mutually exclusive classes, let:
   Softmax probability for class $k$.
 
 > [!NOTE]
-> - The symbols ***$\hat{y}_k$, $p_k$, $\sigma(\mathbf{z})_k$***, and ***$P(Y=k\mid X)$*** use different notation but serve the same purpose: each represents the model's **predicted probability for class $k$**.
+> - The symbols $\hat{y}_k$, $p_k$, $\sigma(\mathbf{z})_k$, and $P(Y=k\mid X)$ use different notation but serve the same purpose: each represents the model's **predicted probability for class $k$**.
 > - Different textbooks, libraries, and derivations may prefer different symbols.
 
 The **Categorical Cross-Entropy**, also called **multiclass log loss**, for ***one sample*** is:
 
-$$
+```math
 \boxed{
 \mathcal{L}_{\text{softmax}}
 =-\sum_{k=1}^{n}y_k\log(\hat{y}_k)
@@ -1034,11 +1036,11 @@ $$
 =-\sum_{k=1}^{n}y_k\log\left(\sigma(\mathbf{z})_k\right)
 =-\sum_{k=1}^{n}y_k\log\left(P(Y=k\mid X)\right)
 }
-$$
+```
 
 Because ***only the correct class $c$ has $y_c=1$***, this simplifies to:
 
-$$
+```math
 \boxed{
 \mathcal{L}_{\text{softmax}}
 =-\log(\hat{y}_c)
@@ -1046,12 +1048,13 @@ $$
 =-\log\left(\sigma(\mathbf{z})_c\right)
 =-\log\left(P(Y=c\mid X)\right)
 }
-$$
+```
 
 For ***$m$ samples and $n$ classes***, the ***average categorical loss*** is:
 
 - The ***average categorical loss*** is also called the ***multiclass log loss*** , ***categorical cross-entropy*** and ***softmax log-loss***.
-$$
+
+```math
 \boxed{
 J_{\text{softmax}}
 =-\frac{1}{m}
@@ -1071,7 +1074,7 @@ y_k^{(i)}\log\left(\sigma(\mathbf{z}^{(i)})_k\right)
 \sum_{k=1}^{n}
 y_k^{(i)}\log\left(P(Y=k\mid X^{(i)})\right)
 }
-$$
+```
 
 > [!IMPORTANT]
 > Both losses penalize the model when it assigns a low probability to the correct class.
@@ -1091,7 +1094,7 @@ $(X_1,X_2)$, and three classes $k\in\{0,1,2\}$:
 
 The feature matrix is:
 
-$$
+```math
 X=
 \begin{bmatrix}
 1.0 & 2.0\\
@@ -1099,11 +1102,11 @@ X=
 1.5 & 2.5
 \end{bmatrix}
 \in\mathbb{R}^{3\times2}.
-$$
+```
 
 Add a column of ones to include the bias:
 
-$$
+```math
 \widetilde{X}
 =
 \begin{bmatrix}
@@ -1112,7 +1115,7 @@ $$
 1.5 & 2.5 & 1
 \end{bmatrix}
 \in\mathbb{R}^{3\times3}.
-$$
+```
 
 For three classes, let
 $\widetilde{W}\in\mathbb{R}^{3\times3}$ contain one class's two feature
@@ -1122,25 +1125,25 @@ weights and bias in each row.
 
 For sample $i$, class $k$, and $d$ input features, the class logit is:
 
-$$
+```math
 z_k^{(i)}
 =\mathbf{w}_k^\top\mathbf{x}^{(i)}+b_k
 =\sum_{r=1}^{d}w_{kr}X_r^{(i)}+b_k.
-$$
+```
 
 Here, $r$ indexes the input features, while $k$ indexes the output classes.
 For this example, $d=2$, so:
 
-$$
+```math
 \boxed{
 z_k^{(i)}
 =w_{k1}X_1^{(i)}+w_{k2}X_2^{(i)}+b_k
 }
-$$
+```
 
 For the three classes $k\in\{0,1,2\}$, the two-feature formula expands to:
 
-$$
+```math
 \begin{aligned}
 z_0^{(i)}
 &=w_{01}X_1^{(i)}+w_{02}X_2^{(i)}+b_0,\\
@@ -1149,12 +1152,12 @@ z_1^{(i)}
 z_2^{(i)}
 &=w_{21}X_1^{(i)}+w_{22}X_2^{(i)}+b_2.
 \end{aligned}
-$$
+```
 
 In matrix form, all three class logits for sample $i$ are calculated
 simultaneously:
 
-$$
+```math
 \boxed{
 \underbrace{
 \begin{bmatrix}
@@ -1179,11 +1182,11 @@ X_2^{(i)}\\
 \end{bmatrix}
 }_{3\times1}
 }
-$$
+```
 
 Using compact vector notation:
 
-$$
+```math
 \mathbf{z}^{(i)}
 =\widetilde{W}\widetilde{\mathbf{x}}^{(i)}
 =
@@ -1192,13 +1195,13 @@ z_0^{(i)}\\
 z_1^{(i)}\\
 z_2^{(i)}
 \end{bmatrix}.
-$$
+```
 
 > [!NOTE]
 > An **equivalent convention** places one class's weights in each **column**
 > and keeps the **bias separate**:
 >
-> $$
+> ```math
 > \begin{bmatrix}
 > z_0^{(i)} & z_1^{(i)} & z_2^{(i)}
 > \end{bmatrix}
@@ -1214,7 +1217,7 @@ $$
 > \begin{bmatrix}
 > b_0 & b_1 & b_2
 > \end{bmatrix}.
-> $$
+> ```
 >
 > This is equivalent to the convention used above. The **feature-weight
 > submatrices** are **transposes of one another**. The **augmented convention**
@@ -1223,11 +1226,11 @@ $$
 
 For all three samples, the logit matrix is calculated simultaneously:
 
-$$
+```math
 \boxed{
 Z=\widetilde{X}\widetilde{W}^{\top}
 }
-$$
+```
 
 where $Z\in\mathbb{R}^{3\times3}$, and $Z_{ik}=z_k^{(i)}$ is the logit for
 sample $i$ and class $k$.
@@ -1236,18 +1239,18 @@ sample $i$ and class $k$.
 
 Softmax converts each row of logits into a probability distribution:
 
-$$
+```math
 \boxed{
 \widehat{Y}_{ik}
 =\sigma(\mathbf{z}^{(i)})_k
 =P(Y=k\mid X^{(i)})
 =\frac{e^{Z_{ik}}}{\sum_{j=0}^{2}e^{Z_{ij}}}
 }
-$$
+```
 
 For classes $0$, $1$, and $2$, the probabilities are:
 
-$$
+```math
 \begin{aligned}
 \hat{y}_0^{(i)}
 &=\sigma(\mathbf{z}^{(i)})_0
@@ -1262,11 +1265,11 @@ $$
 =\frac{e^{z_2^{(i)}}}
 {e^{z_0^{(i)}}+e^{z_1^{(i)}}+e^{z_2^{(i)}}}.
 \end{aligned}
-$$
+```
 
 The predicted probability vector for sample $i$ is:
 
-$$
+```math
 \hat{\mathbf{y}}^{(i)}
 =
 \begin{bmatrix}
@@ -1274,34 +1277,34 @@ $$
 \end{bmatrix},
 \qquad
 \hat{y}_0^{(i)}+\hat{y}_1^{(i)}+\hat{y}_2^{(i)}=1.
-$$
+```
 
 Therefore:
 
-$$
+```math
 \boxed{
 \widehat{Y}
-=\operatorname{Softmax}_{\text{row}}(Z)
-=\operatorname{Softmax}_{\text{row}}
+=\mathrm{Softmax}_{\text{row}}(Z)
+=\mathrm{Softmax}_{\text{row}}
 \left(\widetilde{X}\widetilde{W}^{\top}\right)
 }
-$$
+```
 
 The corresponding one-hot target matrix is:
 
-$$
+```math
 Y=
 \begin{bmatrix}
 1 & 0 & 0\\
 0 & 1 & 0\\
 0 & 0 & 1
 \end{bmatrix}.
-$$
+```
 
 For this example, assume the logit and Softmax calculations produce the
 following probability matrix:
 
-$$
+```math
 \widehat{Y}
 =
 \begin{bmatrix}
@@ -1309,13 +1312,13 @@ $$
 0.10 & 0.80 & 0.10\\
 0.20 & 0.30 & 0.50
 \end{bmatrix}.
-$$
+```
 
 Each row contains one sample's predicted probabilities, and every row sums to $1$.
 
 The average Categorical Cross-Entropy is:
 
-$$
+```math
 \boxed{
 J_{\text{softmax}}
 =-\frac{1}{m}
@@ -1323,11 +1326,11 @@ J_{\text{softmax}}
 \sum_{k=0}^{2}
 y_k^{(i)}\log\left(\hat{y}_k^{(i)}\right)
 }
-$$
+```
 
 For three samples and three classes, the summations expand to:
 
-$$
+```math
 \begin{aligned}
 J_{\text{softmax}}
 =-\frac{1}{3}\Big[&
@@ -1342,11 +1345,11 @@ y_0^{(1)}\log\left(\hat{y}_0^{(1)}\right)
 +y_2^{(3)}\log\left(\hat{y}_2^{(3)}\right)
 \Big].
 \end{aligned}
-$$
+```
 
 Substituting all three samples:
 
-$$
+```math
 \begin{aligned}
 J_{\text{softmax}}
 =-\frac{1}{3}\Big[&
@@ -1355,17 +1358,17 @@ J_{\text{softmax}}
 &+0\log(0.20)+0\log(0.30)+1\log(0.50)
 \Big].
 \end{aligned}
-$$
+```
 
 The one-hot targets select one correct-class probability from each row:
 
-$$
+```math
 \hat{y}_0^{(1)}=0.70,
 \qquad
 \hat{y}_1^{(2)}=0.80,
 \qquad
 \hat{y}_2^{(3)}=0.50.
-$$
+```
 
 These are the only probabilities that remain in the loss because:
 
@@ -1375,7 +1378,7 @@ These are the only probabilities that remain in the loss because:
 
 Because the zero-valued one-hot terms disappear:
 
-$$
+```math
 \begin{aligned}
 J_{\text{softmax}}
 &=-\frac{1}{3}
@@ -1388,7 +1391,7 @@ J_{\text{softmax}}
 &\approx\frac{0.357+0.223+0.693}{3}\\
 &\approx 0.424.
 \end{aligned}
-$$
+```
 
 > [!IMPORTANT]
 > For each sample, **one-hot encoding selects the logarithm of the probability**
@@ -1401,38 +1404,38 @@ $$
 
 For a binary target $y\in\{0,1\}$, logistic regression assumes that the log-odds are linear:
 
-$$
+```math
 \log\frac{p}{1-p}=\mathbf{w}^\top\mathbf{x}+b=z.
-$$
+```
 
 Exponentiating and rearranging,
 
-$$
+```math
 \frac{p}{1-p}=e^z,
 \qquad p=e^z(1-p),
 \qquad p(1+e^z)=e^z.
-$$
+```
 
 Therefore,
 
-$$
+```math
 \boxed{p=\frac{e^z}{1+e^z}=\frac{1}{1+e^{-z}}=\sigma(z).}
-$$
+```
 
 This is the **Sigmoid function**:
 
-$$
+```math
 \boxed{\sigma(z)=\frac{1}{1+e^{-z}}.}
-$$
+```
 
 It converts the binary-classification logit $z$ into the probability
 $p=P(Y=1\mid X)$.
 
 For multiple classes, assign each class an affine score:
 
-$$
+```math
 z_k=\mathbf{w}_k^\top\mathbf{x}+b_k.
-$$
+```
 
 A score is a real number, not yet a probability. Applying separate sigmoid functions does not generally give outputs that sum to one. Softmax uses a **shared denominator** so all classes compete within a single probability distribution.
 
@@ -1443,12 +1446,12 @@ A score is a real number, not yet a probability. Applying separate sigmoid funct
 Let class $n$ be the **reference class**. Assume that every other class has
 linear log-odds relative to class $n$:
 
-$$
+```math
 \log\frac{P(Y=k\mid\mathbf{x})}{P(Y=n\mid\mathbf{x})}
-=\boldsymbol{\beta}_k^\top\mathbf{x}+\alpha_k
+=\mathbf{\beta}_k^\top\mathbf{x}+\alpha_k
 =a_k,
 \qquad k=1,\ldots,n-1.
-$$
+```
 
 > [!NOTE]
 > The **linear log-odds assumption** defines Multinomial Logistic Regression.
@@ -1459,74 +1462,74 @@ $$
 
 Exponentiating both sides gives:
 
-$$
+```math
 \frac{P(Y=k\mid\mathbf{x})}{P(Y=n\mid\mathbf{x})}
 =e^{a_k}.
-$$
+```
 
 Therefore:
 
-$$
+```math
 P(Y=k\mid\mathbf{x})
 =P(Y=n\mid\mathbf{x})e^{a_k}.
-$$
+```
 
 #### Enforce Probability Normalization
 
 All class probabilities must sum to $1$:
 
-$$
+```math
 P(Y=n\mid\mathbf{x})
 +\sum_{k=1}^{n-1}P(Y=k\mid\mathbf{x})
 =1.
-$$
+```
 
 Substituting
 $P(Y=k\mid\mathbf{x})=P(Y=n\mid\mathbf{x})e^{a_k}$ gives:
 
-$$
+```math
 P(Y=n\mid\mathbf{x})
 \left(1+\sum_{k=1}^{n-1}e^{a_k}\right)
 =1.
-$$
+```
 
 Thus, the reference-class probability is:
 
-$$
+```math
 \boxed{
 P(Y=n\mid\mathbf{x})
 =\frac{1}{1+\sum_{j=1}^{n-1}e^{a_j}}
 }
-$$
+```
 
 For every non-reference class $k<n$:
 
-$$
+```math
 \boxed{
 P(Y=k\mid\mathbf{x})
 =\frac{e^{a_k}}{1+\sum_{j=1}^{n-1}e^{a_j}}
 }
-$$
+```
 
 #### Write the Symmetric Softmax Formula
 
 Define $a_n=0$, so $e^{a_n}=1$. Every class can then use the same formula:
 
-$$
+```math
 P(Y=k\mid\mathbf{x})
 =\frac{e^{a_k}}{\sum_{j=1}^{n}e^{a_j}},
 \qquad k=1,\ldots,n.
-$$
+```
 
 More generally, assign every class an affine logit:
 
-$$
+```math
 z_k=\mathbf{w}_k^\top\mathbf{x}+b_k.
-$$
+```
 
 The resulting **Softmax Regression formula** is:
 
-$$
+```math
 \boxed{
 \sigma(\mathbf{z})_k
 =P(Y=k\mid\mathbf{x};W,\mathbf{b})
@@ -1534,18 +1537,18 @@ $$
 =\frac{\exp(\mathbf{w}_k^\top\mathbf{x}+b_k)}
 {\sum_{j=1}^{n}\exp(\mathbf{w}_j^\top\mathbf{x}+b_j)}
 }
-$$
+```
 
 Subtracting the reference-class logit $z_n$ from every score recovers the
 reference-class representation:
 
-$$
+```math
 a_k
 =z_k-z_n
 =(\mathbf{w}_k-\mathbf{w}_n)^\top\mathbf{x}
 +(b_k-b_n),
 \qquad a_n=0.
-$$
+```
 
 > [!IMPORTANT]
 > The **reference-class and symmetric formulations** describe the **same
@@ -1566,23 +1569,23 @@ probability for one class in a two-class problem.
 
 For two classes:
 
-$$
+```math
 P(y = 1 \mid X) = \frac{e^{z_1}}{e^{z_0} + e^{z_1}}
-$$
+```
 
 Dividing the numerator and denominator by $e^{z_1}$:
 
-$$
+```math
 P(y = 1 \mid X) = \frac{1}{1 + e^{z_0-z_1}}
-$$
+```
 
 Since $z_0-z_1=-(z_1-z_0)$, this is the **Sigmoid function** applied to the
 difference between the two class scores:
 
-$$
+```math
 P(y = 1 \mid X)
 = \sigma(z_1-z_0).
-$$
+```
 
 > [!IMPORTANT]
 > **Binary Logistic Regression** and **two-class Softmax Regression** are
@@ -1611,42 +1614,42 @@ $$
 
 For one sample $i$, the probability assigned to its observed label is:
 
-$$
+```math
 \boxed{
 P\left(Y=c_i\mid X^{(i)};W,\mathbf{b}\right)
 =\prod_{k=1}^{n}
 \left(p_k^{(i)}\right)^{y_k^{(i)}}
 =p_{c_i}^{(i)}
 }
-$$
+```
 
 **Why this works:** One-hot encoding automatically selects the
 **correct-class probability** because:
 
-$$
+```math
 p^1=p,
 \qquad
 p^0=1.
-$$
+```
 
 **Example:** If class $2$ is correct:
 
-$$
+```math
 \mathbf{y}^{(i)}
 =
 \begin{bmatrix}
 0&1&0
 \end{bmatrix},
-$$
+```
 
 then:
 
-$$
+```math
 \left(p_1^{(i)}\right)^0
 \left(p_2^{(i)}\right)^1
 \left(p_3^{(i)}\right)^0
 =p_2^{(i)}.
-$$
+```
 
 ### Likelihood of the Dataset
 
@@ -1655,14 +1658,14 @@ $$
 - **Dataset likelihood:** Multiply the probabilities assigned to all observed
   labels:
 
-$$
+```math
 \boxed{
 \mathcal{L}(W,\mathbf{b})
 =\prod_{i=1}^{m}
 \prod_{k=1}^{n}
 \left(p_k^{(i)}\right)^{y_k^{(i)}}
 }
-$$
+```
 
 > [!NOTE]
 > Here, $\mathcal{L}(W,\mathbf{b})$ denotes the **likelihood function**, not
@@ -1675,23 +1678,23 @@ $$
 - Suppose the model assigns these **correct-class probabilities** to three
 training samples:
 
-$$
+```math
 p_{c_1}^{(1)}=0.70,
 \qquad
 p_{c_2}^{(2)}=0.80,
 \qquad
 p_{c_3}^{(3)}=0.50.
-$$
+```
 
 The **dataset likelihood** is:
 
-$$
+```math
 \begin{aligned}
 \mathcal{L}(W,\mathbf{b})
 &=0.70\times0.80\times0.50\\
 &=0.28.
 \end{aligned}
-$$
+```
 
 - **Interpretation:** Parameters that assign higher probabilities to the
   correct classes produce a larger likelihood.
@@ -1700,9 +1703,9 @@ $$
 
 - ***Maximum Likelihood Estimation*** chooses the ***parameters*** that ***maximize this likelihood***:
 
-$$
+```math
 \max_{W,\mathbf{b}}\mathcal{L}(W,\mathbf{b}).
-$$
+```
 
 ### From Log-Likelihood to Cross-Entropy
 
@@ -1711,7 +1714,7 @@ $$
 
 #### Log-Likelihood (Maximize)
 
-$$
+```math
 \boxed{
 \begin{aligned}
 \ell(W,\mathbf{b})
@@ -1721,18 +1724,18 @@ $$
 y_k^{(i)}\log\left(p_k^{(i)}\right).
 \end{aligned}
 }
-$$
+```
 
 - **Meaning:** $\ell(W,\mathbf{b})$ is the **log-likelihood**.
 - **Objective:** Like the original likelihood, it must be **maximized**.
 
 - The ***logarithm is strictly increasing***, so ***maximizing the log-likelihood*** gives the ***same parameters as maximizing the original likelihood***:
 
-$$
+```math
 \max_{W,\mathbf{b}}\mathcal{L}(W,\mathbf{b})
 \quad\Longleftrightarrow\quad
 \max_{W,\mathbf{b}}\ell(W,\mathbf{b}).
-$$
+```
 
 #### Categorical Cross-Entropy (Minimize)
 
@@ -1740,7 +1743,7 @@ $$
   minimization problems.
 - **Conversion:** Negate and average the log-likelihood:
 
-$$
+```math
 \boxed{
 J_{\mathrm{CE}}(W,\mathbf{b})
 =-\frac{1}{m}\ell(W,\mathbf{b})
@@ -1749,19 +1752,19 @@ J_{\mathrm{CE}}(W,\mathbf{b})
 \sum_{k=1}^{n}
 y_k^{(i)}\log\left(p_k^{(i)}\right)
 }
-$$
+```
 
 - This is the **Categorical Cross-Entropy loss**, also called **multiclass log loss**. 
 - **Unlike likelihood and log-likelihood**, it must be **minimized**.
 
 For a **one-hot target**, the loss for sample $i$ simplifies to:
 
-$$
+```math
 \boxed{
 J_{\mathrm{CE}}^{(i)}
 =-\log\left(p_{c_i}^{(i)}\right)
 }
-$$
+```
 
 > [!IMPORTANT]
 > - $\mathcal{L}(W,\mathbf{b})$ is the **likelihood** — maximize it.
@@ -1793,28 +1796,28 @@ $$
 
 **Step 1 — Define the Softmax denominator for sample $i$:**
 
-$$
+```math
 S_i=\sum_{j=1}^{n}e^{z_j^{(i)}}.
-$$
+```
 
 **Step 2 — Write the Softmax probability:**
 
-$$
+```math
 p_k^{(i)}
 =\frac{e^{z_k^{(i)}}}{S_i},
-$$
+```
 
 **Step 3 — Take its logarithm:**
 
-$$
+```math
 \log p_k^{(i)}
 =z_k^{(i)}-\log S_i.
-$$
+```
 
 **Step 4 — Substitute the log-probability into the per-sample
 cross-entropy:**
 
-$$
+```math
 \begin{aligned}
 J_{\mathrm{CE}}^{(i)}
 &=-\sum_{k=1}^{n}
@@ -1825,28 +1828,28 @@ y_k^{(i)}
 &=\log\left(\sum_{j=1}^{n}e^{z_j^{(i)}}\right)
 -\sum_{k=1}^{n}y_k^{(i)}z_k^{(i)}.
 \end{aligned}
-$$
+```
 
 **Step 5 — Simplify using the correct class.** Since a one-hot target selects
 class $c_i$:
 
-$$
+```math
 \boxed{
 J_{\mathrm{CE}}^{(i)}
-=\operatorname{logsumexp}\left(\mathbf{z}^{(i)}\right)
+=\mathrm{logsumexp}\left(\mathbf{z}^{(i)}\right)
 -z_{c_i}^{(i)}
 }
-$$
+```
 
 - **Differentiation:** The logit form is convenient for deriving gradients.
 - **Numerical stability:** If $a_i=\max_j z_j^{(i)}$, compute log-sum-exp as:
 
-$$
-\operatorname{logsumexp}\left(\mathbf{z}^{(i)}\right)
+```math
+\mathrm{logsumexp}\left(\mathbf{z}^{(i)}\right)
 =a_i+\log\left(
 \sum_{j=1}^{n}e^{z_j^{(i)}-a_i}
 \right).
-$$
+```
 
 ### Information-Theoretic Interpretation
 
@@ -1857,14 +1860,14 @@ Let:
 
 Their **cross-entropy** is:
 
-$$
+```math
 \boxed{
 H(\mathbf{q},\mathbf{p})
 =-\sum_{k=1}^{n}q_k\log p_k
 =H(\mathbf{q})
 +D_{\mathrm{KL}}\left(\mathbf{q}\Vert\mathbf{p}\right)
 }
-$$
+```
 
 - **Target entropy:** $H(\mathbf{q})$ is fixed with respect to the model.
 - **KL divergence:** Minimizing cross-entropy therefore minimizes
@@ -1873,9 +1876,9 @@ $$
 
 For a **one-hot target**:
 
-$$
+```math
 H(\mathbf{q})=0.
-$$
+```
 
 - **Statistical interpretation:** At a fixed input, expected cross-entropy is
   minimized when the model predicts the true conditional class distribution,
@@ -1895,7 +1898,7 @@ The complete derivation follows three objectives:
 - **Log-likelihood:** Maximize an equivalent and easier-to-compute sum.
 - **Categorical Cross-Entropy:** Minimize the average negative log-likelihood.
 
-$$
+```math
 \boxed{
 \begin{aligned}
 \text{Likelihood:}\qquad
@@ -1918,11 +1921,11 @@ J_{\mathrm{CE}}(W,\mathbf{b})
 y_k^{(i)}\log\left(p_k^{(i)}\right)
 \end{aligned}
 }
-$$
+```
 
 Therefore:
 
-$$
+```math
 \boxed{
 \text{Maximum Likelihood}
 \Longleftrightarrow
@@ -1930,7 +1933,7 @@ $$
 \Longleftrightarrow
 \text{Minimum Categorical Cross-Entropy}
 }
-$$
+```
 
 ---
 
@@ -1939,14 +1942,14 @@ $$
 This is the most important mathematical section. We have the three-step forward pass:
 
 1. **Linear transformation:** $Z = XW$
-2. **Softmax:** $\hat{Y} = \operatorname{Softmax}(Z)$
+2. **Softmax:** $\hat{Y} = \mathrm{Softmax}(Z)$
 3. **Cross-Entropy loss:** $J(W)$
 
 We need the gradient:
 
-$$
+```math
 \frac{\partial J}{\partial W}
-$$
+```
 
 Because gradient descent uses this gradient to update the model's weights.
 
@@ -1954,9 +1957,9 @@ Because gradient descent uses this gradient to update the model's weights.
 
 Suppress the example index and write:
 
-$$
+```math
 p_k = \frac{e^{z_k}}{S}, \qquad S = \sum_r e^{z_r}
-$$
+```
 
 We need $\frac{\partial p_k}{\partial z_j}$. There are two cases.
 
@@ -1964,42 +1967,42 @@ We need $\frac{\partial p_k}{\partial z_j}$. There are two cases.
 
 Using the quotient rule:
 
-$$
+```math
 \frac{\partial p_k}{\partial z_k}
 = \frac{e^{z_k} S - e^{z_k} e^{z_k}}{S^2}
 = \frac{e^{z_k}}{S}\left(1 - \frac{e^{z_k}}{S}\right)
-$$
+```
 
 Therefore:
 
-$$
+```math
 \frac{\partial p_k}{\partial z_k} = p_k(1 - p_k) > 0
-$$
+```
 
 **Case 2: $k \neq j$ — differentiating one class's probability with respect to another class's logit**
 
-$$
+```math
 \frac{\partial p_k}{\partial z_j}
 = -\frac{e^{z_k} e^{z_j}}{S^2} = -p_k p_j < 0
-$$
+```
 
 Both cases combine using the Kronecker delta $\delta_{kj}$:
 
-$$
+```math
 \boxed{
 \frac{\partial p_k}{\partial z_j} = p_k(\delta_{kj} - p_j)
 }
-$$
+```
 
 Where $\delta_{kj} = 1$ when $k = j$ and $0$ otherwise.
 
 Increasing a class logit increases its probability and decreases every other class's probability. The full Jacobian matrix is:
 
-$$
+```math
 \boxed{
-\frac{\partial \mathbf{p}}{\partial \mathbf{z}} = \operatorname{diag}(\mathbf{p}) - \mathbf{p}\mathbf{p}^\top
+\frac{\partial \mathbf{p}}{\partial \mathbf{z}} = \mathrm{diag}(\mathbf{p}) - \mathbf{p}\mathbf{p}^\top
 }
-$$
+```
 
 The Jacobian is not diagonal — outputs are coupled. Its rows and columns sum to zero, consistent with the normalisation constraint.
 
@@ -2012,29 +2015,29 @@ The Jacobian is not diagonal — outputs are coupled. Its rows and columns sum t
 
 Recall the loss expressed directly in logits for one example:
 
-$$
+```math
 L = \log \sum_j e^{z_j} - \sum_k t_k z_k
-$$
+```
 
 Differentiate with respect to $z_\ell$:
 
-$$
+```math
 \frac{\partial L}{\partial z_\ell}
 = \frac{e^{z_\ell}}{\sum_j e^{z_j}} - t_\ell
 = p_\ell - t_\ell
-$$
+```
 
 #### Chain Rule Derivation
 
 From $L = -\sum_k y_k \log p_k$:
 
-$$
+```math
 \frac{\partial L}{\partial p_k} = -\frac{y_k}{p_k}
-$$
+```
 
 Combining with the Softmax Jacobian via the chain rule:
 
-$$
+```math
 \begin{aligned}
 \frac{\partial L}{\partial z_j}
 &= \sum_k \frac{\partial L}{\partial p_k} \frac{\partial p_k}{\partial z_j} \\
@@ -2042,15 +2045,15 @@ $$
 &= -\sum_k y_k(\delta_{kj} - p_j) \\
 &= -y_j + p_j \sum_k y_k
 \end{aligned}
-$$
+```
 
 Since one-hot labels sum to one ($\sum_k y_k = 1$):
 
-$$
+```math
 \boxed{
 \frac{\partial L}{\partial z_j} = p_j - y_j
 }
-$$
+```
 
 Both derivations agree.
 
@@ -2068,11 +2071,11 @@ Breaking this down into two cases:
 
 For a single-example update, each logit changes by:
 
-$$
+```math
 \boxed{
-\Delta z_k = -\eta(p_k - y_k)(\|\mathbf{x}\|^2 + 1)
+\Delta z_k = -\eta(p_k - y_k)({\lVert\mathbf{x}\rVert}^2 + 1)
 }
-$$
+```
 
 Where $\eta$ is the **learning rate** — a small positive value that controls the step size.
 
@@ -2084,15 +2087,15 @@ The matrix formula $W \leftarrow W - \eta \nabla_W J$ is compact, but it is easi
 
 Suppose the model has $q$ weights per class: $w_1^{(k)}, w_2^{(k)}, \ldots, w_q^{(k)}$ (plus a bias $w_0^{(k)}$). The gradient of the loss with respect to each individual weight is:
 
-$$
+```math
 \frac{\partial L}{\partial w_1^{(1)}}, \quad \frac{\partial L}{\partial w_2^{(1)}}, \quad \frac{\partial L}{\partial w_0^{(s)}}, \quad \ldots \quad (q \text{ gradients total})
-$$
+```
 
 **Initialization:** set all weights to some starting value (e.g. 1, 0, or small random numbers).
 
 **Training loop** — repeat for $T$ epochs (e.g. $T = 1000$):
 
-$$
+```math
 \boxed{
 \begin{aligned}
 w_1^{(1)} &\leftarrow w_1^{(1)} - \eta \, \frac{\partial L}{\partial w_1^{(1)}} \\[6pt]
@@ -2101,7 +2104,7 @@ w_2^{(1)} &\leftarrow w_2^{(1)} - \eta \, \frac{\partial L}{\partial w_2^{(1)}} 
 w_q^{(k)} &\leftarrow w_q^{(k)} - \eta \, \frac{\partial L}{\partial w_q^{(k)}}
 \end{aligned}
 }
-$$
+```
 
 Each weight moves a small step $\eta$ in the direction that *decreases* the loss. After $T$ loops, all weights have been nudged toward values that minimize the Cross-Entropy.
 
@@ -2123,34 +2126,34 @@ Let us connect the equations with the Cat, Dog, and Horse example used earlier.
 
 **Actual class:** Dog
 
-$$
+```math
 Y = [0,\ 1,\ 0]
-$$
+```
 
 **Predicted probabilities (from the Softmax numerical example):**
 
-$$
+```math
 \hat{Y} = [0.659,\ 0.242,\ 0.099]
-$$
+```
 
 We derived:
 
-$$
+```math
 \frac{\partial L}{\partial Z} = \hat{Y} - Y
-$$
+```
 
 Substituting:
 
-$$
+```math
 \frac{\partial L}{\partial Z}
 = [0.659,\ 0.242,\ 0.099] - [0,\ 1,\ 0]
-$$
+```
 
-$$
+```math
 \boxed{
 \frac{\partial L}{\partial Z} = [0.659,\ -0.758,\ 0.099]
 }
-$$
+```
 
 **Interpreting the gradients:**
 
@@ -2162,11 +2165,11 @@ $$
 
 Recall the Gradient Descent update:
 
-$$
+```math
 \boxed{
 W_{\text{new}} = W_{\text{old}} - \alpha \nabla W
 }
-$$
+```
 
 A **positive gradient** decreases the corresponding weight; a **negative gradient** increases it. The model therefore adjusts its weights to:
 
@@ -2179,39 +2182,39 @@ This is how the model learns from its mistakes.
 
 Since $z_k = \mathbf{w}_k^\top \mathbf{x} + b_k$:
 
-$$
+```math
 \frac{\partial z_k}{\partial \mathbf{w}_k} = \mathbf{x}, \qquad \frac{\partial z_k}{\partial b_k} = 1
-$$
+```
 
 For one example:
 
-$$
+```math
 \boxed{
 \frac{\partial L}{\partial \mathbf{w}_k} = (p_k - y_k)\mathbf{x}, \qquad \frac{\partial L}{\partial b_k} = p_k - y_k
 }
-$$
+```
 
 For the average dataset loss $J$ over $N$ examples:
 
-$$
+```math
 \boxed{
 \frac{\partial J}{\partial \mathbf{w}_k} = \frac{1}{N} \sum_i (p_{ik} - y_{ik})\mathbf{x}_i
 }
-$$
+```
 
-$$
+```math
 \boxed{
 \frac{\partial J}{\partial b_k} = \frac{1}{N} \sum_i (p_{ik} - y_{ik})
 }
-$$
+```
 
 In matrix form:
 
-$$
+```math
 \boxed{
 \nabla_W J = \frac{1}{N} X^\top (\hat{Y} - Y)
 }
-$$
+```
 
 This is the main gradient formula used to train Softmax Regression.
 
@@ -2226,9 +2229,9 @@ This is the main gradient formula used to train Softmax Regression.
 
 Let $\mathbf{1}_N$ be a column of $N$ ones:
 
-$$
-Z = XW + \mathbf{1}_N \mathbf{b}^\top, \qquad P = \operatorname{Softmax}_{\text{row}}(Z)
-$$
+```math
+Z = XW + \mathbf{1}_N \mathbf{b}^\top, \qquad P = \mathrm{Softmax}_{\text{row}}(Z)
+```
 
 Softmax is applied **row-wise**, normalising across the $K$ classes independently for each example. Normalising across examples would give the wrong probability meaning.
 
@@ -2239,33 +2242,33 @@ Softmax is applied **row-wise**, normalising across the $K$ classes independentl
 
 The matrix gradients are:
 
-$$
+```math
 \boxed{
 \nabla_W J = \frac{1}{N} X^\top (P - Y)
 }
-$$
+```
 
-$$
+```math
 \boxed{
 \nabla_{\mathbf{b}} J = \frac{1}{N} (P - Y)^\top \mathbf{1}_N
 }
-$$
+```
 
 Shape check: $(d \times N)(N \times K) = d \times K$ for *weights*; $(K \times N)(N \times 1) = K \times 1$ for *biases*.
 
 ### Gradient Descent Update Rule
 
-$$
+```math
 \boxed{
 W \leftarrow W - \alpha \nabla_W J = W - \frac{\alpha}{N} X^\top(\hat{Y} - Y)
 }
-$$
+```
 
-$$
+```math
 \boxed{
 \mathbf{b} \leftarrow \mathbf{b} - \alpha \nabla_{\mathbf{b}} J
 }
-$$
+```
 
 Where:
 
@@ -2302,19 +2305,19 @@ Practical libraries also support alternative optimizers:
 
 Differentiate $\nabla_{\mathbf{z}} L = \mathbf{p} - \mathbf{t}$:
 
-$$
-H_z = \nabla^2_{\mathbf{z}} L = \operatorname{diag}(\mathbf{p}) - \mathbf{p}\mathbf{p}^\top
-$$
+```math
+H_z = \nabla^2_{\mathbf{z}} L = \mathrm{diag}(\mathbf{p}) - \mathbf{p}\mathbf{p}^\top
+```
 
 For any vector $\mathbf{v}$:
 
-$$
+```math
 \begin{aligned}
 \mathbf{v}^\top H_z \mathbf{v}
 &= \sum_k p_k v_k^2 - \left(\sum_k p_k v_k\right)^2 \\
-&= \operatorname{Var}_{k \sim \mathbf{p}}(v_k) \geq 0
+&= \mathrm{Var}_{k \sim \mathbf{p}}(v_k) \geq 0
 \end{aligned}
-$$
+```
 
 The Hessian is **positive semidefinite**, so the loss is **convex in logits**. Since logits are affine in weights and biases, the loss is also convex in these parameters. Averaging losses preserves convexity.
 
@@ -2325,21 +2328,21 @@ The Hessian is **positive semidefinite**, so the loss is **convex in logits**. S
 
 Include biases in augmented vectors:
 
-$$
+```math
 \tilde{\mathbf{x}}_i = \begin{bmatrix} \mathbf{x}_i \\ 1 \end{bmatrix}, \qquad
-\boldsymbol{\theta}_k = \begin{bmatrix} \mathbf{w}_k \\ b_k \end{bmatrix}
-$$
+\mathbf{\theta}_k = \begin{bmatrix} \mathbf{w}_k \\ b_k \end{bmatrix}
+```
 
 The Hessian block for classes $k, \ell$ is:
 
-$$
+```math
 \boxed{
-\frac{\partial^2 J}{\partial \boldsymbol{\theta}_k \partial \boldsymbol{\theta}_\ell^\top}
+\frac{\partial^2 J}{\partial \mathbf{\theta}_k \partial \mathbf{\theta}_\ell^\top}
 = \frac{1}{N} \sum_i p_{ik}(\delta_{k\ell} - p_{i\ell}) \tilde{\mathbf{x}}_i \tilde{\mathbf{x}}_i^\top
 }
-$$
+```
 
-For parameter perturbations $\mathbf{u}_k$, put $v_{ik} = \tilde{\mathbf{x}}_i^\top \mathbf{u}_k$. The full Hessian quadratic form is an average of $\operatorname{Var}_{k \sim \mathbf{p}_i}(v_{ik})$, which is nonnegative.
+For parameter perturbations $\mathbf{u}_k$, put $v_{ik} = \tilde{\mathbf{x}}_i^\top \mathbf{u}_k$. The full Hessian quadratic form is an average of $\mathrm{Var}_{k \sim \mathbf{p}_i}(v_{ik})$, which is nonnegative.
 
 ### Convexity Does Not Guarantee a Unique Finite Estimate
 
@@ -2357,37 +2360,37 @@ If a neural network learns input features jointly with the softmax layer, the ov
 
 We add a penalty proportional to the squared weights to the Cross-Entropy loss:
 
-$$
+```math
 \boxed{
 J_\lambda(W)
 = -\frac{1}{N}\sum_{i=1}^{N}\sum_{k=1}^{K} y_{ik}\log(p_{ik})
-+ \frac{\lambda}{2}\|W\|_F^2
++ \frac{\lambda}{2}{\lVert W \rVert}_F^2
 }
-$$
+```
 
 Where:
 
 - $\lambda$: Regularization strength — larger $\lambda$ means stronger penalty.
-- $\|W\|_F^2 = \sum_{r,k} w_{rk}^2$: Frobenius norm — sum of all squared weight values.
+- ${\lVert W \rVert}_F^2 = \sum_{r,k} w_{rk}^2$: Frobenius norm — sum of all squared weight values.
 
 Bias parameters are typically excluded from the penalty. The gradient becomes:
 
 In **matrix form**, the regularized gradient is:
 
-$$
+```math
 \boxed{
 \nabla_W J_\lambda = \frac{1}{N} X^\top (\hat{Y} - Y) + \lambda W
 }
-$$
+```
 
 The gradient descent update in **matrix form** is:
 
-$$
+```math
 \boxed{
 W \leftarrow W - \eta \nabla_W J_\lambda
 = (1 - \eta\lambda) W - \frac{\eta}{N} X^\top (\hat{Y} - Y)
 }
-$$
+```
 
 The factor $(1 - \eta\lambda)$ shrinks all weights toward zero at each step — this is the ***weight decay*** interpretation of L2.
 
@@ -2407,13 +2410,13 @@ The factor $(1 - \eta\lambda)$ shrinks all weights toward zero at each step — 
 
 L1 adds the sum of absolute weight values:
 
-$$
+```math
 \boxed{
 J_\lambda(W) = J_{\text{CE}}(W) + \lambda \sum_{r,k} |W_{rk}|
 }
-$$
+```
 
-At nonzero weights the derivative is $\lambda \operatorname{sign}(w_{rk})$. At zero the subgradient is $[-\lambda,\, \lambda]$, so optimization requires algorithms that handle non-smoothness (proximal methods, coordinate descent).
+At nonzero weights the derivative is $\lambda \mathrm{sign}(w_{rk})$. At zero the subgradient is $[-\lambda,\, \lambda]$, so optimization requires algorithms that handle non-smoothness (proximal methods, coordinate descent).
 
 **What L1 regularization does:**
 
@@ -2431,43 +2434,43 @@ There is an important implementation detail about Softmax.
 
 Recall the Softmax formula:
 
-$$
+```math
 p_k = \frac{e^{z_k}}{\sum_j e^{z_j}}
-$$
+```
 
 Imagine the logits are:
 
-$$
+```math
 z = [1000,\ 999,\ 998]
-$$
+```
 
 Computing $e^{1000}$, $e^{999}$, $e^{998}$ causes **numerical overflow** — these values exceed the floating-point range of any computer.
 
 To avoid this, we use the **Log-Sum-Exp trick**: subtract the maximum logit from every logit before computing the exponentials.
 
-$$
+```math
 z'_k = z_k - \max_j(z_j)
-$$
+```
 
 For our example:
 
-$$
+```math
 z' = [0,\ -1,\ -2]
-$$
+```
 
 Now compute Softmax using the shifted logits:
 
-$$
+```math
 p_k = \frac{e^{z_k - \max(z)}}{\sum_j e^{z_j - \max(z)}}
-$$
+```
 
 The probabilities are **mathematically identical** to the original because the common factor cancels:
 
-$$
+```math
 \frac{e^{z_k - c}}{\sum_j e^{z_j - c}}
 = \frac{e^{-c} \cdot e^{z_k}}{e^{-c} \cdot \sum_j e^{z_j}}
 = \frac{e^{z_k}}{\sum_j e^{z_j}}
-$$
+```
 
 The shifted logits provide two guarantees:
 
@@ -2476,11 +2479,11 @@ The shifted logits provide two guarantees:
 
 The same trick applies to the *Cross-Entropy loss* in logit form:
 
-$$
+```math
 \boxed{
-\operatorname{logsumexp}(\mathbf{z}) = \max(\mathbf{z}) + \log \sum_j e^{z_j - \max(\mathbf{z})}
+\mathrm{logsumexp}(\mathbf{z}) = \max(\mathbf{z}) + \log \sum_j e^{z_j - \max(\mathbf{z})}
 }
-$$
+```
 
 > [!TIP]
 > Always use the Log-Sum-Exp trick when implementing Softmax. Numerically stable Softmax is built into every production library — `scipy.special.softmax`, `torch.nn.functional.softmax`, and `tf.nn.softmax` all apply this internally.
@@ -2493,62 +2496,62 @@ This example traces all six steps for a single training sample, connecting logit
 
 **Setup:** Three classes, two features.
 
-$$
+```math
 \mathbf{x} = \begin{bmatrix} 1 \\ 2 \end{bmatrix}, \quad
 W = \begin{bmatrix} 1 & 0 & -1 \\ 0 & 0.5 & 0 \end{bmatrix}, \quad
 \mathbf{b} = \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}
-$$
+```
 
 Columns of $W$ represent classes. The observed class is class 2:
 
-$$
+```math
 \mathbf{t} = \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}
-$$
+```
 
 ### Step 1: Compute Logits
 
-$$
+```math
 \mathbf{z} = W^\top \mathbf{x} + \mathbf{b}
 = \begin{bmatrix} 1 \cdot 1 + 0 \cdot 2 + 1 \\ 0 \cdot 1 + 0.5 \cdot 2 + 0 \\ -1 \cdot 1 + 0 \cdot 2 + 1 \end{bmatrix}
 = \begin{bmatrix} 2 \\ 1 \\ 0 \end{bmatrix}
-$$
+```
 
 ### Step 2: Compute Probabilities
 
-$$
+```math
 e^2 \approx 7.389, \qquad e^1 \approx 2.718, \qquad e^0 = 1
-$$
+```
 
-$$
+```math
 S \approx 11.107, \qquad
 \mathbf{p} \approx \begin{bmatrix} 0.665 \\ 0.245 \\ 0.090 \end{bmatrix}
-$$
+```
 
 The model predicts **class 1** (highest probability), so this example is ***misclassified*** — the true class is **class 2**.
 
 ### Step 3: Compute Cross-Entropy
 
-$$
+```math
 L = -\log p_2 \approx -\log(0.245) \approx 1.408
 = \log(e^2 + e^1 + 1) - 1
-$$
+```
 
 ### Step 4: Compute Gradients
 
-$$
+```math
 \mathbf{p} - \mathbf{t} \approx
 \begin{bmatrix} 0.665 \\ -0.755 \\ 0.090 \end{bmatrix}
-$$
+```
 
 The weight gradient is the outer product $\nabla_W L = \mathbf{x}(\mathbf{p} - \mathbf{t})^\top$:
 
-$$
+```math
 \nabla_W L
 \approx \begin{bmatrix}
 0.665 & -0.755 & 0.090 \\
 1.330 & -1.511 & 0.180
 \end{bmatrix}
-$$
+```
 
 The bias gradient is $\nabla_{\mathbf{b}} L = \mathbf{p} - \mathbf{t}$. Its components sum to zero, consistent with shift invariance.
 
@@ -2556,25 +2559,25 @@ The bias gradient is $\nabla_{\mathbf{b}} L = \mathbf{p} - \mathbf{t}$. Its comp
 
 For one unregularized gradient descent step ($\eta = 0.1$):
 
-$$
+```math
 W_{\text{new}} \approx \begin{bmatrix}
 0.934 & 0.076 & -1.009 \\
 -0.133 & 0.651 & -0.018
 \end{bmatrix}
-$$
+```
 
-$$
+```math
 \mathbf{b}_{\text{new}} \approx \begin{bmatrix} 0.934 \\ 0.076 \\ 0.991 \end{bmatrix}
-$$
+```
 
 ### Step 6: Re-evaluate the Same Example
 
-Since $\|\mathbf{x}\|^2 + 1 = 6$, the logit change per class is $-0.6(\mathbf{p} - \mathbf{t})$:
+Since ${\lVert\mathbf{x}\rVert}^2 + 1 = 6$, the logit change per class is $-0.6(\mathbf{p} - \mathbf{t})$:
 
-$$
+```math
 \mathbf{z}_{\text{new}} = \mathbf{z} - 0.6(\mathbf{p} - \mathbf{t})
 \approx \begin{bmatrix} 1.601 \\ 1.453 \\ -0.054 \end{bmatrix}
-$$
+```
 
 | | Before update | After update |
 |---|---:|---:|
@@ -2632,7 +2635,7 @@ Every supervised model sits somewhere on a spectrum between **underfitting** (to
 
 - Low training loss but **high validation loss**
 - Predicted probabilities are extremely confident (near 0 or 1) even on borderline examples
-- Large weight magnitudes ($\|W\|_F \gg 0$)
+- Large weight magnitudes (${\lVert W \rVert}_F \gg 0$)
 
 > [!WARNING]
 > When classes are **perfectly linearly separable**, the unregularized Cross-Entropy loss has no finite minimum — the weights grow indefinitely and the model becomes pathologically overconfident. L2 regularization is the standard fix.
@@ -2647,17 +2650,17 @@ Every supervised model sits somewhere on a spectrum between **underfitting** (to
 | **L2 (Ridge)** | Shrinks all weights smoothly | Softer, more generalised |
 | **L1 (Lasso)** | Drives some weights to exactly zero | Sparse — ignores irrelevant features |
 
-The regularization term $\lambda \|W\|_F^2$ acts as a **penalty on complexity** — it forces the model to explain the data with smaller weights, which smooths the decision boundary and improves generalisation.
+The regularization term $\lambda {\lVert W \rVert}_F^2$ acts as a **penalty on complexity** — it forces the model to explain the data with smaller weights, which smooths the decision boundary and improves generalisation.
 
 <a id="bias-variance-trade-off-summary"></a>
 
 ### Bias-Variance Trade-off Summary
 
-$$
+```math
 \boxed{
 \text{Total Error} = \underbrace{\text{Bias}^2}_{\text{underfitting}} + \underbrace{\text{Variance}}_{\text{overfitting}} + \text{Irreducible Noise}
 }
-$$
+```
 
 - **High bias** → underfit → increase model capacity or reduce $\lambda$
 - **High variance** → overfit → increase $\lambda$, add more data, or reduce epochs
@@ -2676,9 +2679,9 @@ Softmax Regression has three main hyperparameters. None of them are learned from
 
 The ***learning rate*** $\eta$ controls how large each gradient descent step is.
 
-$$
+```math
 W \leftarrow W - \eta \nabla_W J
-$$
+```
 
 | $\eta$ value | Effect |
 |---|---|
@@ -2704,9 +2707,9 @@ $$
 
 The ***regularization strength*** $\lambda$ controls the trade-off between fitting the data and keeping weights small.
 
-$$
-J_\lambda = J_{\text{CE}} + \frac{\lambda}{2}\|W\|_F^2
-$$
+```math
+J_\lambda = J_{\text{CE}} + \frac{\lambda}{2}{\lVert W \rVert}_F^2
+```
 
 | $\lambda$ value | Effect |
 |---|---|
@@ -2789,19 +2792,19 @@ print(gs.best_params_)
 
 The predicted class for an input $\mathbf{x}$ is:
 
-$$
+```math
 \hat{y} = \arg\max_k \, z_k = \arg\max_k \, (\mathbf{w}_k^\top \mathbf{x} + b_k)
-$$
+```
 
 The **boundary between class $j$ and class $k$** is the set of points where $z_j = z_k$:
 
-$$
+```math
 \boxed{
 \mathbf{w}_j^\top \mathbf{x} + b_j = \mathbf{w}_k^\top \mathbf{x} + b_k
 \quad \Longleftrightarrow \quad
 (\mathbf{w}_j - \mathbf{w}_k)^\top \mathbf{x} + (b_j - b_k) = 0
 }
-$$
+```
 
 This is the equation of a **hyperplane** — a linear surface in $d$-dimensional input space. Softmax Regression always produces **piecewise-linear** decision boundaries.
 
@@ -2819,7 +2822,7 @@ For $K$ classes, there are $\binom{K}{2}$ pairwise boundaries. The input space i
 
 - $\mathbf{w}_k$ points in the direction of **increasing logit for class $k$**
 - The boundary between class $j$ and class $k$ is **perpendicular** to $\mathbf{w}_j - \mathbf{w}_k$
-- Larger $\|\mathbf{w}_j - \mathbf{w}_k\|$ → sharper, more confident boundary
+- Larger $\lVert\mathbf{w}_j - \mathbf{w}_k\rVert$ → sharper, more confident boundary
 
 <a id="what-happens-in-higher-dimensions"></a>
 
@@ -2851,9 +2854,9 @@ When faced with a $K$-class problem, there are three main strategies.
 - Classifier $k$ is trained to distinguish *class $k$* from *all other classes combined*
 - At prediction time, all $K$ classifiers score the input; the class with the **highest score** wins
 
-$$
+```math
 \hat{y} = \arg\max_k \, f_k(\mathbf{x})
-$$
+```
 
 **Properties:**
 
@@ -2929,11 +2932,11 @@ LogisticRegression(multi_class='ovr')
 
 **Temperature-scaled softmax** replaces the standard formula by dividing each logit by a positive scalar $\tau$ before the softmax:
 
-$$
+```math
 \boxed{
 p_k^{(\tau)} = \frac{e^{z_k / \tau}}{\displaystyle\sum_{j=1}^{K} e^{z_j / \tau}}, \qquad \tau > 0
 }
-$$
+```
 
 - **Ordinary softmax regression** uses $\tau = 1$.
 - **Small $\tau$** → sharper, more confident probabilities (one class dominates).
@@ -2949,9 +2952,9 @@ $$
 
 **Temperature controls how confident the softmax probabilities are.** It divides each class score (logit) before applying softmax:
 
-$$
+```math
 p_k^{(\tau)} = \frac{\exp(z_k / \tau)}{\displaystyle\sum_{j=1}^{K} \exp(z_j / \tau)}, \qquad \tau > 0
-$$
+```
 
 Where:
 
@@ -2983,19 +2986,19 @@ Suppose the logits are $\mathbf{z} = (2, 1, 0)$:
 
 Consider the **probability ratio** of classes $a$ and $b$. Their common softmax denominator cancels:
 
-$$
+```math
 \frac{p_a^{(\tau)}}{p_b^{(\tau)}}
 = \frac{\exp(z_a / \tau)}{\exp(z_b / \tau)}
 = \exp\!\left(\frac{z_a - z_b}{\tau}\right)
-$$
+```
 
 Taking the log gives the **pairwise log-odds**:
 
-$$
+```math
 \boxed{
 \log \frac{p_a^{(\tau)}}{p_b^{(\tau)}} = \frac{z_a - z_b}{\tau}
 }
-$$
+```
 
 For classes 1 and 2 in the example, the score difference is $2 - 1 = 1$:
 
@@ -3013,9 +3016,9 @@ At **low temperature**, the model gives class 1 much more probability than class
 
 **No — for fixed logits and any positive temperature, the predicted class stays the same.** Dividing all scores by the same positive number preserves their ordering:
 
-$$
-\operatorname*{argmax}_k \, p_k^{(\tau)} = \operatorname*{argmax}_k \, z_k
-$$
+```math
+\arg\max_k \, p_k^{(\tau)} = \arg\max_k \, z_k
+```
 
 Class 1 remains the most likely in all three examples above. **Confidence changes, but the argmax prediction does not.**
 
@@ -3047,12 +3050,12 @@ As $\tau$ grows, the model becomes maximally uncertain. As $\tau$ shrinks toward
 - Keep the trained **weights and biases fixed**
 - Fit a single positive scalar $\tau$ on **held-out validation data** by minimising cross-entropy:
 
-$$
-\tau^* = \operatorname*{argmin}_{\tau > 0}
+```math
+\tau^* = \arg\min_{\tau > 0}
 \left[
 -\frac{1}{n_\text{val}} \sum_{i=1}^{n_\text{val}} \log p_{i,\, y_i}^{(\tau)}
 \right]
-$$
+```
 
 | **Scenario** | **Likely fix** |
 |:---|:---|
