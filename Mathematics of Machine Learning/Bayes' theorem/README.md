@@ -32,9 +32,11 @@
   - [11.1 Hypotheses](#111-hypotheses)
   - [11.2 Prior Probability (Priori Probability)](#112-prior-probability-priori-probability)
   - [11.3 Posterior Probability](#113-posterior-probability)
-  - [11.4 Conditional Probability](#114-conditional-probability)
-  - [11.5 Joint Probability](#115-joint-probability)
-  - [11.6 Random Variables](#116-random-variables)
+  - [11.4 Likelihood](#114-likelihood)
+  - [11.5 Evidence](#115-evidence)
+  - [11.6 Conditional Probability](#116-conditional-probability)
+  - [11.7 Joint Probability](#117-joint-probability)
+  - [11.8 Random Variables](#118-random-variables)
 - **[12. Key Concepts Checklist](#12-key-concepts-checklist)**
 - **[13. References](#13-references)**
 
@@ -361,14 +363,30 @@ After learning about Bayes' theorem in detail, let us understand some ***importa
 - Also called the **"a posteriori" probability** (from Latin: *"from what comes after"*).
 - **Example:** The probability that a patient *has a disease* given that their **test result was positive**.
 
-### 11.4 Conditional Probability
+### 11.4 Likelihood
+
+- The ***likelihood*** $P(B \mid A)$ is the probability of observing evidence $B$ *if* hypothesis $A$ is true.
+- Viewed as a function of $A$ for a fixed observed $B$, it measures how well the hypothesis **explains** the evidence.
+- A **high likelihood** means the evidence is very compatible with the hypothesis.
+- **Note:** The likelihood is *not* a probability over hypotheses — it is a probability over evidence values for a fixed hypothesis.
+- **Example:** The *sensitivity* of a medical test — $P(\text{positive test} \mid \text{has disease})$. A test with 99% sensitivity has a likelihood of 0.99 for the hypothesis *"patient has disease."*
+
+### 11.5 Evidence
+
+- The ***evidence*** $P(B)$ (also called the ***marginal likelihood***) is the **total probability** of observing evidence $B$ across *all* possible hypotheses.
+- It acts as a **normalising constant** that ensures the posterior probabilities sum to 1.
+- It is computed using the **law of total probability**: $P(B) = \sum_i P(B \mid A_i)\,P(A_i)$.
+- In practice it is often the hardest term to compute, which is why the **proportional form** $P(A \mid B) \propto P(A) \cdot P(B \mid A)$ is widely used.
+- **Example:** The total probability of a positive test result — accounting for both people who *have* the disease and those who *do not*.
+
+### 11.6 Conditional Probability
 
 - ***Conditional probability*** $P(A \mid B)$ is the probability of event $A$ occurring ***given that*** event $B$ has *already occurred*.
 - It describes how the **occurrence of one event** changes the likelihood of **another event**.
 - The vertical bar "$\mid$" is read as **"given"**: $P(A \mid B)$ is read *"the probability of A given B."*
 - **Example:** The probability that it *rains* today, given that the **sky is cloudy**.
 
-### 11.5 Joint Probability
+### 11.7 Joint Probability
 
 - ***Joint probability*** $P(A \cap B)$ is the probability of **two or more events** occurring ***together*** — simultaneously.
 - The symbol $\cap$ is read as **"and"** or **"intersection"** — $P(B \cap C)$ means *"the probability that **both** $B$ **and** $C$ occur."*
@@ -391,7 +409,7 @@ After learning about Bayes' theorem in detail, let us understand some ***importa
 >
 > Notice: $P(B \cap C) = \tfrac{1}{3} < P(B) = \tfrac{1}{2}$, because demanding *two* conditions at once can only *reduce* (or at most equal) the probability.
 
-### 11.6 Random Variables
+### 11.8 Random Variables
 
 - A ***random variable*** is a **real-valued variable** whose value is determined by the outcome of a **random experiment**.
 - Each possible value of a random variable has an associated **probability**, found via **experimental** or **theoretical probability**.
