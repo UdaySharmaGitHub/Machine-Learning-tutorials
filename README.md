@@ -40,6 +40,7 @@
 | 09 | **Evaluation Metrics** | Regression and classification metrics, confusion matrices, and model evaluation |
 | 10 | **ROC Curve and AUC** | ROC analysis, AUC, and practical threshold selection |
 | 11 | **Multiclass Logistic Regression** | Softmax regression, mathematical derivations, cross-entropy loss, polynomial logistic regression, hyperparameter tuning, multiclass ROC-AUC, and Iris implementation |
+| 12 | **Naive Bayes Classifier** | Probability foundations, Bayes' Theorem, Bernoulli / Multinomial / Gaussian NB, Laplace smoothing, zero-frequency problem, and from-scratch + sklearn implementations |
 
 
 ---
@@ -200,6 +201,27 @@
 
 ---
 
+### 📁 12 Naive Bayes Classifier
+
+| # | Resource | Description |
+|---|----------|-------------|
+| 01 | [Conditional Probability](12%20Naive%20Bayes%20Classifier/Conditional%20Probability.md) | Conditional probability definition, formula, and key properties |
+| 02 | [Independent and Dependent Events in Probability](12%20Naive%20Bayes%20Classifier/Independent%20and%20dependent%20Events%20in%20Probability.md) | Independence and dependence, multiplication rules, with vs without replacement |
+| 03 | [Mutually Exclusive Events in Probability](12%20Naive%20Bayes%20Classifier/Mutually%20Exclusive%20Events%20in%20Probability.md) | Mutually exclusive vs independent events, addition rule, and Venn diagram intuition |
+| 04 | [Bayes Theorem in Probability](12%20Naive%20Bayes%20Classifier/Bayes%20Theorem%20in%20Probability.md) | Prior, likelihood, posterior, evidence — full derivation and intuition behind Bayes' Theorem |
+| 05 | [Problem Based upon Bayes Theorem](12%20Naive%20Bayes%20Classifier/Problem%20Based%20upon%20Bayes%20Theorem.md) | Worked problems applying Bayes' Theorem: medical tests, spam, and classic urn problems |
+| 06 | [Intuition Behind Naive Bayes Classifier](12%20Naive%20Bayes%20Classifier/Intuition%20Behind%20Naive%20Bayes%20Classifier.md) | Why the conditional independence assumption works in practice; spam and text classification intuition |
+| 07 | [Naive Bayes Classifier](12%20Naive%20Bayes%20Classifier/Naive%20Bayes%20Classifier.md) | Full derivation: Bayes' Theorem → chain rule → independence assumption → decision rule → parameter estimation |
+| 08 | [Types of Naive Bayes Classifier](12%20Naive%20Bayes%20Classifier/Types%20of%20Naive%20Bayes%20Classifier.md) | Gaussian, Multinomial, Bernoulli, Categorical, and Complement NB — likelihood formulas, parameter estimation, and when to use each |
+| 09 | [Numerical Example on Naive Bayes Classifier](12%20Naive%20Bayes%20Classifier/Numerical%20Example%20on%20Naive%20Bayes%20Classifier.md) | Step-by-step worked example: prior estimation, likelihood calculation, and posterior prediction applied to a concrete dataset |
+| 10 | [Simple Code Example of Naive Bayes Classifier](12%20Naive%20Bayes%20Classifier/Simple%20Code%20Example%20of%20Naive%20Bayes%20Classifier.ipynb) | End-to-end notebook: build and train Naive Bayes from scratch, compare with sklearn, visualize results |
+| 11 | [Simple Code Example (Detailed Each Step)](12%20Naive%20Bayes%20Classifier/Simple%20Code%20Example%20of%20Naive%20Bayes%20Classifier%20%28Detailed%20Each%20Step%29.ipynb) | Step-by-step from-scratch notebook: explicit prior, likelihood, and posterior computation with zero-frequency handling |
+| 12 | [Naive-Bayes Classifier In-Depth](12%20Naive%20Bayes%20Classifier/Naive-Bayes%20classifier%20In-Depth.ipynb) | In-depth sklearn notebook: Gaussian NB on the Iris dataset, decision boundaries, confusion matrix, and class probability visualization |
+
+> **Dataset:** [`play_tennis.csv`](12%20Naive%20Bayes%20Classifier/datasets/play_tennis.csv)
+
+---
+
 ## Mathematics of Machine Learning
 
 | # | Resource | Description |
@@ -272,7 +294,7 @@
 
 Each topic is organized in a numbered folder. Within each folder, notebooks are numbered sequentially — **start from `00` or `01`** and work your way through. The progression follows a logical learning path:
 
-> Linear Regression → Gradient Descent → Polynomial Regression → Regularization (Ridge → Lasso → Elastic Net) → Logistic Regression → Evaluation Metrics → ROC and AUC → Multiclass Logistic Regression
+> Linear Regression → Gradient Descent → Polynomial Regression → Regularization (Ridge → Lasso → Elastic Net) → Logistic Regression → Evaluation Metrics → ROC and AUC → Multiclass Logistic Regression → **Naive Bayes Classifier**
 
 ---
 

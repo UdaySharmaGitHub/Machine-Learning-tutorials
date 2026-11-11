@@ -54,17 +54,18 @@ graph TD
     style G fill:#bbf7d0,stroke:#16a34a
 ```
 
+> [!NOTE]
 > The two **red** leaves are all positive test results — one group truly has the disease, the other does not.
 
 ### Step-by-Step Solution
 
 **Step 1 — Recall the two-term Bayes' formula:**
 
-$$P(D \mid +) = \frac{P(+ \mid D)\,P(D)}{P(+ \mid D)\,P(D) \;+\; P(+ \mid \lnot D)\,P(\lnot D)}$$
+$$P(D \mid +) = \frac{P(+ \mid D) \cdot P(D)}{P(+ \mid D) \cdot P(D) + P(+ \mid \lnot D) \cdot P(\lnot D)}$$
 
 **Step 2 — Compute the evidence $P(+)$ using the law of total probability:**
 
-$$P(+) = P(+ \mid D)\,P(D) + P(+ \mid \lnot D)\,P(\lnot D)$$
+$$P(+) = P(+ \mid D) \cdot P(D) + P(+ \mid \lnot D) \cdot P(\lnot D)$$
 
 $$= (0.95)(0.01) + (0.10)(0.99)$$
 
@@ -72,8 +73,7 @@ $$= 0.0095 + 0.0990 = 0.1085$$
 
 **Step 3 — Compute the posterior:**
 
-$$\boxed{P(D \mid +) = \frac{0.0095}{0.1085} \approx 8.76\%}$$
-
+$$P(D \mid +) = \frac{0.0095}{0.1085} \approx 8.76\%$$
 ### Natural Frequency Table
 
 Out of every **1,000** people tested:
@@ -86,6 +86,7 @@ Out of every **1,000** people tested:
 
 $$P(D \mid +) = \frac{\text{True Positives}}{\text{All Positives}} = \frac{9.5}{108.5} \approx 8.76\%$$
 
+> [!TIP]
 > **Key insight:** Even with a 95% sensitive test, a positive result gives only **~8.76%** certainty of disease. Of all positive results, **~91% are false positives** from healthy people. The **low base rate (1%) dominates** — this is the **base-rate fallacy**.
 
 ---
@@ -106,7 +107,7 @@ A randomly selected item is found to be **defective**. What is the probability i
 | Factory 2 production share | $P(F_2)$ | 0.30 |
 | Defect rate — Factory 1 | $P(D \mid F_1)$ | 0.03 |
 | Defect rate — Factory 2 | $P(D \mid F_2)$ | 0.08 |
-| **Find** | $P(F_1 \mid D)$, $\;P(F_2 \mid D)$ | **?** |
+| **Find** | $P(F_1 \mid D)$, $P(F_2 \mid D)$ | **?** |
 
 ### Probability Tree
 
@@ -132,7 +133,7 @@ graph TD
 
 **Step 1 — Total probability of a defective item:**
 
-$$P(D) = P(D \mid F_1)\,P(F_1) + P(D \mid F_2)\,P(F_2)$$
+$$P(D) = P(D \mid F_1) \cdot P(F_1) + P(D \mid F_2) \cdot P(F_2)$$
 
 $$= (0.03)(0.70) + (0.08)(0.30)$$
 
@@ -140,15 +141,15 @@ $$= 0.021 + 0.024 = \mathbf{0.045}$$
 
 **Step 2 — Posterior for Factory 1:**
 
-$$P(F_1 \mid D) = \frac{P(D \mid F_1)\,P(F_1)}{P(D)} = \frac{0.021}{0.045}$$
+$$P(F_1 \mid D) = \frac{P(D \mid F_1) \cdot P(F_1)}{P(D)} = \frac{0.021}{0.045}$$
 
-$$\boxed{P(F_1 \mid D) \approx 46.7\%}$$
+$$P(F_1 \mid D) \approx 46.7\%$$
 
 **Step 3 — Posterior for Factory 2:**
 
-$$P(F_2 \mid D) = \frac{P(D \mid F_2)\,P(F_2)}{P(D)} = \frac{0.024}{0.045}$$
+$$P(F_2 \mid D) = \frac{P(D \mid F_2) \cdot P(F_2)}{P(D)} = \frac{0.024}{0.045}$$
 
-$$\boxed{P(F_2 \mid D) \approx 53.3\%}$$
+$$P(F_2 \mid D) \approx 53.3\%$$
 
 **Verification:** $46.7\% + 53.3\% = 100\%$ ✓
 
@@ -160,6 +161,7 @@ $$\boxed{P(F_2 \mid D) \approx 53.3\%}$$
 | Factory 2 | 0.30 | 0.08 | 0.024 | **53.3%** |
 | **Total** | 1.00 | — | **0.045** | **100%** |
 
+> [!TIP]
 > **Key insight:** Factory 1 produces 70% of all items but has only a 3% defect rate. Factory 2 produces just 30% but has a much higher 8% defect rate. When a defective item is found, Factory 2 becomes the slightly more likely source (53.3%) — **the higher defect rate outweighs the lower production share.**
 
 ---
@@ -207,7 +209,7 @@ graph TD
 
 **Step 1 — Total probability of a delay:**
 
-$$P(\text{Del}) = P(\text{Del} \mid R)\,P(R) + P(\text{Del} \mid \lnot R)\,P(\lnot R)$$
+$$P(\text{Del}) = P(\text{Del} \mid R) \cdot P(R) + P(\text{Del} \mid \lnot R) \cdot P(\lnot R)$$
 
 $$= (0.80)(0.40) + (0.20)(0.60)$$
 
@@ -215,9 +217,9 @@ $$= 0.32 + 0.12 = \mathbf{0.44}$$
 
 **Step 2 — Apply Bayes' theorem:**
 
-$$P(R \mid \text{Del}) = \frac{P(\text{Del} \mid R)\,P(R)}{P(\text{Del})} = \frac{0.32}{0.44} = \frac{8}{11}$$
+$$P(R \mid \text{Del}) = \frac{P(\text{Del} \mid R) \cdot P(R)}{P(\text{Del})} = \frac{0.32}{0.44} = \frac{8}{11}$$
 
-$$\boxed{P(R \mid \text{Del}) \approx 72.7\%}$$
+$$P(R \mid \text{Del}) \approx 72.7\%$$
 
 **Step 3 — Posterior for non-rainy (verification):**
 
@@ -232,6 +234,7 @@ $$72.7\% + 27.3\% = 100\% \checkmark$$
 | Rainy day | 40% | **72.7%** |
 | Non-rainy day | 60% | **27.3%** |
 
+> [!TIP]
 > **Key insight:** Before observing anything, rain had a 40% probability. After learning the flight was delayed, the belief updates to **72.7%** — rain is the dominant cause of delays (80% rate vs 20%), so a delayed flight strongly suggests a rainy day.
 
 ---
@@ -256,17 +259,17 @@ $$P(R \mid B_1) = \frac{4}{6} = \frac{2}{3}, \qquad P(R \mid B_2) = \frac{2}{6} 
 
 **Step 2 — Total probability of drawing Red:**
 
-$$P(R) = \sum_{i=1}^{3} P(R \mid B_i)\,P(B_i) = \frac{2}{3} \cdot \frac{1}{3} + \frac{1}{3} \cdot \frac{1}{3} + \frac{1}{2} \cdot \frac{1}{3}$$
+$$P(R) = \sum_{i=1}^{3} P(R \mid B_i) \cdot P(B_i) = \frac{2}{3} \cdot \frac{1}{3} + \frac{1}{3} \cdot \frac{1}{3} + \frac{1}{2} \cdot \frac{1}{3}$$
 
 $$= \frac{2}{9} + \frac{1}{9} + \frac{1}{6} = \frac{4}{18} + \frac{2}{18} + \frac{3}{18} = \frac{9}{18} = \frac{1}{2}$$
 
 **Step 3 — Posteriors for each box:**
 
-$$P(B_1 \mid R) = \frac{P(R \mid B_1)\,P(B_1)}{P(R)} = \frac{\frac{2}{3} \times \frac{1}{3}}{\frac{1}{2}} = \frac{\frac{2}{9}}{\frac{1}{2}} = \frac{4}{9} \approx \mathbf{44.4\%}$$
+$$P(B_1 \mid R) = \frac{P(R \mid B_1) \cdot P(B_1)}{P(R)} = \frac{\frac{2}{3} \times \frac{1}{3}}{\frac{1}{2}} = \frac{\frac{2}{9}}{\frac{1}{2}} = \frac{4}{9} \approx \mathbf{44.4\%}$$
 
-$$P(B_2 \mid R) = \frac{P(R \mid B_2)\,P(B_2)}{P(R)} = \frac{\frac{1}{3} \times \frac{1}{3}}{\frac{1}{2}} = \frac{\frac{1}{9}}{\frac{1}{2}} = \frac{2}{9} \approx \mathbf{22.2\%}$$
+$$P(B_2 \mid R) = \frac{P(R \mid B_2) \cdot P(B_2)}{P(R)} = \frac{\frac{1}{3} \times \frac{1}{3}}{\frac{1}{2}} = \frac{\frac{1}{9}}{\frac{1}{2}} = \frac{2}{9} \approx \mathbf{22.2\%}$$
 
-$$P(B_3 \mid R) = \frac{P(R \mid B_3)\,P(B_3)}{P(R)} = \frac{\frac{1}{2} \times \frac{1}{3}}{\frac{1}{2}} = \frac{\frac{1}{6}}{\frac{1}{2}} = \frac{1}{3} \approx \mathbf{33.3\%}$$
+$$P(B_3 \mid R) = \frac{P(R \mid B_3) \cdot P(B_3)}{P(R)} = \frac{\frac{1}{2} \times \frac{1}{3}}{\frac{1}{2}} = \frac{\frac{1}{6}}{\frac{1}{2}} = \frac{1}{3} \approx \mathbf{33.3\%}$$
 
 **Verification:** $\dfrac{4}{9} + \dfrac{2}{9} + \dfrac{3}{9} = \dfrac{9}{9} = 1$ ✓
 
@@ -302,6 +305,7 @@ graph TD
     style J fill:#bfdbfe,stroke:#3b82f6
 ```
 
+> [!TIP]
 > **Key insight:** All boxes were equally likely *before* the draw (prior = 1/3 each). After observing a **Red** ball, Box 1 becomes the most probable source (44.4%) because it has the highest red proportion. Box 2 becomes the least probable (22.2%) because it has the fewest red balls. **The likelihood alone drives the update.**
 
 ---
@@ -349,7 +353,7 @@ graph TD
 
 **Step 1 — Total probability of seeing the word "free":**
 
-$$P(F) = P(F \mid \text{Spam})\,P(\text{Spam}) + P(F \mid \text{Ham})\,P(\text{Ham})$$
+$$P(F) = P(F \mid \text{Spam}) \cdot P(\text{Spam}) + P(F \mid \text{Ham}) \cdot P(\text{Ham})$$
 
 $$= (0.60)(0.40) + (0.05)(0.60)$$
 
@@ -357,9 +361,9 @@ $$= 0.240 + 0.030 = \mathbf{0.270}$$
 
 **Step 2 — Posterior probability of spam:**
 
-$$P(\text{Spam} \mid F) = \frac{P(F \mid \text{Spam})\,P(\text{Spam})}{P(F)} = \frac{0.240}{0.270} = \frac{8}{9}$$
+$$P(\text{Spam} \mid F) = \frac{P(F \mid \text{Spam}) \cdot P(\text{Spam})}{P(F)} = \frac{0.240}{0.270} = \frac{8}{9}$$
 
-$$\boxed{P(\text{Spam} \mid F) \approx 88.9\%}$$
+$$P(\text{Spam} \mid F) \approx 88.9\%$$
 
 **Step 3 — Posterior probability of ham (verification):**
 
@@ -378,7 +382,7 @@ $$88.9\% + 11.1\% = 100\% \checkmark$$
 
 This is exactly how a **Naive Bayes spam filter** operates. Using the proportional form to rank classes:
 
-$$\hat{C} = \arg\max_{C} \; P(C) \cdot P(\text{"free"} \mid C)$$
+$$\hat{C} = \arg\max_{C} P(C) \cdot P(\text{"free"} \mid C)$$
 
 | Class | $P(C)$ | $P(\text{"free"} \mid C)$ | Score $\propto$ Posterior |
 |---|:---:|:---:|:---:|
@@ -389,6 +393,7 @@ Since $0.240 > 0.030$, the classifier predicts **Spam** — consistent with the 
 
 In a real classifier, this multiplication runs for **every word** in the email. More features → sharper posteriors. See [Naive Bayes Classifier](Naive%20Bayes%20Classifier.md).
 
+> [!TIP]
 > **Key insight:** A single word "free" pushed spam probability from the prior **40%** to **88.9%**. This dramatic update reflects the large likelihood ratio: "free" is **12× more common** in spam than in ham (60% vs 5%) — a powerful signal.
 
 ---

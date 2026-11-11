@@ -43,7 +43,7 @@
 
 For two events $A$ and $B$ with $P(B) \neq 0$:
 
-$$\boxed{P(A \mid B) = \frac{P(B \mid A)\,P(A)}{P(B)}}$$
+$$\boxed{P(A \mid B) = \frac{P(B \mid A) \cdot P(A)}{P(B)}}$$
 
 <p align="center">
   <img src="../Mathematics%20of%20Machine%20Learning/Bayes%27%20theorem/images/bayes-formula-anatomy.svg" alt="Anatomy of Bayes' theorem: posterior, likelihood, prior, evidence colour-coded" />
@@ -60,7 +60,7 @@ $$\boxed{P(A \mid B) = \frac{P(B \mid A)\,P(A)}{P(B)}}$$
 
 ## 2. Statement of the Theorem
 
-$$\boxed{P(A \mid B) = \frac{P(B \mid A)\,P(A)}{P(B)}}, \qquad P(B) \neq 0$$
+$$\boxed{P(A \mid B) = \frac{P(B \mid A) \cdot P(A)}{P(B)}}, \qquad P(B) \neq 0$$
 
 where $A$ and $B$ are events.
 
@@ -76,17 +76,17 @@ Bayes' theorem follows directly from the definition of conditional probability.
 
 The **joint probability** $P(A \cap B)$ can be written **two equivalent ways**:
 
-$$P(A \cap B) = P(A \mid B)\,P(B)$$
+$$P(A \cap B) = P(A \mid B) \cdot P(B)$$
 
-$$P(A \cap B) = P(B \mid A)\,P(A)$$
+$$P(A \cap B) = P(B \mid A) \cdot P(A)$$
 
 Since both expressions equal $P(A \cap B)$, they are equal to each other:
 
-$$P(A \mid B)\,P(B) = P(B \mid A)\,P(A)$$
+$$P(A \mid B) \cdot P(B) = P(B \mid A) \cdot P(A)$$
 
 Dividing both sides by $P(B)$ (assuming $P(B) \neq 0$):
 
-$$\boxed{P(A \mid B) = \frac{P(B \mid A)\,P(A)}{P(B)}}$$
+$$\boxed{P(A \mid B) = \frac{P(B \mid A) \cdot P(A)}{P(B)}}$$
 
 The diagram below shows this **geometrically** — the overlap of regions $A$ and $B$ is the same whether computed "through $A$" or "through $B$", and equating the two routes is exactly Bayes' rule.
 
@@ -163,6 +163,7 @@ The ***joint probability*** $P(A \cap B)$ is the probability of **two events occ
 - $P(A \cap B) = P(A \mid B) \cdot P(B) = P(B \mid A) \cdot P(A)$ — equating these two expressions **is** the derivation of Bayes' rule.
 - **Example:** The probability that a randomly chosen person is *both* a smoker *and* has lung disease.
 
+> [!NOTE]
 > **Numerical example — rolling a die:**
 >
 > | Event | Description | Outcomes | Probability |
@@ -181,15 +182,15 @@ Often $P(B)$ cannot be measured directly, but it can be decomposed.
 
 If $A_1, A_2, \ldots, A_n$ are **mutually exclusive and exhaustive** (exactly one must occur), the **law of total probability** gives:
 
-$$P(B) = \sum_{i} P(B \mid A_i)\,P(A_i)$$
+$$P(B) = \sum_{i} P(B \mid A_i) \cdot P(A_i)$$
 
 Substituting into the denominator yields the **extended form**:
 
-$$\boxed{P(A_i \mid B) = \frac{P(A_i)\,P(B \mid A_i)}{\displaystyle\sum_{j} P(A_j)\,P(B \mid A_j)}}$$
+$$\boxed{P(A_i \mid B) = \frac{P(A_i) \cdot P(B \mid A_i)}{\displaystyle\sum_{j} P(A_j) \cdot P(B \mid A_j)}}$$
 
 The most common case uses a hypothesis $A$ and its complement $\lnot A$ — which always form a mutually exclusive, exhaustive pair:
 
-$$\boxed{P(A \mid B) = \frac{P(B \mid A)\,P(A)}{P(B \mid A)\,P(A) \;+\; P(B \mid \lnot A)\,P(\lnot A)}}$$
+$$\boxed{P(A \mid B) = \frac{P(B \mid A) \cdot P(A)}{P(B \mid A) \cdot P(A) + P(B \mid \lnot A) \cdot P(\lnot A)}}$$
 
 This **two-term version** is the workhorse for most real applications (medical tests, spam detection, urn problems).
 
@@ -201,8 +202,9 @@ This **two-term version** is the workhorse for most real applications (medical t
 
 When evidence $P(B)$ is fixed and we vary only the hypothesis, Bayes' theorem reduces to:
 
-$$\boxed{P(A \mid B) \;\propto\; P(A) \cdot P(B \mid A)}$$
+$$\boxed{P(A \mid B) \propto P(A) \cdot P(B \mid A)}$$
 
+> [!IMPORTANT]
 > **Posterior $\propto$ Prior $\times$ Likelihood**
 
 The denominator $P(B)$ is just a normalising constant. This proportional form is used throughout Bayesian inference and is the basis of the Naive Bayes Classifier.
@@ -221,7 +223,7 @@ The **Bayes factor** $\frac{P(B \mid A)}{P(B \mid \lnot A)}$ measures how much t
 
 $$O(\text{infected}) = \frac{0.01}{0.99} = \frac{1}{99}, \qquad \text{Bayes factor} = \frac{0.99}{0.01} = \frac{99}{1}$$
 
-$$O(\text{infected} \mid +) = \frac{1}{99} \times \frac{99}{1} = \frac{1}{1} \;\implies\; P = 50\%$$
+$$O(\text{infected} \mid +) = \frac{1}{99} \times \frac{99}{1} = \frac{1}{1} \implies P = 50\%$$
 
 Even with a 99%-accurate test, a positive result gives only 50% certainty — because the disease is rare.
 
@@ -229,7 +231,7 @@ Even with a 99%-accurate test, a positive result gives only 50% certainty — be
 
 For continuous random variables $X$ and $Y$ with probability densities:
 
-$$f_{X \mid Y=y}(x) = \frac{f_{Y \mid X=x}(y)\,f_X(x)}{f_Y(y)}$$
+$$f_{X \mid Y=y}(x) = \frac{f_{Y \mid X=x}(y) \cdot f_X(x)}{f_Y(y)}$$
 
 Here $f_X$ is the **prior density** and $f_{X \mid Y=y}$ is the **posterior density**. This is the version used throughout Bayesian statistics and probabilistic machine learning.
 
@@ -249,8 +251,9 @@ Suppose pancreatic cancer has incidence $1/100{,}000$, while $10/99{,}999$ healt
 | **Symptom: No** | 0 | 99,989 | 99,989 |
 | **Total** | 1 | 99,999 | 100,000 |
 
-$$P(E \mid F) = \frac{P(F \mid E)\,P(E)}{P(F \mid E)\,P(E) + P(F \mid \lnot E)\,P(\lnot E)} = \frac{1 \times 0.00001}{1 \times 0.00001 + (10/99999) \times 0.99999} = \frac{1}{11} \approx 9.1\%$$
+$$P(E \mid F) = \frac{P(F \mid E) \cdot P(E)}{P(F \mid E) \cdot P(E) + P(F \mid \lnot E) \cdot P(\lnot E)} = \frac{1 \times 0.00001}{1 \times 0.00001 + (10/99999) \times 0.99999} = \frac{1}{11} \approx 9.1\%$$
 
+> [!NOTE]
 > Even with symptoms, the probability of cancer is only **9.1%** — because the disease is so rare, the **prior dominates**.
 
 ---
@@ -265,6 +268,7 @@ $$P(\text{User} \mid +) = \frac{0.99 \times 0.003}{0.99 \times 0.003 + 0.01 \tim
   <img src="../Mathematics%20of%20Machine%20Learning/Bayes%27%20theorem/images/base-rate-tree.svg" alt="Natural-frequency tree: of 100,000 people, 297 true positives vs 997 false positives" />
 </p>
 
+> [!WARNING]
 > Even though the test is "99% accurate," **most positive results are false**. The reason is the ***base rate***: users are so rare that the 1% error applied to the huge non-user group produces **more false positives than true positives**.
 >
 > **Takeaway:** The accuracy of a test is not the same as the probability that a positive result is correct. The **prior always matters**.
@@ -289,8 +293,9 @@ $$P(H) = 0.5 \times \tfrac{2}{5} + 0.6 \times \tfrac{2}{5} + 0.9 \times \tfrac{1
 
 **Step 2 — Posterior for type A:**
 
-$$P(A \mid H) = \frac{P(H \mid A)\,P(A)}{P(H)} = \frac{0.5 \times 0.4}{0.62} = \frac{0.20}{0.62} \approx 32\%$$
+$$P(A \mid H) = \frac{P(H \mid A) \cdot P(A)}{P(H)} = \frac{0.5 \times 0.4}{0.62} = \frac{0.20}{0.62} \approx 32\%$$
 
+> [!NOTE]
 > Observing Heads **lowered** the probability of fair coin A (from prior 40% down to ~32%), because Heads is better explained by the biased coins B and C.
 
 ---
@@ -321,15 +326,15 @@ Under the **Bayesian view**:
 
 Bayes' theorem extends to additional conditioning events. With a third event $C$ (where $P(C) > 0$), every probability is conditioned on $C$:
 
-$$\boxed{P(A \mid B \cap C) = \frac{P(B \mid A \cap C)\,P(A \mid C)}{P(B \mid C)}}$$
+$$\boxed{P(A \mid B \cap C) = \frac{P(B \mid A \cap C) \cdot P(A \mid C)}{P(B \mid C)}}$$
 
 **Derivation:** The joint probability $P(A \cap B \cap C)$ can be written two ways using the chain rule:
 
-$$P(A \cap B \cap C) = P(A \mid B \cap C)\,P(B \mid C)\,P(C)$$
+$$P(A \cap B \cap C) = P(A \mid B \cap C) \cdot P(B \mid C) \cdot P(C)$$
 
-$$P(A \cap B \cap C) = P(B \mid A \cap C)\,P(A \mid C)\,P(C)$$
+$$P(A \cap B \cap C) = P(B \mid A \cap C) \cdot P(A \mid C) \cdot P(C)$$
 
-Equating them and dividing by $P(B \mid C)\,P(C)$ gives the result above.
+Equating them and dividing by $P(B \mid C) \cdot P(C)$ gives the result above.
 
 ---
 
@@ -342,9 +347,9 @@ Equating them and dividing by $P(B \mid C)\,P(C)$ gives the result above.
 
 Let $D$ = defective, $A$ = from Machine A.
 
-$$P(D) = P(D \mid A)\,P(A) + P(D \mid B)\,P(B) = 0.02 \times 0.6 + 0.05 \times 0.4 = 0.012 + 0.020 = 0.032$$
+$$P(D) = P(D \mid A) \cdot P(A) + P(D \mid B) \cdot P(B) = 0.02 \times 0.6 + 0.05 \times 0.4 = 0.012 + 0.020 = 0.032$$
 
-$$P(A \mid D) = \frac{P(D \mid A)\,P(A)}{P(D)} = \frac{0.02 \times 0.6}{0.032} = \frac{0.012}{0.032} = \mathbf{37.5\%}$$
+$$P(A \mid D) = \frac{P(D \mid A) \cdot P(A)}{P(D)} = \frac{0.02 \times 0.6}{0.032} = \frac{0.012}{0.032} = \mathbf{37.5\%}$$
 
 </details>
 
@@ -357,9 +362,9 @@ $$P(A \mid D) = \frac{P(D \mid A)\,P(A)}{P(D)} = \frac{0.02 \times 0.6}{0.032} =
 
 Let $S$ = spam, $F$ = contains "free".
 
-$$P(F) = P(F \mid S)\,P(S) + P(F \mid \lnot S)\,P(\lnot S) = 0.80 \times 0.30 + 0.10 \times 0.70 = 0.24 + 0.07 = 0.31$$
+$$P(F) = P(F \mid S) \cdot P(S) + P(F \mid \lnot S) \cdot P(\lnot S) = 0.80 \times 0.30 + 0.10 \times 0.70 = 0.24 + 0.07 = 0.31$$
 
-$$P(S \mid F) = \frac{P(F \mid S)\,P(S)}{P(F)} = \frac{0.80 \times 0.30}{0.31} = \frac{0.24}{0.31} \approx \mathbf{77.4\%}$$
+$$P(S \mid F) = \frac{P(F \mid S) \cdot P(S)}{P(F)} = \frac{0.80 \times 0.30}{0.31} = \frac{0.24}{0.31} \approx \mathbf{77.4\%}$$
 
 </details>
 
@@ -380,7 +385,7 @@ A bag is chosen at random (equal probability) and a ball drawn is **Red**. What 
 
 $$P(R) = \frac{3}{10} \times \frac{1}{3} + \frac{5}{10} \times \frac{1}{3} + \frac{8}{10} \times \frac{1}{3} = \frac{1}{30}(3 + 5 + 8) = \frac{16}{30} = \frac{8}{15}$$
 
-$$P(B_3 \mid R) = \frac{P(R \mid B_3)\,P(B_3)}{P(R)} = \frac{\tfrac{8}{10} \times \tfrac{1}{3}}{\tfrac{8}{15}} = \frac{\tfrac{8}{30}}{\tfrac{8}{15}} = \frac{8}{30} \times \frac{15}{8} = \mathbf{\frac{1}{2} = 50\%}$$
+$$P(B_3 \mid R) = \frac{P(R \mid B_3) \cdot P(B_3)}{P(R)} = \frac{\tfrac{8}{10} \times \tfrac{1}{3}}{\tfrac{8}{15}} = \frac{\tfrac{8}{30}}{\tfrac{8}{15}} = \frac{8}{30} \times \frac{15}{8} = \mathbf{\frac{1}{2} = 50\%}$$
 
 </details>
 
@@ -390,14 +395,14 @@ $$P(B_3 \mid R) = \frac{P(R \mid B_3)\,P(B_3)}{P(R)} = \frac{\tfrac{8}{10} \time
 
 | Concept | Formula |
 |---|---|
-| **Bayes' theorem** | $P(A \mid B) = \dfrac{P(B \mid A)\,P(A)}{P(B)}$ |
-| **Derivation identity** | $P(A \cap B) = P(A \mid B)\,P(B) = P(B \mid A)\,P(A)$ |
-| **Law of total probability** | $P(B) = \displaystyle\sum_i P(B \mid A_i)\,P(A_i)$ |
-| **Extended Bayes** | $P(A_i \mid B) = \dfrac{P(A_i)\,P(B \mid A_i)}{\sum_j P(A_j)\,P(B \mid A_j)}$ |
-| **Two-term form** | $P(A \mid B) = \dfrac{P(B \mid A)\,P(A)}{P(B \mid A)\,P(A) + P(B \mid \lnot A)\,P(\lnot A)}$ |
+| **Bayes' theorem** | $P(A \mid B) = \dfrac{P(B \mid A) \cdot P(A)}{P(B)}$ |
+| **Derivation identity** | $P(A \cap B) = P(A \mid B) \cdot P(B) = P(B \mid A) \cdot P(A)$ |
+| **Law of total probability** | $P(B) = \displaystyle\sum_i P(B \mid A_i) \cdot P(A_i)$ |
+| **Extended Bayes** | $P(A_i \mid B) = \dfrac{P(A_i) \cdot P(B \mid A_i)}{\sum_j P(A_j) \cdot P(B \mid A_j)}$ |
+| **Two-term form** | $P(A \mid B) = \dfrac{P(B \mid A) \cdot P(A)}{P(B \mid A) \cdot P(A) + P(B \mid \lnot A) \cdot P(\lnot A)}$ |
 | **Proportional form** | $P(A \mid B) \propto P(A) \cdot P(B \mid A)$ |
 | **Odds form** | $O(A \mid B) = O(A) \cdot \dfrac{P(B \mid A)}{P(B \mid \lnot A)}$ |
-| **Three-event form** | $P(A \mid B \cap C) = \dfrac{P(B \mid A \cap C)\,P(A \mid C)}{P(B \mid C)}$ |
+| **Three-event form** | $P(A \mid B \cap C) = \dfrac{P(B \mid A \cap C) \cdot P(A \mid C)}{P(B \mid C)}$ |
 
 ---
 
@@ -409,7 +414,7 @@ Bayes' theorem is the **direct mathematical foundation** of the Naive Bayes Clas
 
 Given a data point $\mathbf{x} = (x_1, x_2, \ldots, x_n)$ and class label $C$, the goal is to compute the **posterior**:
 
-$$P(C \mid \mathbf{x}) = \frac{P(\mathbf{x} \mid C)\,P(C)}{P(\mathbf{x})}$$
+$$P(C \mid \mathbf{x}) = \frac{P(\mathbf{x} \mid C) \cdot P(C)}{P(\mathbf{x})}$$
 
 This is exactly Bayes' theorem with $A = C$ (the class hypothesis) and $B = \mathbf{x}$ (the observed features as evidence).
 
@@ -421,7 +426,7 @@ $$P(\mathbf{x} \mid C) = \prod_{i=1}^{n} P(x_i \mid C)$$
 
 This gives the **MAP decision rule**:
 
-$$\boxed{\hat{C} = \arg\max_{C}\; P(C) \prod_{i=1}^{n} P(x_i \mid C)}$$
+$$\boxed{\hat{C} = \arg\max_{C} P(C) \prod_{i=1}^{n} P(x_i \mid C)}$$
 
 ### Mapping Bayes' Terms to the Classifier
 
@@ -432,12 +437,14 @@ $$\boxed{\hat{C} = \arg\max_{C}\; P(C) \prod_{i=1}^{n} P(x_i \mid C)}$$
 | $P(C \mid \mathbf{x})$ | **Posterior** | The quantity we maximise to classify |
 | $P(\mathbf{x})$ | **Evidence** | Same for all classes — dropped from $\arg\max$ |
 
+> [!NOTE]
 > **Why the evidence is ignored:** Since $P(\mathbf{x})$ is identical for all candidate classes, it does not affect which class has the highest posterior. The classifier only needs $P(C) \cdot P(\mathbf{x} \mid C)$.
 
 ---
 
 ## 14. References
 
+> [!NOTE]
 > **Primary reference:** The content and all diagrams in this chapter are adapted from [Bayes' Theorem](../Mathematics%20of%20Machine%20Learning/Bayes%27%20theorem/README.md) in the *Mathematics of Machine Learning* module.
 
 
@@ -462,5 +469,5 @@ $$\boxed{\hat{C} = \arg\max_{C}\; P(C) \prod_{i=1}^{n} P(x_i \mid C)}$$
 ---
 
 <p align="center">
-  ⬅️ <strong>Previous:</strong> <a href="Mutually%20Exclusive%20Events%20in%20Probability.md">Mutually Exclusive Events in Probability</a> &nbsp;&nbsp;|&nbsp;&nbsp; <strong>Next:</strong> <a href="Problem%20Based%20upon%20Bayes%20Theorem.md">Problem Based upon Bayes Theorem</a> ➡️
+  ⬅️ <strong>Previous:</strong> <a href="Mutually%20Exclusive%20Events%20in%20Probability.md">Mutually Exclusive Events in Probability</a> &nbsp&nbsp|&nbsp&nbsp <strong>Next:</strong> <a href="Problem%20Based%20upon%20Bayes%20Theorem.md">Problem Based upon Bayes Theorem</a> ➡️
 </p>

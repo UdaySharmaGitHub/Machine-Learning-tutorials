@@ -360,15 +360,15 @@ Conditional probability is the ***foundation*** of Bayes' Theorem. Bayes' Theore
 
 **Step 1 — Start with the two conditional probability equations:**
 
-$$P(A \mid B) = \frac{P(A \cap B)}{P(B)} \tag{1}$$
+$$P(A \mid B) = \frac{P(A \cap B)}{P(B)}$$
 
-$$P(B \mid A) = \frac{P(A \cap B)}{P(A)} \tag{2}$$
+$$P(B \mid A) = \frac{P(A \cap B)}{P(A)}$$
 
-**Step 2 — Rearrange equation (2) to express the joint probability:**
+**Step 2 — Rearrange the second equation to express the joint probability:**
 
-$$P(A \cap B) = P(B \mid A) \times P(A) \tag{3}$$
+$$P(A \cap B) = P(B \mid A) \times P(A)$$
 
-**Step 3 — Substitute (3) into (1):**
+**Step 3 — Substitute the joint probability expression into the first equation:**
 
 $$P(A \mid B) = \frac{P(B \mid A) \times P(A)}{P(B)}$$
 
@@ -562,7 +562,7 @@ Note: option D (1.1) is impossible — probabilities can never exceed 1.
 
 The Naive Bayes Classifier classifies a new data point $\mathbf{x} = (x_1, x_2, \ldots, x_n)$ by finding the class $C$ that maximizes the **posterior probability**:
 
-$$\hat{C} = \arg\max_C \; P(C \mid \mathbf{x})$$
+$$\hat{C} = \arg\max_C P(C \mid \mathbf{x})$$
 
 Applying Bayes' Theorem:
 
@@ -570,11 +570,11 @@ $$P(C \mid \mathbf{x}) = \frac{P(\mathbf{x} \mid C) \cdot P(C)}{P(\mathbf{x})}$$
 
 Since $P(\mathbf{x})$ is constant across all classes, it is dropped:
 
-$$\hat{C} = \arg\max_C \; P(C) \cdot P(\mathbf{x} \mid C)$$
+$$\hat{C} = \arg\max_C P(C) \cdot P(\mathbf{x} \mid C)$$
 
 Applying the **conditional independence assumption** (the "naive" part):
 
-$$\hat{C} = \arg\max_C \; P(C) \cdot \prod_{i=1}^{n} P(x_i \mid C)$$
+$$\hat{C} = \arg\max_C P(C) \cdot \prod_{i=1}^{n} P(x_i \mid C)$$
 
 Every term $P(x_i \mid C)$ is a **conditional probability** — the probability of observing feature $x_i$ given the class $C$.
 

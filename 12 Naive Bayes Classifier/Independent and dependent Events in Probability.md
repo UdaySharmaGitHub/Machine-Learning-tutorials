@@ -43,6 +43,7 @@
 | **Independent Events** | Two events where the outcome of one **does not affect** the probability of the other. $P(B \mid A) = P(B)$ |
 | **Dependent Events** | Two events where the outcome of one **does change** the probability of the other. $P(B \mid A) \neq P(B)$ |
 
+> [!TIP]
 > **Key test:** Compute $P(B)$ and $P(B \mid A)$. If they are equal, the events are independent. If they differ, the events are dependent.
 
 ---
@@ -60,8 +61,11 @@ $$P(\text{Die} = 6 \mid \text{Heads}) = P(\text{Die} = 6) = \frac{1}{6}$$
 
 The condition makes no difference — the probability stays the same.
 
+> [!NOTE]
 > **Formal definition:** Events $A$ and $B$ are **independent** if and only if:
+>
 > $$P(A \cap B) = P(A) \cdot P(B)$$
+>
 > This is equivalent to saying $P(B \mid A) = P(B)$ whenever $P(A) > 0$.
 
 ---
@@ -113,8 +117,11 @@ $$P(\text{2nd Ace} \mid \text{1st Ace drawn}) = \frac{3}{51} \neq \frac{4}{52} =
 
 The condition **does** make a difference — the probability is different after the first event.
 
+> [!NOTE]
 > **Formal definition:** Events $A$ and $B$ are **dependent** if and only if:
+>
 > $$P(A \cap B) \neq P(A) \cdot P(B)$$
+>
 > This is equivalent to saying $P(B \mid A) \neq P(B)$ — knowing $A$ occurred changes the probability of $B$.
 
 ---
@@ -187,6 +194,7 @@ The coin flip and die roll are **completely separate experiments**. The result o
 | **Formula** | $P(A \cap B) = P(A) \cdot P(B)$ | $P(A \cap B) = P(A) \cdot P(B \mid A)$ |
 | **Clue phrase** | "put back", "replaced", "reset" | "keep", "without replacing", "one by one" |
 
+> [!TIP]
 > **Rule of thumb:** If you see *"with replacement"* in a problem → independent. If you see *"without replacement"* → dependent.
 
 ---
@@ -435,6 +443,7 @@ This is exactly the **multiplication rule for independent events** — applied t
 | Requires knowing all joint conditional probabilities | Only requires per-feature conditional probabilities |
 | Computationally intractable for many features | Computationally efficient — scales linearly with features |
 
+> [!IMPORTANT]
 > **Why does it work in practice?** Even when features are not truly independent (e.g., words in a sentence), the *ranking* of class probabilities is often preserved. The classifier gets the right answer even if the probabilities themselves are miscalibrated.
 
 ---

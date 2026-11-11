@@ -400,13 +400,13 @@ Conditional probability is the ***foundation*** of Bayes' Theorem. Bayes' Theore
 
 **Step 1 — Start with the two conditional probability equations:**
 
-$$P(A \mid B) = \frac{P(A \cap B)}{P(B)} \tag{1}$$
+$$P(A \mid B) = \frac{P(A \cap B)}{P(B)}$$
 
-$$P(B \mid A) = \frac{P(A \cap B)}{P(A)} \tag{2}$$
+$$P(B \mid A) = \frac{P(A \cap B)}{P(A)}$$
 
 **Step 2 — Rearrange equation (2) to express the joint probability:**
 
-$$P(A \cap B) = P(B \mid A) \times P(A) \tag{3}$$
+$$P(A \cap B) = P(B \mid A) \times P(A)$$
 
 **Step 3 — Substitute (3) into (1):**
 

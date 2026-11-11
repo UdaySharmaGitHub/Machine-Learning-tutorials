@@ -48,7 +48,7 @@ $$B = \{x - \varepsilon < X < x + \varepsilon\}$$
 
 - will generally have **nonzero probability** and can therefore be conditioned on. We then take the limit:
 
-$$\lim_{\varepsilon \to 0} P\!\left(A \mid x - \varepsilon < X < x + \varepsilon\right) \tag{1}$$
+$$\lim_{\varepsilon \to 0} P\!\left(A \mid x - \varepsilon < X < x + \varepsilon\right)$$
 
 - For example, if two continuous random variables $X$ and $Y$ have a **joint density** $f_{X,Y}(x, y)$, then by ***L'Hôpital's rule*** and the ***Leibniz integral rule***, upon differentiation with respect to $\varepsilon$:
 
@@ -287,13 +287,13 @@ Let $\Omega$ be a **discrete sample space** with elementary events $\{\omega\}$,
 
 A **new probability distribution** must satisfy — for some scale factor $\alpha$:
 
-$$\omega \in B:\quad P(\omega \mid B) = \alpha\, P(\omega) \tag{1}$$
+$$\omega \in B:\quad P(\omega \mid B) = \alpha\, P(\omega)$$
 
-$$\omega \notin B:\quad P(\omega \mid B) = 0 \tag{2}$$
+$$\omega \notin B:\quad P(\omega \mid B) = 0$$
 
-$$\sum_{\omega \in \Omega} P(\omega \mid B) = 1 \tag{3}$$
+$$\sum_{\omega \in \Omega} P(\omega \mid B) = 1$$
 
-**Substituting (1) and (2) into (3) to solve for $\alpha$:**
+**Substituting the first two conditions into the normalisation requirement to solve for $\alpha$:**
 
 $$1 = \alpha \sum_{\omega \in B} P(\omega) = \alpha \cdot P(B) \quad \Longrightarrow \quad \alpha = \frac{1}{P(B)}$$
 
@@ -308,6 +308,32 @@ $$P(A \mid B) = \sum_{\omega \in A \cap B} P(\omega \mid B) + \underbrace{\sum_{
 $$\boxed{P(A \mid B) = \frac{P(A \cap B)}{P(B)}}$$
 
 This completes the **formal derivation** of the conditional probability formula from the ***Kolmogorov axioms***.
+
+---
+
+## Quick Revision — Important Formulas
+
+| # | Formula | Name / Context |
+|---|---------|----------------|
+| 1 | $P(A \mid B) = \dfrac{P(A \cap B)}{P(B)}$ | **Core definition** — conditional probability (requires $P(B) > 0$) |
+| 2 | $P(A_B) = \dfrac{P(A \cap B)}{P(B)}$ | **Conditional event** — Goodman–Nguyen–Van Fraassen formulation |
+| 3 | $\displaystyle\lim_{\varepsilon \to 0} P\!\left(A \mid x - \varepsilon < X < x + \varepsilon\right)$ | **Zero-probability conditioning** — limit approach for continuous $X$ |
+| 4 | $\displaystyle\lim_{\varepsilon \to 0} P\!\left(Y \in U \mid x_0 - \varepsilon < X < x_0 + \varepsilon\right) = \frac{\int_U f_{X,Y}(x_0,\,y)\,dy}{\int_\mathbb{R} f_{X,Y}(x_0,\,y)\,dy}$ | **Joint density conditioning** — via L'Hôpital and Leibniz |
+| 5 | $P(A \mid B_1 \equiv b_1, \ldots, B_m \equiv b_m) = \displaystyle\sum_{i=1}^{m} b_i\,P(A \mid B_i)$ | **Jeffrey conditionalization** — partial conditional probability |
+| 6 | $P(A \cap B) = P(A) \cdot P(B)$ | **Statistical independence** — preferred symmetrical definition |
+| 7 | $P(A \cap B \mid C) = P(A \mid C) \cdot P(B \mid C)$ | **Conditional independence** given event $C$ |
+| 8 | $P(B \mid A) = \dfrac{P(A \mid B)\cdot P(B)}{P(A)}$ | **Bayes' Theorem** — inverting conditional probability |
+| 9 | $P(A) = \displaystyle\sum_n P(A \mid B_n)\cdot P(B_n)$ | **Law of total probability** — marginalising over partition $(B_n)$ |
+
+**Key distinctions to remember:**
+
+| Concept | Condition | Implication |
+|---------|-----------|-------------|
+| **Dependent events** | $P(A \cap B) \neq P(A)\cdot P(B)$ | $P(B \mid A) \neq P(B)$ — knowledge of $A$ changes $B$ |
+| **Independent events** | $P(A \cap B) = P(A)\cdot P(B)$ | $P(B \mid A) = P(B)$ — knowledge of $A$ is irrelevant to $B$ |
+| **Mutually exclusive** | $P(A \cap B) = 0$ | $P(B \mid A) = 0$ — cannot be independent (unless impossible) |
+| **Positive association** | $P(A \cap B) > P(A)\cdot P(B)$ | $P(B \mid A) > P(B)$ |
+| **Negative association** | $P(A \cap B) < P(A)\cdot P(B)$ | $P(B \mid A) < P(B)$ |
 
 ---
 

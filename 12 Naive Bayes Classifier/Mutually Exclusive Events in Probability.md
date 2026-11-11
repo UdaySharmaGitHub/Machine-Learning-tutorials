@@ -37,8 +37,11 @@ Two events $A$ and $B$ are **mutually exclusive** if they **cannot happen at the
 - Rolling a die: you cannot roll a **2 AND a 5** on the same roll.
 - Drawing a card: drawing a **Heart AND a Spade** in one draw is impossible.
 
+> [!NOTE]
 > **Formal definition:** Events $A$ and $B$ are **mutually exclusive** (disjoint) if and only if:
+>
 > $$P(A \cap B) = 0$$
+>
 > The two events share **no outcomes** — their intersection is the empty set $\emptyset$.
 
 ### Key condition
@@ -85,6 +88,7 @@ For mutually exclusive events, $P(A \cup B) = P(A) + P(B)$ — there is **no dou
 | **Conditional probability** | $P(B \mid A) = 0$ and $P(A \mid B) = 0$ |
 | **Dependence** | ME events are always **dependent** — knowing one occurred tells you the other did NOT |
 
+> [!IMPORTANT]
 > **Key insight:** Mutually exclusive events are **always dependent**. Knowing that one event occurred gives you definite information about the other — it cannot happen. This is the **opposite** of independence.
 
 ---
@@ -167,6 +171,7 @@ If $A$ and $B$ are mutually exclusive, the following probability rules apply:
 | **Complement of union** | $P((A \cup B)') = 1 - P(A \cup B)$ | Probability that neither event occurs |
 | **Exhaustive + ME** | $P(A) + P(B) = 1$ | Only if $A$ and $B$ cover all outcomes |
 
+> [!NOTE]
 > **Note:** Simple events — events with a single possible outcome — are **always** mutually exclusive with every other simple event in the same experiment.
 
 ---
@@ -193,6 +198,7 @@ $$\boxed{P(B \mid A) = 0 \quad \text{for any two mutually exclusive events}}$$
 
 These two terms are **frequently confused** but describe fundamentally different relationships:
 
+> [!NOTE]
 > **Mutually exclusive:** The events **cannot both occur** — if one happens, the other is **impossible** ($P(B \mid A) = 0$).
 >
 > **Independent:** The events **can both occur** — one happening gives **no information** about the other ($P(B \mid A) = P(B)$).
@@ -214,6 +220,7 @@ These two terms are **frequently confused** but describe fundamentally different
 | **Type of relationship** | Always **dependent** | **Independent** (by definition) |
 | **Classic example** | Heads vs Tails on one coin flip | Flipping two separate coins |
 
+> [!CAUTION]
 > **Common mistake:** Thinking mutually exclusive means independent. They are actually **opposite extremes**:
 > - ME events are **maximally dependent** — if one occurs, the other has probability **zero**.
 > - Independent events have **no dependence** — one occurring tells you nothing about the other.
@@ -418,6 +425,7 @@ This sum works precisely because the classes are **disjoint** — no double-coun
 
 $$\hat{C} = \arg\max_{C} \underbrace{P(C)}_{\text{prior}} \cdot \underbrace{\prod_{i=1}^{n} P(x_i \mid C)}_{\text{independence assumption}}$$
 
+> [!IMPORTANT]
 > **Key distinction:** Naive Bayes assumes features are **independent** (given class), while class labels are **mutually exclusive**. These are two separate probability concepts applied to two different parts of the model.
 
 ---

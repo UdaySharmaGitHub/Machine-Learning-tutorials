@@ -31,12 +31,13 @@
 Directly computing this is hard — ***you would need labelled examples of every possible combination of features.*** 
 - Bayes' Theorem provides a smarter path by **flipping the question**:
 
-$$\boxed{P(C \mid X) \;\propto\; P(C) \cdot P(X \mid C)}$$
+$$\boxed{P(C \mid X) \propto P(C) \cdot P(X \mid C)}$$
 
 - Expanding the likelihood with the **naive independence assumption** gives the complete decision rule:
 
-$$\boxed{\hat{C} \;=\; \arg\max_{C} \;\Bigl[\, P(C) \;\cdot\; \prod_{i=1}^{n} P(x_i \mid C) \,\Bigr]}$$
+$$\boxed{\hat{C} = \arg\max_{C} \Bigl[ P(C) \cdot \prod_{i=1}^{n} P(x_i \mid C) \Bigr]}$$
 
+> [!NOTE]
 > **From Bayes' Theorem → Naive Bayes — the exact moment of conversion:**
 >
 > | Step | Formula | What it is |
@@ -68,6 +69,7 @@ flowchart LR
     C --> D["🏆 Predicted Class<br/>argmax Score(C)"]
 ```
 
+> [!TIP]
 > **Key insight:** We never directly compute $P(C \mid X)$. We compute the proportional score $P(C) \cdot P(X \mid C)$ for each class and pick the winner. The $P(X)$ denominator is the same for all classes, so it cancels when comparing.
 
 ---
@@ -78,6 +80,7 @@ The best way to understand Naive Bayes is to think like a human making a quick j
 
 **Scenario:** You receive an email:
 
+> [!NOTE]
 > *Subject: Congratulations! You have won a lottery!*
 >
 > *"You are a lucky winner! Claim your FREE prize now. Click here to collect your reward."*
@@ -100,6 +103,7 @@ You mentally **combine** all these clues and arrive at a decision.
 
 It uses the **frequency of features in past labelled data** to estimate $P(C \mid \text{features})$, then picks the most probable class.
 
+> [!TIP]
 > **The analogy in full:** Your brain is the trained model. Past email experience is the training data. Each word is a feature. Your gut feeling about how spam-like the email is = the posterior probability.
 
 ---
@@ -122,6 +126,7 @@ The probability columns are the **likelihoods** the model stores. Notice that "F
 
 When a new email arrives containing *"Free", "Lottery", "Winner"*, it asks:
 
+> [!NOTE]
 > *"In training data, how often did Spam emails contain each of these words — versus Ham emails?"*
 
 That question is the **likelihood** — and it is the key signal.
@@ -174,6 +179,7 @@ For the spam example:
 
 $$P(\text{free, lottery, winner} \mid \text{Spam}) \approx P(\text{free} \mid \text{Spam}) \times P(\text{lottery} \mid \text{Spam}) \times P(\text{winner} \mid \text{Spam})$$
 
+> [!IMPORTANT]
 > **Why "naive"?** In reality, "free", "win", and "prize" often co-occur — they are correlated. The model ignores this dependency. It is a simplifying assumption, not a claim about reality.
 >
 > **Crucially**, the model does **not** assume features are always independent — only **conditionally independent given the class label**.
@@ -238,8 +244,10 @@ $$P(\text{Spam} \mid \text{email}) = \frac{0.1344}{0.1344 + 0.00005} \approx 99.
 | Spam | 40% | **99.96%** |
 | Ham | 60% | 0.04% |
 
+> [!NOTE]
 > The model started with a 40% prior on Spam (baseline from training data). After observing three strongly spam-associated words, it updated its belief to nearly 100%. **This is Bayesian reasoning — evidence shifts beliefs, it doesn't replace them.**
 
+> [!NOTE]
 > The model never explicitly learned that these three words equal spam. It inferred that from their **statistical patterns** in the training data alone.
 
 ---
@@ -296,6 +304,7 @@ The three main variants differ only in the assumed **distribution** of each $P(x
 | **Multinomial NB** | Counts / frequencies | Multinomial | Text classification, word counts, TF-IDF |
 | **Bernoulli NB** | Binary (0 or 1) | Bernoulli | Word presence/absence, click data, symptom flags |
 
+> [!NOTE]
 > Each variant is covered in depth in [Naive Bayes Classifier](Naive%20Bayes%20Classifier.md).
 
 ---
@@ -352,6 +361,7 @@ Naive Bayes cannot learn that "not good" means something different from "good". 
 
 The entire intuition in one sentence:
 
+> [!IMPORTANT]
 > **Naive Bayes looks at how consistent the observed features are with each class (likelihood), combines that with how common each class is (prior), and picks the class whose combined evidence is strongest.**
 
 ```mermaid
@@ -361,16 +371,11 @@ flowchart TD
     B --> D["Score(C) = P(C) × ∏ P(xᵢ|C)"]
     C --> D
     D --> E["🏆 Predict: argmax Score(C)"]
-
-    style A fill:#e0f2fe,stroke:#0284c7
-    style B fill:#dbeafe,stroke:#3b82f6
-    style C fill:#dcfce7,stroke:#16a34a
-    style D fill:#fef9c3,stroke:#ca8a04
-    style E fill:#fae8ff,stroke:#a855f7
 ```
 
 **Covered in subsequent chapters — not here:**
 
+> [!NOTE]
 > - Formal MAP derivation and log-space computation
 > - Laplace smoothing formulas and worked examples
 > - Gaussian NB parameter estimation ($\mu$, $\sigma^2$ per feature per class)
