@@ -1,0 +1,88 @@
+<svg viewBox="0 0 760 295" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', system-ui, sans-serif">
+  <defs>
+    <marker id="ra" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#dc2626"/>
+    </marker>
+    <marker id="rb" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto-start-reverse">
+      <polygon points="0 0, 8 3, 0 6" fill="#dc2626"/>
+    </marker>
+    <marker id="ga" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#22c55e"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="760" height="295" fill="#f8fafc" rx="12"/>
+
+  <!-- Title -->
+  <text x="380" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">The "Naive" Assumption — Conditional Independence</text>
+
+  <!-- Divider -->
+  <line x1="380" y1="38" x2="380" y2="278" stroke="#e2e8f0" stroke-width="1.5" stroke-dasharray="5,4"/>
+
+  <!-- ── LEFT PANEL ── -->
+  <text x="190" y="54" text-anchor="middle" font-size="11" font-weight="700" fill="#dc2626">Without Naive Assumption</text>
+  <text x="190" y="69" text-anchor="middle" font-size="9.5" fill="#991b1b">Joint probability — must model all dependencies</text>
+
+  <!-- Feature nodes -->
+  <circle cx="110" cy="120" r="30" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="110" y="117" text-anchor="middle" font-size="10" font-weight="700" fill="#7f1d1d">"free"</text>
+  <text x="110" y="130" text-anchor="middle" font-size="8.5" fill="#dc2626">x₁</text>
+
+  <circle cx="270" cy="120" r="30" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="270" y="117" text-anchor="middle" font-size="10" font-weight="700" fill="#7f1d1d">"win"</text>
+  <text x="270" y="130" text-anchor="middle" font-size="8.5" fill="#dc2626">x₂</text>
+
+  <circle cx="190" cy="210" r="30" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="190" y="207" text-anchor="middle" font-size="10" font-weight="700" fill="#7f1d1d">"lottery"</text>
+  <text x="190" y="220" text-anchor="middle" font-size="8.5" fill="#dc2626">x₃</text>
+
+  <!-- Bidirectional dependency arrows -->
+  <line x1="138" y1="130" x2="162" y2="155" stroke="#dc2626" stroke-width="1.3" marker-end="url(#ra)" marker-start="url(#rb)"/>
+  <line x1="242" y1="130" x2="218" y2="155" stroke="#dc2626" stroke-width="1.3" marker-end="url(#ra)" marker-start="url(#rb)"/>
+  <line x1="140" y1="108" x2="240" y2="108" stroke="#fca5a5" stroke-width="1.1" stroke-dasharray="4,3" marker-end="url(#ra)" marker-start="url(#rb)"/>
+  <line x1="125" y1="145" x2="165" y2="195" stroke="#fca5a5" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="255" y1="145" x2="215" y2="195" stroke="#fca5a5" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <!-- Result box -->
+  <rect x="60" y="250" width="260" height="24" rx="5" fill="#fee2e2" stroke="#dc2626" stroke-width="1"/>
+  <text x="190" y="265" text-anchor="middle" font-size="9" fill="#7f1d1d">P(x₁, x₂, x₃ | C)  — exponential to compute</text>
+
+  <text x="190" y="284" text-anchor="middle" font-size="9.5" font-weight="700" fill="#dc2626">❌  Intractable for large feature sets</text>
+
+  <!-- ── RIGHT PANEL ── -->
+  <text x="570" y="54" text-anchor="middle" font-size="11" font-weight="700" fill="#16a34a">With Naive Assumption</text>
+  <text x="570" y="69" text-anchor="middle" font-size="9.5" fill="#14532d">Conditional independence — simple product</text>
+
+  <!-- Three independent feature boxes -->
+  <rect x="404" y="88" width="82" height="50" rx="7" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="445" y="109" text-anchor="middle" font-size="10" font-weight="700" fill="#15803d">"free"</text>
+  <text x="445" y="126" text-anchor="middle" font-size="9" fill="#16a34a">P(x₁|C)</text>
+
+  <rect x="509" y="88" width="82" height="50" rx="7" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="550" y="109" text-anchor="middle" font-size="10" font-weight="700" fill="#15803d">"win"</text>
+  <text x="550" y="126" text-anchor="middle" font-size="9" fill="#16a34a">P(x₂|C)</text>
+
+  <rect x="614" y="88" width="90" height="50" rx="7" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="659" y="109" text-anchor="middle" font-size="10" font-weight="700" fill="#15803d">"lottery"</text>
+  <text x="659" y="126" text-anchor="middle" font-size="9" fill="#16a34a">P(x₃|C)</text>
+
+  <!-- × operators -->
+  <text x="497" y="118" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">×</text>
+  <text x="605" y="118" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">×</text>
+
+  <!-- Arrow down -->
+  <line x1="570" y1="138" x2="570" y2="170" stroke="#22c55e" stroke-width="1.5" marker-end="url(#ga)"/>
+
+  <!-- Result box -->
+  <rect x="430" y="173" width="280" height="38" rx="7" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="570" y="190" text-anchor="middle" font-size="9.5" font-weight="700" fill="#14532d">P(x₁|C) × P(x₂|C) × P(x₃|C)</text>
+  <text x="570" y="204" text-anchor="middle" font-size="9" fill="#15803d">= product of n independent terms</text>
+
+  <!-- Formula label -->
+  <rect x="400" y="220" width="320" height="30" rx="5" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
+  <text x="560" y="234" text-anchor="middle" font-size="9" fill="#15803d" font-style="italic">P(x₁,…,xₙ | C) = ∏ᵢ P(xᵢ | C)</text>
+  <text x="560" y="246" text-anchor="middle" font-size="8.5" fill="#16a34a">scales linearly with n features</text>
+
+  <text x="570" y="284" text-anchor="middle" font-size="9.5" font-weight="700" fill="#16a34a">✓  Linear complexity — works with 10,000+ features</text>
+</svg>

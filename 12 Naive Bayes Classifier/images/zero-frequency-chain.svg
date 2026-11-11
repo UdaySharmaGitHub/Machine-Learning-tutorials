@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 400" width="860" height="400">
+  <!-- Background -->
+  <rect width="860" height="400" fill="#f8fafc" rx="12" stroke="#e2e8f0" stroke-width="1"/>
+
+  <!-- Title -->
+  <text x="430" y="28" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#1e293b">Zero-Frequency Problem — Step by Step</text>
+  <text x="430" y="44" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#64748b">New email: "Free Win Offer"  |  Predicting: Spam or Ham?</text>
+
+  <!-- ══════════ STEP 1: Training Data ══════════ -->
+  <text x="30" y="68" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0369a1">① Training Data — Spam class  (N_spam = 3 emails)</text>
+
+  <!-- Table header -->
+  <rect x="30" y="74" width="235" height="22" rx="2" fill="#e2e8f0"/>
+  <text x="118" y="89" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#475569">Feature</text>
+  <text x="215" y="89" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#475569">Yes in Spam</text>
+
+  <!-- Row: Free -->
+  <rect x="30" y="96" width="235" height="22" fill="white"/>
+  <text x="118" y="111" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#1e293b">Free</text>
+  <text x="215" y="111" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#15803d">2</text>
+
+  <!-- Row: Win -->
+  <rect x="30" y="118" width="235" height="22" fill="#f8fafc"/>
+  <text x="118" y="133" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#1e293b">Win</text>
+  <text x="215" y="133" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#15803d">2</text>
+
+  <!-- Row: Offer (RED) -->
+  <rect x="30" y="140" width="235" height="22" fill="#fee2e2"/>
+  <text x="118" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#991b1b">Offer</text>
+  <text x="215" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#dc2626">0</text>
+
+  <!-- Table border + column line -->
+  <rect x="30" y="74" width="235" height="88" rx="2" fill="none" stroke="#e2e8f0" stroke-width="1.5"/>
+  <line x1="168" y1="74" x2="168" y2="162" stroke="#e2e8f0" stroke-width="1"/>
+
+  <!-- ══════════ STEP 2: Compute P(Offer|Spam) ══════════ -->
+  <text x="300" y="68" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0369a1">② Compute P(Offer | Spam)</text>
+
+  <rect x="300" y="74" width="265" height="88" rx="6" fill="white" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="432" y="97" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#475569">P(Offer | Spam)  =  Count / N_spam</text>
+  <line x1="315" y1="104" x2="549" y2="104" stroke="#f1f5f9" stroke-width="1"/>
+  <text x="432" y="122" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#475569">=  0  /  3</text>
+  <line x1="315" y1="129" x2="549" y2="129" stroke="#f1f5f9" stroke-width="1"/>
+  <rect x="342" y="133" width="180" height="24" rx="4" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="432" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#dc2626">= 0  ⚠ zero!</text>
+
+  <!-- Arrow table → step 2 -->
+  <line x1="267" y1="128" x2="297" y2="128" stroke="#94a3b8" stroke-width="1.5"/>
+  <polygon points="293,124 301,128 293,132" fill="#94a3b8"/>
+
+  <!-- ══════════ STEP 3: Score(Spam) collapses ══════════ -->
+  <text x="600" y="68" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0369a1">③ Score(Spam) Collapses</text>
+
+  <rect x="600" y="74" width="242" height="88" rx="6" fill="#fef2f2" stroke="#dc2626" stroke-width="2.5"/>
+  <text x="721" y="96" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#991b1b">0.5 × 0.667 × 0.667 × 0</text>
+  <line x1="616" y1="103" x2="826" y2="103" stroke="#fca5a5" stroke-width="1"/>
+  <text x="721" y="122" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#991b1b">Score(Ham)  =  0.0556  ≠ 0</text>
+  <line x1="616" y1="130" x2="826" y2="130" stroke="#fca5a5" stroke-width="1"/>
+  <text x="721" y="152" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#dc2626">Score(Spam) = 0</text>
+
+  <!-- Arrow step 2 → result -->
+  <line x1="567" y1="128" x2="597" y2="128" stroke="#dc2626" stroke-width="1.5"/>
+  <polygon points="593,124 601,128 593,132" fill="#dc2626"/>
+
+  <!-- Arrow from P(Offer)=0 result down to chain -->
+  <path d="M432 160 L432 185" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <polygon points="427,182 432,194 437,182" fill="#dc2626"/>
+
+  <!-- ══════════ Chain Diagram ══════════ -->
+  <text x="30" y="210" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#475569">Multiplication chain — why one zero destroys the entire Score(Spam):</text>
+
+  <!-- P(Spam) -->
+  <rect x="18" y="218" width="88" height="58" rx="6" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+  <text x="62" y="238" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#0369a1">P(Spam)</text>
+  <text x="62" y="258" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#0c4a6e">0.5</text>
+
+  <text x="116" y="250" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#94a3b8">×</text>
+
+  <!-- P(Free|Spam) -->
+  <rect x="130" y="218" width="108" height="58" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="184" y="234" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#166534">P(Free|Spam)</text>
+  <text x="184" y="247" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#166534">= 2/3</text>
+  <text x="184" y="265" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#15803d">0.667</text>
+
+  <text x="248" y="250" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#94a3b8">×</text>
+
+  <!-- P(Win|Spam) -->
+  <rect x="262" y="218" width="108" height="58" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="316" y="234" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#166534">P(Win|Spam)</text>
+  <text x="316" y="247" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#166534">= 2/3</text>
+  <text x="316" y="265" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#15803d">0.667</text>
+
+  <text x="380" y="250" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#94a3b8">×</text>
+
+  <!-- P(Offer|Spam) RED -->
+  <rect x="393" y="210" width="122" height="74" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width="3"/>
+  <text x="454" y="230" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#991b1b">P(Offer|Spam)</text>
+  <text x="454" y="244" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#991b1b">= 0/3</text>
+  <text x="454" y="270" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#dc2626">0</text>
+  <circle cx="506" cy="218" r="11" fill="#dc2626"/>
+  <text x="506" y="223" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white">!</text>
+
+  <text x="526" y="250" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#94a3b8">=</text>
+
+  <!-- Result = 0 -->
+  <rect x="540" y="210" width="160" height="74" rx="6" fill="#fef2f2" stroke="#dc2626" stroke-width="3"/>
+  <text x="620" y="236" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#991b1b">Score(Spam)</text>
+  <text x="620" y="268" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#dc2626">= 0</text>
+
+  <!-- Contrast: Ham score -->
+  <rect x="720" y="218" width="122" height="58" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="781" y="234" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#166534">Score(Ham)</text>
+  <text x="781" y="248" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#166534">0.5×0.333×0.333×1</text>
+  <text x="781" y="265" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#16a34a">≈ 0.0556</text>
+
+  <text x="711" y="250" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#64748b">vs</text>
+
+  <!-- "anything × 0 = 0" label -->
+  <path d="M454 287 L454 308" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <rect x="270" y="308" width="370" height="20" rx="10" fill="#fff1f2" stroke="#fca5a5" stroke-width="1"/>
+  <text x="455" y="322" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#991b1b">Anything × 0 = 0 — one unseen word destroys the entire Spam score</text>
+
+  <!-- Bottom summary box -->
+  <rect x="18" y="343" width="822" height="44" rx="8" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="429" y="360" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#475569">"Free" and "Win" both appear frequently in Spam — yet Score(Spam) = 0 because "Offer" was never seen in Spam training data.</text>
+  <text x="429" y="377" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#dc2626" font-weight="bold">Classifier predicts Ham  ←  a wrong prediction caused entirely by the zero-frequency problem.</text>
+</svg>

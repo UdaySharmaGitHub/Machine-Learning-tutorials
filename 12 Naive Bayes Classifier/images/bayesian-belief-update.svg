@@ -1,0 +1,56 @@
+<svg viewBox="0 0 780 180" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', system-ui, sans-serif">
+  <defs>
+    <marker id="arr" markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 9 3.5, 0 7" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="780" height="180" fill="#f8fafc" rx="12"/>
+
+  <!-- Title -->
+  <text x="390" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">Bayesian Belief Update — How Naive Bayes Scores Each Class</text>
+
+  <!-- Box 1: Prior -->
+  <rect x="18" y="44" width="148" height="88" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="92" y="66" text-anchor="middle" font-size="11" font-weight="700" fill="#1d4ed8">① Prior</text>
+  <text x="92" y="89" text-anchor="middle" font-size="22" font-weight="700" fill="#1e40af">P(C)</text>
+  <text x="92" y="108" text-anchor="middle" font-size="9.5" fill="#3b82f6">How common is</text>
+  <text x="92" y="121" text-anchor="middle" font-size="9.5" fill="#3b82f6">each class?</text>
+
+  <!-- × operator -->
+  <text x="192" y="96" text-anchor="middle" font-size="26" font-weight="700" fill="#64748b">×</text>
+  <line x1="166" y1="88" x2="175" y2="88" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="209" y1="88" x2="218" y2="88" stroke="#94a3b8" stroke-width="1.5"/>
+
+  <!-- Box 2: Likelihood -->
+  <rect x="218" y="44" width="168" height="88" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="302" y="66" text-anchor="middle" font-size="11" font-weight="700" fill="#15803d">② Likelihood</text>
+  <text x="302" y="89" text-anchor="middle" font-size="22" font-weight="700" fill="#166534">P(X|C)</text>
+  <text x="302" y="108" text-anchor="middle" font-size="9.5" fill="#22c55e">How typical are features</text>
+  <text x="302" y="121" text-anchor="middle" font-size="9.5" fill="#22c55e">if item belongs to C?</text>
+
+  <!-- ∝ arrow -->
+  <line x1="386" y1="88" x2="426" y2="88" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="406" y="82" text-anchor="middle" font-size="11" fill="#64748b">∝</text>
+
+  <!-- Box 3: Posterior Score -->
+  <rect x="430" y="44" width="168" height="88" rx="8" fill="#fef9c3" stroke="#eab308" stroke-width="1.5"/>
+  <text x="514" y="66" text-anchor="middle" font-size="11" font-weight="700" fill="#92400e">③ Posterior Score</text>
+  <text x="514" y="86" text-anchor="middle" font-size="14" font-weight="700" fill="#92400e">P(C) · P(X|C)</text>
+  <text x="514" y="104" text-anchor="middle" font-size="9.5" fill="#a16207">Unnormalized class score</text>
+  <text x="514" y="117" text-anchor="middle" font-size="9.5" fill="#a16207">computed for every C</text>
+
+  <!-- → arrow -->
+  <line x1="598" y1="88" x2="636" y2="88" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Box 4: Prediction -->
+  <rect x="640" y="44" width="122" height="88" rx="8" fill="#fae8ff" stroke="#a855f7" stroke-width="1.5"/>
+  <text x="701" y="66" text-anchor="middle" font-size="11" font-weight="700" fill="#7e22ce">④ Prediction</text>
+  <text x="701" y="86" text-anchor="middle" font-size="13" font-weight="700" fill="#6b21a8">argmax</text>
+  <text x="701" y="104" text-anchor="middle" font-size="14" fill="#6b21a8">Score(C)</text>
+  <text x="701" y="121" text-anchor="middle" font-size="9.5" fill="#a855f7">Pick highest class</text>
+
+  <!-- Bottom note -->
+  <text x="390" y="160" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-style="italic">Repeat for every class C — the winner is the predicted label</text>
+</svg>

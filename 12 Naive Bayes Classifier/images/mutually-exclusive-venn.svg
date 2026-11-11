@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 300" width="540" height="300" font-family="'Segoe UI', Arial, sans-serif">
+
+  <!-- Background -->
+  <rect width="540" height="300" fill="#f8f9fa" rx="12"/>
+
+  <!-- Title -->
+  <text x="270" y="28" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a1a2e">Mutually Exclusive Events — Venn Diagram</text>
+
+  <!-- Sample space rectangle -->
+  <rect x="30" y="45" width="480" height="220" rx="10" fill="none" stroke="#aaa" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="490" y="58" text-anchor="end" font-size="10" fill="#999">Sample Space S</text>
+
+  <!-- Circle A -->
+  <circle cx="155" cy="155" r="90" fill="#dbeafe" stroke="#3b82f6" stroke-width="2.5"/>
+  <text x="155" y="148" text-anchor="middle" font-size="24" font-weight="bold" fill="#1d4ed8">A</text>
+  <text x="155" y="170" text-anchor="middle" font-size="11" fill="#1e40af">e.g. Heads</text>
+
+  <!-- Circle B -->
+  <circle cx="385" cy="155" r="90" fill="#fee2e2" stroke="#ef4444" stroke-width="2.5"/>
+  <text x="385" y="148" text-anchor="middle" font-size="24" font-weight="bold" fill="#dc2626">B</text>
+  <text x="385" y="170" text-anchor="middle" font-size="11" fill="#b91c1c">e.g. Tails</text>
+
+  <!-- Gap annotation -->
+  <line x1="245" y1="155" x2="295" y2="155" stroke="#999" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="270" y="143" text-anchor="middle" font-size="18" fill="#bbb">∅</text>
+  <text x="270" y="163" text-anchor="middle" font-size="9" fill="#aaa">empty</text>
+
+  <!-- Formula label at bottom -->
+  <rect x="165" y="260" width="210" height="28" rx="7" fill="#fff" stroke="#94a3b8" stroke-width="1.2"/>
+  <text x="270" y="278" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">P(A ∩ B) = 0</text>
+
+</svg>

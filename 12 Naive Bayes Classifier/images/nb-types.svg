@@ -1,0 +1,67 @@
+<svg viewBox="0 0 760 230" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', system-ui, sans-serif">
+  <!-- Background -->
+  <rect width="760" height="230" fill="#f8fafc" rx="12"/>
+
+  <!-- Title -->
+  <text x="380" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">Three Variants of Naive Bayes Classifiers</text>
+
+  <!-- ── Panel 1: Gaussian NB ── -->
+  <rect x="18" y="40" width="228" height="172" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="132" y="63" text-anchor="middle" font-size="12" font-weight="700" fill="#1d4ed8">Gaussian NB</text>
+  <text x="132" y="79" text-anchor="middle" font-size="9.5" fill="#3b82f6">Continuous numerical features</text>
+
+  <!-- Bell curve -->
+  <path d="M 50,155 C 60,155 80,90 132,85 C 184,90 204,155 214,155" fill="#bfdbfe" stroke="#3b82f6" stroke-width="2" fill-opacity="0.6"/>
+  <line x1="48" y1="155" x2="216" y2="155" stroke="#93c5fd" stroke-width="1"/>
+  <line x1="132" y1="85" x2="132" y2="155" stroke="#3b82f6" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="132" y="148" text-anchor="middle" font-size="9" fill="#1d4ed8">μ</text>
+  <text x="132" y="168" text-anchor="middle" font-size="9.5" fill="#1d4ed8">P(xᵢ|C) ~ 𝒩(μ, σ²)</text>
+
+  <text x="132" y="188" text-anchor="middle" font-size="9" fill="#1e40af">✦ Height, weight, temperature</text>
+  <text x="132" y="201" text-anchor="middle" font-size="9" fill="#1e40af">✦ Sensor readings, measurements</text>
+
+  <!-- ── Panel 2: Multinomial NB ── -->
+  <rect x="266" y="40" width="228" height="172" rx="10" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="380" y="63" text-anchor="middle" font-size="12" font-weight="700" fill="#15803d">Multinomial NB</text>
+  <text x="380" y="79" text-anchor="middle" font-size="9.5" fill="#22c55e">Count / frequency features</text>
+
+  <!-- Bar chart -->
+  <rect x="292" y="128" width="18" height="27" fill="#86efac" stroke="#22c55e" stroke-width="1"/>
+  <rect x="316" y="112" width="18" height="43" fill="#4ade80" stroke="#22c55e" stroke-width="1"/>
+  <rect x="340" y="96" width="18" height="59" fill="#22c55e" stroke="#16a34a" stroke-width="1"/>
+  <rect x="364" y="113" width="18" height="42" fill="#4ade80" stroke="#22c55e" stroke-width="1"/>
+  <rect x="388" y="104" width="18" height="51" fill="#86efac" stroke="#22c55e" stroke-width="1"/>
+  <rect x="412" y="130" width="18" height="25" fill="#86efac" stroke="#22c55e" stroke-width="1"/>
+  <rect x="436" y="119" width="18" height="36" fill="#4ade80" stroke="#22c55e" stroke-width="1"/>
+  <line x1="288" y1="155" x2="460" y2="155" stroke="#16a34a" stroke-width="1"/>
+  <text x="380" y="168" text-anchor="middle" font-size="9.5" fill="#15803d">word frequencies / counts</text>
+
+  <text x="380" y="188" text-anchor="middle" font-size="9" fill="#166534">✦ Spam detection, news topics</text>
+  <text x="380" y="201" text-anchor="middle" font-size="9" fill="#166534">✦ Document classification, NLP</text>
+
+  <!-- ── Panel 3: Bernoulli NB ── -->
+  <rect x="514" y="40" width="228" height="172" rx="10" fill="#fae8ff" stroke="#a855f7" stroke-width="1.5"/>
+  <text x="628" y="63" text-anchor="middle" font-size="12" font-weight="700" fill="#7e22ce">Bernoulli NB</text>
+  <text x="628" y="79" text-anchor="middle" font-size="9.5" fill="#a855f7">Binary features (0 or 1)</text>
+
+  <!-- Binary grid -->
+  <g font-size="15" font-weight="700" text-anchor="middle">
+    <text x="547" y="118" fill="#7e22ce">1</text>
+    <text x="575" y="118" fill="#c4b5fd">0</text>
+    <text x="603" y="118" fill="#7e22ce">1</text>
+    <text x="631" y="118" fill="#c4b5fd">0</text>
+    <text x="659" y="118" fill="#7e22ce">1</text>
+    <text x="687" y="118" fill="#c4b5fd">0</text>
+
+    <text x="547" y="140" fill="#c4b5fd">0</text>
+    <text x="575" y="140" fill="#7e22ce">1</text>
+    <text x="603" y="140" fill="#7e22ce">1</text>
+    <text x="631" y="140" fill="#c4b5fd">0</text>
+    <text x="659" y="140" fill="#c4b5fd">0</text>
+    <text x="687" y="140" fill="#7e22ce">1</text>
+  </g>
+  <text x="628" y="158" text-anchor="middle" font-size="9.5" fill="#7e22ce">word present (1) / absent (0)</text>
+
+  <text x="628" y="188" text-anchor="middle" font-size="9" fill="#6b21a8">✦ Word presence, click events</text>
+  <text x="628" y="201" text-anchor="middle" font-size="9" fill="#6b21a8">✦ Symptom flags, ad impressions</text>
+</svg>
