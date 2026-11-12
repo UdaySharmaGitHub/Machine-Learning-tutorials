@@ -211,7 +211,7 @@ This email has the classic spam-like keywords "Free" and "Win" but does **not** 
 
 ### The Naive Bayes Decision Rule
 
-$$\boxed{\hat{y} = \arg\max_{C_k}\; P(C_k) \cdot \prod_{i=1}^{n} P(x_i \mid C_k)}$$
+$$\boxed{\hat{y} = \arg\max_{C_k} P(C_k) \cdot \prod_{i=1}^{n} P(x_i \mid C_k)}$$
 
 > [!NOTE]
 > We are using **Bernoulli NB**, so we substitute the **actual feature value** (Yes or No) into each $P(x_i \mid C_k)$ term. For example, Free = Yes → use $P(\text{Free=Yes} \mid C_k)$; Offer = No → use $P(\text{Offer=No} \mid C_k)$.
@@ -222,13 +222,13 @@ $$\text{Score(Spam)} = P(\text{Spam}) \times P(\text{Free=Yes} \mid \text{Spam})
 
 Substituting values:
 
-$$= \frac{1}{2} \;\times\; \frac{5}{7} \;\times\; \frac{5}{7} \;\times\; \frac{7}{7} \;\times\; \frac{3}{7}$$
+$$= \frac{1}{2} \times \frac{5}{7} \times \frac{5}{7} \times \frac{7}{7} \times \frac{3}{7}$$
 
-$$= \frac{1}{2} \;\times\; \frac{5 \times 5 \times 7 \times 3}{7^4}$$
+$$= \frac{1}{2} \times \frac{5 \times 5 \times 7 \times 3}{7^4}$$
 
-$$= \frac{1}{2} \;\times\; \frac{525}{2401}$$
+$$= \frac{1}{2} \times \frac{525}{2401}$$
 
-$$= \frac{1}{2} \;\times\; 0.21866 = \boxed{0.10933}$$
+$$= \frac{1}{2} \times 0.21866 = \boxed{0.10933}$$
 
 ### 7.2 Score for Ham
 
@@ -236,21 +236,25 @@ $$\text{Score(Ham)} = P(\text{Ham}) \times P(\text{Free=Yes} \mid \text{Ham}) \t
 
 Substituting values:
 
-$$= \frac{1}{2} \;\times\; \frac{2}{7} \;\times\; \frac{2}{7} \;\times\; \frac{1}{7} \;\times\; \frac{3}{7}$$
+$$= \frac{1}{2} \times \frac{2}{7} \times \frac{2}{7} \times \frac{1}{7} \times \frac{3}{7}$$
 
-$$= \frac{1}{2} \;\times\; \frac{2 \times 2 \times 1 \times 3}{7^4}$$
+$$= \frac{1}{2} \times \frac{2 \times 2 \times 1 \times 3}{7^4}$$
 
-$$= \frac{1}{2} \;\times\; \frac{12}{2401}$$
+$$= \frac{1}{2} \times \frac{12}{2401}$$
 
-$$= \frac{1}{2} \;\times\; 0.004998 = \boxed{0.002499}$$
+$$= \frac{1}{2} \times 0.004998 = \boxed{0.002499}$$
 
 ### 7.3 Normalise to Get Posterior Probabilities
 
 $$\text{Total} = 0.10933 + 0.002499 = 0.11183$$
 
-$$P(\text{Spam} \mid \text{Email A}) = \frac{0.10933}{0.11183} = \boxed{97.8\%}$$
+```math
+P(\text{Spam} \mid \text{Email A}) = \frac{0.10933}{0.11183} = \boxed{97.8\%}
+```
 
-$$P(\text{Ham} \mid \text{Email A}) = \frac{0.002499}{0.11183} = \boxed{2.2\%}$$
+```math
+P(\text{Ham} \mid \text{Email A}) = \frac{0.002499}{0.11183} = \boxed{2.2\%}
+```
 
 ### 7.4 Prediction
 
@@ -271,17 +275,17 @@ This email also contains "Free" and "Win" — yet it **also** contains "Offer". 
 
 ### 8.1 Score for Spam
 
-$$\text{Score(Spam)} = \frac{1}{2} \;\times\; \frac{5}{7} \;\times\; \frac{5}{7} \;\times\; \underbrace{\frac{0}{7}}_{P(\text{Offer=Yes}|\text{Spam})} \;\times\; \frac{3}{7}$$
+$$\text{Score(Spam)} = \frac{1}{2} \times \frac{5}{7} \times \frac{5}{7} \times \underbrace{\frac{0}{7}}_{P(\text{Offer=Yes}|\text{Spam})} \times \frac{3}{7}$$
 
-$$= \frac{1}{2} \;\times\; \frac{5 \times 5 \times \mathbf{0} \times 3}{7^4} = \boxed{0}$$
+$$= \frac{1}{2} \times \frac{5 \times 5 \times \mathbf{0} \times 3}{7^4} = \boxed{0}$$
 
 ### 8.2 Score for Ham
 
-$$\text{Score(Ham)} = \frac{1}{2} \;\times\; \frac{2}{7} \;\times\; \frac{2}{7} \;\times\; \frac{6}{7} \;\times\; \frac{3}{7}$$
+$$\text{Score(Ham)} = \frac{1}{2} \times \frac{2}{7} \times \frac{2}{7} \times \frac{6}{7} \times \frac{3}{7}$$
 
-$$= \frac{1}{2} \;\times\; \frac{2 \times 2 \times 6 \times 3}{7^4}$$
+$$= \frac{1}{2} \times \frac{2 \times 2 \times 6 \times 3}{7^4}$$
 
-$$= \frac{1}{2} \;\times\; \frac{72}{2401} = \frac{1}{2} \;\times\; 0.02999 = \boxed{0.01499}$$
+$$= \frac{1}{2} \times \frac{72}{2401} = \frac{1}{2} \times 0.02999 = \boxed{0.01499}$$
 
 ### 8.3 Prediction (Without Smoothing)
 
@@ -303,11 +307,11 @@ $$= \frac{1}{2} \;\times\; \frac{72}{2401} = \frac{1}{2} \;\times\; 0.02999 = \b
 
 Naive Bayes computes a **product** of probabilities:
 
-$$\text{Score}(C_k) = P(C_k) \;\times\; P(x_1 \mid C_k) \;\times\; P(x_2 \mid C_k) \;\times\; \cdots \;\times\; P(x_n \mid C_k)$$
+$$\text{Score}(C_k) = P(C_k) \times P(x_1 \mid C_k) \times P(x_2 \mid C_k) \times \cdots \times P(x_n \mid C_k)$$
 
 If **any single factor is zero**, the entire product becomes zero — regardless of how large all other factors are:
 
-$$0.5 \;\times\; \underbrace{\frac{5}{7}}_{0.714} \;\times\; \underbrace{\frac{5}{7}}_{0.714} \;\times\; \underbrace{0}_{P(\text{Offer=Yes}|\text{Spam})} \;\times\; \underbrace{\frac{3}{7}}_{0.429} = 0$$
+$$0.5 \times \underbrace{\frac{5}{7}}_{0.714} \times \underbrace{\frac{5}{7}}_{0.714} \times \underbrace{0}_{P(\text{Offer=Yes}|\text{Spam})} \times \underbrace{\frac{3}{7}}_{0.429} = 0$$
 
 This is **mathematically correct** given the raw counts — "Offer" never appeared in Spam. But it is **epistemologically wrong**: not seeing something in 7 training examples does not mean it is ***impossible***. It means it is ***unobserved*** — and we need a technique to handle this distinction.
 
@@ -339,7 +343,7 @@ $$\boxed{\widehat{P}(X_i = v \mid C_k) = \frac{\text{Count}(X_i = v \text{ in } 
 
 | Symbol | Meaning | Value in this example |
 |---|---|---|
-| $\text{Count}(X_i = v,\, C_k)$ | Times feature $X_i$ had value $v$ in class $C_k$ | Raw count from Step 2 |
+| $\text{Count}(X_i = v, C_k)$ | Times feature $X_i$ had value $v$ in class $C_k$ | Raw count from Step 2 |
 | $N_k$ | Total training examples in class $C_k$ | 7 (for both classes) |
 | $\alpha$ | Smoothing parameter | 1 (Laplace) |
 | $K$ | Number of distinct values per feature | 2 (binary: Yes / No) |
@@ -400,31 +404,35 @@ $$\text{Smoothed denominator} = N_\text{Ham} + \alpha \cdot K = 7 + 1 \times 2 =
 
 ### 12.1 Score for Spam (Smoothed)
 
-$$\text{Score(Spam)} = \frac{1}{2} \;\times\; \frac{6}{9} \;\times\; \frac{6}{9} \;\times\; \frac{8}{9} \;\times\; \frac{4}{9}$$
+$$\text{Score(Spam)} = \frac{1}{2} \times \frac{6}{9} \times \frac{6}{9} \times \frac{8}{9} \times \frac{4}{9}$$
 
-$$= \frac{1}{2} \;\times\; \frac{6 \times 6 \times 8 \times 4}{9^4}$$
+$$= \frac{1}{2} \times \frac{6 \times 6 \times 8 \times 4}{9^4}$$
 
-$$= \frac{1}{2} \;\times\; \frac{1152}{6561}$$
+$$= \frac{1}{2} \times \frac{1152}{6561}$$
 
-$$= \frac{1}{2} \;\times\; 0.17559 = \boxed{0.08779}$$
+$$= \frac{1}{2} \times 0.17559 = \boxed{0.08779}$$
 
 ### 12.2 Score for Ham (Smoothed)
 
-$$\text{Score(Ham)} = \frac{1}{2} \;\times\; \frac{3}{9} \;\times\; \frac{3}{9} \;\times\; \frac{2}{9} \;\times\; \frac{4}{9}$$
+$$\text{Score(Ham)} = \frac{1}{2} \times \frac{3}{9} \times \frac{3}{9} \times \frac{2}{9} \times \frac{4}{9}$$
 
-$$= \frac{1}{2} \;\times\; \frac{3 \times 3 \times 2 \times 4}{9^4}$$
+$$= \frac{1}{2} \times \frac{3 \times 3 \times 2 \times 4}{9^4}$$
 
-$$= \frac{1}{2} \;\times\; \frac{72}{6561}$$
+$$= \frac{1}{2} \times \frac{72}{6561}$$
 
-$$= \frac{1}{2} \;\times\; 0.010975 = \boxed{0.005487}$$
+$$= \frac{1}{2} \times 0.010975 = \boxed{0.005487}$$
 
 ### 12.3 Posterior Probabilities (Smoothed)
 
 $$\text{Total} = 0.08779 + 0.005487 = 0.09328$$
 
-$$P(\text{Spam} \mid \text{Email A}) = \frac{0.08779}{0.09328} = \boxed{94.1\%}$$
+```math
+P(\text{Spam} \mid \text{Email A}) = \frac{0.08779}{0.09328} = \boxed{94.1\%}
+```
 
-$$P(\text{Ham} \mid \text{Email A}) = \frac{0.005487}{0.09328} = \boxed{5.9\%}$$
+```math
+P(\text{Ham} \mid \text{Email A}) = \frac{0.005487}{0.09328} = \boxed{5.9\%}
+```
 
 **Prediction: Spam** ✓ (still correct, slightly less confident than without smoothing: 94.1% vs 97.8%)
 
@@ -438,31 +446,35 @@ Now $P(\text{Offer=Yes} \mid \text{Spam}) = 1/9 \approx 0.111$ — **no longer z
 
 ### 13.1 Score for Spam (Smoothed)
 
-$$\text{Score(Spam)} = \frac{1}{2} \;\times\; \frac{6}{9} \;\times\; \frac{6}{9} \;\times\; \underbrace{\frac{1}{9}}_{P(\text{Offer=Yes}|\text{Spam})\text{ fixed!}} \;\times\; \frac{4}{9}$$
+$$\text{Score(Spam)} = \frac{1}{2} \times \frac{6}{9} \times \frac{6}{9} \times \underbrace{\frac{1}{9}}_{P(\text{Offer=Yes}|\text{Spam})\text{ fixed!}} \times \frac{4}{9}$$
 
-$$= \frac{1}{2} \;\times\; \frac{6 \times 6 \times 1 \times 4}{9^4}$$
+$$= \frac{1}{2} \times \frac{6 \times 6 \times 1 \times 4}{9^4}$$
 
-$$= \frac{1}{2} \;\times\; \frac{144}{6561}$$
+$$= \frac{1}{2} \times \frac{144}{6561}$$
 
-$$= \frac{1}{2} \;\times\; 0.021946 = \boxed{0.010973}$$
+$$= \frac{1}{2} \times 0.021946 = \boxed{0.010973}$$
 
 ### 13.2 Score for Ham (Smoothed)
 
-$$\text{Score(Ham)} = \frac{1}{2} \;\times\; \frac{3}{9} \;\times\; \frac{3}{9} \;\times\; \frac{7}{9} \;\times\; \frac{4}{9}$$
+$$\text{Score(Ham)} = \frac{1}{2} \times \frac{3}{9} \times \frac{3}{9} \times \frac{7}{9} \times \frac{4}{9}$$
 
-$$= \frac{1}{2} \;\times\; \frac{3 \times 3 \times 7 \times 4}{9^4}$$
+$$= \frac{1}{2} \times \frac{3 \times 3 \times 7 \times 4}{9^4}$$
 
-$$= \frac{1}{2} \;\times\; \frac{252}{6561}$$
+$$= \frac{1}{2} \times \frac{252}{6561}$$
 
-$$= \frac{1}{2} \;\times\; 0.038410 = \boxed{0.019205}$$
+$$= \frac{1}{2} \times 0.038410 = \boxed{0.019205}$$
 
 ### 13.3 Posterior Probabilities (Smoothed)
 
 $$\text{Total} = 0.010973 + 0.019205 = 0.030178$$
 
-$$P(\text{Spam} \mid \text{Email B}) = \frac{0.010973}{0.030178} = \boxed{36.4\%}$$
+```math
+P(\text{Spam} \mid \text{Email B}) = \frac{0.010973}{0.030178} = \boxed{36.4\%}
+```
 
-$$P(\text{Ham} \mid \text{Email B}) = \frac{0.019205}{0.030178} = \boxed{63.6\%}$$
+```math
+P(\text{Ham} \mid \text{Email B}) = \frac{0.019205}{0.030178} = \boxed{63.6\%}
+```
 
 **Prediction: Ham**
 
@@ -489,31 +501,35 @@ This email lacks both "Free" and "Win" (the main spam keywords) and contains "Of
 
 ### 14.1 Score for Spam (Smoothed)
 
-$$\text{Score(Spam)} = \frac{1}{2} \;\times\; \underbrace{\frac{3}{9}}_{P(\text{Free=No}|\text{Spam})} \;\times\; \underbrace{\frac{3}{9}}_{P(\text{Win=No}|\text{Spam})} \;\times\; \underbrace{\frac{1}{9}}_{P(\text{Offer=Yes}|\text{Spam})} \;\times\; \underbrace{\frac{5}{9}}_{P(\text{Discount=Yes}|\text{Spam})}$$
+$$\text{Score(Spam)} = \frac{1}{2} \times \underbrace{\frac{3}{9}}_{P(\text{Free=No}|\text{Spam})} \times \underbrace{\frac{3}{9}}_{P(\text{Win=No}|\text{Spam})} \times \underbrace{\frac{1}{9}}_{P(\text{Offer=Yes}|\text{Spam})} \times \underbrace{\frac{5}{9}}_{P(\text{Discount=Yes}|\text{Spam})}$$
 
-$$= \frac{1}{2} \;\times\; \frac{3 \times 3 \times 1 \times 5}{9^4}$$
+$$= \frac{1}{2} \times \frac{3 \times 3 \times 1 \times 5}{9^4}$$
 
-$$= \frac{1}{2} \;\times\; \frac{45}{6561}$$
+$$= \frac{1}{2} \times \frac{45}{6561}$$
 
-$$= \frac{1}{2} \;\times\; 0.006860 = \boxed{0.003430}$$
+$$= \frac{1}{2} \times 0.006860 = \boxed{0.003430}$$
 
 ### 14.2 Score for Ham (Smoothed)
 
-$$\text{Score(Ham)} = \frac{1}{2} \;\times\; \underbrace{\frac{6}{9}}_{P(\text{Free=No}|\text{Ham})} \;\times\; \underbrace{\frac{6}{9}}_{P(\text{Win=No}|\text{Ham})} \;\times\; \underbrace{\frac{7}{9}}_{P(\text{Offer=Yes}|\text{Ham})} \;\times\; \underbrace{\frac{5}{9}}_{P(\text{Discount=Yes}|\text{Ham})}$$
+$$\text{Score(Ham)} = \frac{1}{2} \times \underbrace{\frac{6}{9}}_{P(\text{Free=No}|\text{Ham})} \times \underbrace{\frac{6}{9}}_{P(\text{Win=No}|\text{Ham})} \times \underbrace{\frac{7}{9}}_{P(\text{Offer=Yes}|\text{Ham})} \times \underbrace{\frac{5}{9}}_{P(\text{Discount=Yes}|\text{Ham})}$$
 
-$$= \frac{1}{2} \;\times\; \frac{6 \times 6 \times 7 \times 5}{9^4}$$
+$$= \frac{1}{2} \times \frac{6 \times 6 \times 7 \times 5}{9^4}$$
 
-$$= \frac{1}{2} \;\times\; \frac{1260}{6561}$$
+$$= \frac{1}{2} \times \frac{1260}{6561}$$
 
-$$= \frac{1}{2} \;\times\; 0.19205 = \boxed{0.09602}$$
+$$= \frac{1}{2} \times 0.19205 = \boxed{0.09602}$$
 
 ### 14.3 Posterior Probabilities (Smoothed)
 
 $$\text{Total} = 0.003430 + 0.09602 = 0.099450$$
 
-$$P(\text{Spam} \mid \text{Email C}) = \frac{0.003430}{0.099450} = \boxed{3.4\%}$$
+```math
+P(\text{Spam} \mid \text{Email C}) = \frac{0.003430}{0.099450} = \boxed{3.4\%}
+```
 
-$$P(\text{Ham} \mid \text{Email C}) = \frac{0.09602}{0.099450} = \boxed{96.6\%}$$
+```math
+P(\text{Ham} \mid \text{Email C}) = \frac{0.09602}{0.099450} = \boxed{96.6\%}
+```
 
 **Prediction: Ham** ✓ — The classifier is very confident. Absent "Free" and "Win" (the main spam signals) and the presence of "Offer" (which is very common in Ham: 7/9 ≈ 78%) together make Ham overwhelmingly more likely.
 
@@ -525,7 +541,7 @@ $$P(\text{Ham} \mid \text{Email C}) = \frac{0.09602}{0.099450} = \boxed{96.6\%}$
 
 When multiplying many probabilities (each between 0 and 1), the product becomes extremely small and can **underflow to zero** in floating-point arithmetic. For example:
 
-$$0.5 \;\times\; 0.667 \;\times\; 0.667 \;\times\; 0.111 \;\times\; 0.444 = 0.01097$$
+$$0.5 \times 0.667 \times 0.667 \times 0.111 \times 0.444 = 0.01097$$
 
 This is still representable — but with hundreds or thousands of features, the product becomes `0.0` on any machine.
 
@@ -553,17 +569,17 @@ $$\boxed{\hat{y} = \arg\max_k \underbrace{P(C_k) \prod_i P(x_i \mid C_k)}_{\text
 
 **Spam log score:**
 
-$$g(\text{Spam} \mid A) = \ln(0.5) + \ln\!\left(\tfrac{6}{9}\right) + \ln\!\left(\tfrac{6}{9}\right) + \ln\!\left(\tfrac{8}{9}\right) + \ln\!\left(\tfrac{4}{9}\right)$$
+$$g(\text{Spam} \mid A) = \ln(0.5) + \ln\left(\tfrac{6}{9}\right) + \ln\left(\tfrac{6}{9}\right) + \ln\left(\tfrac{8}{9}\right) + \ln\left(\tfrac{4}{9}\right)$$
 
 $$= (-0.6931) + (-0.4055) + (-0.4055) + (-0.1178) + (-0.8109) = \boxed{-2.4328}$$
 
 **Ham log score:**
 
-$$g(\text{Ham} \mid A) = \ln(0.5) + \ln\!\left(\tfrac{3}{9}\right) + \ln\!\left(\tfrac{3}{9}\right) + \ln\!\left(\tfrac{2}{9}\right) + \ln\!\left(\tfrac{4}{9}\right)$$
+$$g(\text{Ham} \mid A) = \ln(0.5) + \ln\left(\tfrac{3}{9}\right) + \ln\left(\tfrac{3}{9}\right) + \ln\left(\tfrac{2}{9}\right) + \ln\left(\tfrac{4}{9}\right)$$
 
 $$= (-0.6931) + (-1.0986) + (-1.0986) + (-1.5041) + (-0.8109) = \boxed{-5.2053}$$
 
-**Decision:** $g(\text{Spam} \mid A) = -2.4328 \;\;>\;\; g(\text{Ham} \mid A) = -5.2053$
+**Decision:** $g(\text{Spam} \mid A) = -2.4328 > g(\text{Ham} \mid A) = -5.2053$
 
 → **Spam wins** ✓
 
@@ -571,17 +587,17 @@ $$= (-0.6931) + (-1.0986) + (-1.0986) + (-1.5041) + (-0.8109) = \boxed{-5.2053}$
 
 **Spam log score:**
 
-$$g(\text{Spam} \mid B) = \ln(0.5) + \ln\!\left(\tfrac{6}{9}\right) + \ln\!\left(\tfrac{6}{9}\right) + \ln\!\left(\tfrac{1}{9}\right) + \ln\!\left(\tfrac{4}{9}\right)$$
+$$g(\text{Spam} \mid B) = \ln(0.5) + \ln\left(\tfrac{6}{9}\right) + \ln\left(\tfrac{6}{9}\right) + \ln\left(\tfrac{1}{9}\right) + \ln\left(\tfrac{4}{9}\right)$$
 
 $$= (-0.6931) + (-0.4055) + (-0.4055) + (-2.1972) + (-0.8109) = \boxed{-4.5122}$$
 
 **Ham log score:**
 
-$$g(\text{Ham} \mid B) = \ln(0.5) + \ln\!\left(\tfrac{3}{9}\right) + \ln\!\left(\tfrac{3}{9}\right) + \ln\!\left(\tfrac{7}{9}\right) + \ln\!\left(\tfrac{4}{9}\right)$$
+$$g(\text{Ham} \mid B) = \ln(0.5) + \ln\left(\tfrac{3}{9}\right) + \ln\left(\tfrac{3}{9}\right) + \ln\left(\tfrac{7}{9}\right) + \ln\left(\tfrac{4}{9}\right)$$
 
 $$= (-0.6931) + (-1.0986) + (-1.0986) + (-0.2513) + (-0.8109) = \boxed{-3.9525}$$
 
-**Decision:** $g(\text{Spam} \mid B) = -4.5122 \;\;<\;\; g(\text{Ham} \mid B) = -3.9525$
+**Decision:** $g(\text{Spam} \mid B) = -4.5122 < g(\text{Ham} \mid B) = -3.9525$
 
 → **Ham wins**
 
@@ -589,17 +605,17 @@ $$= (-0.6931) + (-1.0986) + (-1.0986) + (-0.2513) + (-0.8109) = \boxed{-3.9525}$
 
 **Spam log score:**
 
-$$g(\text{Spam} \mid C) = \ln(0.5) + \ln\!\left(\tfrac{3}{9}\right) + \ln\!\left(\tfrac{3}{9}\right) + \ln\!\left(\tfrac{1}{9}\right) + \ln\!\left(\tfrac{5}{9}\right)$$
+$$g(\text{Spam} \mid C) = \ln(0.5) + \ln\left(\tfrac{3}{9}\right) + \ln\left(\tfrac{3}{9}\right) + \ln\left(\tfrac{1}{9}\right) + \ln\left(\tfrac{5}{9}\right)$$
 
 $$= (-0.6931) + (-1.0986) + (-1.0986) + (-2.1972) + (-0.5878) = \boxed{-5.6753}$$
 
 **Ham log score:**
 
-$$g(\text{Ham} \mid C) = \ln(0.5) + \ln\!\left(\tfrac{6}{9}\right) + \ln\!\left(\tfrac{6}{9}\right) + \ln\!\left(\tfrac{7}{9}\right) + \ln\!\left(\tfrac{5}{9}\right)$$
+$$g(\text{Ham} \mid C) = \ln(0.5) + \ln\left(\tfrac{6}{9}\right) + \ln\left(\tfrac{6}{9}\right) + \ln\left(\tfrac{7}{9}\right) + \ln\left(\tfrac{5}{9}\right)$$
 
 $$= (-0.6931) + (-0.4055) + (-0.4055) + (-0.2513) + (-0.5878) = \boxed{-2.3432}$$
 
-**Decision:** $g(\text{Spam} \mid C) = -5.6753 \;\;<\;\; g(\text{Ham} \mid C) = -2.3432$
+**Decision:** $g(\text{Spam} \mid C) = -5.6753 < g(\text{Ham} \mid C) = -2.3432$
 
 → **Ham wins** ✓
 
@@ -607,23 +623,27 @@ $$= (-0.6931) + (-0.4055) + (-0.4055) + (-0.2513) + (-0.5878) = \boxed{-2.3432}$
 
 When you need the actual posterior probabilities (not just the winning class), use the **log-sum-exp trick** to avoid overflow:
 
-$$\text{LSE} = m + \ln\!\left(e^{g_\text{Spam} - m} + e^{g_\text{Ham} - m}\right), \qquad m = \max(g_\text{Spam},\, g_\text{Ham})$$
+$$\text{LSE} = m + \ln\left(e^{g_\text{Spam} - m} + e^{g_\text{Ham} - m}\right), \qquad m = \max(g_\text{Spam}, g_\text{Ham})$$
 
 **For Test Email B:**
 
-$$m = \max(-4.5122,\; -3.9525) = -3.9525$$
+$$m = \max(-4.5122, -3.9525) = -3.9525$$
 
-$$\text{LSE} = -3.9525 + \ln\!\left(e^{-4.5122 - (-3.9525)} + e^{0}\right)$$
+$$\text{LSE} = -3.9525 + \ln\left(e^{-4.5122 - (-3.9525)} + e^{0}\right)$$
 
-$$= -3.9525 + \ln\!\left(e^{-0.5597} + 1\right)$$
+$$= -3.9525 + \ln\left(e^{-0.5597} + 1\right)$$
 
 $$= -3.9525 + \ln(0.5714 + 1.000) = -3.9525 + \ln(1.5714)$$
 
 $$= -3.9525 + 0.4520 = -3.5005$$
 
-$$P(\text{Spam} \mid B) = e^{g_\text{Spam} - \text{LSE}} = e^{-4.5122 - (-3.5005)} = e^{-1.0117} \approx 0.364 = \boxed{36.4\%}$$
+```math
+P(\text{Spam} \mid B) = e^{g_\text{Spam} - \text{LSE}} = e^{-4.5122 - (-3.5005)} = e^{-1.0117} \approx 0.364 = \boxed{36.4\%}
+```
 
-$$P(\text{Ham} \mid B) = e^{g_\text{Ham} - \text{LSE}} = e^{-3.9525 - (-3.5005)} = e^{-0.4520} \approx 0.636 = \boxed{63.6\%}$$
+```math
+P(\text{Ham} \mid B) = e^{g_\text{Ham} - \text{LSE}} = e^{-3.9525 - (-3.5005)} = e^{-0.4520} \approx 0.636 = \boxed{63.6\%}
+```
 
 These match the direct calculation in Step 10 exactly. ✓
 

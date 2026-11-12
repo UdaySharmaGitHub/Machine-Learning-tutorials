@@ -142,7 +142,7 @@ $$\boxed{P(C_k \mid \mathbf{x}) = \frac{P(\mathbf{x} \mid C_k) \cdot P(C_k)}{P(\
 > [!NOTE]
 > **Bayes' Theorem:**
 
-$$P(C_k \mid x_1, \ldots, x_n) = \frac{P(x_1, \ldots, x_n \mid C_k)\; P(C_k)}{P(x_1, \ldots, x_n)} \tag{1}$$
+$$P(C_k \mid x_1, \ldots, x_n) = \frac{P(x_1, \ldots, x_n \mid C_k) \cdot P(C_k)}{P(x_1, \ldots, x_n)}$$
 
 **Where:**
 
@@ -178,10 +178,10 @@ $$P(x_1, x_2, x_3, x_4 \mid C_k) = P(x_1 \mid C_k) \cdot P(x_2 \mid x_1, C_k) \c
 $$\begin{aligned}
 P(x_1, \ldots, x_n \mid C_k)
 &= P(x_1 \mid C_k) \\
-&\quad\cdot\; P(x_2 \mid x_1, C_k) \\
-&\quad\cdot\; P(x_3 \mid x_1, x_2, C_k) \\
+&\quad\cdot P(x_2 \mid x_1, C_k) \\
+&\quad\cdot P(x_3 \mid x_1, x_2, C_k) \\
 &\quad\cdots \\
-&\quad\cdot\; P(x_n \mid x_1, \ldots, x_{n-1}, C_k)
+&\quad\cdot P(x_n \mid x_1, \ldots, x_{n-1}, C_k)
 \end{aligned}$$
 
 > [!NOTE]
@@ -226,10 +226,10 @@ Now apply ***conditional independence*** to **each factor** of the ***chain rule
 $$\begin{aligned}
 P(x_1, \ldots, x_n \mid C_k)
 &= P(x_1 \mid C_k) \\
-&\quad\cdot\; P(x_2 \mid x_1, C_k) \\
-&\quad\cdot\; P(x_3 \mid x_1, x_2, C_k) \\
+&\quad\cdot P(x_2 \mid x_1, C_k) \\
+&\quad\cdot P(x_3 \mid x_1, x_2, C_k) \\
 &\quad\cdots \\
-&\quad\cdot\; P(x_n \mid x_1, \ldots, x_{n-1}, C_k)
+&\quad\cdot P(x_n \mid x_1, \ldots, x_{n-1}, C_k)
 \end{aligned}$$
 
 **Step 1 — Apply independence to the 2nd factor:**
@@ -239,10 +239,10 @@ $$P(x_2 \mid x_1, C_k) = P(x_2 \mid C_k) \qquad \leftarrow x_2 \text{ is indepen
 $$\begin{aligned}
 P(x_1, \ldots, x_n \mid C_k)
 &= P(x_1 \mid C_k) \\
-&\quad\cdot\; \mathbf{P(x_2 \mid C_k)} \\
-&\quad\cdot\; P(x_3 \mid x_1, x_2, C_k) \\
+&\quad\cdot \mathbf{P(x_2 \mid C_k)} \\
+&\quad\cdot P(x_3 \mid x_1, x_2, C_k) \\
 &\quad\cdots \\
-&\quad\cdot\; P(x_n \mid x_1, \ldots, x_{n-1}, C_k)
+&\quad\cdot P(x_n \mid x_1, \ldots, x_{n-1}, C_k)
 \end{aligned}$$
 
 **Step 2 — Apply independence to the 3rd factor:**
@@ -252,10 +252,10 @@ $$P(x_3 \mid x_1, x_2, C_k) = P(x_3 \mid C_k) \qquad \leftarrow x_3 \text{ is in
 $$\begin{aligned}
 P(x_1, \ldots, x_n \mid C_k)
 &= P(x_1 \mid C_k) \\
-&\quad\cdot\; P(x_2 \mid C_k) \\
-&\quad\cdot\; \mathbf{P(x_3 \mid C_k)} \\
+&\quad\cdot P(x_2 \mid C_k) \\
+&\quad\cdot \mathbf{P(x_3 \mid C_k)} \\
 &\quad\cdots \\
-&\quad\cdot\; P(x_n \mid x_1, \ldots, x_{n-1}, C_k)
+&\quad\cdot P(x_n \mid x_1, \ldots, x_{n-1}, C_k)
 \end{aligned}$$
 
 **Step 3 — Apply independence to every remaining factor** (same pattern repeats):
@@ -264,13 +264,13 @@ $$P(x_i \mid x_1, \ldots, x_{i-1}, C_k) = P(x_i \mid C_k) \qquad \leftarrow \tex
 
 - ***Formally***, the ***conditional independence assumption*** states:
 
-$$P(x_i \mid C_k,\; x_1, \ldots, x_{i-1}, x_{i+1}, \ldots, x_n) = P(x_i \mid C_k)$$
+$$P(x_i \mid C_k, x_1, \ldots, x_{i-1}, x_{i+1}, \ldots, x_n) = P(x_i \mid C_k)$$
 
 - Therefore the ***entire chain*** ***collapses*** to a ***simple product:***
 
-$$\boxed{P(x_1, \ldots, x_n \mid C_k) = \prod_{i=1}^{n} P(x_i \mid C_k)} \tag{2}$$
+$$\boxed{P(x_1, \ldots, x_n \mid C_k) = \prod_{i=1}^{n} P(x_i \mid C_k)}$$
 
-- **Substituting** **(2)** *into* **(1)**:
+- **Substituting the independence assumption into the Bayes' theorem expression:**
 
 $$P(C_k \mid \mathbf{x}) = \frac{P(C_k) \displaystyle\prod_{i=1}^{n} P(x_i \mid C_k)}{P(\mathbf{x})}$$
 
@@ -279,11 +279,11 @@ $$P(C_k \mid \mathbf{x}) = \frac{P(C_k) \displaystyle\prod_{i=1}^{n} P(x_i \mid 
 - For a fixed input $\mathbf{x}$, $P(\mathbf{x})$ is the ***same positive constant*** for every candidate class $C_k$. 
 - It **cannot change** which class has the *largest score*:
 
-$$P(C_k \mid \mathbf{x}) \;\propto\; P(C_k) \prod_{i=1}^{n} P(x_i \mid C_k)$$
+$$P(C_k \mid \mathbf{x}) \propto P(C_k) \cdot \prod_{i=1}^{n} P(x_i \mid C_k)$$
 
 This gives the **Naive Bayes decision rule** — derived fully in §3.
 
-$$\boxed{\hat{y} = \arg\max_{C_k \in \mathcal{Y}}\; P(C_k) \prod_{i=1}^{n} P(x_i \mid C_k)}$$
+$$\boxed{\hat{y} = \arg\max_{C_k \in \mathcal{Y}} P(C_k) \cdot \prod_{i=1}^{n} P(x_i \mid C_k)}$$
 
 > [!IMPORTANT]
 > **This is the Naive Bayes Classification Formula.**
@@ -313,7 +313,7 @@ To *classify a new data point*, compute the **proportional score** for each clas
 > [!IMPORTANT]
 > **This is the Naive Bayes Classification Formula.**
 
-$$\boxed{\hat{y} = \arg\max_{C_k \in \mathcal{Y}} \; P(C_k) \cdot \prod_{i=1}^{n} P(x_i \mid C_k)}$$
+$$\boxed{\hat{y} = \arg\max_{C_k \in \mathcal{Y}} P(C_k) \cdot \prod_{i=1}^{n} P(x_i \mid C_k)}$$
 
 **Where:**
 - $\arg\max$ means *selecting the class that produces the* ***maximum value***
@@ -339,7 +339,7 @@ Because $\log$ is **strictly increasing**, the $\arg\max$ is preserved when we t
 
 $$\boxed{\begin{aligned}
 \hat{y}
-&= \arg\max_k \; P(C_k) \prod_i P(x_i \mid C_k) \\
+&= \arg\max_k P(C_k) \cdot \prod_i P(x_i \mid C_k) \\
 &= \arg\max_k \left[ \log P(C_k) + \sum_i \log P(x_i \mid C_k) \right]
 \end{aligned}}$$
 
@@ -349,9 +349,9 @@ This converts *multiplication* into **addition** — far more **numerically stab
 
 $$\boxed{g_k(\mathbf{x}) = \log P(C_k) + \sum_{i=1}^{n} \log P(x_i \mid C_k)}$$
 
-The predicted class is $\hat{y} = \arg\max_k \; g_k(\mathbf{x})$.
+The predicted class is $\hat{y} = \arg\max_k g_k(\mathbf{x})$.
 
-For **Multinomial Naive Bayes** specifically (where $x_i$ is a word count and $\theta_{ki} = P(w_i \mid C_k)$):
+For **Multinomial Naive Bayes** specifically, where $x_i$ is a word count and $\theta_{ki} = P(w_i \mid C_k)$:
 
 $$\boxed{g_k(\mathbf{x}) = \log P(C_k) + \sum_i x_i \log \theta_{ki}}$$
 
@@ -359,11 +359,11 @@ $$\boxed{g_k(\mathbf{x}) = \log P(C_k) + \sum_i x_i \log \theta_{ki}}$$
 
 When *normalized posterior probabilities* are needed (not just the winning class), recovering them directly from $g_k$ risks **overflow** in $e^{g_k}$. The ***log-sum-exp*** trick avoids this:
 
-$$\boxed{P(C_k \mid \mathbf{x}) = \exp\!\left[\, g_k - \operatorname{LSE}(g_1, \ldots, g_K) \,\right]}$$
+$$\boxed{P(C_k \mid \mathbf{x}) = \exp\left[ g_k - \text{LSE}(g_1, \ldots, g_K) \right]}$$
 
 where
 
-$$\boxed{\operatorname{LSE}(g_1, \ldots, g_K) = m + \log \sum_j e^{g_j - m}, \qquad m = \max_j g_j}$$
+$$\boxed{\text{LSE}(g_1, \ldots, g_K) = m + \log \sum_j e^{g_j - m}, \qquad m = \max_j g_j}$$
 
 **Why subtract $m$?** Shifting every $g_j$ by the same constant $m$ does not change the result, but it guarantees the largest exponent is $e^0 = 1$ — ***preventing both overflow and underflow*** without altering the probabilities.
 
@@ -420,7 +420,7 @@ $$\boxed{\widehat{\theta}_{ki} = \widehat{P}(X_i = 1 \mid C_k) = \frac{N_{ki} + 
 
 The ***complete feature likelihood*** includes both *presence* and *absence*:
 
-$$P(x_i \mid C_k) = \theta_{ki}^{x_i}\,(1 - \theta_{ki})^{1 - x_i}$$
+$$P(x_i \mid C_k) = \theta_{ki}^{x_i} \cdot (1 - \theta_{ki})^{1 - x_i}$$
 
 ### 5.4 Multinomial Likelihoods
 
@@ -484,7 +484,7 @@ Used when features are **continuous** and assumed to follow a **Normal (Gaussian
 
 For each feature $x_i$ in class $C_k$, the likelihood is modelled using the Gaussian probability density function:
 
-$$\boxed{P(x_i \mid C_k) = \frac{1}{\sqrt{2\pi\,\sigma_{ki}^2}} \;\exp\!\left(-\frac{(x_i - \mu_{ki})^2}{2\sigma_{ki}^2}\right)}$$
+$$\boxed{P(x_i \mid C_k) = \frac{1}{\sqrt{2\pi\sigma_{ki}^2}} \exp\left(-\frac{(x_i - \mu_{ki})^2}{2\sigma_{ki}^2}\right)}$$
 
 | Parameter | Meaning | Estimated As |
 |---|---|---|
@@ -521,7 +521,7 @@ $$\boxed{P(x_i \mid C_k) = \frac{N_{ki} + \alpha}{N_k + \alpha \cdot |V|}}$$
 
 Used when features are **binary** — each feature is either present ($x_i = 1$) or absent ($x_i = 0$).
 
-$$\boxed{P(x_i \mid C_k) = P(i \mid C_k)^{\,x_i} \cdot \bigl(1 - P(i \mid C_k)\bigr)^{\,1 - x_i}}$$
+$$\boxed{P(x_i \mid C_k) = P(i \mid C_k)^{x_i} \cdot \bigl(1 - P(i \mid C_k)\bigr)^{1 - x_i}}$$
 
 | Symbol | Meaning |
 |---|---|
@@ -614,17 +614,17 @@ $$P(\text{Free} \mid \text{Ham}) = \frac{1}{3} \qquad P(\text{Win} \mid \text{Ha
 
 #### Step 3 — Naive Bayes Scores
 
-Using the classification formula $\text{Score}(C_k) = P(C_k) \prod_{i=1}^{n} P(x_i \mid C_k)$:
+Using the classification formula $\text{Score}(C_k) = P(C_k)\cdot \prod_{i=1}^{n} P(x_i \mid C_k)$:
 
 **Score for Spam:**
 
 $$\text{Score(Spam)} = P(\text{Spam}) \times P(\text{Free} \mid \text{Spam}) \times P(\text{Win} \mid \text{Spam}) \times P(\text{Offer} \mid \text{Spam})$$
 
-$$= 0.5 \;\times\; \frac{2}{3} \;\times\; \frac{2}{3} \;\times\; \underbrace{0}_{P(\text{Offer}|\text{Spam})} = \boxed{0}$$
+$$= 0.5 \times \frac{2}{3} \times \frac{2}{3} \times \underbrace{0}_{P(\text{Offer}|\text{Spam})} = \boxed{0}$$
 
 **Score for Ham:**
 
-$$\text{Score(Ham)} = 0.5 \;\times\; \frac{1}{3} \;\times\; \frac{1}{3} \;\times\; 1 = \boxed{0.0556}$$
+$$\text{Score(Ham)} = 0.5 \times \frac{1}{3} \times \frac{1}{3} \times 1 = \boxed{0.0556}$$
 
 ---
 
@@ -686,13 +686,13 @@ With $\alpha = 1$, you start with ***1 pseudo-observation*** for each *possible 
 
 For **categorical features**:
 
-$$\boxed{P(x_i = v \mid C_k) = \frac{\text{Count}(x_i = v,\; C_k) + \alpha}{\text{Count}(C_k) + \alpha \cdot K}}$$
+$$\boxed{P(x_i = v \mid C_k) = \frac{\text{Count}(x_i = v, C_k) + \alpha}{\text{Count}(C_k) + \alpha \cdot K}}$$
 
 **Where:**
 
 | Symbol | Meaning |
 |---|---|
-| $\text{Count}(x_i = v,\; C_k)$ | Times feature $x_i$ had value $v$ in class $C_k$ |
+| $\text{Count}(x_i = v, C_k)$ | Times feature $x_i$ had value $v$ in class $C_k$ |
 | $\text{Count}(C_k)$ | Total observations in class $C_k$ |
 | $\alpha$ | Smoothing parameter — for ***Laplace smoothing***: $\alpha = 1$ |
 | $K$ | Number of possible feature values (vocabulary size for text) |
@@ -721,8 +721,8 @@ The formula above is general. In practice, $K$ takes a different value depending
 
 | Variant | Formula | What $K$ means |
 |---|---|---|
-| **Bernoulli NB** | $P(x_i=v \mid C_k) = \dfrac{\text{Count}(x_i=v,\,C_k)+\alpha}{\text{Count}(C_k)+\alpha \cdot K}$ | $K = 2$ — binary feature (Yes / No) |
-| **Multinomial NB** | $P(w \mid C) = \dfrac{\text{count}(w,\,C)+\alpha}{\text{total words in } C + \alpha \cdot V}$ | $V$ = vocabulary size (unique words) |
+| **Bernoulli NB** | $P(x_i=v \mid C_k) = \dfrac{\text{Count}(x_i=v, C_k)+\alpha}{\text{Count}(C_k)+\alpha \cdot K}$ | $K = 2$ — binary feature (Yes / No) |
+| **Multinomial NB** | $P(w \mid C) = \dfrac{\text{count}(w, C)+\alpha}{\text{total words in } C + \alpha \cdot V}$ | $V$ = vocabulary size (unique words) |
 
 > [!NOTE]
 > **Quick Multinomial example** — suppose there are **100 spam word-tokens** and a vocabulary of **V = 10** unique words. The word *"offer"* never appeared in Spam:
@@ -761,13 +761,15 @@ $$\text{New denominator} = N_\text{Spam} + \alpha \cdot K = 3 + 1 \times 2 = 5$$
 
 **Step 4 — Compute scores and posterior probabilities:**
 
-$$\text{Score(Spam)} = 0.5 \times 0.6 \times 0.6 \times 0.2 = \boxed{0.036} \;\neq\; 0$$
+$$\text{Score(Spam)} = 0.5 \times 0.6 \times 0.6 \times 0.2 = \boxed{0.036} \neq 0$$
 
 $$\text{Score(Ham)} = 0.5 \times 0.4 \times 0.4 \times 0.8 = \boxed{0.064}$$
 
 **Normalise to get posterior probabilities:**
 
-$$P(\text{Spam} \mid X) = \frac{0.036}{0.036 + 0.064} = \boxed{36\%} \qquad P(\text{Ham} \mid X) = \boxed{64\%}$$
+```math
+P(\text{Spam} \mid X) = \frac{0.036}{0.036 + 0.064} = \boxed{36\%} \qquad P(\text{Ham} \mid X) = \boxed{64\%}
+```
 
 | | Without Smoothing | With Laplace Smoothing |
 |---|:---:|:---:|
@@ -805,11 +807,11 @@ $\alpha$ is a **hyperparameter** — not always 1:
 
 The MAP decision rule:
 
-$$\boxed{\hat{y}_{\text{MAP}} = \arg\max_y \; P(y \mid x)}$$
+$$\boxed{\hat{y}_{\text{MAP}} = \arg\max_y P(y \mid x)}$$
 
 Applying **Bayes' Theorem** to expand $P(y \mid x)$:
 
-$$\boxed{\hat{y}_{\text{MAP}} = \arg\max_y \; P(x \mid y) \cdot P(y)}$$
+$$\boxed{\hat{y}_{\text{MAP}} = \arg\max_y P(x \mid y) \cdot P(y)}$$
 
 | Term | Symbol | Role |
 |---|---|---|
@@ -857,7 +859,7 @@ A word appearing at test time that was **never seen during training** (outside v
 
 | Variant | Feature Type | Distribution | Typical Use Case |
 |---|---|---|---|
-| **Gaussian NB** | Continuous real numbers | $\mathcal{N}(\mu_{ki},\, \sigma_{ki}^2)$ | Sensor data, biometrics, measurements |
+| **Gaussian NB** | Continuous real numbers | $\mathcal{N}(\mu_{ki}, \sigma_{ki}^2)$ | Sensor data, biometrics, measurements |
 | **Multinomial NB** | Counts / frequencies | Multinomial | Spam filtering, word counts, NLP |
 | **Bernoulli NB** | Binary (0 or 1) | Bernoulli | Word presence, binary event flags |
 

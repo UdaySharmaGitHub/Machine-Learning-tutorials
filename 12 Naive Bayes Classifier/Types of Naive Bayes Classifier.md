@@ -91,7 +91,7 @@ flowchart TD
 </p>
 
 > [!IMPORTANT]
-> All variants use the **same decision rule**: $\hat{y} = \arg\max_k\, P(C_k) \prod_i P(x_i \mid C_k)$. The **only** difference between variants is the formula used to compute $P(x_i \mid C_k)$.
+> All variants use the **same decision rule**: $\hat{y} = \arg\max_k P(C_k) \prod_i P(x_i \mid C_k)$. The **only** difference between variants is the formula used to compute $P(x_i \mid C_k)$.
 
 | Variant | Feature Type | Distribution | Common Use Cases |
 |---|---|---|---|
@@ -113,7 +113,7 @@ Examples include *length*, *mass*, *temperature*, *laboratory measurements*, or 
 
 For each feature $x_i$ in class $C_k$, the likelihood is modelled using the **Gaussian probability density function**:
 
-$$\boxed{P(x_i \mid C_k) = \frac{1}{\sqrt{2\pi\,\sigma_{ki}^2}} \;\exp\!\left(-\frac{(x_i - \mu_{ki})^2}{2\sigma_{ki}^2}\right)}$$
+$$\boxed{P(x_i \mid C_k) = \frac{1}{\sqrt{2\pi\sigma_{ki}^2}} \exp\left(-\frac{(x_i - \mu_{ki})^2}{2\sigma_{ki}^2}\right)}$$
 
 | Parameter | Meaning |
 |---|---|
@@ -126,9 +126,9 @@ $$\boxed{P(x_i \mid C_k) = \frac{1}{\sqrt{2\pi\,\sigma_{ki}^2}} \;\exp\!\left(-\
 
 For feature $i$ among the $N_k$ training examples of class $C_k$, ***maximum-likelihood*** estimation gives:
 
-$$\boxed{\widehat{\mu}_{ki} = \frac{1}{N_k} \sum_{n:\,y^{(n)} = C_k} x_i^{(n)}}$$
+$$\boxed{\widehat{\mu}_{ki} = \frac{1}{N_k} \sum_{n: y^{(n)} = C_k} x_i^{(n)}}$$
 
-$$\boxed{\widehat{\sigma}_{ki}^2 = \frac{1}{N_k} \sum_{n:\,y^{(n)} = C_k} \left(x_i^{(n)} - \widehat{\mu}_{ki}\right)^2}$$
+$$\boxed{\widehat{\sigma}_{ki}^2 = \frac{1}{N_k} \sum_{n: y^{(n)} = C_k} \left(x_i^{(n)} - \widehat{\mu}_{ki}\right)^2}$$
 
 > [!NOTE]
 > The **ML variance** uses denominator $N_k$. The ***Bessel-corrected*** (unbiased) sample variance uses $N_k - 1$. In practice, implementations (e.g. scikit-learn) add a small ***variance smoothing*** constant $\varepsilon$ to $\widehat{\sigma}_{ki}^2$ to prevent **division by zero** when a feature is constant within a class.
@@ -137,9 +137,9 @@ $$\boxed{\widehat{\sigma}_{ki}^2 = \frac{1}{N_k} \sum_{n:\,y^{(n)} = C_k} \left(
 
 Substituting the Gaussian density and taking the logarithm converts the product into a sum — ***numerically stable*** and efficient:
 
-$$\boxed{g_k(\mathbf{x}) = \log P(C_k) - \frac{1}{2}\sum_i \left[\log\!\left(2\pi\sigma_{ki}^2\right) + \frac{(x_i - \mu_{ki})^2}{\sigma_{ki}^2}\right]}$$
+$$\boxed{g_k(\mathbf{x}) = \log P(C_k) - \frac{1}{2}\sum_i \left[\log\left(2\pi\sigma_{ki}^2\right) + \frac{(x_i - \mu_{ki})^2}{\sigma_{ki}^2}\right]}$$
 
-The predicted class is $\hat{y} = \arg\max_k\; g_k(\mathbf{x})$.
+The predicted class is $\hat{y} = \arg\max_k g_k(\mathbf{x})$.
 
 ### 2.4 Alternative Approaches
 
@@ -160,7 +160,7 @@ A feature vector $\mathbf{x} = (x_1, \ldots, x_n)$ is a ***histogram***, with $x
 
 The full multinomial likelihood of observing word-count histogram $\mathbf{x}$ given class $C_k$:
 
-$$p(\mathbf{x} \mid C_k) = \frac{\left(\displaystyle\sum_{i=1}^n x_i\right)!}{\displaystyle\prod_{i=1}^n x_i!} \prod_{i=1}^n p_{ki}^{\,x_i}$$
+$$p(\mathbf{x} \mid C_k) = \underbrace{\frac{\left(\displaystyle\sum_{i=1}^n x_i\right)!}{\displaystyle\prod_{i=1}^n x_i!}}_{\text{multinomial coefficient}} \prod_{i=1}^n p_{ki}^{x_i}$$
 
 where $p_{ki} := P(i \mid C_k)$ is the ***probability of feature $i$ given class $C_k$***.
 
@@ -187,7 +187,7 @@ $$\boxed{\widehat{p}_{ki} = \frac{N_{ki} + \alpha}{N_k + \alpha \cdot |V|}}$$
 
 In log space, the Multinomial Naive Bayes classifier becomes a ***linear classifier***:
 
-$$\boxed{\log p(C_k \mid \mathbf{x}) \;\propto\; \underbrace{\log p(C_k)}_{b} \;+\; \sum_{i=1}^n x_i \cdot \underbrace{\log p_{ki}}_{w_{ki}} \;=\; b + \mathbf{w}_k^\top \mathbf{x}}$$
+$$\boxed{\log p(C_k \mid \mathbf{x}) \propto \underbrace{\log p(C_k)}_{b} + \sum_{i=1}^n x_i \cdot \underbrace{\log p_{ki}}_{w_{ki}} = b + \mathbf{w}_k^\top \mathbf{x}}$$
 
 where $b = \log p(C_k)$ is the ***bias*** (log-prior) and $w_{ki} = \log p_{ki}$ are the ***feature weights***.
 
@@ -213,7 +213,7 @@ Used when features are ***binary*** — each feature is either **present** ($x_i
 
 ### 4.1 Likelihood Formula
 
-$$\boxed{P(\mathbf{x} \mid C_k) = \prod_{i=1}^n P(i \mid C_k)^{\,x_i} \cdot \bigl(1 - P(i \mid C_k)\bigr)^{1-x_i}}$$
+$$\boxed{P(\mathbf{x} \mid C_k) = \prod_{i=1}^n P(i \mid C_k)^{x_i} \cdot \bigl(1 - P(i \mid C_k)\bigr)^{1-x_i}}$$
 
 | Symbol | Meaning |
 |---|---|
