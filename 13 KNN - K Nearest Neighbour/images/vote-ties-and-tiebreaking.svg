@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="420" viewBox="0 0 680 420" role="img" aria-labelledby="vt-title vt-desc">
+  <title id="vt-title">KNN Vote Tie: k=4, Two Classes Even</title>
+  <desc id="vt-desc">Left panel shows a query point (purple diamond) surrounded by four neighbours at equal distance: two Class A blue circles at top and two Class B orange squares at bottom. The vote is 2-2, a tie. Right panel lists five deterministic tie-breaking strategies: smallest total distance, closest single neighbour, predeclared cost priority, adjust k, and abstain.</desc>
+  <defs>
+    <style>
+      .bg{fill:#f8fafc}
+      .title{font:700 20px system-ui,sans-serif;fill:#111827}
+      .ptitle{font:700 14px system-ui,sans-serif;fill:#111827}
+      .sub{font:12px system-ui,sans-serif;fill:#6b7280}
+      .ann{font:12px system-ui,sans-serif;fill:#374151}
+      .strat-box{fill:#fff;stroke:#e2e8f0;stroke-width:1.2}
+      .num{font:700 15px system-ui,sans-serif}
+      .strat{font:700 12px system-ui,sans-serif}
+      .detail{font:11px system-ui,sans-serif;fill:#6b7280}
+      .classA{fill:#bfdbfe;stroke:#2563eb;stroke-width:2}
+      .classB{fill:#fed7aa;stroke:#ea580c;stroke-width:2}
+      .query{fill:#7c3aed;stroke:#4c1d95;stroke-width:2}
+      .equal-dist{stroke:#94a3b8;stroke-width:1.2;stroke-dasharray:4 3;fill:none}
+    </style>
+  </defs>
+
+  <rect class="bg" width="680" height="420" rx="14"/>
+  <text class="title" x="340" y="30" text-anchor="middle">Vote Tie — k = 4, Two Classes Equal</text>
+
+  <!-- ══ LEFT PANEL: visual of tie ═══════════════════════════ -->
+  <rect x="20" y="45" width="290" height="310" rx="8" fill="#fff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text class="ptitle" x="165" y="68" text-anchor="middle">The Tie Situation</text>
+
+  <!-- equal-distance dashed ring -->
+  <circle cx="165" cy="210" r="85" class="equal-dist"/>
+  <text x="165" y="124" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#94a3b8">equal distance</text>
+
+  <!-- query diamond at centre -->
+  <polygon points="165,196 177,210 165,224 153,210" class="query"/>
+  <text x="165" y="244" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#6d28d9">query</text>
+
+  <!-- Class A: 2 blue circles (top-left, top-right) -->
+  <circle cx="110" cy="145" r="20" class="classA"/>
+  <text cx="110" cy="145" x="110" y="149" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="bold" fill="#1d4ed8">A</text>
+
+  <circle cx="220" cy="145" r="20" class="classA"/>
+  <text x="220" y="149" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="bold" fill="#1d4ed8">A</text>
+
+  <!-- Class B: 2 orange squares (bottom-left, bottom-right) -->
+  <rect x="90" y="257" width="40" height="40" rx="5" class="classB"/>
+  <text x="110" y="282" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="bold" fill="#c2410c">B</text>
+
+  <rect x="200" y="257" width="40" height="40" rx="5" class="classB"/>
+  <text x="220" y="282" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="bold" fill="#c2410c">B</text>
+
+  <!-- distance dashes from query to neighbours -->
+  <line x1="165" y1="210" x2="122" y2="162" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 3"/>
+  <line x1="165" y1="210" x2="208" y2="162" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 3"/>
+  <line x1="165" y1="210" x2="122" y2="258" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 3"/>
+  <line x1="165" y1="210" x2="208" y2="258" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 3"/>
+
+  <!-- vote labels -->
+  <text x="85" y="200" font-family="system-ui,sans-serif" font-size="11" fill="#2563eb" font-weight="bold">Class A: 2</text>
+  <text x="210" y="200" font-family="system-ui,sans-serif" font-size="11" fill="#ea580c" font-weight="bold">Class B: 2</text>
+
+  <!-- TIE badge -->
+  <rect x="128" y="336" width="74" height="26" rx="6" fill="#fef9c3" stroke="#ca8a04" stroke-width="1.5"/>
+  <text x="165" y="354" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="bold" fill="#92400e">TIE!</text>
+
+  <!-- ══ RIGHT PANEL: 5 strategies ════════════════════════════ -->
+  <text class="ptitle" x="490" y="68" text-anchor="middle">Tie-Breaking Strategies</text>
+
+  <!-- Strategy 1 -->
+  <rect class="strat-box" x="330" y="80" width="330" height="58" rx="6"/>
+  <text class="num" x="352" y="104" fill="#2563eb">1</text>
+  <text class="strat" x="372" y="101" fill="#111827">Smallest total distance</text>
+  <text class="detail" x="372" y="116">Sum d(q, nᵢ) per class — pick the class</text>
+  <text class="detail" x="372" y="129">whose neighbours are collectively closest.</text>
+
+  <!-- Strategy 2 -->
+  <rect class="strat-box" x="330" y="146" width="330" height="58" rx="6"/>
+  <text class="num" x="352" y="170" fill="#2563eb">2</text>
+  <text class="strat" x="372" y="167" fill="#111827">Closest single neighbour wins</text>
+  <text class="detail" x="372" y="182">Break tie using the label of the single</text>
+  <text class="detail" x="372" y="195">nearest neighbour among tied classes.</text>
+
+  <!-- Strategy 3 -->
+  <rect class="strat-box" x="330" y="212" width="330" height="58" rx="6"/>
+  <text class="num" x="352" y="236" fill="#2563eb">3</text>
+  <text class="strat" x="372" y="233" fill="#111827">Cost-based class priority</text>
+  <text class="detail" x="372" y="248">Pre-declare which class to favour when</text>
+  <text class="detail" x="372" y="261">tied — e.g. prefer positive in medical use.</text>
+
+  <!-- Strategy 4 -->
+  <rect class="strat-box" x="330" y="278" width="330" height="58" rx="6"/>
+  <text class="num" x="352" y="302" fill="#2563eb">4</text>
+  <text class="strat" x="372" y="299" fill="#111827">Adjust k (reduce or increase by 1)</text>
+  <text class="detail" x="372" y="314">Use an odd k to avoid ties in binary</text>
+  <text class="detail" x="372" y="327">classification; document the procedure.</text>
+
+  <!-- Strategy 5 -->
+  <rect class="strat-box" x="330" y="344" width="330" height="58" rx="6"/>
+  <text class="num" x="352" y="368" fill="#ea580c">5</text>
+  <text class="strat" x="372" y="365" fill="#111827">Return abstention / uncertain result</text>
+  <text class="detail" x="372" y="380">When no confident resolution exists,</text>
+  <text class="detail" x="372" y="393">surface the tie as a low-confidence flag.</text>
+
+  <!-- bottom note -->
+  <text x="340" y="413" font-family="system-ui,sans-serif" font-size="11" fill="#6b7280" font-style="italic">
+    Random tie-breaking harms reproducibility — always use a deterministic rule.
+  </text>
+</svg>

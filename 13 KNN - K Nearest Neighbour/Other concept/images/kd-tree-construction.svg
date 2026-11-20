@@ -1,0 +1,59 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="400" y="30" font-size="24" font-weight="bold" text-anchor="middle" fill="#1976d2">KD-Tree Construction Example (2D)</text>
+
+  <!-- Grid background -->
+  <rect x="50" y="80" width="700" height="450" fill="#f5f5f5" stroke="#ccc" stroke-width="1"/>
+
+  <!-- Axes -->
+  <line x1="50" y1="530" x2="750" y2="530" stroke="#000" stroke-width="2"/>
+  <line x1="50" y1="80" x2="50" y2="530" stroke="#000" stroke-width="2"/>
+  <text x="750" y="555" font-size="14" fill="#000">X</text>
+  <text x="25" y="85" font-size="14" fill="#000">Y</text>
+
+  <!-- Root split (x=5) - vertical line -->
+  <line x1="400" y1="80" x2="400" y2="530" stroke="#d32f2f" stroke-width="3" stroke-dasharray="5,5"/>
+  <text x="420" y="305" font-size="12" fill="#d32f2f" font-weight="bold">x=5</text>
+
+  <!-- Left subtree split (y=3) - horizontal line on left -->
+  <line x1="50" y1="352" x2="400" y2="352" stroke="#1976d2" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="150" y="370" font-size="12" fill="#1976d2" font-weight="bold">y=3</text>
+
+  <!-- Right subtree split (y=7) - horizontal line on right -->
+  <line x1="400" y1="176" x2="750" y2="176" stroke="#388e3c" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="550" y="160" font-size="12" fill="#388e3c" font-weight="bold">y=7</text>
+
+  <!-- Data points -->
+  <!-- Left-Bottom region -->
+  <circle cx="100" cy="450" r="5" fill="#ff6b6b"/>
+  <text x="110" y="455" font-size="11" fill="#000">P1(1,1)</text>
+
+  <circle cx="150" cy="400" r="5" fill="#ff6b6b"/>
+  <text x="160" y="405" font-size="11" fill="#000">P2(2,2)</text>
+
+  <!-- Left-Top region -->
+  <circle cx="80" cy="250" r="5" fill="#4ecdc4"/>
+  <text x="90" y="255" font-size="11" fill="#000">P3(1,5)</text>
+
+  <!-- Right-Top region -->
+  <circle cx="550" cy="150" r="5" fill="#95e1d3"/>
+  <text x="560" y="155" font-size="11" fill="#000">P4(7,8)</text>
+
+  <circle cx="650" cy="200" r="5" fill="#95e1d3"/>
+  <text x="660" y="205" font-size="11" fill="#000">P5(9,6)</text>
+
+  <!-- Right-Bottom region -->
+  <circle cx="600" cy="450" r="5" fill="#f8b500"/>
+  <text x="610" y="455" font-size="11" fill="#000">P6(8,2)</text>
+
+  <!-- Legend -->
+  <rect x="50" y="555" width="700" height="40" fill="#fff" stroke="#ccc" stroke-width="1"/>
+  <line x1="80" y1="572" x2="100" y2="572" stroke="#d32f2f" stroke-width="3" stroke-dasharray="5,5"/>
+  <text x="110" y="577" font-size="12" fill="#000">Root Split (x=5)</text>
+
+  <line x1="300" y1="572" x2="320" y2="572" stroke="#1976d2" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="330" y="577" font-size="12" fill="#000">Left Split (y=3)</text>
+
+  <line x1="550" y1="572" x2="570" y2="572" stroke="#388e3c" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="580" y="577" font-size="12" fill="#000">Right Split (y=7)</text>
+</svg>

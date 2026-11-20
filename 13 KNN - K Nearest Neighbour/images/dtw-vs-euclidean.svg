@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="520" viewBox="0 0 960 520" role="img" aria-labelledby="title desc">
+  <title id="title">Dynamic Time Warping vs Euclidean Distance for Time Series</title>
+  <desc id="desc">Demonstrating why rigid lockstep Euclidean distance fails on phase-shifted or speed-varying sequences, while Dynamic Time Warping aligns morphological features.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .card { fill: #ffffff; stroke: #e2e8f0; stroke-width: 1.5; }
+      .title { font: 700 22px system-ui, -apple-system, sans-serif; fill: #0f172a; }
+      .subtitle { font: 400 13px system-ui, -apple-system, sans-serif; fill: #64748b; }
+      .card-title { font: 700 16px system-ui, -apple-system, sans-serif; }
+      .card-sub { font: 400 12px system-ui, -apple-system, sans-serif; fill: #64748b; }
+      .label { font: 600 12px system-ui, -apple-system, sans-serif; fill: #1e293b; }
+      .small { font: 500 11px system-ui, -apple-system, sans-serif; fill: #64748b; }
+      .badge-bad { font: 700 11px system-ui, -apple-system, sans-serif; fill: #991b1b; }
+      .badge-good { font: 700 11px system-ui, -apple-system, sans-serif; fill: #166534; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="960" height="520" rx="16"/>
+
+  <text class="title" x="36" y="42">Time Series Distance: Euclidean vs. Dynamic Time Warping (DTW)</text>
+  <text class="subtitle" x="36" y="62">Comparing rigid one-to-one point alignment with elastic feature-to-feature alignment</text>
+
+  <!-- ==================== TOP CARD: EUCLIDEAN DISTANCE ==================== -->
+  <g transform="translate(36, 82)">
+    <rect class="card" width="888" height="195" rx="12"/>
+
+    <text class="card-title" x="24" y="30" fill="#991b1b">Euclidean Distance (Rigid Lockstep Alignment ❌)</text>
+    <text class="card-sub" x="24" y="48">Points are strictly paired at identical timestamps t_i ↔ t_i. Phase shifts cause massive false distances!</text>
+
+    <!-- Plot Area -->
+    <g transform="translate(30, 60)">
+      <!-- Series 1 (Blue) -->
+      <path d="M 20 80 Q 70 10 120 80 T 220 80 T 320 80 T 420 80 T 520 80" fill="none" stroke="#2563eb" stroke-width="3"/>
+      <!-- Series 2 (Orange - same wave, phase-shifted right by 40px) -->
+      <path d="M 20 80 Q 40 80 60 80 Q 110 10 160 80 T 260 80 T 360 80 T 460 80 T 520 80" fill="none" stroke="#ea580c" stroke-width="3" stroke-dasharray="5 3"/>
+
+      <!-- Rigid Vertical Alignment Lines (Connecting t_i to t_i) -->
+      <line x1="70" y1="28" x2="70" y2="78" stroke="#ef4444" stroke-width="1.8" stroke-dasharray="3 3"/>
+      <line x1="110" y1="72" x2="110" y2="28" stroke="#ef4444" stroke-width="1.8" stroke-dasharray="3 3"/>
+      <line x1="170" y1="28" x2="170" y2="78" stroke="#ef4444" stroke-width="1.8" stroke-dasharray="3 3"/>
+      <line x1="210" y1="72" x2="210" y2="28" stroke="#ef4444" stroke-width="1.8" stroke-dasharray="3 3"/>
+      <line x1="270" y1="28" x2="270" y2="78" stroke="#ef4444" stroke-width="1.8" stroke-dasharray="3 3"/>
+      <line x1="310" y1="72" x2="310" y2="28" stroke="#ef4444" stroke-width="1.8" stroke-dasharray="3 3"/>
+      <line x1="370" y1="28" x2="370" y2="78" stroke="#ef4444" stroke-width="1.8" stroke-dasharray="3 3"/>
+      <line x1="410" y1="72" x2="410" y2="28" stroke="#ef4444" stroke-width="1.8" stroke-dasharray="3 3"/>
+      <line x1="470" y1="28" x2="470" y2="78" stroke="#ef4444" stroke-width="1.8" stroke-dasharray="3 3"/>
+
+      <!-- Legend & Info Box -->
+      <g transform="translate(560, 10)">
+        <rect width="260" height="90" rx="8" fill="#fef2f2" stroke="#fca5a5"/>
+        <text class="label" x="14" y="24" fill="#991b1b">Problem: Peak vs. Trough!</text>
+        <text class="small" x="14" y="44" fill="#7f1d1d">• Blue peak aligns with Orange baseline</text>
+        <text class="small" x="14" y="60" fill="#7f1d1d">• Computes enormous false distance</text>
+        <text class="badge-bad" x="14" y="80">Result: Identical patterns classified as far apart</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ==================== BOTTOM CARD: DTW ==================== -->
+  <g transform="translate(36, 292)">
+    <rect class="card" width="888" height="200" rx="12"/>
+
+    <text class="card-title" x="24" y="30" fill="#166534">Dynamic Time Warping (Elastic Feature Alignment ✅)</text>
+    <text class="card-sub" x="24" y="48">Non-linear warping connects matching morphological peaks and troughs regardless of temporal shifts</text>
+
+    <!-- Plot Area -->
+    <g transform="translate(30, 60)">
+      <!-- Series 1 (Blue) -->
+      <path d="M 20 80 Q 70 10 120 80 T 220 80 T 320 80 T 420 80 T 520 80" fill="none" stroke="#2563eb" stroke-width="3"/>
+      <!-- Series 2 (Orange - same wave, shifted right) -->
+      <path d="M 20 80 Q 40 80 60 80 Q 110 10 160 80 T 260 80 T 360 80 T 460 80 T 520 80" fill="none" stroke="#ea580c" stroke-width="3" stroke-dasharray="5 3"/>
+
+      <!-- Elastic Warping Lines (Connecting Peaks to Peaks!) -->
+      <line x1="70" y1="28" x2="110" y2="28" stroke="#10b981" stroke-width="2"/>
+      <line x1="170" y1="28" x2="210" y2="28" stroke="#10b981" stroke-width="2"/>
+      <line x1="270" y1="28" x2="310" y2="28" stroke="#10b981" stroke-width="2"/>
+      <line x1="370" y1="28" x2="410" y2="28" stroke="#10b981" stroke-width="2"/>
+      <line x1="470" y1="28" x2="510" y2="28" stroke="#10b981" stroke-width="2"/>
+
+      <!-- Baseline Elastic Lines -->
+      <line x1="120" y1="80" x2="160" y2="80" stroke="#10b981" stroke-width="1.5" stroke-dasharray="2 2"/>
+      <line x1="220" y1="80" x2="260" y2="80" stroke="#10b981" stroke-width="1.5" stroke-dasharray="2 2"/>
+      <line x1="320" y1="80" x2="360" y2="80" stroke="#10b981" stroke-width="1.5" stroke-dasharray="2 2"/>
+      <line x1="420" y1="80" x2="460" y2="80" stroke="#10b981" stroke-width="1.5" stroke-dasharray="2 2"/>
+
+      <!-- Legend & Info Box -->
+      <g transform="translate(560, 10)">
+        <rect width="260" height="94" rx="8" fill="#f0fdf4" stroke="#86efac"/>
+        <text class="label" x="14" y="24" fill="#166534">Solution: Peak-to-Peak Warping!</text>
+        <text class="small" x="14" y="44" fill="#14532d">• Stretches &amp; compresses time axis</text>
+        <text class="small" x="14" y="60" fill="#14532d">• Correctly detects shape similarity: d ≈ 0</text>
+        <text class="badge-good" x="14" y="82">Result: Invariant to speed and phase changes</text>
+      </g>
+    </g>
+  </g>
+</svg>

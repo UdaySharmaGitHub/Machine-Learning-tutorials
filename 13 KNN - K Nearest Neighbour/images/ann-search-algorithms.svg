@@ -1,0 +1,193 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Approximate Nearest Neighbor (ANN) Architectures: HNSW and IVF-PQ</title>
+  <desc id="desc">Visualizing how modern ANN algorithms trade tiny recall margins for 10x-100x speedups: HNSW multi-layer graphs and IVF-PQ inverted file clustering with vector quantization.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .card { fill: #ffffff; stroke: #e2e8f0; stroke-width: 1.5; }
+      .title { font: 700 22px system-ui, -apple-system, sans-serif; fill: #0f172a; }
+      .subtitle { font: 400 13px system-ui, -apple-system, sans-serif; fill: #64748b; }
+      .card-title { font: 700 16px system-ui, -apple-system, sans-serif; }
+      .card-sub { font: 500 12px system-ui, -apple-system, sans-serif; fill: #64748b; }
+      .label { font: 600 12px system-ui, -apple-system, sans-serif; fill: #1e293b; }
+      .small { font: 500 11px system-ui, -apple-system, sans-serif; fill: #64748b; }
+      .code-txt { font: 600 11px "SF Mono", Menlo, Consolas, monospace; }
+      .graph-edge { stroke: #cbd5e1; stroke-width: 1.5; }
+      .hnsw-hop { stroke: #ea580c; stroke-width: 2.5; stroke-dasharray: 4 3; }
+    </style>
+    <marker id="hop-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 1L8 5L0 9z" fill="#ea580c"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="960" height="540" rx="16"/>
+
+  <text class="title" x="36" y="42">Approximate Nearest Neighbors (ANN) at Scale</text>
+  <text class="subtitle" x="36" y="62">Trading &lt;1% recall for 10× to 100× speedups and massive memory reduction in high dimensions</text>
+
+  <!-- ==================== LEFT CARD: HNSW GRAPH ==================== -->
+  <g transform="translate(36, 82)">
+    <rect class="card" width="432" height="380" rx="14"/>
+
+    <!-- Header Box -->
+    <rect x="0" y="0" width="432" height="56" rx="14" fill="#fff7ed"/>
+    <rect x="0" y="44" width="432" height="12" fill="#fff7ed"/>
+    <text class="card-title" x="20" y="28" fill="#9a3412">HNSW (Hierarchical Navigable Graph)</text>
+    <text class="card-sub" x="20" y="46" fill="#ea580c">Layered skip-list proximity graph with greedy routing</text>
+
+    <!-- Multi-Layer Graph Visualization -->
+    <g transform="translate(20, 68)">
+      <!-- Layer 2: Top Highway Layer -->
+      <rect x="0" y="0" width="392" height="42" rx="6" fill="#f8fafc" stroke="#fed7aa"/>
+      <text class="code-txt" x="12" y="25" fill="#ea580c">Layer 2 (Expressway):</text>
+      <circle cx="160" cy="21" r="6" fill="#ea580c"/>
+      <circle cx="310" cy="21" r="6" fill="#ea580c"/>
+      <line x1="166" y1="21" x2="304" y2="21" class="graph-edge"/>
+      <!-- Hop 1 -->
+      <path d="M 160 21 L 310 21" stroke="#ea580c" stroke-width="2.5" marker-end="url(#hop-arrow)"/>
+
+      <!-- Drop Down -->
+      <line x1="310" y1="27" x2="310" y2="55" stroke="#ea580c" stroke-width="2" stroke-dasharray="3 3"/>
+
+      <!-- Layer 1: Intermediate Layer -->
+      <g transform="translate(0, 52)">
+        <rect x="0" y="0" width="392" height="52" rx="6" fill="#f8fafc" stroke="#fed7aa"/>
+        <text class="code-txt" x="12" y="30" fill="#ea580c">Layer 1 (Regional):</text>
+        <circle cx="110" cy="26" r="6" fill="#f97316"/>
+        <circle cx="210" cy="26" r="6" fill="#f97316"/>
+        <circle cx="310" cy="26" r="6" fill="#ea580c"/>
+        <circle cx="360" cy="26" r="6" fill="#f97316"/>
+        <line x1="116" y1="26" x2="204" y2="26" class="graph-edge"/>
+        <line x1="216" y1="26" x2="304" y2="26" class="graph-edge"/>
+        <line x1="316" y1="26" x2="354" y2="26" class="graph-edge"/>
+
+        <!-- Hop 2 -->
+        <path d="M 310 26 L 360 26" stroke="#ea580c" stroke-width="2.5" marker-end="url(#hop-arrow)"/>
+      </g>
+
+      <!-- Drop Down -->
+      <line x1="360" y1="104" x2="360" y2="120" stroke="#ea580c" stroke-width="2" stroke-dasharray="3 3"/>
+
+      <!-- Layer 0: Dense Bottom Layer -->
+      <g transform="translate(0, 116)">
+        <rect x="0" y="0" width="392" height="74" rx="6" fill="#f8fafc" stroke="#fed7aa"/>
+        <text class="code-txt" x="12" y="24" fill="#ea580c">Layer 0 (Full Data):</text>
+
+        <!-- Dense mesh points -->
+        <circle cx="60" cy="46" r="5" fill="#3b82f6"/>
+        <circle cx="110" cy="38" r="5" fill="#3b82f6"/>
+        <circle cx="160" cy="52" r="5" fill="#3b82f6"/>
+        <circle cx="210" cy="36" r="5" fill="#3b82f6"/>
+        <circle cx="260" cy="50" r="5" fill="#3b82f6"/>
+        <circle cx="310" cy="38" r="5" fill="#3b82f6"/>
+        <circle cx="345" cy="54" r="6" fill="#10b981"/>
+        <circle cx="375" cy="40" r="5" fill="#3b82f6"/>
+
+        <line x1="65" y1="46" x2="105" y2="38" class="graph-edge"/>
+        <line x1="115" y1="38" x2="155" y2="52" class="graph-edge"/>
+        <line x1="165" y1="52" x2="205" y2="36" class="graph-edge"/>
+        <line x1="215" y1="36" x2="255" y2="50" class="graph-edge"/>
+        <line x1="265" y1="50" x2="305" y2="38" class="graph-edge"/>
+        <line x1="315" y1="38" x2="340" y2="54" class="graph-edge"/>
+        <line x1="351" y1="54" x2="370" y2="40" class="graph-edge"/>
+
+        <!-- Final query match -->
+        <circle cx="345" cy="54" r="9" fill="none" stroke="#10b981" stroke-width="2"/>
+        <text class="code-txt" x="345" y="24" text-anchor="middle" fill="#047857">Nearest Found! ✅</text>
+      </g>
+    </g>
+
+    <!-- Properties Box -->
+    <rect x="20" y="278" width="392" height="84" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text class="label" x="30" y="298">HNSW Characteristics:</text>
+    <text class="small" x="30" y="318">• <tspan font-weight="700">Speed/Recall Champion:</tspan> O(log n) query time in practice</text>
+    <text class="small" x="30" y="336">• <tspan font-weight="700">Memory Tradeoff:</tspan> Index size is 1.5× to 2.5× raw data size</text>
+    <text class="small" x="30" y="352">• <tspan font-weight="700">Libraries:</tspan> Faiss, Hnswlib, Qdrant, ChromaDB</text>
+  </g>
+
+  <!-- ==================== RIGHT CARD: IVF + PQ ==================== -->
+  <g transform="translate(492, 82)">
+    <rect class="card" width="432" height="380" rx="14"/>
+
+    <!-- Header Box -->
+    <rect x="0" y="0" width="432" height="56" rx="14" fill="#f0fdf4"/>
+    <rect x="0" y="44" width="432" height="12" fill="#f0fdf4"/>
+    <text class="card-title" x="20" y="28" fill="#166534">IVF + PQ (Inverted File + Quantization)</text>
+    <text class="card-sub" x="20" y="46" fill="#15803d">Cluster pruning + 8× to 32× vector compression</text>
+
+    <!-- IVF + PQ Visualization -->
+    <g transform="translate(20, 68)">
+      <!-- Step 1: Inverted File (Voronoi Partitioning) -->
+      <rect x="0" y="0" width="186" height="190" rx="6" fill="#f8fafc" stroke="#bbf7d0"/>
+      <text class="label" x="12" y="22" fill="#166534">1. IVF Clustering</text>
+      <text class="small" x="12" y="38" fill="#64748b">Search only nprobe cells</text>
+
+      <!-- 4 Voronoi Cells -->
+      <rect x="10" y="48" width="80" height="64" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+      <circle cx="50" cy="80" r="4" fill="#10b981"/>
+      <text class="small" x="14" y="62">Cell 1</text>
+
+      <!-- Cell 2: Target Cell -->
+      <rect x="96" y="48" width="80" height="64" rx="4" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+      <circle cx="136" cy="80" r="4" fill="#047857"/>
+      <text class="code-txt" x="102" y="62" fill="#047857">nprobe ✅</text>
+      <circle cx="148" cy="95" r="3" fill="#059669"/>
+      <circle cx="122" cy="90" r="3" fill="#059669"/>
+
+      <rect x="10" y="118" width="80" height="62" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+      <circle cx="50" cy="149" r="4" fill="#10b981"/>
+      <text class="small" x="14" y="132">Cell 3</text>
+
+      <rect x="96" y="118" width="80" height="62" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+      <circle cx="136" cy="149" r="4" fill="#10b981"/>
+      <text class="small" x="102" y="132">Cell 4</text>
+
+      <!-- Step 2: Product Quantization (PQ) Compression -->
+      <g transform="translate(196, 0)">
+        <rect x="0" y="0" width="196" height="190" rx="6" fill="#f8fafc" stroke="#bbf7d0"/>
+        <text class="label" x="12" y="22" fill="#166534">2. Product Quantization</text>
+        <text class="small" x="12" y="38" fill="#64748b">Compress 128D floats to bytes</text>
+
+        <!-- Vector splitting visualization -->
+        <rect x="12" y="52" width="172" height="24" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+        <text class="small" x="18" y="68" font-family="monospace">128D Float32 (512 B)</text>
+
+        <text class="label" x="98" y="94" text-anchor="middle" fill="#10b981">↓ Split into M sub-vectors</text>
+
+        <g transform="translate(12, 102)">
+          <rect x="0" y="0" width="38" height="22" rx="3" fill="#dcfce7" stroke="#86efac"/>
+          <text class="code-txt" x="6" y="15" fill="#166534">code1</text>
+
+          <rect x="44" y="0" width="38" height="22" rx="3" fill="#dcfce7" stroke="#86efac"/>
+          <text class="code-txt" x="50" y="15" fill="#166534">code2</text>
+
+          <rect x="88" y="0" width="38" height="22" rx="3" fill="#dcfce7" stroke="#86efac"/>
+          <text class="code-txt" x="94" y="15" fill="#166534">code3</text>
+
+          <rect x="132" y="0" width="38" height="22" rx="3" fill="#dcfce7" stroke="#86efac"/>
+          <text class="code-txt" x="138" y="15" fill="#166534">code4</text>
+        </g>
+
+        <!-- Compact Byte Footprint -->
+        <rect x="12" y="136" width="172" height="42" rx="4" fill="#ecfdf5" stroke="#10b981"/>
+        <text class="code-txt" x="20" y="154" fill="#047857">Compressed: 16 Bytes!</text>
+        <text class="small" x="20" y="168" fill="#047857">32× memory reduction</text>
+      </g>
+    </g>
+
+    <!-- Properties Box -->
+    <rect x="20" y="278" width="392" height="84" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text class="label" x="30" y="298">IVF + PQ Characteristics:</text>
+    <text class="small" x="30" y="318">• <tspan font-weight="700">Memory Champion:</tspan> Stores billion-scale datasets in RAM</text>
+    <text class="small" x="30" y="336">• <tspan font-weight="700">Trade-off:</tspan> Quantization noise slightly reduces recall</text>
+    <text class="small" x="30" y="352">• <tspan font-weight="700">Libraries:</tspan> Meta Faiss (IndexIVFPQ), Milvus</text>
+  </g>
+
+  <!-- Bottom Takeaway -->
+  <g transform="translate(36, 476)">
+    <rect width="888" height="46" rx="10" fill="#f1f5f9" stroke="#cbd5e1"/>
+    <text class="small" x="20" y="28" fill="#334155">
+      <tspan font-weight="700" fill="#0f172a">When to use ANN:</tspan> Essential when training set <tspan font-family="monospace">n &gt; 100,000</tspan> and dimension <tspan font-family="monospace">d &gt; 50</tspan> (embeddings, search, recommendations).
+    </text>
+  </g>
+</svg>

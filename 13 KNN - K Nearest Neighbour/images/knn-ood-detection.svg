@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="520" viewBox="0 0 960 520" role="img" aria-labelledby="title desc">
+  <title id="title">KNN Out-of-Distribution Detection via k-th Neighbor Distance</title>
+  <desc id="desc">Visual diagram explaining out-of-distribution and novelty detection in KNN using the calibrated k-th nearest neighbor distance threshold to prevent silent extrapolation errors.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .title { font: 700 22px system-ui, -apple-system, sans-serif; fill: #0f172a; }
+      .subtitle { font: 400 13px system-ui, -apple-system, sans-serif; fill: #64748b; }
+      .card { fill: #ffffff; stroke: #e2e8f0; stroke-width: 1.5; rx: 12; }
+      .card-title { font: 700 15px system-ui, -apple-system, sans-serif; fill: #1e293b; }
+      .card-sub { font: 500 12px system-ui, -apple-system, sans-serif; fill: #64748b; }
+      .node-title { font: 700 13px system-ui, -apple-system, sans-serif; fill: #0f172a; }
+      .node-desc { font: 400 11px system-ui, -apple-system, sans-serif; fill: #475569; }
+      .code-badge { font: 700 11px "SF Mono", Menlo, Consolas, monospace; }
+      .formula { font: 700 13px "SF Mono", Menlo, Consolas, monospace; fill: #1e293b; }
+      .arrow { stroke: #94a3b8; stroke-width: 1.8; fill: none; }
+      .pt-tr { fill: #cbd5e1; stroke: #94a3b8; stroke-width: 1; }
+      .pt-in { fill: #10b981; stroke: #047857; stroke-width: 1.5; }
+      .pt-bound { fill: #f59e0b; stroke: #b45309; stroke-width: 1.5; }
+      .pt-ood { fill: #ef4444; stroke: #b91c1c; stroke-width: 2; }
+      .radius-circle { fill: none; stroke-dasharray: 4 3; stroke-width: 1.5; }
+      .manifold-bg { fill: #f1f5f9; stroke: #cbd5e1; stroke-width: 1.5; stroke-dasharray: 6 4; }
+    </style>
+    <marker id="arrow-ood" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 1L8 5L0 9z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect class="bg" width="960" height="520" rx="16"/>
+
+  <!-- Header -->
+  <text class="title" x="36" y="42">Detecting Out-of-Distribution (OOD) Queries via Distance r_k(x)</text>
+  <text class="subtitle" x="36" y="62">KNN always returns neighbors even for completely alien queries. Calibrated distance thresholds prevent silent extrapolation.</text>
+
+  <!-- ==================== LEFT PANEL: FEATURE SPACE MANIFOLD ==================== -->
+  <g transform="translate(36, 85)">
+    <rect class="card" width="460" height="340"/>
+    <rect x="0" y="0" width="460" height="36" rx="12" fill="#f1f5f9"/>
+    <rect x="0" y="24" width="460" height="12" fill="#f1f5f9"/>
+    <text class="card-title" x="18" y="24">Feature Space &amp; Neighborhood Radii (k = 4)</text>
+
+    <!-- Training Data Density Manifold (Blob) -->
+    <path class="manifold-bg" d="M 50 140 C 60 70, 160 60, 240 80 C 310 100, 310 200, 260 260 C 200 310, 80 290, 50 220 Z"/>
+    <text class="code-badge" x="65" y="90" fill="#64748b">Training Data Manifold (Dense Distribution)</text>
+
+    <!-- Training Points (Dots) -->
+    <circle cx="90" cy="150" r="3.5" class="pt-tr"/>
+    <circle cx="110" cy="130" r="3.5" class="pt-tr"/>
+    <circle cx="125" cy="165" r="3.5" class="pt-tr"/>
+    <circle cx="140" cy="140" r="3.5" class="pt-tr"/>
+    <circle cx="160" cy="120" r="3.5" class="pt-tr"/>
+    <circle cx="150" cy="175" r="3.5" class="pt-tr"/>
+    <circle cx="180" cy="155" r="3.5" class="pt-tr"/>
+    <circle cx="195" cy="135" r="3.5" class="pt-tr"/>
+    <circle cx="210" cy="180" r="3.5" class="pt-tr"/>
+    <circle cx="225" cy="150" r="3.5" class="pt-tr"/>
+    <circle cx="230" cy="220" r="3.5" class="pt-tr"/>
+    <circle cx="170" cy="230" r="3.5" class="pt-tr"/>
+    <circle cx="110" cy="210" r="3.5" class="pt-tr"/>
+    <circle cx="140" cy="245" r="3.5" class="pt-tr"/>
+
+    <!-- 1. IN-DISTRIBUTION QUERY -->
+    <circle cx="145" cy="150" r="6" class="pt-in"/>
+    <circle cx="145" cy="150" r="26" class="radius-circle" stroke="#10b981"/>
+    <text class="code-badge" x="145" y="125" fill="#047857" font-weight="700">x₁ (In-Dist)</text>
+    <text class="node-desc" x="145" y="195" fill="#047857" font-size="10">r₄ = 0.38 &lt; τ₉₅</text>
+
+    <!-- 2. BOUNDARY QUERY -->
+    <circle cx="255" cy="240" r="6" class="pt-bound"/>
+    <circle cx="255" cy="240" r="52" class="radius-circle" stroke="#f59e0b"/>
+    <text class="code-badge" x="255" y="215" fill="#b45309" font-weight="700">x₂ (Border)</text>
+    <text class="node-desc" x="255" y="305" fill="#b45309" font-size="10">r₄ = 0.95 ≈ τ₉₅</text>
+
+    <!-- 3. OUT-OF-DISTRIBUTION QUERY (FAR AWAY) -->
+    <circle cx="390" cy="110" r="7" class="pt-ood"/>
+    <circle cx="390" cy="110" r="145" class="radius-circle" stroke="#ef4444"/>
+    <line x1="390" y1="110" x2="245" y2="110" stroke="#ef4444" stroke-width="1.8" stroke-dasharray="3 3"/>
+    <text class="code-badge" x="350" y="85" fill="#b91c1c" font-weight="700">x₃ (OOD / Novelty)</text>
+    <text class="node-desc" x="270" y="104" fill="#b91c1c" font-weight="700">r₄ = 3.65 &gt;&gt; τ₉₉ (ALERT!)</text>
+
+    <!-- Formula at bottom -->
+    <g transform="translate(18, 285)">
+      <rect width="424" height="42" rx="6" fill="#f8fafc" stroke="#e2e8f0"/>
+      <text class="formula" x="12" y="26">r_k(x) = max_{i ∈ N_k(x)} d(x, x_i)</text>
+      <text class="node-desc" x="290" y="26" fill="#64748b">Radius to k-th neighbor</text>
+    </g>
+  </g>
+
+  <!-- ==================== RIGHT PANEL: CALIBRATED THRESHOLD & DECISION POLICY ==================== -->
+  <g transform="translate(516, 85)">
+    <rect class="card" width="408" height="340"/>
+    <rect x="0" y="0" width="408" height="36" rx="12" fill="#f8fafc"/>
+    <rect x="0" y="24" width="408" height="12" fill="#f8fafc"/>
+    <text class="card-title" x="18" y="24">Calibrated Threshold Distribution</text>
+
+    <!-- Distribution Curve (Simulation) -->
+    <g transform="translate(18, 48)">
+      <rect width="372" height="115" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+      <text class="code-badge" x="12" y="18" fill="#475569">Distribution of r_k on Training / CV Folds</text>
+
+      <!-- Distribution curve -->
+      <path d="M 20 95 Q 60 95, 90 35 T 160 65 T 230 85 T 320 95" fill="none" stroke="#6366f1" stroke-width="2"/>
+
+      <!-- Fill under curve -->
+      <path d="M 20 95 Q 60 95, 90 35 T 160 65 T 230 85 T 320 95 L 320 95 L 20 95 Z" fill="#e0e7ff" opacity="0.4"/>
+
+      <!-- Threshold vertical lines -->
+      <!-- Median -->
+      <line x1="110" y1="28" x2="110" y2="95" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="3 3"/>
+      <text class="node-desc" x="90" y="108" font-size="9">Median (0.42)</text>
+
+      <!-- 95th Percentile -->
+      <line x1="220" y1="28" x2="220" y2="95" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="3 3"/>
+      <text class="code-badge" x="195" y="24" fill="#b45309">τ₉₅ = 1.05</text>
+      <text class="node-desc" x="195" y="108" font-size="9">95th %ile</text>
+
+      <!-- 99th Percentile -->
+      <line x1="275" y1="28" x2="275" y2="95" stroke="#ef4444" stroke-width="1.8"/>
+      <text class="code-badge" x="250" y="24" fill="#b91c1c">τ₉₉ = 1.82</text>
+      <text class="node-desc" x="255" y="108" font-size="9">99th %ile</text>
+    </g>
+
+    <!-- TIERED DECISION POLICY -->
+    <g transform="translate(18, 178)">
+      <!-- Tier 1: Normal -->
+      <rect width="372" height="42" rx="6" fill="#ecfdf5" stroke="#a7f3d0"/>
+      <text class="code-badge" x="10" y="18" fill="#065f46">r_k(x) ≤ τ₉₅ (In-Distribution)</text>
+      <text class="node-desc" x="10" y="32" fill="#047857">High confidence. Accept prediction and proceed normally.</text>
+
+      <!-- Tier 2: Caution -->
+      <rect y="48" width="372" height="42" rx="6" fill="#fffbeb" stroke="#fde68a"/>
+      <text class="code-badge" x="10" y="66" fill="#92400e">τ₉₅ &lt; r_k(x) ≤ τ₉₉ (Boundary / Low Density)</text>
+      <text class="node-desc" x="10" y="80" fill="#b45309">Moderate confidence. Flag for potential high variance.</text>
+
+      <!-- Tier 3: OOD Hazard -->
+      <rect y="96" width="372" height="52" rx="6" fill="#fff1f2" stroke="#fda4af"/>
+      <text class="code-badge" x="10" y="114" fill="#9f1239">r_k(x) &gt; τ₉₉ (Out-of-Distribution / Alien Data)</text>
+      <text class="node-desc" x="10" y="128" fill="#be123c">ABORT PREDICTION / FALLBACK TO DEFAULT OR HUMAN AUDIT!</text>
+      <text class="node-desc" x="10" y="140" fill="#be123c">Query lies in an uncharted region far from all training memories.</text>
+    </g>
+  </g>
+
+  <!-- Bottom Implementation Snippet Bar -->
+  <g transform="translate(36, 440)">
+    <rect width="888" height="52" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <text class="node-title" x="18" y="22" fill="#0f172a">Production Implementation Code:</text>
+    <text class="code-badge" x="18" y="40" fill="#4338ca">r_k_train = knn.kneighbors(X_train)[0][:, -1]; tau_99 = np.percentile(r_k_train, 99); is_ood = r_k_query > tau_99</text>
+  </g>
+</svg>

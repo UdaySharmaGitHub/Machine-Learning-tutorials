@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560" viewBox="0 0 960 560" role="img" aria-labelledby="title desc">
+  <title id="title">K-nearest-neighbour classification with k equal to five</title>
+  <desc id="desc">A query point is surrounded by its five nearest neighbours: three circles from class A and two triangles from class B, so plurality voting predicts class A.</desc>
+  <defs>
+    <style>
+      .bg{fill:#f8fafc}.axis{fill:none;stroke:#64748b;stroke-width:2}.grid{fill:none;stroke:#e2e8f0;stroke-width:1}.a{fill:#2563eb;stroke:#1e3a8a;stroke-width:2}.b{fill:#f97316;stroke:#9a3412;stroke-width:2}.q{fill:#fff;stroke:#111827;stroke-width:4}.ring{fill:none;stroke:#7c3aed;stroke-width:3;stroke-dasharray:10 8}.near{fill:none;stroke:#7c3aed;stroke-width:2}.label{font:18px system-ui,sans-serif;fill:#111827}.small{font:15px system-ui,sans-serif;fill:#475569}.title{font:700 24px system-ui,sans-serif;fill:#111827}
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#7c3aed"/></marker>
+  </defs>
+  <rect class="bg" width="960" height="560" rx="18"/>
+  <text class="title" x="48" y="48">KNN classification: k = 5</text>
+  <g opacity=".9">
+    <path class="grid" d="M80 100V490M200 100V490M320 100V490M440 100V490M560 100V490M680 100V490M800 100V490M80 130H850M80 220H850M80 310H850M80 400H850M80 490H850"/>
+    <path class="axis" d="M80 100V490H850"/>
+  </g>
+  <circle class="ring" cx="480" cy="300" r="150"/>
+  <g class="near" opacity=".55"><path d="M480 300L405 225M480 300L540 205M480 300L585 330M480 300L390 355M480 300L505 425"/></g>
+  <g>
+    <circle class="a" cx="405" cy="225" r="13"/><circle class="a" cx="540" cy="205" r="13"/><circle class="a" cx="390" cy="355" r="13"/>
+    <circle class="a" cx="275" cy="185" r="13"/><circle class="a" cx="235" cy="390" r="13"/><circle class="a" cx="650" cy="150" r="13"/>
+    <path class="b" d="M585 315l16 28h-32z"/><path class="b" d="M505 410l16 28h-32z"/>
+    <path class="b" d="M710 255l16 28h-32z"/><path class="b" d="M685 405l16 28h-32z"/><path class="b" d="M330 115l16 28h-32z"/>
+    <circle class="q" cx="480" cy="300" r="16"/><text class="label" x="473" y="307">?</text>
+  </g>
+  <path d="M644 300H785" fill="none" stroke="#7c3aed" stroke-width="3" marker-end="url(#arrow)"/>
+  <text class="label" x="675" y="286">nearest 5</text>
+  <rect x="688" y="80" width="220" height="104" rx="12" fill="#fff" stroke="#cbd5e1"/>
+  <circle class="a" cx="718" cy="112" r="10"/><text class="small" x="740" y="118">Class A: 3 votes</text>
+  <path class="b" d="M718 136l11 20h-22z"/><text class="small" x="740" y="153">Class B: 2 votes</text>
+  <text class="label" x="689" y="525">Prediction: Class A (plurality)</text>
+  <text class="small" x="85" y="525">Only local neighbours vote; distant points are ignored.</text>
+</svg>

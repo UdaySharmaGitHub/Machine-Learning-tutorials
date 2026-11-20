@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="490" viewBox="0 0 560 490" role="img" aria-labelledby="cm-title cm-desc">
+  <title id="cm-title">Confusion Matrix — Binary Classification</title>
+  <desc id="cm-desc">A colour-coded 2×2 confusion matrix: TP and TN are green (correct); FN is orange and FP is red (errors).</desc>
+  <defs>
+    <style>
+      .bg{fill:#f8fafc}
+      .title{font:700 21px system-ui,sans-serif;fill:#111827}
+      .hdr{font:700 12px system-ui,sans-serif;fill:#374151;letter-spacing:.08em}
+      .sub{font:13px system-ui,sans-serif;fill:#475569}
+      .abbr{font:700 36px system-ui,sans-serif}
+      .nm{font:700 13px system-ui,sans-serif}
+      .info{font:11px system-ui,sans-serif;fill:#6b7280}
+      .tag{font:700 11px system-ui,sans-serif}
+      .tp,.tn{fill:#dcfce7;stroke:#16a34a;stroke-width:2}
+      .fp{fill:#fee2e2;stroke:#dc2626;stroke-width:2}
+      .fn{fill:#fff7ed;stroke:#ea580c;stroke-width:2}
+    </style>
+  </defs>
+
+  <!-- background -->
+  <rect class="bg" width="560" height="490" rx="14"/>
+
+  <!-- title -->
+  <text class="title" x="280" y="38" text-anchor="middle">Confusion Matrix</text>
+
+  <!-- PREDICTED header -->
+  <text class="hdr" x="315" y="66" text-anchor="middle">PREDICTED</text>
+  <line x1="140" y1="74" x2="490" y2="74" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="5 3"/>
+
+  <!-- column sub-headers -->
+  <text class="sub" x="227" y="92" text-anchor="middle">Positive (+)</text>
+  <text class="sub" x="402" y="92" text-anchor="middle">Negative (−)</text>
+
+  <!-- ACTUAL label (vertical) -->
+  <text class="hdr" x="27" y="253" text-anchor="middle" transform="rotate(-90,27,253)">ACTUAL</text>
+
+  <!-- row sub-headers -->
+  <text class="sub" x="97" y="174" text-anchor="middle">Positive (+)</text>
+  <text class="sub" x="97" y="323" text-anchor="middle">Negative (−)</text>
+
+  <!-- TP cell -->
+  <rect class="tp" x="140" y="103" width="175" height="150" rx="8"/>
+  <text class="abbr" x="227" y="162" text-anchor="middle" fill="#15803d">TP</text>
+  <text class="nm" x="227" y="183" text-anchor="middle" fill="#15803d">True Positive</text>
+  <text class="info" x="227" y="202" text-anchor="middle">Predicted +, Actual +</text>
+  <text class="tag" x="227" y="221" text-anchor="middle" fill="#15803d">✓ Correct Hit</text>
+
+  <!-- FN cell -->
+  <rect class="fn" x="315" y="103" width="175" height="150" rx="8"/>
+  <text class="abbr" x="402" y="162" text-anchor="middle" fill="#c2410c">FN</text>
+  <text class="nm" x="402" y="183" text-anchor="middle" fill="#c2410c">False Negative</text>
+  <text class="info" x="402" y="202" text-anchor="middle">Predicted −, Actual +</text>
+  <text class="tag" x="402" y="221" text-anchor="middle" fill="#c2410c">✗ Miss — Type II Error</text>
+
+  <!-- FP cell -->
+  <rect class="fp" x="140" y="253" width="175" height="150" rx="8"/>
+  <text class="abbr" x="227" y="312" text-anchor="middle" fill="#b91c1c">FP</text>
+  <text class="nm" x="227" y="333" text-anchor="middle" fill="#b91c1c">False Positive</text>
+  <text class="info" x="227" y="352" text-anchor="middle">Predicted +, Actual −</text>
+  <text class="tag" x="227" y="371" text-anchor="middle" fill="#b91c1c">✗ False Alarm — Type I Error</text>
+
+  <!-- TN cell -->
+  <rect class="tn" x="315" y="253" width="175" height="150" rx="8"/>
+  <text class="abbr" x="402" y="312" text-anchor="middle" fill="#15803d">TN</text>
+  <text class="nm" x="402" y="333" text-anchor="middle" fill="#15803d">True Negative</text>
+  <text class="info" x="402" y="352" text-anchor="middle">Predicted −, Actual −</text>
+  <text class="tag" x="402" y="371" text-anchor="middle" fill="#15803d">✓ Correct Reject</text>
+
+  <!-- accuracy formula bar -->
+  <rect x="80" y="425" width="400" height="40" rx="8" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="280" y="441" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#6b7280">Overall correctness</text>
+  <text x="280" y="457" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="bold" fill="#1d4ed8">Accuracy = (TP + TN) / (TP + TN + FP + FN)</text>
+</svg>

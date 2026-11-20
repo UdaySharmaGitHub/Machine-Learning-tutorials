@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560" viewBox="0 0 960 560" role="img" aria-labelledby="title desc">
+  <title id="title">Geometric Search: KD-Tree vs. Ball Tree</title>
+  <desc id="desc">Visual comparison showing how KD-trees partition space using axis-aligned hyperrectangles and how Ball trees partition space using nested metric hyperspheres.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .card { fill: #ffffff; stroke: #e2e8f0; stroke-width: 1.5; }
+      .title { font: 700 22px system-ui, -apple-system, sans-serif; fill: #0f172a; }
+      .subtitle { font: 400 13px system-ui, -apple-system, sans-serif; fill: #64748b; }
+      .card-title { font: 700 16px system-ui, -apple-system, sans-serif; }
+      .card-sub { font: 500 12px system-ui, -apple-system, sans-serif; fill: #64748b; }
+      .label { font: 600 12px system-ui, -apple-system, sans-serif; fill: #1e293b; }
+      .small { font: 500 11px system-ui, -apple-system, sans-serif; fill: #64748b; }
+      .code-txt { font: 600 11px "SF Mono", Menlo, Consolas, monospace; }
+      .query-pt { fill: #0f172a; stroke: #ffffff; stroke-width: 2.5; }
+      .data-pt { fill: #3b82f6; stroke: #1d4ed8; stroke-width: 1.5; }
+      .pruned-pt { fill: #94a3b8; stroke: #64748b; stroke-width: 1.2; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="960" height="560" rx="16"/>
+
+  <text class="title" x="36" y="42">Exact Spatial Indexing: KD-Tree vs. Ball Tree</text>
+  <text class="subtitle" x="36" y="62">Recursive geometric partitioning accelerates nearest neighbor search by pruning unreachable regions</text>
+
+  <!-- ==================== LEFT CARD: KD-TREE ==================== -->
+  <g transform="translate(36, 82)">
+    <rect class="card" width="432" height="400" rx="14"/>
+
+    <!-- Header Box -->
+    <rect x="0" y="0" width="432" height="56" rx="14" fill="#eff6ff"/>
+    <rect x="0" y="44" width="432" height="12" fill="#eff6ff"/>
+    <text class="card-title" x="20" y="28" fill="#1e40af">KD-Tree (Axis-Aligned Splits)</text>
+    <text class="card-sub" x="20" y="46" fill="#3b82f6">Recursive orthogonal cuts along alternating coordinate dimensions</text>
+
+    <!-- KD-Tree 2D Space Simulation (Width 392, Height 220) -->
+    <g transform="translate(20, 66)">
+      <!-- Outer bounding box -->
+      <rect x="0" y="0" width="392" height="210" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+
+      <!-- Level 1 Cut: Vertical split at x=200 -->
+      <line x1="200" y1="0" x2="200" y2="210" stroke="#2563eb" stroke-width="2.5"/>
+      <text class="code-txt" x="204" y="16" fill="#1d4ed8">Split 1 (X)</text>
+
+      <!-- Level 2 Cuts: Horizontal splits -->
+      <!-- Left side split at y=110 -->
+      <line x1="0" y1="110" x2="200" y2="110" stroke="#7c3aed" stroke-width="2"/>
+      <text class="code-txt" x="8" y="104" fill="#6d28d9">Split 2a (Y)</text>
+
+      <!-- Right side split at y=90 -->
+      <line x1="200" y1="90" x2="392" y2="90" stroke="#7c3aed" stroke-width="2"/>
+      <text class="code-txt" x="320" y="84" fill="#6d28d9">Split 2b (Y)</text>
+
+      <!-- Pruned Branch Shading (Right upper quadrant pruned!) -->
+      <rect x="201" y="1" width="190" height="88" fill="#fee2e2" opacity="0.45"/>
+      <text class="code-txt" x="296" y="48" text-anchor="middle" fill="#991b1b">PRUNED CELL ✂️</text>
+      <text class="small" x="296" y="64" text-anchor="middle" fill="#b91c1c">min dist &gt; r_best</text>
+
+      <!-- Query Ball & Current Best Radius -->
+      <circle cx="90" cy="155" r="48" fill="#ecfdf5" stroke="#10b981" stroke-width="1.8" stroke-dasharray="4 3" opacity="0.8"/>
+      <text class="small" x="90" y="118" text-anchor="middle" font-weight="700" fill="#047857">radius r_best</text>
+
+      <!-- Data Points -->
+      <circle class="data-pt" cx="70" cy="165" r="5"/>
+      <circle class="data-pt" cx="110" cy="140" r="5"/>
+      <circle class="data-pt" cx="45" cy="65" r="5"/>
+      <circle class="data-pt" cx="150" cy="50" r="5"/>
+      <circle class="data-pt" cx="240" cy="145" r="5"/>
+      <circle class="data-pt" cx="330" cy="160" r="5"/>
+      
+      <!-- Pruned points -->
+      <circle class="pruned-pt" cx="260" cy="45" r="5"/>
+      <circle class="pruned-pt" cx="340" cy="35" r="5"/>
+
+      <!-- Query Point -->
+      <circle class="query-pt" cx="90" cy="155" r="8"/>
+      <text class="code-txt" x="90" y="178" text-anchor="middle" fill="#0f172a">x_q</text>
+    </g>
+
+    <!-- Properties Box -->
+    <rect x="20" y="290" width="392" height="94" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text class="label" x="30" y="310">Pruning Logic &amp; Constraints:</text>
+    <text class="small" x="30" y="330">• Prunes if distance to bounding box edge &gt; current r_best</text>
+    <text class="small" x="30" y="348">• <tspan font-weight="700" fill="#1e40af">Best For:</tspan> Low dimensions (d ≤ 20), Euclidean distance</text>
+    <text class="small" x="30" y="366" fill="#b91c1c">• <tspan font-weight="700">Curse of Dim:</tspan> Boxes overlap heavily in high d → O(n) fallback</text>
+  </g>
+
+  <!-- ==================== RIGHT CARD: BALL TREE ==================== -->
+  <g transform="translate(492, 82)">
+    <rect class="card" width="432" height="400" rx="14"/>
+
+    <!-- Header Box -->
+    <rect x="0" y="0" width="432" height="56" rx="14" fill="#f5f3ff"/>
+    <rect x="0" y="44" width="432" height="12" fill="#f5f3ff"/>
+    <text class="card-title" x="20" y="28" fill="#6d28d9">Ball Tree (Metric Hyperspheres)</text>
+    <text class="card-sub" x="20" y="46" fill="#7c3aed">Hierarchical bounding spheres pruned via the triangle inequality</text>
+
+    <!-- Ball Tree 2D Simulation (Width 392, Height 220) -->
+    <g transform="translate(20, 66)">
+      <rect x="0" y="0" width="392" height="210" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+
+      <!-- Root/Parent Ball 1 (Left) -->
+      <circle cx="110" cy="115" r="80" fill="#eff6ff" stroke="#3b82f6" stroke-width="2" stroke-dasharray="6 4" opacity="0.6"/>
+      <circle cx="75" cy="140" r="42" fill="#e0e7ff" stroke="#6366f1" stroke-width="1.5"/>
+      <circle cx="145" cy="85" r="35" fill="#e0e7ff" stroke="#6366f1" stroke-width="1.5"/>
+
+      <!-- Parent Ball 2 (Right - Pruned by Triangle Inequality!) -->
+      <circle cx="295" cy="105" r="75" fill="#fee2e2" stroke="#ef4444" stroke-width="2" stroke-dasharray="6 4" opacity="0.5"/>
+      <circle cx="270" cy="125" r="36" fill="#fecaca" stroke="#f87171" stroke-width="1.5" opacity="0.6"/>
+      <circle cx="330" cy="75" r="32" fill="#fecaca" stroke="#f87171" stroke-width="1.5" opacity="0.6"/>
+
+      <!-- Pruned Label -->
+      <text class="code-txt" x="295" y="105" text-anchor="middle" fill="#991b1b">PRUNED BALL ✂️</text>
+      <text class="small" x="295" y="122" text-anchor="middle" fill="#b91c1c">|d(q,C) - R| &gt; r_best</text>
+
+      <!-- Center of Ball 2 -->
+      <circle cx="295" cy="105" r="3" fill="#ef4444"/>
+      <text class="small" x="303" y="102" fill="#ef4444">Center C</text>
+
+      <!-- Query Ball & Current Best -->
+      <circle cx="65" cy="155" r="30" fill="#ecfdf5" stroke="#10b981" stroke-width="1.8" stroke-dasharray="4 3"/>
+
+      <!-- Data Points inside Balls -->
+      <circle class="data-pt" cx="60" cy="145" r="5"/>
+      <circle class="data-pt" cx="85" cy="160" r="5"/>
+      <circle class="data-pt" cx="135" cy="80" r="5"/>
+      <circle class="data-pt" cx="155" cy="95" r="5"/>
+
+      <!-- Pruned Points -->
+      <circle class="pruned-pt" cx="260" cy="125" r="5"/>
+      <circle class="pruned-pt" cx="280" cy="135" r="5"/>
+      <circle class="pruned-pt" cx="325" cy="70" r="5"/>
+      <circle class="pruned-pt" cx="340" cy="85" r="5"/>
+
+      <!-- Query Point -->
+      <circle class="query-pt" cx="65" cy="155" r="8"/>
+      <text class="code-txt" x="65" y="176" text-anchor="middle" fill="#0f172a">x_q</text>
+    </g>
+
+    <!-- Properties Box -->
+    <rect x="20" y="290" width="392" height="94" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text class="label" x="30" y="310">Triangle Inequality Pruning:</text>
+    <text class="small" x="30" y="330">• Prunes entire ball if distance to boundary |d(x_q, C) - R| &gt; r_best</text>
+    <text class="small" x="30" y="348">• <tspan font-weight="700" fill="#6d28d9">Metric-Agnostic:</tspan> Works for Manhattan, Minkowski, any metric</text>
+    <text class="small" x="30" y="366" fill="#475569">• Better than KD-tree for non-Euclidean metrics and moderate d</text>
+  </g>
+
+  <!-- Bottom Takeaway -->
+  <g transform="translate(36, 496)">
+    <rect width="888" height="46" rx="10" fill="#f1f5f9" stroke="#cbd5e1"/>
+    <text class="small" x="20" y="28" fill="#334155">
+      <tspan font-weight="700" fill="#0f172a">Key Summary:</tspan> Both KD-trees and Ball trees build in <tspan font-family="monospace">O(n log n)</tspan> and search in <tspan font-family="monospace">O(log n)</tspan> average time in low dimensions. Above <tspan font-family="monospace">d ≈ 20</tspan>, both degrade toward brute force.
+    </text>
+  </g>
+</svg>

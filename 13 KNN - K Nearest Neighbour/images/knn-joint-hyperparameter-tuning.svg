@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="510" viewBox="0 0 960 510" role="img" aria-labelledby="title desc">
+  <title id="title">Sequential versus Joint Hyperparameter Tuning in KNN</title>
+  <desc id="desc">Visual explanation comparing isolated sequential tuning which gets trapped in sub-optimal parameters, versus joint cross-validated grid search across k, distance metric, weighting scheme, and scaling strategy.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .title { font: 700 22px system-ui, -apple-system, sans-serif; fill: #0f172a; }
+      .subtitle { font: 400 13px system-ui, -apple-system, sans-serif; fill: #64748b; }
+      .card { fill: #ffffff; stroke: #e2e8f0; stroke-width: 1.5; rx: 12; }
+      .card-title { font: 700 15px system-ui, -apple-system, sans-serif; fill: #1e293b; }
+      .card-sub { font: 500 12px system-ui, -apple-system, sans-serif; fill: #64748b; }
+      .node-title { font: 700 13px system-ui, -apple-system, sans-serif; }
+      .node-desc { font: 400 11px system-ui, -apple-system, sans-serif; fill: #475569; }
+      .code-badge { font: 700 11px "SF Mono", Menlo, Consolas, monospace; }
+      .arrow { stroke: #94a3b8; stroke-width: 1.8; fill: none; }
+      .arrow-red { stroke: #ef4444; stroke-width: 2; fill: none; }
+      .arrow-green { stroke: #10b981; stroke-width: 2; fill: none; }
+      .badge-err { fill: #fff1f2; stroke: #fca5a5; }
+      .badge-err-txt { font: 700 11px system-ui, -apple-system, sans-serif; fill: #be123c; }
+      .badge-ok { fill: #ecfdf5; stroke: #6ee7b7; }
+      .badge-ok-txt { font: 700 11px system-ui, -apple-system, sans-serif; fill: #047857; }
+      .grid-cell { stroke: #e2e8f0; stroke-width: 1; }
+      .score-low { fill: #fee2e2; }
+      .score-mid { fill: #fef3c7; }
+      .score-high { fill: #d1fae5; }
+      .score-best { fill: #10b981; }
+    </style>
+    <marker id="arrow-tune" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 1L8 5L0 9z" fill="#94a3b8"/>
+    </marker>
+    <marker id="arrow-red-m" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 1L8 5L0 9z" fill="#ef4444"/>
+    </marker>
+    <marker id="arrow-green-m" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 1L8 5L0 9z" fill="#10b981"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect class="bg" width="960" height="510" rx="16"/>
+
+  <!-- Header -->
+  <text class="title" x="36" y="42">Joint vs. Sequential Hyperparameter Tuning for KNN</text>
+  <text class="subtitle" x="36" y="62">Optimal k depends on the scaling method, and optimal metric depends on the voting scheme. Isolated tuning fails.</text>
+
+  <!-- ==================== LEFT CARD: SEQUENTIAL TUNING (THE PITFALL) ==================== -->
+  <g transform="translate(36, 85)">
+    <rect class="card" width="430" height="340"/>
+    <rect x="0" y="0" width="430" height="42" rx="12" fill="#fff1f2"/>
+    <rect x="0" y="30" width="430" height="12" fill="#fff1f2"/>
+    <text class="badge-err-txt" x="18" y="26">✗ Sequential Tuning (Greedy / One-at-a-time)</text>
+
+    <!-- Step 1 -->
+    <g transform="translate(18, 55)">
+      <rect width="394" height="60" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+      <text class="node-title" x="12" y="20" fill="#0f172a">Step 1: Fix Scaler = Standard, Metric = Euclidean</text>
+      <text class="node-desc" x="12" y="38">Tune k across [1, 3, 5, 7, 9, 11] → <tspan font-weight="700" fill="#be123c">Finds best k = 9 (Accuracy: 84.2%)</tspan></text>
+      <text class="node-desc" x="12" y="52" fill="#64748b">Now lock k = 9 for all future steps...</text>
+    </g>
+
+    <!-- Step 2 -->
+    <path d="M 215 115 L 215 130" class="arrow-red" marker-end="url(#arrow-red-m)"/>
+
+    <g transform="translate(18, 130)">
+      <rect width="394" height="60" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+      <text class="node-title" x="12" y="20" fill="#0f172a">Step 2: With k = 9 locked, tune Scaler</text>
+      <text class="node-desc" x="12" y="38">Compare Standard vs Robust vs MinMax → <tspan font-weight="700" fill="#be123c">Robust wins (86.1%)</tspan></text>
+      <text class="node-desc" x="12" y="52" fill="#64748b">Now lock RobustScaler for step 3...</text>
+    </g>
+
+    <!-- Step 3 -->
+    <path d="M 215 190 L 215 205" class="arrow-red" marker-end="url(#arrow-red-m)"/>
+
+    <g transform="translate(18, 205)">
+      <rect width="394" height="60" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+      <text class="node-title" x="12" y="20" fill="#0f172a">Step 3: With k = 9, Robust locked, tune Metric</text>
+      <text class="node-desc" x="12" y="38">Compare Euclidean vs Manhattan → <tspan font-weight="700" fill="#be123c">Manhattan wins (87.5%)</tspan></text>
+      <text class="node-desc" x="12" y="52" fill="#64748b">Final sequential result: Accuracy 87.5%</text>
+    </g>
+
+    <!-- Pitfall Warning box -->
+    <g transform="translate(18, 275)">
+      <rect width="394" height="52" rx="6" fill="#fff1f2" stroke="#fda4af"/>
+      <text class="badge-err-txt" x="10" y="18">FATAL FLAW: Strong Hyperparameter Interaction</text>
+      <text class="node-desc" x="10" y="34" fill="#9f1239">Under RobustScaler + Manhattan, the true optimal neighbor count was k = 3 (92.4%), but Step 1 prematurely froze k = 9 forever!</text>
+    </g>
+  </g>
+
+  <!-- ==================== RIGHT CARD: JOINT GRID SEARCH ==================== -->
+  <g transform="translate(494, 85)">
+    <rect class="card" width="430" height="340"/>
+    <rect x="0" y="0" width="430" height="42" rx="12" fill="#ecfdf5"/>
+    <rect x="0" y="30" width="430" height="12" fill="#ecfdf5"/>
+    <text class="badge-ok-txt" x="18" y="26">✓ Joint Search (GridSearchCV / RandomizedSearchCV)</text>
+
+    <!-- Interactive Grid / Matrix Visualization -->
+    <g transform="translate(18, 55)">
+      <text class="card-title" x="0" y="16">Simultaneous Cartesian Evaluation</text>
+      <text class="card-sub" x="0" y="32">Evaluates every combination inside cross-validation folds:</text>
+
+      <!-- Grid Table -->
+      <g transform="translate(0, 44)">
+        <!-- Table Header -->
+        <rect x="0" y="0" width="110" height="24" fill="#f1f5f9" stroke="#cbd5e1"/>
+        <text class="code-badge" x="10" y="16" fill="#475569">Configuration</text>
+        <rect x="110" y="0" width="70" height="24" fill="#f1f5f9" stroke="#cbd5e1"/>
+        <text class="code-badge" x="122" y="16" fill="#475569">k = 3</text>
+        <rect x="180" y="0" width="70" height="24" fill="#f1f5f9" stroke="#cbd5e1"/>
+        <text class="code-badge" x="192" y="16" fill="#475569">k = 7</text>
+        <rect x="250" y="0" width="70" height="24" fill="#f1f5f9" stroke="#cbd5e1"/>
+        <text class="code-badge" x="262" y="16" fill="#475569">k = 11</text>
+        <rect x="320" y="0" width="74" height="24" fill="#f1f5f9" stroke="#cbd5e1"/>
+        <text class="code-badge" x="330" y="16" fill="#475569">k = 15</text>
+
+        <!-- Row 1: Std + Euclid + Uniform -->
+        <rect x="0" y="24" width="110" height="22" fill="#ffffff" stroke="#e2e8f0"/>
+        <text class="node-desc" x="6" y="39" font-size="10">Std / Euclid / Uni</text>
+        <rect class="score-low" x="110" y="24" width="70" height="22" stroke="#e2e8f0"/>
+        <text class="code-badge" x="128" y="39" fill="#991b1b">81.1%</text>
+        <rect class="score-mid" x="180" y="24" width="70" height="22" stroke="#e2e8f0"/>
+        <text class="code-badge" x="198" y="39" fill="#92400e">83.5%</text>
+        <rect class="score-mid" x="250" y="24" width="70" height="22" stroke="#e2e8f0"/>
+        <text class="code-badge" x="268" y="39" fill="#92400e">84.2%</text>
+        <rect class="score-low" x="320" y="24" width="74" height="22" stroke="#e2e8f0"/>
+        <text class="code-badge" x="338" y="39" fill="#991b1b">82.0%</text>
+
+        <!-- Row 2: Robust + Euclid + Dist -->
+        <rect x="0" y="46" width="110" height="22" fill="#ffffff" stroke="#e2e8f0"/>
+        <text class="node-desc" x="6" y="61" font-size="10">Rob / Euclid / Dist</text>
+        <rect class="score-high" x="110" y="46" width="70" height="22" stroke="#e2e8f0"/>
+        <text class="code-badge" x="128" y="61" fill="#065f46">88.4%</text>
+        <rect class="score-high" x="180" y="46" width="70" height="22" stroke="#e2e8f0"/>
+        <text class="code-badge" x="198" y="61" fill="#065f46">87.9%</text>
+        <rect class="score-mid" x="250" y="46" width="70" height="22" stroke="#e2e8f0"/>
+        <text class="code-badge" x="268" y="61" fill="#92400e">85.6%</text>
+        <rect class="score-low" x="320" y="46" width="74" height="22" stroke="#e2e8f0"/>
+        <text class="code-badge" x="338" y="61" fill="#991b1b">83.1%</text>
+
+        <!-- Row 3: Robust + Manhattan + Dist (TRUE GLOBAL OPTIMUM) -->
+        <rect x="0" y="68" width="110" height="24" fill="#ffffff" stroke="#059669" stroke-width="2"/>
+        <text class="node-desc" x="6" y="84" font-weight="700" fill="#047857" font-size="10">Rob / Manh / Dist</text>
+        <rect class="score-best" x="110" y="68" width="70" height="24" stroke="#059669" stroke-width="2"/>
+        <text class="code-badge" x="124" y="85" fill="#ffffff" font-weight="700">★ 92.4%</text>
+        <rect class="score-high" x="180" y="68" width="70" height="24" stroke="#059669" stroke-width="2"/>
+        <text class="code-badge" x="198" y="85" fill="#065f46">89.7%</text>
+        <rect class="score-high" x="250" y="68" width="70" height="24" stroke="#059669" stroke-width="2"/>
+        <text class="code-badge" x="268" y="85" fill="#065f46">87.5%</text>
+        <rect class="score-mid" x="320" y="68" width="74" height="24" stroke="#059669" stroke-width="2"/>
+        <text class="code-badge" x="338" y="85" fill="#92400e">85.2%</text>
+      </g>
+    </g>
+
+    <!-- Success Callout -->
+    <g transform="translate(18, 230)">
+      <rect width="394" height="95" rx="6" fill="#ecfdf5" stroke="#a7f3d0"/>
+      <text class="badge-ok-txt" x="10" y="20">TRUE GLOBAL WINNER DISCOVERED: 92.4%</text>
+      <text class="node-desc" x="10" y="38" fill="#065f46">• Joint search discovered that <tspan font-weight="700">k = 3 with Manhattan distance</tspan> is vastly superior when paired with RobustScaler.</text>
+      <text class="node-desc" x="10" y="56" fill="#065f46">• Gain over sequential tuning: <tspan font-weight="700" fill="#047857">+4.9% accuracy</tspan> on cross-validation.</text>
+      <text class="node-desc" x="10" y="74" fill="#065f46">• Scikit-learn Pipeline syntax: <tspan font-family="monospace">knn__n_neighbors, knn__metric, scaler</tspan></text>
+    </g>
+  </g>
+
+  <!-- Bottom Recommendation Bar -->
+  <g transform="translate(36, 440)">
+    <rect width="888" height="52" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <text class="node-title" x="18" y="22" fill="#0f172a">Recommended Tuning Practice:</text>
+    <text class="node-desc" x="18" y="40">Start with a focused grid (k: [3, 5, 9, 15], weights: ['uniform', 'distance'], metric: ['euclidean', 'manhattan'], scaler: [Standard, Robust]). Only add PCA components or Minkowski p if performance demands further gains.</text>
+  </g>
+</svg>

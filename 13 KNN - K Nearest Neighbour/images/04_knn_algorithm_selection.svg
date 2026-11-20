@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760">
+<title>Choosing a KNN search algorithm</title><desc>A practical starting guide. Benchmark on your data, distance metric, latency and memory constraints.</desc>
+<defs>
+  <style>
+    text { font-family: Inter, Arial, sans-serif; fill: #172033; }
+    .title { font-size: 34px; font-weight: 750; }
+    .subtitle { font-size: 17px; fill: #536078; }
+    .h { font-size: 22px; font-weight: 700; }
+    .body { font-size: 17px; }
+    .small { font-size: 14px; fill: #536078; }
+    .tiny { font-size: 12px; fill: #64748b; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
+    .panel { fill: #ffffff; stroke: #d9e0ea; stroke-width: 2; }
+    .line { stroke: #cbd5e1; stroke-width: 2; }
+    .blue { fill: #2563eb; } .blueStroke { stroke: #2563eb; }
+    .teal { fill: #0f9d8a; } .tealStroke { stroke: #0f9d8a; }
+    .orange { fill: #e8792e; } .orangeStroke { stroke: #e8792e; }
+    .purple { fill: #7656c9; } .purpleStroke { stroke: #7656c9; }
+    .red { fill: #dc5656; } .redStroke { stroke: #dc5656; }
+    .muted { fill: #eef2f7; }
+  </style>
+  <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#64748b"/></marker>
+</defs>
+<rect width="1200" height="760" fill="#f6f8fc"/>
+<text x="60" y="66" class="title">Choosing a KNN search algorithm</text>
+<text x="60" y="98" class="subtitle">A practical starting guide. Benchmark on your data, distance metric, latency and memory constraints.</text>
+<rect x="55" y="130" width="1090" height="550" rx="18" class="panel"/><rect x="420" y="160" width="360" height="72" rx="13" fill="#e8efff" stroke="#8fb0f3" stroke-width="2"/><text x="600.0" y="190" text-anchor="middle" class="body" font-weight="700">Start with brute force</text><text x="600.0" y="215" text-anchor="middle" class="small">Exact baseline; measure latency and memory</text><path d="M600 232 L600 270" stroke="#64748b" stroke-width="2.5" marker-end="url(#arrow)"/><rect x="380" y="275" width="440" height="72" rx="13" fill="#f1f5f9" stroke="#b9c5d5" stroke-width="2"/><text x="600.0" y="305" text-anchor="middle" class="body" font-weight="700">What is the data like?</text><text x="600.0" y="330" text-anchor="middle" class="small">Size • dimension • sparsity • metric</text><path d="M490 347 L245 395" stroke="#64748b" stroke-width="2.5" marker-end="url(#arrow)"/><path d="M710 347 L955 395" stroke="#64748b" stroke-width="2.5" marker-end="url(#arrow)"/><rect x="85" y="405" width="330" height="90" rx="13" fill="#e9f7f4" stroke="#8bd2c4" stroke-width="2"/><text x="250.0" y="435" text-anchor="middle" class="body" font-weight="700">Low-dimensional dense data</text><text x="250.0" y="460" text-anchor="middle" class="small">Compare KD-Tree / Ball Tree</text><rect x="785" y="405" width="330" height="90" rx="13" fill="#f0ebff" stroke="#b6a5ee" stroke-width="2"/><text x="950.0" y="435" text-anchor="middle" class="body" font-weight="700">Large, high-dimensional data</text><text x="950.0" y="460" text-anchor="middle" class="small">Consider HNSW or other ANN</text><path d="M245 495 L245 535" stroke="#64748b" stroke-width="2.5" marker-end="url(#arrow)"/><path d="M950 495 L950 535" stroke="#64748b" stroke-width="2.5" marker-end="url(#arrow)"/><rect x="85" y="545" width="330" height="80" rx="13" fill="#fff4e8" stroke="#f0c18d" stroke-width="2"/><text x="250.0" y="575" text-anchor="middle" class="body" font-weight="700">Memory-constrained retrieval?</text><text x="250.0" y="600" text-anchor="middle" class="small">Consider IVF + PQ / compression</text><rect x="785" y="545" width="330" height="80" rx="13" fill="#fff4e8" stroke="#f0c18d" stroke-width="2"/><text x="950.0" y="575" text-anchor="middle" class="body" font-weight="700">Need approximate search?</text><text x="950.0" y="600" text-anchor="middle" class="small">Measure Recall@K + task quality</text><text x="600" y="665" text-anchor="middle" class="small">No method wins universally: validate recall, prediction quality, latency, throughput and index memory.</text></svg>

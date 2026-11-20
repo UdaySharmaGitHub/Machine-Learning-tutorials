@@ -41,6 +41,7 @@
 | 10 | **ROC Curve and AUC** | ROC analysis, AUC, and practical threshold selection |
 | 11 | **Multiclass Logistic Regression** | Softmax regression, mathematical derivations, cross-entropy loss, polynomial logistic regression, hyperparameter tuning, multiclass ROC-AUC, and Iris implementation |
 | 12 | **Naive Bayes Classifier** | Probability foundations, Bayes' Theorem, Bernoulli / Multinomial / Gaussian NB, Laplace smoothing, zero-frequency problem, and from-scratch + sklearn implementations |
+| 13 | **K-Nearest Neighbours (KNN)** | Instance-based lazy learning, distance metrics, K selection, classification & regression, weighted KNN, decision boundaries, curse of dimensionality, search algorithms, and end-to-end modelling workflow |
 
 
 ---
@@ -222,12 +223,47 @@
 
 ---
 
+### 📁 13 KNN - K Nearest Neighbour
+
+> K-Nearest Neighbours from the ground up — theory notes, from-scratch implementations, scikit-learn walkthroughs, and an end-to-end breast cancer case study.
+
+| # | Type | Resource | Description |
+|---|------|----------|-------------|
+| 00 | 📝 Notes | [KNN Intro and Key Concepts](13%20KNN%20-%20K%20Nearest%20Neighbour/00%20KNN%20Intro%20and%20Key%20Concept.md) | What KNN is, core properties, meaning of K, non-parametric nature, lazy learning, and the neighbourhood principle |
+| 01 | 📝 Notes | [KNN Algorithm and Working Step-by-Step](13%20KNN%20-%20K%20Nearest%20Neighbour/01%20KNN%20Algorithm%20and%20Working%20Step-by-Step..md) | Step-by-step algorithm with math formulas, distance computation, neighbor selection, and aggregation |
+| 02 | 📝 Notes | [Distance Metrics](13%20KNN%20-%20K%20Nearest%20Neighbour/02%20Distance%20Metrics.md) | Euclidean, Manhattan, Minkowski, Hamming, Cosine, Mahalanobis, Chebyshev, Jaccard — when to use each, comparisons, and visualizations |
+| 03 | 📝 Notes | [How to Choose K: Bias, Variance and Validation](13%20KNN%20-%20K%20Nearest%20Neighbour/03%20How%20to%20Choose%20K%20in%20KNN%3A%20Bias%2C%20Variance%20and%20Validation.md) | Bias-variance tradeoff, cross-validation, K selection strategies, and practical guidelines |
+| 04 | 📝 Notes | [KNN Classification and Regression](13%20KNN%20-%20K%20Nearest%20Neighbour/04%20KNN%20Classification%20and%20Regression.md) | Majority voting for classification, local mean/median for regression, mathematical derivations, and theoretical foundations |
+| 04.1 | 📓 Notebook | [KNN Classifier From Scratch](13%20KNN%20-%20K%20Nearest%20Neighbour/04.1%20KNN%20Classifier%20From%20Scratch.ipynb) | From-scratch implementation: distance computation, neighbor selection, majority voting, and decision boundary visualization |
+| 04.2 | 📓 Notebook | [KNN Classifier Using Scikit-learn](13%20KNN%20-%20K%20Nearest%20Neighbour/04.2%20KNN%20Classifier%20Using%20Sickit-learn.ipynb) | Scikit-learn workflow: model instantiation, training, predictions, evaluation, and hyperparameter tuning |
+| 04.3 | 📓 Notebook | [KNN Regressor From Scratch](13%20KNN%20-%20K%20Nearest%20Neighbour/04.3%20KNN%20Regressor%20From%20Scratch.ipynb) | From-scratch regression: local mean predictions, distance-weighted averaging, and performance metrics |
+| 04.4 | 📓 Notebook | [KNN Regressor Using Scikit-learn](13%20KNN%20-%20K%20Nearest%20Neighbour/04.4%20KNN%20Regressor%20Using%20Sickit-learn.ipynb) | Scikit-learn regression: model training, predictions, residual analysis, and error comparison |
+| 05 | 📝 Notes | [Feature Scaling and Preprocessing](13%20KNN%20-%20K%20Nearest%20Neighbour/05%20Feature%20scaling%20and%20preprocessing.md) | Standardization, normalization, feature importance, and impact on KNN performance |
+| 06 | 📝 Notes | [Numerical Example on KNN](13%20KNN%20-%20K%20Nearest%20Neighbour/06%20Numerical%20Example%20on%20KNN.md) | Step-by-step worked example: distance calculation, neighbor selection, and final prediction on a concrete dataset |
+| 07 | 📝 Notes | [Decision Surface and Boundaries](13%20KNN%20-%20K%20Nearest%20Neighbour/07%20Decision%20Surface%20and%20Boundaries.md) | Decision boundaries, Voronoi geometry, visualization techniques, and overfitting/underfitting patterns |
+| 08 | 📝 Notes | [Weighted KNN](13%20KNN%20-%20K%20Nearest%20Neighbour/08%20Weighted%20KNN.md) | Distance-weighted voting, kernel functions, smooth probability estimates, and bias reduction |
+| 08.1 | 📓 Notebook | [Weighted KNN Notebook](13%20KNN%20-%20K%20Nearest%20Neighbour/08.1%20Weighted%20KNN%20notebook.ipynb) | Weighted KNN implementation: comparison with uniform weights, impact on boundaries, and performance evaluation |
+| 09 | 📝 Notes | [Curse of Dimensionality and Special Data Types](13%20KNN%20-%20K%20Nearest%20Neighbour/09%20Curse%20of%20Dimensionality%20and%20Special%20Data%20Types.md) | High-dimensional breakdown, text & categorical data, distance metrics for special types, and practical mitigation strategies |
+| 10 | 📝 Notes | [Search Algorithms and Computational Complexity](13%20KNN%20-%20K%20Nearest%20Neighbour/10%20Search%20algorithms%20and%20computational%20complexity.md) | Brute-force, KD-tree, Ball-tree, HNSW, LSH, IVF+PQ — complexity analysis, memory trade-offs, and production deployment |
+| 11 | 📝 Notes | [End-to-End KNN Modelling Workflow](13%20KNN%20-%20K%20Nearest%20Neighbour/11%20End-to-End%20KNN%20Modelling%20Workflow.md) | Complete pipeline: data preparation, cross-validation, hyperparameter tuning, model evaluation, and production deployment checklist |
+| 12 | 📝 Notes | [Evaluation in KNN](13%20KNN%20-%20K%20Nearest%20Neighbour/12%20Evaluation%20in%20KNN.md) | Classification metrics (accuracy, precision, recall, F1, ROC-AUC), regression metrics (MAE, MSE, RMSE, R²), probability calibration, and operational concerns |
+| 12.1 | 📓 Notebook | [Evaluation in KNN — Implementation](13%20KNN%20-%20K%20Nearest%20Neighbour/12.1%20Evaluation%20in%20KNN%20-%20implementation.ipynb) | Hands-on evaluation: confusion matrices, classification reports, cross-validation scores, and metric comparisons |
+| 13 | 📝 Notes | [Class Imbalance, Ties, and Edge Cases](13%20KNN%20-%20K%20Nearest%20Neighbour/13%20Class%20imbalance%2C%20ties%2C%20and%20edge%20cases.md) | Imbalanced classes, vote ties, distance ties, duplicate inputs, self-neighbors, and adversarial considerations |
+| 14 | 📓 Notebook | [KNN on Breast Cancer Dataset](13%20KNN%20-%20K%20Nearest%20Neighbour/14%20knn-on-breast-cancer-dataset.ipynb) | End-to-end case study: preprocessing, model training, evaluation, and hyperparameter tuning on the breast cancer dataset |
+
+---
+
 ## Mathematics of Machine Learning
 
 | # | Resource | Description |
 |---|----------|-------------|
 | — | [Sigmoid Function](Mathematics%20of%20Machine%20Learning/Sigmoid%20Function/README.md) | Mathematical definition, properties, derivative, and role in logistic regression and neural networks |
 | — | [Softmax Function](Mathematics%20of%20Machine%20Learning/Softmax%20Function/README.md) | Mathematical definition, properties, relationship to sigmoid, and role in multiclass classification |
+| — | [Conditional Probability](Mathematics%20of%20Machine%20Learning/Conditional%20Probability/README.md) | Conditional probability definition, formula, multiplication rule, chain rule, and intuition behind Bayesian reasoning |
+| — | [Conditional Probability — Advanced Concepts](Mathematics%20of%20Machine%20Learning/Conditional%20Probability/Conditional%20Probability%20Advanced%20Concept.md) | Advanced treatment: independence, Bayes' theorem connection, and real-world ML applications |
+| — | [Bayes' Theorem](Mathematics%20of%20Machine%20Learning/Bayes'%20theorem/README.md) | Prior, likelihood, posterior, evidence — full derivation, visual intuition, and ML applications of Bayes' rule |
+| — | [Distance Metrics](Mathematics%20of%20Machine%20Learning/Distance%20Metrices/README.md) | Foundational theory behind Euclidean, Manhattan, Minkowski, Cosine, Mahalanobis, and other distance metrics used across ML |
+| — | [Probability Calibration](Mathematics%20of%20Machine%20Learning/Probability%20Calibration/README.md) | How predicted probabilities align with actual outcomes — calibration curves, reliability diagrams, and calibration techniques |
 
 ---
 
@@ -294,7 +330,7 @@
 
 Each topic is organized in a numbered folder. Within each folder, notebooks are numbered sequentially — **start from `00` or `01`** and work your way through. The progression follows a logical learning path:
 
-> Linear Regression → Gradient Descent → Polynomial Regression → Regularization (Ridge → Lasso → Elastic Net) → Logistic Regression → Evaluation Metrics → ROC and AUC → Multiclass Logistic Regression → **Naive Bayes Classifier**
+> Linear Regression → Gradient Descent → Polynomial Regression → Regularization (Ridge → Lasso → Elastic Net) → Logistic Regression → Evaluation Metrics → ROC and AUC → Multiclass Logistic Regression → Naive Bayes Classifier → **K-Nearest Neighbours (KNN)**
 
 ---
 

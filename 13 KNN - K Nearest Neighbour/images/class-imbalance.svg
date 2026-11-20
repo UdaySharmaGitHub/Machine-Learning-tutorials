@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="430" viewBox="0 0 700 430" role="img" aria-labelledby="ci-title ci-desc">
+  <title id="ci-title">Class Imbalance in KNN</title>
+  <desc id="ci-desc">Scatter plot showing 14 negative-class points (blue) and 4 positive-class points (orange). The query point's k=5 neighbourhood circle captures 4 negatives and only 1 positive, so KNN predicts Negative even though a positive example is nearby. Summary panel on the right shows the vote count and suggested mitigations.</desc>
+  <defs>
+    <style>
+      .bg{fill:#f8fafc}
+      .title{font:700 20px system-ui,sans-serif;fill:#111827}
+      .ptitle{font:700 14px system-ui,sans-serif;fill:#111827}
+      .leg{font:13px system-ui,sans-serif;fill:#374151}
+      .vbox{fill:#fff;stroke:#e2e8f0;stroke-width:1.5}
+      .neg-dot{fill:#bfdbfe;stroke:#2563eb;stroke-width:1.8}
+      .pos-dot{fill:#fed7aa;stroke:#ea580c;stroke-width:1.8}
+      .query{fill:#7c3aed;stroke:#4c1d95;stroke-width:2}
+    </style>
+  </defs>
+
+  <rect class="bg" width="700" height="430" rx="14"/>
+  <text class="title" x="350" y="30" text-anchor="middle">Class Imbalance in KNN</text>
+
+  <!-- plot border -->
+  <rect x="50" y="45" width="380" height="310" rx="6" fill="#fff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <line x1="50" y1="355" x2="430" y2="355" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="50" y1="45"  x2="50"  y2="355" stroke="#94a3b8" stroke-width="1.5"/>
+
+  <!-- k=5 neighbourhood circle (cx=235, cy=200, r=80) -->
+  <circle cx="235" cy="200" r="80"
+    fill="#f3e8ff" fill-opacity="0.45"
+    stroke="#7c3aed" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="235" y="118" text-anchor="middle"
+    font-family="system-ui,sans-serif" font-size="11" fill="#7c3aed">k = 5 neighbourhood</text>
+
+  <!-- negatives OUTSIDE circle -->
+  <circle class="neg-dot" cx="90"  cy="75"  r="7"/>
+  <circle class="neg-dot" cx="145" cy="65"  r="7"/>
+  <circle class="neg-dot" cx="75"  cy="145" r="7"/>
+  <circle class="neg-dot" cx="100" cy="230" r="7"/>
+  <circle class="neg-dot" cx="80"  cy="295" r="7"/>
+  <circle class="neg-dot" cx="150" cy="330" r="7"/>
+  <circle class="neg-dot" cx="310" cy="330" r="7"/>
+  <circle class="neg-dot" cx="380" cy="310" r="7"/>
+  <circle class="neg-dot" cx="410" cy="230" r="7"/>
+  <circle class="neg-dot" cx="400" cy="130" r="7"/>
+  <circle class="neg-dot" cx="350" cy="65"  r="7"/>
+  <circle class="neg-dot" cx="270" cy="60"  r="7"/>
+
+  <!-- negatives INSIDE circle (4) -->
+  <circle class="neg-dot" cx="175" cy="170" r="7"/>
+  <circle class="neg-dot" cx="287" cy="162" r="7"/>
+  <circle class="neg-dot" cx="294" cy="232" r="7"/>
+  <circle class="neg-dot" cx="175" cy="240" r="7"/>
+
+  <!-- positives OUTSIDE circle (3) -->
+  <circle class="pos-dot" cx="130" cy="150" r="7"/>
+  <circle class="pos-dot" cx="345" cy="140" r="7"/>
+  <circle class="pos-dot" cx="230" cy="330" r="7"/>
+
+  <!-- positive INSIDE circle (1) -->
+  <circle class="pos-dot" cx="210" cy="175" r="7"/>
+
+  <!-- query diamond -->
+  <polygon points="235,185 248,200 235,215 222,200" class="query"/>
+  <text x="252" y="208" font-family="system-ui,sans-serif" font-size="11" fill="#6d28d9">query</text>
+
+  <!-- vote count inside circle -->
+  <text x="300" y="210" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#2563eb" font-weight="bold">4 × Neg</text>
+  <text x="300" y="225" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#ea580c" font-weight="bold">1 × Pos</text>
+
+  <!-- legend -->
+  <circle class="neg-dot" cx="65"  cy="378" r="7"/>
+  <text class="leg" x="78"  y="382">Negative (majority)</text>
+  <circle class="pos-dot" cx="210" cy="378" r="7"/>
+  <text class="leg" x="223" y="382">Positive (minority)</text>
+  <polygon points="345,373 353,381 345,389 337,381" class="query"/>
+  <text class="leg" x="360" y="382">Query</text>
+
+  <!-- summary panel -->
+  <rect class="vbox" x="448" y="45" width="230" height="310" rx="8"/>
+  <text class="ptitle" x="563" y="68" text-anchor="middle">Vote Result</text>
+  <line x1="460" y1="76" x2="668" y2="76" stroke="#e2e8f0" stroke-width="1"/>
+
+  <text x="470" y="100" font-family="system-ui,sans-serif" font-size="12" fill="#374151" font-weight="bold">Votes inside k=5 circle:</text>
+
+  <text x="470" y="120" font-family="system-ui,sans-serif" font-size="11" fill="#2563eb">Negative</text>
+  <rect x="528" y="109" width="120" height="14" rx="3" fill="#bfdbfe" stroke="#2563eb" stroke-width="1"/>
+  <text x="655" y="120" font-family="system-ui,sans-serif" font-size="11" fill="#2563eb">4</text>
+
+  <text x="470" y="142" font-family="system-ui,sans-serif" font-size="11" fill="#ea580c">Positive</text>
+  <rect x="528" y="131" width="30" height="14" rx="3" fill="#fed7aa" stroke="#ea580c" stroke-width="1"/>
+  <text x="565" y="142" font-family="system-ui,sans-serif" font-size="11" fill="#ea580c">1</text>
+
+  <rect x="460" y="158" width="208" height="38" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="564" y="173" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#374151">Plurality prediction:</text>
+  <text x="564" y="189" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" font-weight="bold" fill="#2563eb">NEGATIVE</text>
+
+  <line x1="460" y1="206" x2="668" y2="206" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4 3"/>
+
+  <text x="470" y="224" font-family="system-ui,sans-serif" font-size="12" fill="#374151" font-weight="bold">Why this is a problem:</text>
+  <text x="470" y="241" font-family="system-ui,sans-serif" font-size="11" fill="#6b7280">The closest neighbour is</text>
+  <text x="470" y="255" font-family="system-ui,sans-serif" font-size="11" fill="#6b7280">positive, yet 4 majority</text>
+  <text x="470" y="269" font-family="system-ui,sans-serif" font-size="11" fill="#6b7280">points outvote it.</text>
+
+  <line x1="460" y1="281" x2="668" y2="281" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4 3"/>
+
+  <text x="470" y="298" font-family="system-ui,sans-serif" font-size="12" fill="#374151" font-weight="bold">Mitigations:</text>
+  <text x="470" y="314" font-family="system-ui,sans-serif" font-size="11" fill="#6b7280">· Cost-weighted votes</text>
+  <text x="470" y="328" font-family="system-ui,sans-serif" font-size="11" fill="#6b7280">· Oversampling (SMOTE)</text>
+  <text x="470" y="342" font-family="system-ui,sans-serif" font-size="11" fill="#6b7280">· PR-AUC over accuracy</text>
+
+  <text x="350" y="418" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#6b7280">
+    Dataset: 14 Negative, 4 Positive (78% majority)  •  k = 5
+  </text>
+</svg>

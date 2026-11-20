@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="530" viewBox="0 0 960 530" role="img" aria-labelledby="title desc">
+  <title id="title">Categorical Encoding in Distance-Based Algorithms</title>
+  <desc id="desc">Visualizing why integer encoding corrupts distances in KNN versus One-Hot Encoding and Gower Distance.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .card { fill: #ffffff; stroke: #e2e8f0; stroke-width: 1.5; }
+      .title { font: 700 22px system-ui, -apple-system, sans-serif; fill: #0f172a; }
+      .subtitle { font: 400 13px system-ui, -apple-system, sans-serif; fill: #64748b; }
+      .card-title { font: 700 15px system-ui, -apple-system, sans-serif; }
+      .card-sub { font: 400 12px system-ui, -apple-system, sans-serif; fill: #64748b; }
+      .label { font: 600 12px system-ui, -apple-system, sans-serif; fill: #1e293b; }
+      .small { font: 500 11px system-ui, -apple-system, sans-serif; fill: #64748b; }
+      .code-txt { font: 600 11px "SF Mono", Menlo, Consolas, monospace; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="960" height="530" rx="16"/>
+
+  <text class="title" x="36" y="42">Encoding Categorical Data for KNN</text>
+  <text class="subtitle" x="36" y="62">How encoding choices directly dictate geometric distances and neighbor rankings</text>
+
+  <!-- ==================== PANEL 1: INTEGER ENCODING (TRAP) ==================== -->
+  <g transform="translate(36, 82)">
+    <rect class="card" width="280" height="415" rx="12"/>
+    <rect x="0" y="0" width="280" height="48" rx="12" fill="#fef2f2"/>
+    <rect x="0" y="38" width="280" height="10" fill="#fef2f2"/>
+    <text class="card-title" x="16" y="26" fill="#991b1b">1. Integer Encoding (Trap ❌)</text>
+    <text class="card-sub" x="16" y="42" fill="#b91c1c">Arbitrary numbers: Red=0, Blue=1, Green=2</text>
+
+    <!-- 1D Number Line Visualization -->
+    <line x1="30" y1="130" x2="250" y2="130" stroke="#cbd5e1" stroke-width="3"/>
+    
+    <!-- Red dot -->
+    <circle cx="50" cy="130" r="10" fill="#ef4444"/>
+    <text class="label" x="50" y="112" text-anchor="middle" fill="#ef4444">Red (0)</text>
+
+    <!-- Blue dot -->
+    <circle cx="140" cy="130" r="10" fill="#3b82f6"/>
+    <text class="label" x="140" y="112" text-anchor="middle" fill="#3b82f6">Blue (1)</text>
+
+    <!-- Green dot -->
+    <circle cx="230" cy="130" r="10" fill="#10b981"/>
+    <text class="label" x="230" y="112" text-anchor="middle" fill="#10b981">Green (2)</text>
+
+    <!-- Distance Brackets -->
+    <path d="M50 150 C 95 170, 95 170, 140 150" fill="none" stroke="#64748b" stroke-width="1.5"/>
+    <text class="small" x="95" y="176" text-anchor="middle" font-weight="700">d = 1.0</text>
+
+    <path d="M50 190 C 140 230, 140 230, 230 190" fill="none" stroke="#ef4444" stroke-width="1.5"/>
+    <text class="small" x="140" y="226" text-anchor="middle" font-weight="700" fill="#ef4444">d = 2.0 (Double!)</text>
+
+    <!-- Description -->
+    <rect x="16" y="248" width="248" height="148" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text class="label" x="26" y="272" fill="#b91c1c">Why this breaks KNN:</text>
+    <text class="small" x="26" y="292">• Imposes an artificial ordering</text>
+    <text class="small" x="26" y="310">• Falsely asserts Green is twice</text>
+    <text class="small" x="32" y="326">as far from Red as Blue is</text>
+    <text class="small" x="26" y="348" font-weight="700" fill="#991b1b">⚠️ Produces bogus neighbors!</text>
+    <text class="small" x="26" y="372" fill="#64748b">Only safe for natural ordinal ranks</text>
+  </g>
+
+  <!-- ==================== PANEL 2: ONE-HOT ENCODING ==================== -->
+  <g transform="translate(340, 82)">
+    <rect class="card" width="280" height="415" rx="12"/>
+    <rect x="0" y="0" width="280" height="48" rx="12" fill="#eff6ff"/>
+    <rect x="0" y="38" width="280" height="10" fill="#eff6ff"/>
+    <text class="card-title" x="16" y="26" fill="#1e40af">2. One-Hot Encoding (Standard ✅)</text>
+    <text class="card-sub" x="16" y="42" fill="#2563eb">Binary vectors: [1,0,0], [0,1,0], [0,0,1]</text>
+
+    <!-- Equilateral Triangle / Simplex Visualization -->
+    <!-- Vertices: Red (60, 200), Blue (220, 200), Green (140, 90) -->
+    <polygon points="60,200 220,200 140,90" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4"/>
+    
+    <circle cx="60" cy="200" r="10" fill="#ef4444"/>
+    <text class="label" x="50" y="222" fill="#ef4444">Red [1,0,0]</text>
+
+    <circle cx="220" cy="200" r="10" fill="#3b82f6"/>
+    <text class="label" x="225" y="222" fill="#3b82f6">Blue [0,1,0]</text>
+
+    <circle cx="140" cy="90" r="10" fill="#10b981"/>
+    <text class="label" x="140" y="74" text-anchor="middle" fill="#10b981">Green [0,0,1]</text>
+
+    <!-- All edge distances are sqrt(2) -->
+    <text class="code-txt" x="140" y="194" text-anchor="middle" fill="#1e40af">d = √2 ≈ 1.41</text>
+    <text class="code-txt" x="80" y="140" text-anchor="middle" fill="#1e40af">d = √2</text>
+    <text class="code-txt" x="200" y="140" text-anchor="middle" fill="#1e40af">d = √2</text>
+
+    <!-- Description -->
+    <rect x="16" y="248" width="248" height="148" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text class="label" x="26" y="272" fill="#166534">Why this works:</text>
+    <text class="small" x="26" y="292">• All distinct pairs are equidistant</text>
+    <text class="small" x="26" y="310">• Matches have d = 0</text>
+    <text class="small" x="26" y="332" font-weight="700" fill="#b45309">⚠️ Trade-off to manage:</text>
+    <text class="small" x="26" y="352">• Adds m columns (curse of dim!)</text>
+    <text class="small" x="26" y="372">• Group rare categories if m > 50</text>
+  </g>
+
+  <!-- ==================== PANEL 3: GOWER DISTANCE ==================== -->
+  <g transform="translate(644, 82)">
+    <rect class="card" width="280" height="415" rx="12"/>
+    <rect x="0" y="0" width="280" height="48" rx="12" fill="#f5f3ff"/>
+    <rect x="0" y="38" width="280" height="10" fill="#f5f3ff"/>
+    <text class="card-title" x="16" y="26" fill="#6d28d9">3. Gower Distance (Mixed Data 🎯)</text>
+    <text class="card-sub" x="16" y="42" fill="#7c3aed">Principled hybrid for Numeric + Categorical</text>
+
+    <!-- Visual Formula Structure -->
+    <rect x="18" y="72" width="244" height="152" rx="8" fill="#ffffff" stroke="#ddd6fe"/>
+    <text class="label" x="28" y="94" fill="#5b21b6">Hybrid Metric per Feature:</text>
+    
+    <text class="small" x="28" y="120" font-weight="700">• Numerical Features:</text>
+    <text class="code-txt" x="38" y="138" fill="#6d28d9">δ = |x_1 - x_2| / Range_R</text>
+    <text class="small" x="38" y="152" fill="#64748b">Normalized difference in [0, 1]</text>
+
+    <text class="small" x="28" y="176" font-weight="700">• Categorical Features:</text>
+    <text class="code-txt" x="38" y="194" fill="#6d28d9">δ = 0 if same, 1 if diff</text>
+    <text class="small" x="38" y="208" fill="#64748b">Binary exact matching</text>
+
+    <!-- Description -->
+    <rect x="16" y="248" width="248" height="148" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text class="label" x="26" y="272" fill="#4338ca">Best Applications:</text>
+    <text class="small" x="26" y="292">• Datasets with mixed data types</text>
+    <text class="small" x="26" y="310">• No need to inflate dimensions</text>
+    <text class="small" x="26" y="328">• Naturally handles missing values</text>
+    <text class="small" x="26" y="352" font-weight="700" fill="#4338ca">Use library: gower</text>
+    <text class="code-txt" x="26" y="372" fill="#6d28d9">import gower; gower.gower_matrix</text>
+  </g>
+</svg>

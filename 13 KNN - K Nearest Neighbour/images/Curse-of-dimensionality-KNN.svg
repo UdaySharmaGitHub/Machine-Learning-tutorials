@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="420" viewBox="0 0 960 420" role="img" aria-labelledby="title desc">
+  <title id="title">Exponential growth of grid cells with dimension</title><desc id="desc">With ten bins per feature, one dimension has ten cells, two dimensions one hundred cells, three dimensions one thousand cells, and ten dimensions ten billion cells.</desc>
+  <defs><style>.bg{fill:#f8fafc}.bar{fill:#7c3aed}.track{fill:#e2e8f0}.title{font:700 24px system-ui,sans-serif;fill:#111827}.label{font:17px system-ui,sans-serif;fill:#111827}.small{font:15px system-ui,sans-serif;fill:#475569}</style></defs>
+  <rect class="bg" width="960" height="420" rx="18"/><text class="title" x="42" y="48">Why high dimensions make local neighbourhoods sparse</text><text class="small" x="42" y="76">If each feature is divided into 10 intervals, the number of grid cells is 10ᵈ.</text>
+  <g transform="translate(42 105)"><text class="label" x="0" y="28">d = 1</text><rect class="track" x="92" y="8" width="700" height="28" rx="8"/><rect class="bar" x="92" y="8" width="70" height="28" rx="8"/><text class="label" x="810" y="29">10</text></g>
+  <g transform="translate(42 165)"><text class="label" x="0" y="28">d = 2</text><rect class="track" x="92" y="8" width="700" height="28" rx="8"/><rect class="bar" x="92" y="8" width="140" height="28" rx="8"/><text class="label" x="810" y="29">100</text></g>
+  <g transform="translate(42 225)"><text class="label" x="0" y="28">d = 3</text><rect class="track" x="92" y="8" width="700" height="28" rx="8"/><rect class="bar" x="92" y="8" width="210" height="28" rx="8"/><text class="label" x="810" y="29">1,000</text></g>
+  <g transform="translate(42 285)"><text class="label" x="0" y="28">d = 10</text><rect class="track" x="92" y="8" width="700" height="28" rx="8"/><rect class="bar" x="92" y="8" width="700" height="28" rx="8"/><text class="label" x="810" y="29">10 billion</text></g>
+  <text class="small" x="42" y="372">Bars use log₁₀ length. Fixed data occupy a rapidly shrinking fraction of the available space.</text>
+</svg>

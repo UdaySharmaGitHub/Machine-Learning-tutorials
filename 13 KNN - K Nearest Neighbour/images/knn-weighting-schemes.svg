@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="530" viewBox="0 0 960 530" role="img" aria-labelledby="title desc">
+  <title id="title">Weight Decay Functions in Weighted KNN</title>
+  <desc id="desc">Curves showing how different weighting schemes decay with distance: Uniform, Inverse Distance, Inverse Squared Distance, and Gaussian Kernel.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .card { fill: #ffffff; stroke: #e2e8f0; stroke-width: 1.5; }
+      .title { font: 700 22px system-ui, -apple-system, sans-serif; fill: #0f172a; }
+      .subtitle { font: 400 13px system-ui, -apple-system, sans-serif; fill: #64748b; }
+      .axis { stroke: #64748b; stroke-width: 1.5; }
+      .grid { stroke: #e2e8f0; stroke-width: 1; stroke-dasharray: 3 3; }
+      .axis-label { font: 600 12px system-ui, -apple-system, sans-serif; fill: #475569; }
+      .tick-label { font: 500 11px system-ui, -apple-system, sans-serif; fill: #64748b; }
+      .legend-txt { font: 600 12px system-ui, -apple-system, sans-serif; fill: #1e293b; }
+      .scheme-title { font: 700 14px system-ui, -apple-system, sans-serif; fill: #0f172a; }
+      .scheme-sub { font: 400 12px system-ui, -apple-system, sans-serif; fill: #475569; }
+      .formula-box { font: 600 12px "SF Mono", Menlo, Consolas, monospace; }
+    </style>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect class="bg" width="960" height="530" rx="16"/>
+
+  <!-- Main Header -->
+  <text class="title" x="36" y="42">Distance-Weighting Kernel Schemes</text>
+  <text class="subtitle" x="36" y="62">Comparison of mathematical decay curves as distance d increases from the query point</text>
+
+  <!-- ==================== LEFT: PLOT AREA ==================== -->
+  <g transform="translate(36, 82)">
+    <rect class="card" width="530" height="416" rx="14"/>
+
+    <!-- Plot Origin at (70, 340), Width 420, Height 260 -->
+    <!-- X-axis: 0 to 4.0 (scale: 100px per unit => 400px total) -->
+    <!-- Y-axis: 0 to 1.0 (scale: 240px per unit => 240px total) -->
+
+    <!-- Grid Lines & Ticks -->
+    <!-- Y-grid: 0.2, 0.4, 0.6, 0.8, 1.0 -->
+    <line class="grid" x1="70" y1="292" x2="490" y2="292"/>
+    <text class="tick-label" x="58" y="296" text-anchor="end">0.2</text>
+
+    <line class="grid" x1="70" y1="244" x2="490" y2="244"/>
+    <text class="tick-label" x="58" y="248" text-anchor="end">0.4</text>
+
+    <line class="grid" x1="70" y1="196" x2="490" y2="196"/>
+    <text class="tick-label" x="58" y="200" text-anchor="end">0.6</text>
+
+    <line class="grid" x1="70" y1="148" x2="490" y2="148"/>
+    <text class="tick-label" x="58" y="152" text-anchor="end">0.8</text>
+
+    <line class="grid" x1="70" y1="100" x2="490" y2="100"/>
+    <text class="tick-label" x="58" y="104" text-anchor="end">1.0</text>
+
+    <!-- X-grid: 1.0, 2.0, 3.0, 4.0 -->
+    <line class="grid" x1="170" y1="100" x2="170" y2="340"/>
+    <text class="tick-label" x="170" y="358" text-anchor="middle">1.0</text>
+
+    <line class="grid" x1="270" y1="100" x2="270" y2="340"/>
+    <text class="tick-label" x="270" y="358" text-anchor="middle">2.0</text>
+
+    <line class="grid" x1="370" y1="100" x2="370" y2="340"/>
+    <text class="tick-label" x="370" y="358" text-anchor="middle">3.0</text>
+
+    <line class="grid" x1="470" y1="100" x2="470" y2="340"/>
+    <text class="tick-label" x="470" y="358" text-anchor="middle">4.0</text>
+
+    <!-- Axes -->
+    <line class="axis" x1="70" y1="340" x2="500" y2="340"/>
+    <line class="axis" x1="70" y1="340" x2="70" y2="80"/>
+    <text class="tick-label" x="58" y="344" text-anchor="end">0.0</text>
+
+    <!-- Axis Labels -->
+    <text class="axis-label" x="285" y="384" text-anchor="middle">Distance d from Query Point →</text>
+    <text class="axis-label" x="26" y="210" text-anchor="middle" transform="rotate(-90 26 210)">Normalized Weight w(d) →</text>
+
+    <!-- CURVES -->
+    <!-- 1. Uniform: Constant 1.0 until cutoff d=2.8, then 0 -->
+    <path d="M 70 100 L 350 100 L 350 340 L 490 340" fill="none" stroke="#94a3b8" stroke-width="2.5" stroke-dasharray="6 4"/>
+
+    <!-- 2. Inverse Distance Normalized: w = 1 / (1 + d) -->
+    <!-- d=0 -> 1.0 (y=100); d=1 -> 0.5 (y=220); d=2 -> 0.333 (y=260); d=3 -> 0.25 (y=280); d=4 -> 0.20 (y=292) -->
+    <path d="M 70 100 Q 120 180 170 220 T 270 260 T 370 280 T 470 292" fill="none" stroke="#2563eb" stroke-width="3"/>
+
+    <!-- 3. Inverse Squared Normalized: w = 1 / (1 + d^2) -->
+    <!-- d=0 -> 1.0 (y=100); d=1 -> 0.5 (y=220); d=2 -> 0.2 (y=292); d=3 -> 0.1 (y=316); d=4 -> 0.058 (y=326) -->
+    <path d="M 70 100 Q 110 200 170 220 Q 220 275 270 292 T 370 316 T 470 326" fill="none" stroke="#ea580c" stroke-width="3"/>
+
+    <!-- 4. Gaussian Kernel: w = exp(-d^2 / (2 * h^2)) with h = 1.2 -->
+    <!-- d=0 -> 1.0 (y=100); d=1 -> 0.706 (y=170); d=2 -> 0.249 (y=280); d=3 -> 0.044 (y=329); d=4 -> 0.003 (y=339) -->
+    <path d="M 70 100 C 110 100 130 135 170 170 C 220 220 240 265 270 280 C 310 305 340 325 370 329 T 470 339" fill="none" stroke="#8b5cf6" stroke-width="3"/>
+
+    <!-- Legend inside chart -->
+    <g transform="translate(230, 24)">
+      <rect x="0" y="0" width="280" height="66" rx="8" fill="#f8fafc" stroke="#cbd5e1" opacity="0.95"/>
+      
+      <line x1="12" y1="18" x2="36" y2="18" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4 3"/>
+      <text class="small" x="42" y="22">Uniform (w = 1)</text>
+
+      <line x1="150" y1="18" x2="174" y2="18" stroke="#2563eb" stroke-width="2.5"/>
+      <text class="small" x="180" y="22">Inverse (1 / d)</text>
+
+      <line x1="12" y1="46" x2="36" y2="46" stroke="#ea580c" stroke-width="2.5"/>
+      <text class="small" x="42" y="50">Inv. Square (1 / d²)</text>
+
+      <line x1="150" y1="46" x2="174" y2="46" stroke="#8b5cf6" stroke-width="2.5"/>
+      <text class="small" x="180" y="50">Gaussian Kernel</text>
+    </g>
+  </g>
+
+  <!-- ==================== RIGHT: SCHEME BREAKDOWN CARDS ==================== -->
+  <g transform="translate(582, 82)">
+    
+    <!-- Card 1: Uniform -->
+    <rect class="card" width="342" height="96" rx="10"/>
+    <rect x="12" y="14" width="4" height="68" rx="2" fill="#94a3b8"/>
+    <text class="scheme-title" x="26" y="32">Uniform Weighting</text>
+    <text class="formula-box" x="26" y="50" fill="#64748b">w_i = 1.0</text>
+    <text class="scheme-sub" x="26" y="70">Abrupt step function at k-th neighbor.</text>
+    <text class="scheme-sub" x="26" y="86">Vulnerable to distant majority clusters.</text>
+
+    <!-- Card 2: Inverse Distance -->
+    <g transform="translate(0, 106)">
+      <rect class="card" width="342" height="96" rx="10"/>
+      <rect x="12" y="14" width="4" height="68" rx="2" fill="#ea580c"/>
+      <text class="scheme-title" x="26" y="32">Inverse Distance (q = 1 or 2)</text>
+      <text class="formula-box" x="26" y="50" fill="#c2410c">w_i = 1 / (d_i + ε)^q</text>
+      <text class="scheme-sub" x="26" y="70">Rapid hyperbolic decay; q=2 standard default.</text>
+      <text class="scheme-sub" x="26" y="86">Needs small ε to guard against exact d=0 matches.</text>
+    </g>
+
+    <!-- Card 3: Gaussian Kernel -->
+    <g transform="translate(0, 212)">
+      <rect class="card" width="342" height="96" rx="10"/>
+      <rect x="12" y="14" width="4" height="68" rx="2" fill="#8b5cf6"/>
+      <text class="scheme-title" x="26" y="32">Gaussian Radial Basis Function</text>
+      <text class="formula-box" x="26" y="50" fill="#6d28d9">w_i = exp(-d_i² / 2h²)</text>
+      <text class="scheme-sub" x="26" y="70">Smooth, infinite support, no singularity at zero.</text>
+      <text class="scheme-sub" x="26" y="86">Bandwidth h tunes locality (analogous to k).</text>
+    </g>
+
+    <!-- Card 4: Selection Guide -->
+    <g transform="translate(0, 318)">
+      <rect width="342" height="98" rx="10" fill="#ecfdf5" stroke="#a7f3d0"/>
+      <text class="scheme-title" x="18" y="26" fill="#065f46">💡 Which scheme to choose?</text>
+      <text class="scheme-sub" x="18" y="46" fill="#047857">• <strong>w = 1/d²</strong> is standard, highly effective default</text>
+      <text class="scheme-sub" x="18" y="64" fill="#047857">• <strong>Gaussian</strong> preferred for smooth regression surfaces</text>
+      <text class="scheme-sub" x="18" y="82" fill="#047857">• Compare using <strong>GridSearchCV</strong> inside a Pipeline</text>
+    </g>
+
+  </g>
+</svg>

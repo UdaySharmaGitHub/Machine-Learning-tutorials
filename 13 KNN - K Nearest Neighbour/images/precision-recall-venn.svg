@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="430" viewBox="0 0 680 430" role="img" aria-labelledby="prv-title prv-desc">
+  <title id="prv-title">Precision and Recall as a Venn Diagram</title>
+  <desc id="prv-desc">Two overlapping circles: left (blue) = Predicted Positive = TP + FP; right (orange) = Actual Positive = TP + FN. The overlap = TP. Precision measures TP vs left circle; Recall measures TP vs right circle.</desc>
+  <defs>
+    <style>
+      .bg{fill:#f8fafc}
+      .title{font:700 21px system-ui,sans-serif;fill:#111827}
+      .sub{font:14px system-ui,sans-serif;fill:#374151}
+      .sub2{font:12px system-ui,sans-serif;fill:#6b7280}
+      .region{font:700 20px system-ui,sans-serif}
+      .rlabel{font:11px system-ui,sans-serif;fill:#374151}
+      .fbold{font:700 13px system-ui,sans-serif}
+      .fform{font:700 15px system-ui,sans-serif}
+      .fmeta{font:12px system-ui,sans-serif;fill:#6b7280}
+    </style>
+    <!-- clip path so circles stay within SVG -->
+    <clipPath id="svgclip"><rect width="680" height="430"/></clipPath>
+  </defs>
+
+  <!-- background -->
+  <rect class="bg" width="680" height="430" rx="14"/>
+
+  <!-- title -->
+  <text class="title" x="340" y="36" text-anchor="middle">Precision vs Recall</text>
+
+  <!-- circle labels -->
+  <text class="sub" x="210" y="62" text-anchor="middle">Predicted Positive</text>
+  <text class="sub2" x="210" y="78" text-anchor="middle">(TP + FP)</text>
+  <text class="sub" x="460" y="62" text-anchor="middle">Actual Positive</text>
+  <text class="sub2" x="460" y="78" text-anchor="middle">(TP + FN)</text>
+
+  <!-- left circle: Predicted Positive (blue, TP+FP) -->
+  <circle cx="230" cy="185" r="130" fill="#dbeafe" fill-opacity="0.75" stroke="#2563eb" stroke-width="2.5" clip-path="url(#svgclip)"/>
+
+  <!-- right circle: Actual Positive (orange, TP+FN) -->
+  <circle cx="430" cy="185" r="130" fill="#fff7ed" fill-opacity="0.75" stroke="#ea580c" stroke-width="2.5" clip-path="url(#svgclip)"/>
+
+  <!-- region labels -->
+  <!-- FP: left-only region, center ≈ x=155 -->
+  <text class="region" x="155" y="180" text-anchor="middle" fill="#2563eb">FP</text>
+  <text class="rlabel" x="155" y="200" text-anchor="middle">False</text>
+  <text class="rlabel" x="155" y="215" text-anchor="middle">Positive</text>
+
+  <!-- TP: overlap region, center ≈ x=330 -->
+  <text class="region" x="330" y="180" text-anchor="middle" fill="#7c3aed">TP</text>
+  <text class="rlabel" x="330" y="200" text-anchor="middle">True</text>
+  <text class="rlabel" x="330" y="215" text-anchor="middle">Positive</text>
+
+  <!-- FN: right-only region, center ≈ x=505 -->
+  <text class="region" x="505" y="180" text-anchor="middle" fill="#ea580c">FN</text>
+  <text class="rlabel" x="505" y="200" text-anchor="middle">False</text>
+  <text class="rlabel" x="505" y="215" text-anchor="middle">Negative</text>
+
+  <!-- divider -->
+  <line x1="30" y1="300" x2="650" y2="300" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- Precision box (left) -->
+  <rect x="30" y="312" width="295" height="90" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text class="fbold" x="177" y="333" text-anchor="middle" fill="#1d4ed8">PRECISION</text>
+  <text class="fform" x="177" y="356" text-anchor="middle" fill="#1d4ed8">P = TP / (TP + FP)</text>
+  <text class="fmeta" x="177" y="376" text-anchor="middle">Of all predicted positives,</text>
+  <text class="fmeta" x="177" y="392" text-anchor="middle">how many are truly positive?</text>
+
+  <!-- Recall box (right) -->
+  <rect x="345" y="312" width="295" height="90" rx="10" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5"/>
+  <text class="fbold" x="492" y="333" text-anchor="middle" fill="#c2410c">RECALL  (Sensitivity)</text>
+  <text class="fform" x="492" y="356" text-anchor="middle" fill="#c2410c">R = TP / (TP + FN)</text>
+  <text class="fmeta" x="492" y="376" text-anchor="middle">Of all actual positives,</text>
+  <text class="fmeta" x="492" y="392" text-anchor="middle">how many were correctly found?</text>
+
+  <!-- F1 note at very bottom -->
+  <text x="340" y="416" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#7c3aed" font-weight="bold">F1 = 2 × (P × R) / (P + R)   —   harmonic mean of Precision and Recall</text>
+</svg>

@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="520" viewBox="0 0 960 520" role="img" aria-labelledby="title desc">
+  <title id="title">Decision Guide for KNN Distance Metrics and Data Types</title>
+  <desc id="desc">Visual architecture flowchart for selecting the right encoding, preprocessing, and distance metric across diverse data types in KNN.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .title { font: 700 22px system-ui, -apple-system, sans-serif; fill: #0f172a; }
+      .subtitle { font: 400 13px system-ui, -apple-system, sans-serif; fill: #64748b; }
+      .node-box { stroke-width: 1.5; rx: 8; }
+      .node-title { font: 700 13px system-ui, -apple-system, sans-serif; }
+      .node-sub { font: 400 11px system-ui, -apple-system, sans-serif; }
+      .node-tag { font: 700 10px "SF Mono", Menlo, Consolas, monospace; }
+      .arrow-line { stroke: #94a3b8; stroke-width: 1.8; fill: none; }
+    </style>
+    <marker id="flow-arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 1L8 5L0 9z" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="960" height="520" rx="16"/>
+
+  <text class="title" x="36" y="42">Data Type &amp; Metric Decision Guide for KNN</text>
+  <text class="subtitle" x="36" y="62">Recommended preprocessing pipelines and distance metrics for non-standard inputs</text>
+
+  <!-- Left Column: Input Data Types -->
+  <g transform="translate(36, 88)">
+    <rect width="210" height="400" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <rect width="210" height="36" rx="12" fill="#f1f5f9"/>
+    <rect y="26" width="210" height="10" fill="#f1f5f9"/>
+    <text class="node-title" x="16" y="24" fill="#1e293b">1. Input Data Type</text>
+
+    <!-- Type 1 -->
+    <rect x="14" y="48" width="182" height="48" rx="6" fill="#eff6ff" stroke="#bfdbfe"/>
+    <text class="node-title" x="24" y="68" fill="#1e40af">Continuous Numeric</text>
+    <text class="node-sub" x="24" y="84" fill="#3b82f6">Standard tabular features</text>
+
+    <!-- Type 2 -->
+    <rect x="14" y="106" width="182" height="48" rx="6" fill="#fef3c7" stroke="#fde68a"/>
+    <text class="node-title" x="24" y="126" fill="#92400e">Categorical (Nominal)</text>
+    <text class="node-sub" x="24" y="142" fill="#b45309">Colors, cities, categories</text>
+
+    <!-- Type 3 -->
+    <rect x="14" y="164" width="182" height="48" rx="6" fill="#f3e8ff" stroke="#e9d5ff"/>
+    <text class="node-title" x="24" y="184" fill="#6b21a8">Mixed Types</text>
+    <text class="node-sub" x="24" y="200" fill="#9333ea">Numeric + Categorical rows</text>
+
+    <!-- Type 4 -->
+    <rect x="14" y="222" width="182" height="48" rx="6" fill="#ecfdf5" stroke="#a7f3d0"/>
+    <text class="node-title" x="24" y="242" fill="#065f46">Text / Sparse Counts</text>
+    <text class="node-sub" x="24" y="258" fill="#059669">Bag of words, TF-IDF</text>
+
+    <!-- Type 5 -->
+    <rect x="14" y="280" width="182" height="48" rx="6" fill="#fff1f2" stroke="#fecdd3"/>
+    <text class="node-title" x="24" y="300" fill="#9f1239">Time Series / Sequences</text>
+    <text class="node-sub" x="24" y="316" fill="#e11d48">ECG, audio, sensor streams</text>
+
+    <!-- Type 6 -->
+    <rect x="14" y="338" width="182" height="48" rx="6" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text class="node-title" x="24" y="358" fill="#334155">High-Dim (>20 dims)</text>
+    <text class="node-sub" x="24" y="374" fill="#64748b">Images, gene expression</text>
+  </g>
+
+  <!-- Connectors from Input to Preprocessing -->
+  <path d="M 246 160 L 330 160" class="arrow-line" marker-end="url(#flow-arrow)"/>
+  <path d="M 246 218 L 330 218" class="arrow-line" marker-end="url(#flow-arrow)"/>
+  <path d="M 246 276 L 330 276" class="arrow-line" marker-end="url(#flow-arrow)"/>
+  <path d="M 246 334 L 330 334" class="arrow-line" marker-end="url(#flow-arrow)"/>
+  <path d="M 246 392 L 330 392" class="arrow-line" marker-end="url(#flow-arrow)"/>
+  <path d="M 246 450 L 330 450" class="arrow-line" marker-end="url(#flow-arrow)"/>
+
+  <!-- Middle Column: Preprocessing & Encoding Strategy -->
+  <g transform="translate(330, 88)">
+    <rect width="250" height="400" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <rect width="250" height="36" rx="12" fill="#f1f5f9"/>
+    <rect y="26" width="250" height="10" fill="#f1f5f9"/>
+    <text class="node-title" x="16" y="24" fill="#1e293b">2. Preprocessing &amp; Encoding</text>
+
+    <!-- Prep 1 -->
+    <rect x="14" y="48" width="222" height="48" rx="6" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text class="node-title" x="24" y="68" fill="#0f172a">Standard / Robust Scaler</text>
+    <text class="node-sub" x="24" y="84" fill="#64748b">Equalize feature variances</text>
+
+    <!-- Prep 2 -->
+    <rect x="14" y="106" width="222" height="48" rx="6" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text class="node-title" x="24" y="126" fill="#0f172a">One-Hot Encoding</text>
+    <text class="node-sub" x="24" y="142" fill="#64748b">Avoid integer encoding trap!</text>
+
+    <!-- Prep 3 -->
+    <rect x="14" y="164" width="222" height="48" rx="6" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text class="node-title" x="24" y="184" fill="#0f172a">Range Normalize + Match</text>
+    <text class="node-sub" x="24" y="200" fill="#64748b">Separate numeric &amp; categorical</text>
+
+    <!-- Prep 4 -->
+    <rect x="14" y="222" width="222" height="48" rx="6" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text class="node-title" x="24" y="242" fill="#0f172a">TF-IDF Vectorizer + L2 Norm</text>
+    <text class="node-sub" x="24" y="258" fill="#64748b">Normalize row vector lengths</text>
+
+    <!-- Prep 5 -->
+    <rect x="14" y="280" width="222" height="48" rx="6" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text class="node-title" x="24" y="300" fill="#0f172a">Z-Normalize Amplitude</text>
+    <text class="node-sub" x="24" y="316" fill="#64748b">Remove offset &amp; gain bias</text>
+
+    <!-- Prep 6 -->
+    <rect x="14" y="338" width="222" height="48" rx="6" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text class="node-title" x="24" y="358" fill="#0f172a">PCA / Autoencoder / UMAP</text>
+    <text class="node-sub" x="24" y="374" fill="#64748b">Extract intrinsic dimensionality</text>
+  </g>
+
+  <!-- Connectors from Preprocessing to Recommended Metric -->
+  <path d="M 580 160 L 664 160" class="arrow-line" marker-end="url(#flow-arrow)"/>
+  <path d="M 580 218 L 664 218" class="arrow-line" marker-end="url(#flow-arrow)"/>
+  <path d="M 580 276 L 664 276" class="arrow-line" marker-end="url(#flow-arrow)"/>
+  <path d="M 580 334 L 664 334" class="arrow-line" marker-end="url(#flow-arrow)"/>
+  <path d="M 580 392 L 664 392" class="arrow-line" marker-end="url(#flow-arrow)"/>
+  <path d="M 580 450 L 664 450" class="arrow-line" marker-end="url(#flow-arrow)"/>
+
+  <!-- Right Column: Recommended Distance Metric -->
+  <g transform="translate(664, 88)">
+    <rect width="260" height="400" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <rect width="260" height="36" rx="12" fill="#f1f5f9"/>
+    <rect y="26" width="260" height="10" fill="#f1f5f9"/>
+    <text class="node-title" x="16" y="24" fill="#1e293b">3. Optimal Distance Metric</text>
+
+    <!-- Metric 1 -->
+    <rect x="14" y="48" width="232" height="48" rx="6" fill="#f0fdf4" stroke="#86efac"/>
+    <text class="node-title" x="24" y="68" fill="#166534">Euclidean / Manhattan (L₁)</text>
+    <text class="node-tag" x="24" y="84" fill="#15803d">metric='euclidean' / 'manhattan'</text>
+
+    <!-- Metric 2 -->
+    <rect x="14" y="106" width="232" height="48" rx="6" fill="#f0fdf4" stroke="#86efac"/>
+    <text class="node-title" x="24" y="126" fill="#166534">Euclidean on One-Hot</text>
+    <text class="node-tag" x="24" y="142" fill="#15803d">All category pairs d = √2</text>
+
+    <!-- Metric 3 -->
+    <rect x="14" y="164" width="232" height="48" rx="6" fill="#f0fdf4" stroke="#86efac"/>
+    <text class="node-title" x="24" y="184" fill="#166534">Gower Distance</text>
+    <text class="node-tag" x="24" y="200" fill="#15803d">library: gower (native mixed)</text>
+
+    <!-- Metric 4 -->
+    <rect x="14" y="222" width="232" height="48" rx="6" fill="#f0fdf4" stroke="#86efac"/>
+    <text class="node-title" x="24" y="242" fill="#166534">Cosine Distance</text>
+    <text class="node-tag" x="24" y="258" fill="#15803d">metric='cosine' (ignores length)</text>
+
+    <!-- Metric 5 -->
+    <rect x="14" y="280" width="232" height="48" rx="6" fill="#f0fdf4" stroke="#86efac"/>
+    <text class="node-title" x="24" y="300" fill="#166534">Dynamic Time Warping (DTW)</text>
+    <text class="node-tag" x="24" y="316" fill="#15803d">library: fastdtw / tslearn</text>
+
+    <!-- Metric 6 -->
+    <rect x="14" y="338" width="232" height="48" rx="6" fill="#f0fdf4" stroke="#86efac"/>
+    <text class="node-title" x="24" y="358" fill="#166534">Cosine / Low-Dim Euclidean</text>
+    <text class="node-tag" x="24" y="374" fill="#15803d">Mitigates distance collapse</text>
+  </g>
+</svg>

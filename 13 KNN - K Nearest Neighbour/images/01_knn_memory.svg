@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">KNN memory: training data, search index and numeric precision</title>
+  <desc id="desc">An editable infographic showing feature and target storage, extra search-index memory, and relative raw vector storage for float32, float16 and int8.</desc>
+  <defs>
+    <style>
+      text { font-family: Arial, Helvetica, sans-serif; fill: #172033; }
+      .title { font-size: 34px; font-weight: 700; }
+      .subtitle { font-size: 18px; fill: #536078; }
+      .heading { font-size: 23px; font-weight: 700; }
+      .body { font-size: 18px; }
+      .small { font-size: 15px; fill: #536078; }
+      .mono { font-family: Consolas, 'Courier New', monospace; font-size: 19px; }
+      .panel { fill: #ffffff; stroke: #d9e0ea; stroke-width: 2; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="760" fill="#f6f8fc"/>
+  <text x="60" y="66" class="title">KNN memory: data, index and precision</text>
+  <text x="60" y="101" class="subtitle">Separate stored training samples from the extra memory required by a search index.</text>
+
+  <!-- Left panel: stored training data -->
+  <rect x="55" y="135" width="530" height="565" rx="18" class="panel"/>
+  <text x="85" y="180" class="heading">1. Training data storage</text>
+  <text x="85" y="220" class="body">Dense feature matrix (n rows × d features)</text>
+
+  <!-- Feature matrix -->
+  <g stroke="#9bb8f7" stroke-width="1.5" fill="#e8efff">
+    <rect x="90" y="250" width="64" height="42" rx="6"/>
+    <rect x="162" y="250" width="64" height="42" rx="6"/>
+    <rect x="234" y="250" width="64" height="42" rx="6"/>
+    <rect x="306" y="250" width="64" height="42" rx="6"/>
+    <rect x="378" y="250" width="64" height="42" rx="6"/>
+    <rect x="90" y="300" width="64" height="42" rx="6"/>
+    <rect x="162" y="300" width="64" height="42" rx="6"/>
+    <rect x="234" y="300" width="64" height="42" rx="6"/>
+    <rect x="306" y="300" width="64" height="42" rx="6"/>
+    <rect x="378" y="300" width="64" height="42" rx="6"/>
+    <rect x="90" y="350" width="64" height="42" rx="6"/>
+    <rect x="162" y="350" width="64" height="42" rx="6"/>
+    <rect x="234" y="350" width="64" height="42" rx="6"/>
+    <rect x="306" y="350" width="64" height="42" rx="6"/>
+    <rect x="378" y="350" width="64" height="42" rx="6"/>
+  </g>
+  <g class="small" text-anchor="middle">
+    <text x="122" y="277">x₁</text><text x="194" y="277">x₂</text><text x="266" y="277">x₃</text><text x="338" y="277">…</text><text x="410" y="277">x_d</text>
+    <text x="122" y="327">x₁</text><text x="194" y="327">x₂</text><text x="266" y="327">x₃</text><text x="338" y="327">…</text><text x="410" y="327">x_d</text>
+    <text x="122" y="377">x₁</text><text x="194" y="377">x₂</text><text x="266" y="377">x₃</text><text x="338" y="377">…</text><text x="410" y="377">x_d</text>
+  </g>
+  <text x="90" y="425" class="mono">Feature storage = O(n × d)</text>
+
+  <rect x="90" y="455" width="420" height="72" rx="11" fill="#e9f7f4" stroke="#8bd2c4" stroke-width="1.5"/>
+  <text x="112" y="484" class="body" font-weight="700">Target values</text>
+  <text x="112" y="510" class="mono">Target storage = O(n)</text>
+
+  <text x="90" y="575" class="small">n = number of training observations</text>
+  <text x="90" y="601" class="small">d = number of features per observation</text>
+  <text x="90" y="650" class="small">These are the core stored training values.</text>
+
+  <!-- Right panel: index and precision -->
+  <rect x="615" y="135" width="530" height="565" rx="18" class="panel"/>
+  <text x="645" y="180" class="heading">2. Index memory and precision</text>
+
+  <rect x="650" y="205" width="460" height="94" rx="12" fill="#f0ebff" stroke="#b6a5ee" stroke-width="1.5"/>
+  <text x="675" y="239" class="body" font-weight="700">Search index = additional memory</text>
+  <text x="675" y="268" class="small">KD-Tree, Ball Tree and HNSW add structures</text>
+  <text x="675" y="289" class="small">whose memory depends on implementation/configuration.</text>
+
+  <text x="650" y="345" class="body" font-weight="700">Raw storage for the same number of values</text>
+
+  <text x="650" y="397" class="body">float32</text>
+  <rect x="770" y="370" width="280" height="38" rx="7" fill="#2563eb"/>
+  <text x="1065" y="396" class="small">4 bytes/value</text>
+
+  <text x="650" y="465" class="body">float16</text>
+  <rect x="770" y="438" width="140" height="38" rx="7" fill="#0f9d8a"/>
+  <text x="925" y="464" class="small">2 bytes/value</text>
+
+  <text x="650" y="533" class="body">int8</text>
+  <rect x="770" y="506" width="70" height="38" rx="7" fill="#e8792e"/>
+  <text x="855" y="532" class="small">1 byte/value</text>
+
+  <rect x="650" y="570" width="460" height="98" rx="11" fill="#fff4e8" stroke="#f0c18d" stroke-width="1.5"/>
+  <text x="675" y="601" class="body" font-weight="700">Memory reduction (raw values only)</text>
+  <text x="675" y="628" class="small">float32 → float16: about 2× less storage</text>
+  <text x="675" y="651" class="small">float32 → int8: about 4× less storage</text>
+  <text x="650" y="690" class="small">Quantization can affect distance accuracy and prediction quality.</text>
+</svg>

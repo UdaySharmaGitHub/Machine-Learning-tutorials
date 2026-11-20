@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="500" viewBox="0 0 960 500" role="img" aria-labelledby="title desc">
+  <title id="title">Euclidean and Manhattan distance compared</title>
+  <desc id="desc">Two points at one two and six five. The Euclidean straight line has length five; a Manhattan axis-aligned route has length eight.</desc>
+  <defs><style>.bg{fill:#f8fafc}.grid{fill:none;stroke:#e2e8f0}.axis{fill:none;stroke:#475569;stroke-width:2}.eu{fill:none;stroke:#2563eb;stroke-width:5}.man{fill:none;stroke:#f97316;stroke-width:5}.point{fill:#111827}.label{font:17px system-ui,sans-serif;fill:#111827}.small{font:15px system-ui,sans-serif;fill:#475569}.title{font:700 24px system-ui,sans-serif;fill:#111827}</style></defs>
+  <rect class="bg" width="960" height="500" rx="18"/>
+  <text class="title" x="45" y="47">Distance metrics change what “near” means</text>
+  <g><path class="grid" d="M90 90V420M170 90V420M250 90V420M330 90V420M410 90V420M490 90V420M570 90V420M650 90V420M90 100H680M90 180H680M90 260H680M90 340H680M90 420H680"/><path class="axis" d="M90 90V420H680"/></g>
+  <path class="eu" d="M170 340L570 100"/>
+  <path class="man" d="M170 340H570V100"/>
+  <circle class="point" cx="170" cy="340" r="9"/><circle class="point" cx="570" cy="100" r="9"/>
+  <text class="label" x="126" y="371">x = (1, 2)</text><text class="label" x="586" y="105">z = (6, 5)</text>
+  <rect x="710" y="95" width="205" height="265" rx="14" fill="#fff" stroke="#cbd5e1"/>
+  <line class="eu" x1="738" y1="132" x2="785" y2="132"/><text class="label" x="798" y="138">Euclidean</text>
+  <text class="small" x="738" y="178">√(5² + 3²)</text><text class="label" x="738" y="207">= √34 ≈ 5.83</text>
+  <line class="man" x1="738" y1="249" x2="785" y2="249"/><text class="label" x="798" y="255">Manhattan</text>
+  <text class="small" x="738" y="296">|5| + |3|</text><text class="label" x="738" y="325">= 8</text>
+  <text class="small" x="90" y="462">The same data can produce different neighbour rankings under different metrics.</text>
+</svg>

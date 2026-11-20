@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="390" viewBox="0 0 700 390" role="img" aria-labelledby="sn-title sn-desc">
+  <title id="sn-title">Self-Neighbour Bias in KNN Training Evaluation</title>
+  <desc id="sn-desc">Two side-by-side panels. Left panel shows naïve training evaluation: the query point q finds itself as its own nearest neighbour (distance 0), predicts its own label, and reports zero error — an overly optimistic result. Right panel shows leave-one-out evaluation: q is excluded from the candidate set, so its true nearest neighbour is a different point; this gives an honest estimate of generalisation error.</desc>
+  <defs>
+    <style>
+      .bg{fill:#f8fafc}
+      .title{font:700 20px system-ui,sans-serif;fill:#111827}
+      .ptitle{font:700 14px system-ui,sans-serif;fill:#111827}
+      .sub{font:11px system-ui,sans-serif;fill:#6b7280}
+      .panel-ok{fill:#fff;stroke:#e2e8f0;stroke-width:1.5}
+      .panel-bad{fill:#fff7ed;stroke:#fed7aa;stroke-width:1.5}
+      .panel-good{fill:#f0fdf4;stroke:#bbf7d0;stroke-width:1.5}
+      .dot-class1{fill:#bfdbfe;stroke:#2563eb;stroke-width:1.8}
+      .dot-class2{fill:#fecdd3;stroke:#dc2626;stroke-width:1.8}
+      .q-naive{fill:#ea580c;stroke:#9a3412;stroke-width:2}
+      .q-loo{fill:#7c3aed;stroke:#4c1d95;stroke-width:2}
+      .dist-line{stroke:#94a3b8;stroke-width:1.4;stroke-dasharray:5 3}
+      .dist0{stroke:#ef4444;stroke-width:2}
+      .ann{font:12px system-ui,sans-serif;fill:#374151}
+      .badge-bad{fill:#fee2e2;stroke:#fca5a5;stroke-width:1.2}
+      .badge-good{fill:#dcfce7;stroke:#86efac;stroke-width:1.2}
+    </style>
+  </defs>
+
+  <rect class="bg" width="700" height="390" rx="14"/>
+  <text class="title" x="350" y="30" text-anchor="middle">Self-Neighbour Bias in Training Evaluation</text>
+
+  <!-- ══ LEFT PANEL: Naïve (bad) ══════════════════════════════ -->
+  <rect class="panel-bad" x="20" y="48" width="315" height="295" rx="8"/>
+  <text class="ptitle" x="177" y="70" text-anchor="middle" fill="#c2410c">Naïve Training Accuracy</text>
+  <text class="sub" x="177" y="86" text-anchor="middle">(q included in candidate set)</text>
+
+  <!-- training dots: class 1 (blue) -->
+  <circle class="dot-class1" cx="90"  cy="150" r="10"/>
+  <circle class="dot-class1" cx="140" cy="130" r="10"/>
+  <circle class="dot-class1" cx="260" cy="145" r="10"/>
+  <circle class="dot-class1" cx="290" cy="200" r="10"/>
+  <!-- training dots: class 2 (red) -->
+  <circle class="dot-class2" cx="80"  cy="240" r="10"/>
+  <circle class="dot-class2" cx="200" cy="280" r="10"/>
+  <circle class="dot-class2" cx="300" cy="270" r="10"/>
+
+  <!-- q (orange star = training point being evaluated) -->
+  <polygon points="180,185 193,200 180,215 167,200" class="q-naive"/>
+  <text x="180" y="232" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#c2410c" font-weight="bold">q (class 1)</text>
+
+  <!-- d=0 line from q to itself (loop arrow look) -->
+  <path d="M 180,200 C 160,170 150,155 170,160 C 185,163 185,185 180,200"
+    fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="5 2"/>
+  <text x="140" y="162" font-family="system-ui,sans-serif" font-size="11" fill="#ef4444" font-weight="bold">d = 0</text>
+  <text x="140" y="176" font-family="system-ui,sans-serif" font-size="10" fill="#ef4444">(itself!)</text>
+
+  <!-- nearest neighbour = q itself -->
+  <text x="177" y="255" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#374151">Nearest neighbour = q itself</text>
+
+  <!-- result badge -->
+  <rect class="badge-bad" x="62" y="268" width="230" height="50" rx="6"/>
+  <text x="177" y="287" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#374151">Prediction = class 1 ✓ (always correct!)</text>
+  <text x="177" y="303" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="bold" fill="#dc2626">Training error = 0%  — OPTIMISTIC BIAS</text>
+
+  <!-- ══ RIGHT PANEL: LOO (good) ══════════════════════════════ -->
+  <rect class="panel-good" x="365" y="48" width="315" height="295" rx="8"/>
+  <text class="ptitle" x="522" y="70" text-anchor="middle" fill="#15803d">Leave-One-Out (LOO)</text>
+  <text class="sub" x="522" y="86" text-anchor="middle">(q excluded from candidate set)</text>
+
+  <!-- same training dots (same layout, shifted +345) -->
+  <circle class="dot-class1" cx="435" cy="150" r="10"/>
+  <circle class="dot-class1" cx="485" cy="130" r="10"/>
+  <circle class="dot-class1" cx="605" cy="145" r="10"/>
+  <circle class="dot-class1" cx="635" cy="200" r="10"/>
+  <circle class="dot-class2" cx="425" cy="240" r="10"/>
+  <circle class="dot-class2" cx="545" cy="280" r="10"/>
+  <circle class="dot-class2" cx="645" cy="270" r="10"/>
+
+  <!-- q (purple diamond) -->
+  <polygon points="525,185 538,200 525,215 512,200" class="q-loo"/>
+  <text x="525" y="232" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#6d28d9" font-weight="bold">q (class 1)</text>
+
+  <!-- nearest neighbour line to class2 dot (closest real neighbour) -->
+  <line x1="525" y1="200" x2="430" y2="238" class="dist-line"/>
+  <text x="460" y="218" font-family="system-ui,sans-serif" font-size="11" fill="#374151">nearest</text>
+  <text x="456" y="230" font-family="system-ui,sans-serif" font-size="11" fill="#374151">neighbour</text>
+  <!-- arrow head -->
+  <polygon points="433,236 441,228 440,238" fill="#94a3b8"/>
+
+  <!-- exclusion X on q in the candidate set -->
+  <text x="510" y="162" font-family="system-ui,sans-serif" font-size="20" fill="#6b7280" font-weight="bold">∅</text>
+  <text x="508" y="178" font-family="system-ui,sans-serif" font-size="10" fill="#6b7280">q excluded</text>
+
+  <!-- nearest neighbour = class 2 -->
+  <text x="522" y="255" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#374151">Nearest neighbour = class 2</text>
+
+  <!-- result badge -->
+  <rect class="badge-good" x="407" y="268" width="230" height="50" rx="6"/>
+  <text x="522" y="287" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#374151">Prediction = class 2  ✗ (wrong!)</text>
+  <text x="522" y="303" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="bold" fill="#15803d">Honest error — REALISTIC ESTIMATE</text>
+
+  <!-- bottom explanation -->
+  <text x="350" y="358" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#374151" font-weight="bold">
+    Always exclude the query point from its own neighbourhood when evaluating training performance.
+  </text>
+  <text x="350" y="376" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#6b7280">
+    LOO cross-validation is equivalent to 1-NN and provides an unbiased estimate for n-fold.
+  </text>
+</svg>

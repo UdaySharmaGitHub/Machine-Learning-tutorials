@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="510" viewBox="0 0 960 510" role="img" aria-labelledby="title desc">
+  <title id="title">KNN Local Neighborhood Diagnostic Inspection</title>
+  <desc id="desc">Visual diagram demonstrating local neighborhood inspection for model explainability, showing retrieved neighbors, distances, vote weighting, and root-cause debugging of erroneous predictions.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .title { font: 700 22px system-ui, -apple-system, sans-serif; fill: #0f172a; }
+      .subtitle { font: 400 13px system-ui, -apple-system, sans-serif; fill: #64748b; }
+      .card { fill: #ffffff; stroke: #e2e8f0; stroke-width: 1.5; rx: 12; }
+      .card-title { font: 700 15px system-ui, -apple-system, sans-serif; fill: #1e293b; }
+      .card-sub { font: 500 12px system-ui, -apple-system, sans-serif; fill: #64748b; }
+      .node-title { font: 700 13px system-ui, -apple-system, sans-serif; fill: #0f172a; }
+      .node-desc { font: 400 11px system-ui, -apple-system, sans-serif; fill: #475569; }
+      .code-badge { font: 700 11px "SF Mono", Menlo, Consolas, monospace; }
+      .arrow { stroke: #94a3b8; stroke-width: 1.8; fill: none; }
+      .dot-q { fill: #6366f1; stroke: #312e81; stroke-width: 2; }
+      .dot-a { fill: #10b981; stroke: #047857; stroke-width: 1.5; }
+      .dot-b { fill: #ef4444; stroke: #b91c1c; stroke-width: 1.5; }
+    </style>
+    <marker id="arrow-diag" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 1L8 5L0 9z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect class="bg" width="960" height="510" rx="16"/>
+
+  <!-- Header -->
+  <text class="title" x="36" y="42">Inspecting Local Behaviour: KNN's White-Box Diagnostics</text>
+  <text class="subtitle" x="36" y="62">Unlike black-box models, any KNN prediction can be explained and debugged by inspecting retrieved neighbor rows directly.</text>
+
+  <!-- ==================== LEFT PANEL: QUERY POINT & LOCAL NEIGHBORHOOD ==================== -->
+  <g transform="translate(36, 85)">
+    <rect class="card" width="460" height="340"/>
+    <rect x="0" y="0" width="460" height="38" rx="12" fill="#e0e7ff"/>
+    <rect x="0" y="26" width="460" height="12" fill="#e0e7ff"/>
+    <text class="card-title" x="18" y="24" fill="#3730a3">Target Query &amp; Retrieved Top-5 Neighbours</text>
+
+    <!-- Query Info Box -->
+    <g transform="translate(18, 48)">
+      <rect width="424" height="42" rx="6" fill="#f8fafc" stroke="#c7d2fe"/>
+      <circle cx="20" cy="21" r="7" class="dot-q"/>
+      <text class="node-title" x="36" y="18" fill="#4338ca">Query Point x_q (ID: #4092)</text>
+      <text class="code-badge" x="36" y="32" fill="#475569">Age: 42 | Income: $68k | Debt: $14k | CreditScore: 680</text>
+    </g>
+
+    <!-- Neighbours Table -->
+    <g transform="translate(18, 98)">
+      <!-- Table Header -->
+      <rect x="0" y="0" width="424" height="22" fill="#f1f5f9" stroke="#cbd5e1"/>
+      <text class="code-badge" x="8" y="15" fill="#475569">Rank</text>
+      <text class="code-badge" x="48" y="15" fill="#475569">Train ID</text>
+      <text class="code-badge" x="120" y="15" fill="#475569">Distance d</text>
+      <text class="code-badge" x="205" y="15" fill="#475569">True Label</text>
+      <text class="code-badge" x="300" y="15" fill="#475569">Weight (1/d)</text>
+      <text class="code-badge" x="380" y="15" fill="#475569">Vote</text>
+
+      <!-- Row 1 -->
+      <rect x="0" y="22" width="424" height="24" fill="#ecfdf5" stroke="#e2e8f0"/>
+      <text class="node-desc" x="12" y="38" font-weight="700">#1</text>
+      <text class="code-badge" x="48" y="38">#1204</text>
+      <text class="code-badge" x="120" y="38" fill="#047857">0.18 (Very close)</text>
+      <text class="node-desc" x="205" y="38" fill="#047857" font-weight="700">Approved (1)</text>
+      <text class="code-badge" x="305" y="38">5.55</text>
+      <text class="node-desc" x="382" y="38" fill="#047857" font-weight="700">62.6%</text>
+
+      <!-- Row 2 -->
+      <rect x="0" y="46" width="424" height="24" fill="#ecfdf5" stroke="#e2e8f0"/>
+      <text class="node-desc" x="12" y="62" font-weight="700">#2</text>
+      <text class="code-badge" x="48" y="62">#0891</text>
+      <text class="code-badge" x="120" y="62" fill="#047857">0.42 (Close)</text>
+      <text class="node-desc" x="205" y="62" fill="#047857" font-weight="700">Approved (1)</text>
+      <text class="code-badge" x="305" y="62">2.38</text>
+      <text class="node-desc" x="382" y="62" fill="#047857" font-weight="700">26.8%</text>
+
+      <!-- Row 3 -->
+      <rect x="0" y="70" width="424" height="24" fill="#fee2e2" stroke="#e2e8f0"/>
+      <text class="node-desc" x="12" y="86" font-weight="700">#3</text>
+      <text class="code-badge" x="48" y="86">#3310</text>
+      <text class="code-badge" x="120" y="86" fill="#b91c1c">1.25 (Distant)</text>
+      <text class="node-desc" x="205" y="86" fill="#b91c1c" font-weight="700">Default (0)</text>
+      <text class="code-badge" x="305" y="86">0.80</text>
+      <text class="node-desc" x="382" y="86" fill="#b91c1c">9.0%</text>
+
+      <!-- Row 4 -->
+      <rect x="0" y="94" width="424" height="24" fill="#fee2e2" stroke="#e2e8f0"/>
+      <text class="node-desc" x="12" y="110" font-weight="700">#4</text>
+      <text class="code-badge" x="48" y="110">#1942</text>
+      <text class="code-badge" x="120" y="110" fill="#b91c1c">2.10 (Far)</text>
+      <text class="node-desc" x="205" y="110" fill="#b91c1c" font-weight="700">Default (0)</text>
+      <text class="code-badge" x="305" y="110">0.47</text>
+      <text class="node-desc" x="382" y="110" fill="#b91c1c">5.3%</text>
+
+      <!-- Row 5 -->
+      <rect x="0" y="118" width="424" height="24" fill="#fee2e2" stroke="#e2e8f0"/>
+      <text class="node-desc" x="12" y="134" font-weight="700">#5</text>
+      <text class="code-badge" x="48" y="134">#5011</text>
+      <text class="code-badge" x="120" y="134" fill="#b91c1c">2.45 (Boundary)</text>
+      <text class="node-desc" x="205" y="134" fill="#b91c1c" font-weight="700">Default (0)</text>
+      <text class="code-badge" x="305" y="134">0.40</text>
+      <text class="node-desc" x="382" y="134" fill="#b91c1c">4.5%</text>
+    </g>
+
+    <!-- Aggregation Summary Box -->
+    <g transform="translate(18, 250)">
+      <rect width="424" height="75" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+      <text class="node-title" x="12" y="20">Uniform Vote vs Distance-Weighted Decision:</text>
+      <text class="node-desc" x="12" y="38">• <tspan font-weight="700" fill="#be123c">Uniform Voting:</tspan> 3 Default vs 2 Approved → <tspan font-weight="700" fill="#be123c">Predicts DEFAULT (Wrong!)</tspan></text>
+      <text class="node-desc" x="12" y="54">• <tspan font-weight="700" fill="#047857">Distance-Weighted Voting:</tspan> 89.4% Approved weight vs 10.6% Default → <tspan font-weight="700" fill="#047857">Predicts APPROVED (Correct!)</tspan></text>
+      <text class="node-desc" x="12" y="68" fill="#4338ca">Scikit-learn API: <tspan font-family="monospace">distances, indices = knn.kneighbors(X_query, n_neighbors=5)</tspan></text>
+    </g>
+  </g>
+
+  <!-- ==================== RIGHT PANEL: ROOT-CAUSE FAILURE DIAGNOSTICS ==================== -->
+  <g transform="translate(516, 85)">
+    <rect class="card" width="408" height="340"/>
+    <rect x="0" y="0" width="408" height="38" rx="12" fill="#f1f5f9"/>
+    <rect x="0" y="26" width="408" height="12" fill="#f1f5f9"/>
+    <text class="card-title" x="16" y="24">Root-Cause Debugging Checklist</text>
+
+    <!-- Case 1: Label Noise -->
+    <g transform="translate(16, 48)">
+      <rect width="376" height="58" rx="6" fill="#ffffff" stroke="#e2e8f0"/>
+      <text class="node-title" x="10" y="18" fill="#b91c1c">1. Corrupted Label / Label Noise</text>
+      <text class="node-desc" x="10" y="34">Retrieved neighbor has distance d = 0.05 (identical features) but opposite label. Confirms mislabelled training record.</text>
+      <text class="code-badge" x="10" y="48" fill="#64748b">Action: Audit / clean target column ground truth.</text>
+    </g>
+
+    <!-- Case 2: Low Local Density -->
+    <g transform="translate(16, 114)">
+      <rect width="376" height="58" rx="6" fill="#ffffff" stroke="#e2e8f0"/>
+      <text class="node-title" x="10" y="18" fill="#d97706">2. Low Local Density (Data Desert)</text>
+      <text class="node-desc" x="10" y="34">Nearest neighbor distance d₁ is unusually huge compared to median train distances. The model is extrapolating into void.</text>
+      <text class="code-badge" x="10" y="48" fill="#64748b">Action: Trigger OOD warning or collect more training data.</text>
+    </g>
+
+    <!-- Case 3: Missing Feature -->
+    <g transform="translate(16, 180)">
+      <rect width="376" height="58" rx="6" fill="#ffffff" stroke="#e2e8f0"/>
+      <text class="node-title" x="10" y="18" fill="#4338ca">3. Representation / Missing Predictor</text>
+      <text class="node-desc" x="10" y="34">Neighbors are semantically implausible according to domain experts (e.g. wrong disease subtype retrieved).</text>
+      <text class="code-badge" x="10" y="48" fill="#64748b">Action: Add domain features or switch distance metric.</text>
+    </g>
+
+    <!-- Case 4: Scale Distortion -->
+    <g transform="translate(16, 246)">
+      <rect width="376" height="58" rx="6" fill="#ffffff" stroke="#e2e8f0"/>
+      <text class="node-title" x="10" y="18" fill="#0f172a">4. Scaling &amp; Dominant Feature Bias</text>
+      <text class="node-desc" x="10" y="34">Neighbors match on Income but vary wildly on Age, because Income was unscaled with variance 10,000x higher.</text>
+      <text class="code-badge" x="10" y="48" fill="#64748b">Action: Verify RobustScaler/StandardScaler in Pipeline.</text>
+    </g>
+
+    <!-- Bottom summary line -->
+    <text class="node-desc" x="16" y="324" font-weight="600" fill="#047857">Inspecting neighbors directly turns failures into actionable data &amp; feature improvements.</text>
+  </g>
+
+  <!-- Bottom Recommendation Bar -->
+  <g transform="translate(36, 440)">
+    <rect width="888" height="52" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <text class="node-title" x="18" y="22" fill="#0f172a">Diagnostic Best Practice:</text>
+    <text class="node-desc" x="18" y="40">During model evaluation, always extract and print the top-5 neighbors for the top 10 worst errors (highest log-loss or residual). It takes 5 lines of code and reveals whether the problem is in the data or the algorithm.</text>
+  </g>
+</svg>

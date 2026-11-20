@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="550" viewBox="0 0 960 550" role="img" aria-labelledby="title desc">
+  <title id="title">KNN Search Algorithm Selection Flowchart</title>
+  <desc id="desc">Decision guide mapping dataset size n, feature dimension d, metric type, and hardware to the optimal KNN search algorithm.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .title { font: 700 22px system-ui, -apple-system, sans-serif; fill: #0f172a; }
+      .subtitle { font: 400 13px system-ui, -apple-system, sans-serif; fill: #64748b; }
+      .node-box { stroke-width: 1.5; rx: 10; }
+      .node-title { font: 700 14px system-ui, -apple-system, sans-serif; }
+      .node-desc { font: 400 11px system-ui, -apple-system, sans-serif; }
+      .node-tag { font: 700 11px "SF Mono", Menlo, Consolas, monospace; }
+      .arrow { stroke: #94a3b8; stroke-width: 2; fill: none; }
+      .cond-txt { font: 600 11px system-ui, -apple-system, sans-serif; fill: #475569; }
+    </style>
+    <marker id="guide-arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 1L8 5L0 9z" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="960" height="550" rx="16"/>
+
+  <text class="title" x="36" y="42">Search Algorithm Decision Guide for KNN</text>
+  <text class="subtitle" x="36" y="62">Select the optimal search backend based on sample size n, dimension d, and precision requirements</text>
+
+  <!-- Flowchart Layout -->
+  <!-- START NODE -->
+  <g transform="translate(380, 85)">
+    <rect width="200" height="50" rx="25" fill="#0f172a" stroke="#334155"/>
+    <text class="node-title" x="100" y="30" text-anchor="middle" fill="#ffffff">Start: New KNN Task</text>
+  </g>
+
+  <!-- Main Question 1: Exact vs Approx -->
+  <path d="M 480 135 L 480 165" class="arrow" marker-end="url(#guide-arrow)"/>
+
+  <!-- Decision Diamond / Node 1 -->
+  <g transform="translate(360, 165)">
+    <rect width="240" height="60" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
+    <text class="node-title" x="120" y="28" text-anchor="middle" fill="#0f172a">Dataset Scale &amp; Latency?</text>
+    <text class="node-desc" x="120" y="46" text-anchor="middle" fill="#475569">Sample count n &amp; Dimension d</text>
+  </g>
+
+  <!-- Left Branch: Exact Search (Small/Moderate n) -->
+  <path d="M 360 195 L 180 195 L 180 250" class="arrow" marker-end="url(#guide-arrow)"/>
+  <text class="cond-txt" x="220" y="186">n &lt; 100,000 (Exact)</text>
+
+  <!-- Right Branch: Large-Scale / High-D (Approximate ANN) -->
+  <path d="M 600 195 L 770 195 L 770 250" class="arrow" marker-end="url(#guide-arrow)"/>
+  <text class="cond-txt" x="620" y="186">n &gt; 100,000 &amp; d &gt; 50 (Scale)</text>
+
+  <!-- ==================== EXACT SEARCH BRANCH (LEFT) ==================== -->
+  <!-- Check Dimensions -->
+  <g transform="translate(70, 250)">
+    <rect width="220" height="54" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text class="node-title" x="110" y="24" text-anchor="middle" fill="#1e293b">Feature Dimension?</text>
+    <text class="node-desc" x="110" y="42" text-anchor="middle" fill="#64748b">Is d ≤ 20 or high d / GPU?</text>
+  </g>
+
+  <!-- Path to KD-Tree & Ball-tree -->
+  <path d="M 120 304 L 120 350" class="arrow" marker-end="url(#guide-arrow)"/>
+  <text class="cond-txt" x="65" y="330">d ≤ 20</text>
+
+  <!-- Node: KD-Tree vs Ball-tree -->
+  <g transform="translate(36, 350)">
+    <rect width="210" height="150" rx="10" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+    <text class="node-title" x="16" y="26" fill="#1e40af">1. Spatial Trees</text>
+    
+    <rect x="12" y="36" width="186" height="48" rx="6" fill="#ffffff" stroke="#93c5fd"/>
+    <text class="node-tag" x="18" y="54" fill="#1d4ed8">KD-Tree</text>
+    <text class="node-desc" x="18" y="70" fill="#475569">Euclidean, O(log n) queries</text>
+
+    <rect x="12" y="90" width="186" height="48" rx="6" fill="#ffffff" stroke="#93c5fd"/>
+    <text class="node-tag" x="18" y="108" fill="#1d4ed8">Ball Tree</text>
+    <text class="node-desc" x="18" y="124" fill="#475569">Non-Euclidean (Manhattan, etc.)</text>
+  </g>
+
+  <!-- Path to Brute-Force -->
+  <path d="M 240 304 L 320 304 L 320 350" class="arrow" marker-end="url(#guide-arrow)"/>
+  <text class="cond-txt" x="250" y="326">d &gt; 20 or GPU</text>
+
+  <!-- Node: Brute-Force -->
+  <g transform="translate(260, 350)">
+    <rect width="190" height="150" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
+    <text class="node-title" x="16" y="26" fill="#166534">2. Brute-Force</text>
+    
+    <rect x="12" y="36" width="166" height="102" rx="6" fill="#ffffff" stroke="#86efac"/>
+    <text class="node-tag" x="18" y="54" fill="#15803d">algorithm='brute'</text>
+    <text class="node-desc" x="18" y="72" fill="#334155">• Exact 100% recall</text>
+    <text class="node-desc" x="18" y="88" fill="#334155">• Fast on modern CPUs/GPUs</text>
+    <text class="node-desc" x="18" y="104" fill="#334155">• Works for sparse text matrices</text>
+    <text class="node-desc" x="18" y="120" fill="#334155">• No tree build overhead</text>
+  </g>
+
+  <!-- ==================== ANN BRANCH (RIGHT) ==================== -->
+  <!-- Check RAM constraints -->
+  <g transform="translate(660, 250)">
+    <rect width="220" height="54" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text class="node-title" x="110" y="24" text-anchor="middle" fill="#1e293b">RAM vs Speed Priority?</text>
+    <text class="node-desc" x="110" y="42" text-anchor="middle" fill="#64748b">Low latency or minimal memory?</text>
+  </g>
+
+  <!-- Path to HNSW -->
+  <path d="M 720 304 L 590 304 L 590 350" class="arrow" marker-end="url(#guide-arrow)"/>
+  <text class="cond-txt" x="600" y="326">Max Recall &amp; Speed</text>
+
+  <!-- Node: HNSW -->
+  <g transform="translate(480, 350)">
+    <rect width="210" height="150" rx="10" fill="#fff7ed" stroke="#fed7aa" stroke-width="1.5"/>
+    <text class="node-title" x="16" y="26" fill="#9a3412">3. HNSW (Graph)</text>
+    
+    <rect x="12" y="36" width="186" height="102" rx="6" fill="#ffffff" stroke="#fdba74"/>
+    <text class="node-tag" x="18" y="54" fill="#ea580c">HNSW (Faiss / Hnswlib)</text>
+    <text class="node-desc" x="18" y="72" fill="#334155">• Sub-millisecond queries</text>
+    <text class="node-desc" x="18" y="88" fill="#334155">• 95%–99% recall</text>
+    <text class="node-desc" x="18" y="104" fill="#334155">• Industry standard for vector DBs</text>
+    <text class="node-desc" x="18" y="120" fill="#9a3412">⚠️ Needs 1.5–2× raw RAM</text>
+  </g>
+
+  <!-- Path to IVF-PQ -->
+  <path d="M 820 304 L 820 350" class="arrow" marker-end="url(#guide-arrow)"/>
+  <text class="cond-txt" x="735" y="330">Memory Constrained</text>
+
+  <!-- Node: IVF-PQ -->
+  <g transform="translate(720, 350)">
+    <rect width="204" height="150" rx="10" fill="#fdf2f8" stroke="#fbcfe8" stroke-width="1.5"/>
+    <text class="node-title" x="16" y="26" fill="#9d174d">4. IVF + PQ (Faiss)</text>
+    
+    <rect x="12" y="36" width="180" height="102" rx="6" fill="#ffffff" stroke="#f472b6"/>
+    <text class="node-tag" x="18" y="54" fill="#be185d">IndexIVFPQ</text>
+    <text class="node-desc" x="18" y="72" fill="#334155">• Compresses vectors 8×–32×</text>
+    <text class="node-desc" x="18" y="88" fill="#334155">• Fits millions/billions in RAM</text>
+    <text class="node-desc" x="18" y="104" fill="#334155">• Fast centroid-pruned search</text>
+    <text class="node-desc" x="18" y="120" fill="#9d174d">⚠️ Slight quantization loss</text>
+  </g>
+
+  <!-- Footer Tip -->
+  <g transform="translate(36, 514)">
+    <text class="node-desc" x="444" y="18" text-anchor="middle" font-weight="700" fill="#475569">💡 Golden Rule: Always benchmark with Brute Force first — only adopt Trees or ANN when scale strictly demands it.</text>
+  </g>
+</svg>

@@ -1,0 +1,87 @@
+<svg width="900" height="550" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="450" y="30" font-size="24" font-weight="bold" text-anchor="middle" fill="#1976d2">KD-Tree Nearest Neighbor Search</text>
+
+  <!-- Left side: Feature space -->
+  <text x="250" y="60" font-size="16" font-weight="bold" fill="#000">Feature Space</text>
+  <rect x="50" y="80" width="400" height="400" fill="#f9f9f9" stroke="#ccc" stroke-width="2"/>
+
+  <!-- Grid -->
+  <line x1="50" y1="480" x2="450" y2="480" stroke="#000" stroke-width="2"/>
+  <line x1="50" y1="80" x2="50" y2="480" stroke="#000" stroke-width="2"/>
+  <text x="450" y="505" font-size="12" fill="#000">X</text>
+  <text x="25" y="85" font-size="12" fill="#000">Y</text>
+
+  <!-- Splits -->
+  <!-- x=5 -->
+  <line x1="250" y1="80" x2="250" y2="480" stroke="#d32f2f" stroke-width="3" stroke-dasharray="5,5"/>
+
+  <!-- y=3 on left -->
+  <line x1="50" y1="360" x2="250" y2="360" stroke="#1976d2" stroke-width="2" stroke-dasharray="5,5"/>
+
+  <!-- y=7 on right -->
+  <line x1="250" y1="200" x2="450" y2="200" stroke="#388e3c" stroke-width="2" stroke-dasharray="5,5"/>
+
+  <!-- Data points -->
+  <circle cx="100" cy="430" r="5" fill="#ff6b6b"/>
+  <text x="105" y="435" font-size="10">P1</text>
+
+  <circle cx="150" cy="390" r="5" fill="#ff6b6b"/>
+  <text x="155" y="395" font-size="10">P2</text>
+
+  <circle cx="80" cy="280" r="5" fill="#4ecdc4"/>
+  <text x="85" y="285" font-size="10">P3</text>
+
+  <circle cx="320" cy="150" r="5" fill="#95e1d3"/>
+  <text x="325" y="155" font-size="10">P4</text>
+
+  <circle cx="380" cy="210" r="5" fill="#95e1d3"/>
+  <text x="385" y="215" font-size="10">P5</text>
+
+  <circle cx="350" cy="430" r="5" fill="#f8b500"/>
+  <text x="355" y="435" font-size="10">P6</text>
+
+  <!-- Query point -->
+  <circle cx="200" cy="350" r="8" fill="#2196f3" stroke="#000" stroke-width="2"/>
+  <text x="210" y="355" font-size="11" font-weight="bold" fill="#000">Q</text>
+
+  <!-- Search radius circle around Q -->
+  <circle cx="200" cy="350" r="70" fill="none" stroke="#2196f3" stroke-width="2" stroke-dasharray="3,3" opacity="0.7"/>
+  <text x="210" y="330" font-size="10" fill="#2196f3">Search Radius</text>
+
+  <!-- Right side: Search process -->
+  <text x="700" y="60" font-size="16" font-weight="bold" fill="#000">Search Steps</text>
+
+  <!-- Step boxes -->
+  <rect x="550" y="80" width="320" height="420" fill="#f5f5f5" stroke="#ccc" stroke-width="1" rx="5"/>
+
+  <!-- Step 1 -->
+  <rect x="560" y="95" width="300" height="70" fill="#fff3e0" stroke="#ff9800" stroke-width="2" rx="3"/>
+  <text x="570" y="115" font-size="12" font-weight="bold" fill="#000">Step 1: Traverse to Leaf</text>
+  <text x="570" y="135" font-size="11" fill="#000">• Start at root (x=5)</text>
+  <text x="570" y="155" font-size="11" fill="#000">• Q.x=2 &lt; 5 → go LEFT</text>
+
+  <!-- Step 2 -->
+  <rect x="560" y="175" width="300" height="70" fill="#e3f2fd" stroke="#2196f3" stroke-width="2" rx="3"/>
+  <text x="570" y="195" font-size="12" font-weight="bold" fill="#000">Step 2: Find Best Leaf</text>
+  <text x="570" y="215" font-size="11" fill="#000">• At node (y=3)</text>
+  <text x="570" y="235" font-size="11" fill="#000">• Q.y=3.5 &gt; 3 → go RIGHT</text>
+
+  <!-- Step 3 -->
+  <rect x="560" y="255" width="300" height="70" fill="#f3e5f5" stroke="#9c27b0" stroke-width="2" rx="3"/>
+  <text x="570" y="275" font-size="12" font-weight="bold" fill="#000">Step 3: Check Neighbors</text>
+  <text x="570" y="295" font-size="11" fill="#000">• Compute distances to P1, P2, P3</text>
+  <text x="570" y="315" font-size="11" fill="#000">• Keep k-closest points</text>
+
+  <!-- Step 4 -->
+  <rect x="560" y="335" width="300" height="70" fill="#e8f5e9" stroke="#4caf50" stroke-width="2" rx="3"/>
+  <text x="570" y="355" font-size="12" font-weight="bold" fill="#000">Step 4: Backtrack &amp; Prune</text>
+  <text x="570" y="375" font-size="11" fill="#000">• Check if other regions could have</text>
+  <text x="570" y="395" font-size="11" fill="#000">  closer neighbors (via distance to split)</text>
+
+  <!-- Step 5 -->
+  <rect x="560" y="415" width="300" height="70" fill="#fce4ec" stroke="#e91e63" stroke-width="2" rx="3"/>
+  <text x="570" y="435" font-size="12" font-weight="bold" fill="#000">Step 5: Return Result</text>
+  <text x="570" y="455" font-size="11" fill="#000">• Return k nearest neighbors found</text>
+  <text x="570" y="475" font-size="11" fill="#000">• Cost: O(d log n) vs O(nd) brute force</text>
+</svg>
